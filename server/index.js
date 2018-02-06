@@ -10,8 +10,19 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 // Answer API requests.
 app.get('/api', function (req, res) {
   res.set('Content-Type', 'application/json');
-  res.send('{"message":"Hello from the custom server! Running NodeJS"}');
+  console.log('/api hit!')
+  res.send('{"message":"Welcome to NextLens.io Find your next right gear now!"}');
 });
+
+
+app.get('/test', function (req, res) {
+  console.log('req: ', req.body)
+  console.log('test')
+  res.send('{"message":"testing the /test endpoint"}')
+
+});
+
+
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', function(request, response) {

@@ -14,8 +14,8 @@ const PhotoLiker = () => (
                         centered='true'
                     />}
                 header='Photographers Name'
-                content='Description and link to profile'
-                on={['hover', 'click']}
+                content='Descriptions and link to profile'
+                on={['click']}
             />
 
 

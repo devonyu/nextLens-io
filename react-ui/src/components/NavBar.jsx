@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Container, Menu } from 'semantic-ui-react'
+import { Button, Container, Header, Image, Menu, Modal } from 'semantic-ui-react'
 
 export default class NavBar extends Component {
   state = {}
@@ -11,47 +11,38 @@ export default class NavBar extends Component {
 
     return (
       <Container fluid>
-      <Menu borderless='true' size='small' fluid='true' stackable='true'>
+      <Menu borderless='true' size='tiny' fluid={true}>
         <Menu.Item 
         header
         >
           NextLens.io
         </Menu.Item>
 
-        <Menu.Item
-          name='editorials'
-          active={activeItem === 'cameras'}
-          onClick={this.handleItemClick}
-        >
-          Cameras
-        </Menu.Item>
-
-        <Menu.Item
-          name='reviews'
-          active={activeItem === 'lenses'}
-          onClick={this.handleItemClick}
-        >
-          Lenses
-        </Menu.Item>
-
-        <Menu.Menu position='right'>
+        <Modal trigger={          
           <Menu.Item
-            name='upcomingEvents'
+            name='about'
             active={activeItem === 'about'}
             onClick={this.handleItemClick}
-          >
+            >
             About
-          </Menu.Item>
+          </Menu.Item>}>
+
+          <Modal.Header>This Application was built by Devon Yu</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+            <Image wrapped size='medium' src='https://i.imgur.com/p2JkbNN.png' />
+              <Header>Default Profile Image</Header>
+              <p>Built using React/Redux, Node+Express, MongoDB + Redis, Deployed with Heroku </p>
+              <p>Are you Hiring? Checkout my <a href='https://devonyu.github.io'>portfolio</a>, Download my <a href='https://devonyu.github.io/devonyuresume.pdf' download='true'>Resume!</a></p>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
 
 
+        <Menu.Menu position='right'>
           <Menu.Item>
-            <Button primary>Sign up</Button>
+            <Button size='tiny' onClick={()=>console.log('log in clicked')} primary>Log-in</Button>
           </Menu.Item>
-
-          <Menu.Item>
-            <Button>Log-in</Button>
-          </Menu.Item>
-
         </Menu.Menu>
       </Menu>
       </Container>

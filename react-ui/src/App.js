@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Menu } from 'semantic-ui-react';
+import { Button, Container, Menu } from 'semantic-ui-react';
 import NavBar from './components/NavBar';
 import PhotoLiker from './components/PhotoLiker';
 
@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar/>
-        <Container fluid>
+        <Container textAlign='center' fluid>
           <h1>Tired of your current Lens?</h1>
           <p>Find out the lenses you like based off the photos taken by them!</p>
           
@@ -46,7 +46,10 @@ class App extends Component {
               ? 'Fetching message from API'
               : this.state.message}
           </p>
+
+          <Button basic color='green' size='massive' content='Sign up for free' onClick={()=>console.log('sign up clicked')}/>
         </Container>
+
         <PhotoLiker/>
       </div>
     );
