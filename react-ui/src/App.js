@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container, Menu } from 'semantic-ui-react';
+import NavBar from './components/NavBar';
+import PhotoLiker from './components/PhotoLiker';
 
 class App extends Component {
   constructor(props) {
@@ -35,21 +36,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          {'This is '}
-          <a href="https://github.com/mars/heroku-cra-node">
-            {'tester'}
-          </a><br/>
-        </p>
-        <p className="App-intro">
-          {this.state.fetching
-            ? 'Fetching message from API'
-            : this.state.message}
-        </p>
+        <NavBar/>
+        <Container fluid>
+          <h1>Tired of your current Lens?</h1>
+          <p>Find out the lenses you like based off the photos taken by them!</p>
+          
+          <p className="App-intro">
+            {this.state.fetching
+              ? 'Fetching message from API'
+              : this.state.message}
+          </p>
+        </Container>
+        <PhotoLiker/>
       </div>
     );
   }
