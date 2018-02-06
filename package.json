@@ -1,12 +1,12 @@
 {
-  "name": "heroku-cra-node",
+  "name": "NextLens.io",
   "version": "1.0.0",
-  "description": "How to use create-react-app with a custom Node API on Heroku",
+  "description": "Lens and Camera Recommendations based off Users Likes",
   "engines": {
     "node": "6.11.x"
   },
   "scripts": {
-    "start": "nodemon server",
+    "start": "node server",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "cacheDirectories": [
@@ -21,13 +21,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mars/heroku-cra-node.git"
+    "url": "https://github.com/devonyu/nextLens-io"
   },
   "keywords": [
     "node",
     "heroku",
     "create-react-app",
-    "react"
+    "react",
+    "photography",
+    "camera",
+    "lens",
+    "reccomendation",
+    
   ],
   "license": "MIT",
   "devDependencies": {
