@@ -31,8 +31,7 @@
     "photography",
     "camera",
     "lens",
-    "reccomendation",
-    
+    "reccomendation"
   ],
   "license": "MIT",
   "devDependencies": {
