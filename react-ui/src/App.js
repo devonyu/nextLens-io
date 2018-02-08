@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Container, Menu } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import './App.css';
 import NavBar from './components/NavBar';
 import PhotoLiker from './components/PhotoLiker';
 import Signup from './components/Signup';
+import Landing from './components/Landing';
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar/>
+        <Landing/>
         <Container fluid>
           <h1>Tired of your current Lens?</h1>
           <h2>Find out the lenses you like based off the photos taken by them!</h2>

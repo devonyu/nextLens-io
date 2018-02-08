@@ -11,7 +11,7 @@ export default class NavBar extends Component {
 
     return (
       <Container fluid>
-      <Menu borderless='true' size='tiny' fluid={true}>
+      <Menu borderless={true} size='tiny' fluid={true}>
         <Menu.Item 
         header
         >
@@ -31,7 +31,7 @@ export default class NavBar extends Component {
           <Modal.Header>NextLens was designed and built by Devon Yu</Modal.Header>
           <Modal.Content>
             <Modal.Description>
-            <Image wrapped size='medium' src='https://i.imgur.com/p2JkbNN.png' fluid circular centered/>
+            <Image wrapped size='medium' src='https://i.imgur.com/p2JkbNN.png' circular centered/>
               <Header>I wanted to create an application to help new photographers find their next lens</Header>
               <p>Built using React/Redux, Node+Express, MongoDB + Redis, Deployed with Heroku </p>
               <p>Are you Hiring? Checkout my <a href='https://devonyu.github.io'>portfolio</a>, Download my <a href='https://devonyu.github.io/devonyuresume.pdf' download='true'>Resume!</a></p>
