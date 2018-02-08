@@ -41,7 +41,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar/>
-        <Landing/>
+
         <Container fluid>
           <h1>Tired of your current Lens?</h1>
           <h2>Find out the lenses you like based off the photos taken by them!</h2>
@@ -51,12 +51,13 @@ class App extends Component {
               ? 'Fetching message from API'
               : this.state.message}
           </p>
+          <Landing/>
 
           <Button basic color='green' size='massive' content='Sign up for free' onClick={()=>console.log('sign up clicked')}/>
         </Container>
 
-        <PhotoLiker/>
-        <Signup/>
+        {/* <PhotoLiker/>
+        <Signup/> */}
       </div>
     );
   }

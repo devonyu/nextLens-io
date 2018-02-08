@@ -12,8 +12,8 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 // Answer API requests.
 app.get('/api', function (req, res) {
   res.set('Content-Type', 'application/json');
-  console.log('/api hit!')
-  res.send('{"message":"Welcome to NextLens.io \n You are connected via Node.JS"}');
+  console.log('/api hit!');
+  res.send('{"message":"Welcome to NextLens.io You are connected via Node.JS"}');
 });
 
 
@@ -35,6 +35,15 @@ app.get('/pics', (req, res) => {
     }
   })
   .then(result => {
+    res.send(result.data);
+  })
+})
+
+app.get('/landing', (req, res) => {
+  console.log('Splash page request');
+  axios.get('https://api.unsplash.com/collections/1351856/photos/?client_id=6ebc0ce91af88792678fc2e0df9905da0e7f9ec1f9ad61fadb827a86a28268c6')
+  .then(result => {
+    console.log('pictures incoming from a photos collection on Unsplash')
     res.send(result.data);
   })
 })
