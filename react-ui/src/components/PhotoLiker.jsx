@@ -17,8 +17,7 @@ const PhotoLiker = () => (
                 content='Descriptions and link to profile'
                 on={['click']}
             />
-
-
+            
         </Transition>
     </Container>
 )

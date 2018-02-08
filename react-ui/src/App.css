@@ -17,3 +17,7 @@
 .App a {
   color: #f60;
 }
+
+.ui.modal.transition.visible.active {
+  text-align: center;
+}

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Container, Menu } from 'semantic-ui-react';
+import './App.css';
 import NavBar from './components/NavBar';
 import PhotoLiker from './components/PhotoLiker';
+import Signup from './components/Signup';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      view: 'landing',
       message: null,
       fetching: true
     };
@@ -37,9 +40,9 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar/>
-        <Container textAlign='center' fluid>
+        <Container fluid>
           <h1>Tired of your current Lens?</h1>
-          <p>Find out the lenses you like based off the photos taken by them!</p>
+          <h2>Find out the lenses you like based off the photos taken by them!</h2>
           
           <p className="App-intro">
             {this.state.fetching
@@ -51,6 +54,7 @@ class App extends Component {
         </Container>
 
         <PhotoLiker/>
+        <Signup/>
       </div>
     );
   }
