@@ -11,7 +11,7 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 app.get('/api', function (req, res) {
   res.set('Content-Type', 'application/json');
   console.log('/api hit!')
-  res.send('{"message":"Welcome to NextLens.io You are connected via Node.JS"}');
+  res.send('{"message":"Welcome to NextLens.io \n You are connected via Node.JS"}');
 });
 
 
