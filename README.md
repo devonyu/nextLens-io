@@ -1,15 +1,13 @@
 # NextLens.io
 > Camera and Lens recommendations based on user's likes on pre-sorted and pre-screened images.  
-
-[![NPM Version][npm-image]][npm-url]
+>
 [![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
 
 So you just started your photography journey by either purchasing your own DSLR or was generously gifted one!  You're beginning to master the basic functions of your favorite new toy but upon viewing images on Instagram/Flickr/Unsplash/etc, a lingering question burns into your mind:  "Why aren't my photos as aesthetic as theirs!? What camera and lens setup are they using for these exposures?!?".
 
 Enter NextLens.io!  This app's primary objective will be to find camera and lens recommendations to our users.  By showcasing photos taken by specific metrics, the algorithm will suggest the optimal lens (camera would be the next feat on road map) to the user and showcase example photos taken with the recommended lens!
 
-![](https://devonyu.github.io/images/photolikermockup.jpg)
+![MockupImage](https://devonyu.github.io/images/nextLensmockup.jpg)
 
 ## Usage example
 
@@ -18,7 +16,7 @@ New photographer is tired of their kit lens that came with the camera.  Although
 _For more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Roadmap
-See the [open issues](https://github.com/coolstar/electra/issues) for smaller things to work on.
+See the [open issues](#bugs) for smaller things to work on.
 
 ### Currently Implemented:
 - React styled with Semantic-UI React components rendering.
@@ -45,8 +43,8 @@ See the [open issues](https://github.com/coolstar/electra/issues) for smaller th
 - Sharing the web app to social media (FB/Google+/Instagram/Snapchat?/others).
 
 ### Possible Improvements on Current Features:
--Currently using 30 random images from Unsplash API for likes (some images dont have EXIF Data), By sorting images that do have EXIF data, we can filter the amount of calls needed to their API and not waste anytime/clicks.
--Alternatively, we can use an external API (IBM Watson / Microsoft Computer Vision /etc) to scan images for key terms on their likes and dislikes.  A NoSQL DB may be useful for this as the data may vary from image to image.
+- Currently using 30 random images from Unsplash API for likes (some images dont have EXIF Data), By sorting images that do have EXIF data, we can filter the amount of calls needed to their API and not waste anytime/clicks.
+- Alternatively, we can use an external API (IBM Watson / Microsoft Computer Vision /etc) to scan images for key terms on their likes and dislikes.  A NoSQL DB may be useful for this as the data may vary from image to image.
 
 ### Future features and goals:
 - Learn React Native and port the general functionality of web app to a mobile experience.
@@ -60,7 +58,7 @@ See the [open issues](https://github.com/coolstar/electra/issues) for smaller th
 - SOA Micro service architecture in the back-end to decouple the components.
 - APM implementation to see where bottlenecks/issues are occurring before they bring down the entire system.
 
-### Bugs and Issues:
+### Bugs:
 - Rendering of images at current state depends on the users connection speeds - we can optimize the downloads based off of what device they are using (smaller images for phones vs larger for desktops).
 - Rendering of images only occur when a Like || Dislike is clicked. Cache or Preload images can fix this immensely (How to optimize?)
 
@@ -72,7 +70,7 @@ Fork and clone the repo down to your local dev machine.  Npm install the depende
 npm install
 ```
 
-To run the NodeJS server and have the React client up and running run the following in the root folder (to start NodeJS server).
+Start the NodeJS server by going to the root folder and run the following.
 We use nodemon to continuously watch the server index file for changes:
 
 ```sh
@@ -98,6 +96,11 @@ npm start
 * 0.1.0
     * The first proper release
     * CHANGE: Rename `foo()` to `bar()` -->
+* 0.0.4
+    * Sign-in/Login Page MVP implemented
+    * Option to toggle between landing page and photoliker
+    * Env variables setup with Heroku and for Local development
+    * README updates
 * 0.0.3
     * README Major Update
     * Splash Page Implemented with about page
@@ -106,14 +109,25 @@ npm start
 * 0.0.1
     * Begin project
 
+## Social Media
+
+- [nextLens.io](https://www.nextLens.io)
+- [@nextlens](https://twitter.com/nextlens) 
+- [Facbook.com/nextlens.io](https://www.facebook.com/nextlens.io)
+- [Instagram.com/nextlens.io](https://www.instagram.com/nextlens.io/)
+- [Flickr.com/photos/nextlens](https://www.flickr.com/photos/nextlens)
+- [Tumblr.com/blog/nextlens](https://www.tumblr.com/blog/nextlens)
+
 ## Contact Information
 
-Devon Yu – [@devonyu_](https://twitter.com/devonyu_) – devonyu415@gmail.com
-[https://github.com/devonyu/](https://github.com/devonyu/)
-[https://linkedin.com/devonyu](https://linkedin.com/devonyu)
-[https://facebook.com/devonyu](https://facebook.com/devonyu)
-[https://instagram.com/devonyu](https://instagram.com/devonyu)
-
+ Devon Yu 
+ 
+- [devonyu415@gmail.com](mailto:devonyu415@gmail.com?subject=Hello)
+- [Twitter](https://twitter.com/devonyu_) 
+- [Github](https://github.com/devonyu/)
+- [LinkedIn](https://linkedin.com/in/devonyu)
+- [Facebook](https://facebook.com/devonyu)
+- [Instagram](https://instagram.com/devonyu)
 
 ## Contributing
 
@@ -123,5 +137,6 @@ Devon Yu – [@devonyu_](https://twitter.com/devonyu_) – devonyu415@gmail.com
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
+[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/devonyu/nextLens-io
 [wiki]: https://github.com/devonyu/nextLens-io/wiki

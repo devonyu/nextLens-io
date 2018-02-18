@@ -5,6 +5,7 @@ import NavBar from './components/NavBar';
 import PhotoLiker from './components/PhotoLiker';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
+import Login from './components/Login';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,12 @@ class App extends Component {
       message: null,
       fetching: true
     };
+    this.changeView = this.changeView.bind(this);
+    this.getView = this.getView.bind(this);
+  }
+
+  changeView(option) {
+    this.setState({ view: option})
   }
 
   componentDidMount() {
@@ -37,28 +44,29 @@ class App extends Component {
       })
   }
 
+  getView() {
+    if (this.state.view === 'landing') {
+      return <Landing
+      changeView={ this.changeView.bind(this) }
+      />
+    } else if (this.state.view ==='login') {
+      return <Login
+      changeView={ this.changeView.bind(this) }
+      />
+    } else if (this.state.view ==='signup') {
+      return <Signup
+      changeView={ this.changeView.bind(this) }
+      />
+    }else if (this.state.view ==='photoliker') {
+      return <PhotoLiker
+      changeView={ this.changeView.bind(this) }
+      />
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <NavBar/>
-
-        <Container fluid>
-          <h1>Tired of your current Lens?</h1>
-          <h2>Find out the lenses you like based off the photos taken by them!</h2>
-          
-          <p className="App-intro">
-            {this.state.fetching
-              ? 'Fetching message from API'
-              : this.state.message}
-          </p>
-          <Landing/>
-
-          <Button basic color='green' size='massive' content='Sign up for free' onClick={()=>console.log('sign up clicked')}/>
-        </Container>
-
-        {/* <PhotoLiker/>
-        <Signup/> */}
-      </div>
+        <div>{ this.getView() }</div>
     );
   }
 }

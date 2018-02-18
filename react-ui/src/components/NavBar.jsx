@@ -1,10 +1,27 @@
 import React, { Component } from 'react'
 import { Button, Container, Header, Image, Menu, Modal } from 'semantic-ui-react'
 
-export default class NavBar extends Component {
-  state = {}
+
+class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: 'false',
+      term: ''
+    }
+    this.logIn = this.logIn.bind(this);
+    this.landing = this.landing.bind(this);
+  }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+  logIn() {
+    this.props.changeView('login');
+  }
+
+  landing() {
+    this.props.changeView('landing');
+  }
 
   render() {
     const { activeItem } = this.state
@@ -12,7 +29,7 @@ export default class NavBar extends Component {
     return (
       <Container fluid>
       <Menu borderless={true} size='tiny' fluid={true}>
-        <Menu.Item 
+        <Menu.Item onClick={this.landing}
         header
         >
           NextLens.io
@@ -42,7 +59,7 @@ export default class NavBar extends Component {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            <Button size='tiny' onClick={()=>console.log('log in clicked')} primary>Log-in</Button>
+            <Button size='tiny' onClick={this.logIn} primary>Log-in</Button>
           </Menu.Item>
         </Menu.Menu>
       </Menu>
@@ -50,3 +67,5 @@ export default class NavBar extends Component {
     )
   }
 }
+
+export default NavBar;

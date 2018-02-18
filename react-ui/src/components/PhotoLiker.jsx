@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Container, Image, Popup, Transition } from 'semantic-ui-react'
+import NavBar from './NavBar';
+
 
 export default class PhotoLiker extends Component {
     constructor(props) {
@@ -72,21 +74,25 @@ export default class PhotoLiker extends Component {
     render() {
         return(
             <Container fluid>
-                <Button onClick={this.handleYes} size='big'>Like</Button>
-                <Button onClick={this.handleNo} size='big'>Dislke</Button>
-                <br/>
-                    <Popup
-                        trigger={
-                            <Image src={this.state.currentUrl}
-                                size='huge'
-                                rounded
-                                centered={true}
-                            />
-                        }
-                        header={this.state.imgs.length !== 0 ? <p>Download this picture on Unsplash <a href={this.state.imgs[0].links.download_location}>here</a></p> : null}
-                        content={this.state.imgs.length !== 0 ? <p>Photo by <a href={'https://unsplash.com/@' + this.state.imgs[0].user.username + '?utm_source=Photoliker&utm_medium=referral'} >{this.state.imgs[0].user.name}</a> on <a href={'https://unsplash.com/?utm_source=Photoliker&utm_medium=referral'}>Unsplash </a> </p>: null }
-                        on={['click']}
-                    />
+                <NavBar changeView={this.props.changeView}/>
+                <Container fluid textAlign='center'>
+                    <h2>PhotoLiker Beta 1.0</h2>
+                    <Button onClick={this.handleYes} size='big'>Like</Button>
+                    <Button onClick={this.handleNo} size='big'>Dislke</Button>
+                    <br/>
+                        <Popup
+                            trigger={
+                                <Image src={this.state.currentUrl}
+                                    size='huge'
+                                    rounded
+                                    centered={true}
+                                />
+                            }
+                            header={this.state.imgs.length !== 0 ? <p>Download this picture on Unsplash <a href={this.state.imgs[0].links.download_location}>here</a></p> : null}
+                            content={this.state.imgs.length !== 0 ? <p>Photo by <a href={'https://unsplash.com/@' + this.state.imgs[0].user.username + '?utm_source=Photoliker&utm_medium=referral'} >{this.state.imgs[0].user.name}</a> on <a href={'https://unsplash.com/?utm_source=Photoliker&utm_medium=referral'}>Unsplash </a> </p>: null }
+                            on={['click']}
+                        />
+                </Container>
             </Container>
         )
     }
