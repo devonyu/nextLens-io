@@ -1,13 +1,66 @@
 import React, { Component } from 'react'
-import { Button, Container, Checkbox, Form, Transition, Segment } from 'semantic-ui-react'
+import { Button, Container, Form, TextArea, Transition, Segment, Select } from 'semantic-ui-react'
 import axios from 'axios';
 import NavBar from './NavBar';
+const options = require('./utils.js');
+// Addition filters can be which specific mount (EG. FX or DX)
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+        first: '',
+        email: '',
+        password: '',
+        mount: '',
+        about: '',
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.updateMount = this.updateMount.bind(this);
   }
+
+  handleChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value
+    this.setState({
+      [name]: value
+    });
+  }
+
+  updateMount = (e, { value }) => {
+    this.setState({ mount: value });
+  }
+
+  signupNewUser = (info) => {
+      // takes in the current state (must make sure that it is valid)
+      // then checks to see if database includes current email already
+      // if not, write to DB and save user information for login page
+      console.log('Signing up => first: ', this.state.first, 'email: ', this.state.email, 'password: ', this.state.password, 'mount: ', this.state.mount, 'about: ', this.state.about);
+
+      axios.post('/signup', info)
+      .then((response) => {
+          console.log('server sent back: ', response)
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+  }
+
+  handleSubmit = () => {
+    // if no err (checks db for username on change of state for email)
+    // signup user and save their information inside DB
+    if (this.state.email !== 'wontwork@email.com') {
+        this.signupNewUser(this.state);
+    } else {
+        alert('Invalid email! wontwork@email.com')
+    }
+  }
+
   render() {
+    const { first, email, password, mount, about} = this.state
+
     return(
       <Container fluid>
         <NavBar changeView={this.props.changeView}/>
@@ -17,20 +70,38 @@ export default class Signup extends Component {
                     <Form>
                         <Form.Field>
                             <label>First Name</label>
-                            <input placeholder='First Name' />
+                            <input placeholder='First Name'
+                            name='first'
+                            value={first}
+                            onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
                             <label>Email</label>
-                            <input placeholder='Email' />
+                            <input placeholder='Email'
+                            name='email'
+                            value={email}
+                            onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>    
                             <label>Password</label>
-                            <input placeholder='Password' />
+                            <input placeholder='Password'
+                            name='password'
+                            value={password}
+                            onChange={this.handleChange} />
                         </Form.Field>
-                            <Form.Field>
-                            <Checkbox label='I agree to the Terms and Conditions' />
-                        </Form.Field>
-                        <Button type='submit'>Submit</Button>
+                        <Form.Field control={Select} 
+                        label='Camera Mount' 
+                        options={options}
+                        value = {mount}
+                        placeholder='Your Camera Mount'
+                        onChange={this.updateMount} />
+                        <Form.Field control={TextArea} 
+                    label='About' 
+                        placeholder='Tell us more about you...' 
+                        name='about' 
+                        value={about} 
+                        onChange={this.handleChange}/>
+                        <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
                     </Form>
                 </Segment>
 
