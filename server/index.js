@@ -3,7 +3,7 @@ const path = require('path');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-
+const { Client } = require('pg');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -16,20 +16,16 @@ app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 // Answer API requests.
 app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
-  console.log('/api hit!');
   res.send('{"message":"Welcome to NextLens.io You are connected via Node.JS"}');
 });
 
 app.get('/test', (req, res) => {
-  console.log('test hit');
   res.send('{"message":"testing the /test endpoint"}')
 });
 
 app.post('/signup', (req, res) => {
   const { username, password } = req.body;
-  console.log(`Signup data submitted: username: ${username} password: ${password}`);
   const toClient = { username, password };
-  console.log(process.env.UNSPLASH_URL);
   // sends username and password to database to store
   // const connectionString = process.env.DATABASE_URL
   res.send(toClient);
@@ -37,7 +33,6 @@ app.post('/signup', (req, res) => {
 
 // Get random images for user to like
 app.get('/pics', (req, res) => {
-  console.log('30 Random Incoming pictures from Unsplash');
   axios.get(`https://api.unsplash.com/photos/random/?client_id=${process.env.UNSPLASH_URL}`, {
     params: {
       count: 30,
@@ -50,10 +45,8 @@ app.get('/pics', (req, res) => {
 
 // Gets collection of images from first photo lens collection - soon to be a larger search query
 app.get('/landing', (req, res) => {
-  console.log('Splash page request');
   axios.get(`https://api.unsplash.com/collections/1351856/photos/?client_id=${process.env.UNSPLASH_URL}`)
     .then((result) => {
-      console.log('pictures incoming from a photos collection on Unsplash');
       res.send(result.data);
     });
 });
@@ -69,6 +62,21 @@ app.get('/newlanding', (req, res) => {
     .then((result) => {
       res.send(result.data);
     });
+});
+
+app.get('/db', (request, response) => {
+  let result;
+  // Change env variable to TEST_DATABASE to test locally
+  // or to DATABASE_URL for deployed postgres server on Heroku
+  const connectionString = process.env.DATABASE_URL;
+  const client = new Client({ connectionString });
+  client.connect();
+  client.query('SELECT * from information', (err, res) => {
+    result = res.rows;
+    client.end();
+    console.log(result);
+    response.send(JSON.stringify(result));
+  });
 });
 
 
