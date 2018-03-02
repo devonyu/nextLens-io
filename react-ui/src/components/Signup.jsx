@@ -18,12 +18,12 @@ export default class Signup extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateMount = this.updateMount.bind(this);
+    this.signupNewUser = this.signupNewUser.bind(this);
   }
 
   handleChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value
+    const name = event.target.name;
+    const value = event.target.value;
     this.setState({
       [name]: value
     });
@@ -37,18 +37,23 @@ export default class Signup extends Component {
       // takes in the current state (must make sure that it is valid)
       // then checks to see if database includes current email already
       // if not, write to DB and save user information for login page
-      axios.post('/signup', info)
-      .then((response) => {
-          console.log('server sent back: ', response)
+      axios({
+        method: 'post',
+        url: '/signup',
+        data: info
+      }).then((result) => {
+        console.log(result);
       })
       .catch((error) => {
-          console.log(error);
+        console.log(error);
       });
+
   }
 
   handleSubmit = () => {
     // if no err (checks db for username on change of state for email)
     // signup user and save their information inside DB
+
     if (this.state.email !== 'wontwork@email.com') {
         this.signupNewUser(this.state);
     } else {
@@ -63,7 +68,7 @@ export default class Signup extends Component {
       <Container fluid>
         <NavBar changeView={this.props.changeView}/>
         <Container>
-            <Transition animation='jiggle' duration={500} transitionOnMount={true}>
+            <Transition animation='pulse' duration={500} transitionOnMount={true}>
                 <Segment>
                     <Form>
                         <Form.Field>
@@ -102,7 +107,6 @@ export default class Signup extends Component {
                         <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
                     </Form>
                 </Segment>
-
             </Transition>
         </Container>
       </Container>
