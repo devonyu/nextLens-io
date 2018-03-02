@@ -9,7 +9,7 @@ export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        first: '',
+        firstName: '',
         email: '',
         password: '',
         mount: '',
@@ -37,8 +37,6 @@ export default class Signup extends Component {
       // takes in the current state (must make sure that it is valid)
       // then checks to see if database includes current email already
       // if not, write to DB and save user information for login page
-      console.log('Signing up => first: ', this.state.first, 'email: ', this.state.email, 'password: ', this.state.password, 'mount: ', this.state.mount, 'about: ', this.state.about);
-
       axios.post('/signup', info)
       .then((response) => {
           console.log('server sent back: ', response)
@@ -59,7 +57,7 @@ export default class Signup extends Component {
   }
 
   render() {
-    const { first, email, password, mount, about} = this.state
+    const { firstName, email, password, mount, about} = this.state
 
     return(
       <Container fluid>
@@ -71,8 +69,8 @@ export default class Signup extends Component {
                         <Form.Field>
                             <label>First Name</label>
                             <input placeholder='First Name'
-                            name='first'
-                            value={first}
+                            name='firstName'
+                            value={firstName}
                             onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field>
@@ -92,12 +90,12 @@ export default class Signup extends Component {
                         <Form.Field control={Select} 
                         label='Camera Mount' 
                         options={options}
-                        value = {mount}
+                        value={mount}
                         placeholder='Your Camera Mount'
                         onChange={this.updateMount} />
                         <Form.Field control={TextArea} 
                     label='About' 
-                        placeholder='Tell us more about you...' 
+                        placeholder='Tell us more about yourself...' 
                         name='about' 
                         value={about} 
                         onChange={this.handleChange}/>

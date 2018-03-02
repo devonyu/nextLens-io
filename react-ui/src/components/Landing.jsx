@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Checkbox, Container, Form, Image, Segment, Popup, Transition } from 'semantic-ui-react'
+import { Button, Container, Image, Transition } from 'semantic-ui-react'
 import NavBar from './NavBar';
 
 export default class Landing extends Component {

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container } from 'semantic-ui-react';
 import './App.css';
-import NavBar from './components/NavBar';
 import PhotoLiker from './components/PhotoLiker';
 import Signup from './components/Signup';
 import Landing from './components/Landing';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Container, Image, Popup, Transition } from 'semantic-ui-react'
+import { Button, Container, Image, Popup } from 'semantic-ui-react'
 import NavBar from './NavBar';
 
 
