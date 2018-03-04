@@ -28,7 +28,7 @@ export default class Login extends Component {
         console.log(`${this.state.email} has been logged in`);
         // change state to user information
         // change view to photoliker or userHomepage
-        this.props.changeView('photoliker');
+        this.props.changeView('homepage');
       }
     })
     .catch((error) => {

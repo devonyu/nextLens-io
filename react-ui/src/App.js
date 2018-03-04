@@ -4,6 +4,7 @@ import PhotoLiker from './components/PhotoLiker';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
 import Login from './components/Login';
+import HomePage from './components/HomePage';
 
 class App extends Component {
   constructor(props) {
@@ -55,8 +56,12 @@ class App extends Component {
       return <Signup
       changeView={ this.changeView.bind(this) }
       />
-    }else if (this.state.view ==='photoliker') {
+    } else if (this.state.view ==='photoliker') {
       return <PhotoLiker
+      changeView={ this.changeView.bind(this) }
+      />
+    } else if (this.state.view ==='homepage') {
+      return <HomePage
       changeView={ this.changeView.bind(this) }
       />
     }

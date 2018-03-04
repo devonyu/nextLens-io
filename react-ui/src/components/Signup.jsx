@@ -34,30 +34,40 @@ export default class Signup extends Component {
   }
 
   signupNewUser = (info) => {
-      // takes in the current state (must make sure that it is valid)
-      // then checks to see if database includes current email already
-      // if not, write to DB and save user information for login page
       axios({
         method: 'post',
         url: '/signup',
         data: info
       }).then((result) => {
-        console.log(result);
+          if (result.data.status === false) {
+            // Email already in database
+            alert('Email is already signed up!');
+          } else {
+            // Email signed up successfully
+            // Change state to homepage for user to sign in!
+            this.props.changeView('homepage');
+          }
       })
       .catch((error) => {
         console.log(error);
       });
-
   }
 
   handleSubmit = () => {
-    // if no err (checks db for username on change of state for email)
-    // signup user and save their information inside DB
-
-    if (this.state.email !== 'wontwork@email.com') {
+    function validateEmail(email) {
+        let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    if (validateEmail(this.state.email) && this.state.password.length >= 5 && this.state.firstName && this.state.mount) {
         this.signupNewUser(this.state);
-    } else {
-        alert('Invalid email! wontwork@email.com')
+    } else if (!validateEmail(this.state.email)) {
+        alert('Invalid Email Format');
+    } else if (this.state.password.length < 5) {
+        alert('Password must be at least 5 characters');
+    } else if (!this.state.firstName) {
+        alert('First Name required');
+    } else if (!this.state.mount) {
+        alert('Please Select a Camera Mount');
     }
   }
 

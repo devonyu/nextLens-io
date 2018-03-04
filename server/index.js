@@ -3,7 +3,8 @@ const path = require('path');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const { Client } = require('pg');
+const db = require('./db');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -20,15 +21,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  res.send('{"message":"testing the /test endpoint"}')
-});
-
-app.post('/signup', (req, res) => {
-  const { username, password } = req.body;
-  const toClient = { username, password };
-  // sends username and password to database to store
-  // const connectionString = process.env.DATABASE_URL
-  res.send(toClient);
+  res.send('{"message":"testing the /test endpoint"}');
 });
 
 // Get random images for user to like
@@ -51,11 +44,13 @@ app.get('/landing', (req, res) => {
     });
 });
 
-// Gets 100 images related to lenses
+// Gets 100 images related to lenses and related queries
 app.get('/newlanding', (req, res) => {
+  const keywords = ['camera lens', 'dslr', 'camera', 'lens', 'drone', 'portrait', 'wide'];
+  const randomQuery = keywords[Math.floor(Math.random() * keywords.length)];
   axios.get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_URL}`, {
     params: {
-      query: 'camera lens',
+      query: randomQuery,
       per_page: '100',
     },
   })
@@ -64,27 +59,48 @@ app.get('/newlanding', (req, res) => {
     });
 });
 
-app.get('/db', (request, response) => {
-  let result;
-  // Change env variable to TEST_DATABASE to test locally
-  // or to DATABASE_URL for deployed postgres server on Heroku
-  const connectionString = process.env.DATABASE_URL;
-  const client = new Client({ connectionString });
-  client.connect();
-  client.query('SELECT * from information', (err, res) => {
-    result = res.rows;
-    client.end();
-    console.log(result);
-    response.send(JSON.stringify(result));
+// Signup Route
+app.post('/signup', (req, res) => {
+  const { firstName, email, password, mount, about } = req.body;
+  const toClient = { firstName, email, password, mount, about };
+  // Check database for email address
+  async function checkSignUp() {
+    const result = await db.checkEmail(toClient.email, (response) => {
+      console.log('result of checkEmail: ', response.rows[0]);
+      return response.rows[0];
+    });
+    console.log('result = ', result);
+    if (result) {
+      console.log('user EXISTS ALREADY! ABORT')
+      res.send({status: false});
+    } else if (result === undefined) {
+      db.signUp(toClient, (res) => {
+        console.log('signing up user: ', toClient.email);
+      });
+      res.send('signed UP!');
+    }
+  }
+  checkSignUp();
+});
+
+// Login route
+app.post('/login', (request, response) => {
+  const input = request.body;
+  db.checkLogin(input, (res) => {
+    response.send(res);
   });
 });
 
+app.post('/logout', (req, res) => {
+  console.log('logging user');
+});
 
 // All remaining requests return the React app, so it can handle routing.
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
 });
 
+// Which port is the NodeJS server listening on
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
