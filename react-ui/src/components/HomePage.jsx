@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, Container, Image, Transition } from 'semantic-ui-react'
 import NavBar from './NavBar';
 
-export default class Landing extends Component {
+export default class HomePage extends Component {
     constructor(props) {
         super(props);
 		this.state = {
@@ -93,8 +93,8 @@ export default class Landing extends Component {
             <Container fluid>
                 <NavBar changeView={this.props.changeView}/>
                 <Container fluid textAlign='center'>
-                <h1>Tired of your current Lens?</h1>
-                <h2>Find out the lenses you like based off the photos taken by them!</h2>
+                <h1>User HOMEPAGE</h1>
+                <h2>DO WE HAVE ENOUGH DATA ON YOU?</h2>
             
                 <Button basic color='green' size='large' content='Sign up for free' onClick={this.toggleSignup}/>
                 <Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
@@ -111,6 +111,8 @@ export default class Landing extends Component {
                     </Transition>
                 </Container>
             </Container>
+
         )
     }
+
 }
