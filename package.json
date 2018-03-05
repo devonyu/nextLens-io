@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Lens and Camera Recommendations based off Users Likes",
   "engines": {
-    "node": "6.11.x"
+    "node": "8.9.4"
   },
   "scripts": {
     "start": "node server",
