@@ -1,118 +1,57 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Container, Image, Transition } from 'semantic-ui-react'
-import NavBar from './NavBar';
+import { Button, Container, Transition } from 'semantic-ui-react'
 
 export default class HomePage extends Component {
-    constructor(props) {
-        super(props);
-		this.state = {
-            signedin: false,
-			imgs: [],
-            current: [],
-            currentUrl: '',
-            animation: 'pulse', 
-            duration: 250, 
-            visible: true
-        }
-        
-        this.getSplashImage = this.getSplashImage.bind(this);
-        this.alterPhoto = this.alterPhoto.bind(this);
-        this.toggleVisibility = this.toggleVisibility.bind(this);
-        this.toggleChangeView = this.toggleChangeView.bind(this);
-        this.toggleSignup = this.toggleSignup.bind(this);
-    }
+	constructor(props) {
+		super(props);
+	this.state = {
+		animation: 'pulse', 
+		duration: 250, 
+		visible: true
+	}
+	this.getUserInformation = this.getUserInformation.bind(this);
+	}
 
-    toggleVisibility = () => this.setState({ visible: !this.state.visible })
+	toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
-    toggleChangeView = () => {
-        console.log('clicked')
-        this.props.changeView('photoliker');
-    }
+	toggleChangeView = () => {
+		this.props.changeView('photoliker');
+	}
 
-    toggleSignup = () => {
-        console.log('clicked')
-        this.props.changeView('signup');
-    }
-	getSplashImage = () => {
-		axios.get('/landing')
+	getUserInformation = (userId) => {
+		//  git the userID api route to check whether or not we have recommendations or not
+		axios.get('/test')
 		.then(({ data }) => {
-        let temp = [];
-        data.forEach((img)=> {
-            temp.push(img.urls.regular)
-        })
-		this.setState({ 
-			imgs: temp,
-            current: temp[0],
-            currentUrl: temp[0]
-		 });
-		})
+      console.log(data)
+    })
 		.catch((error) => {
-		console.log(error);
+		  console.log(error);
 		});
-    }
+  }
 
-    newGetSplashImages = () => {
-		axios.get('/newlanding')
-		.then(({ data }) => {
-        let temp = [];
-        data.results.forEach((img)=> {
-            temp.push(img.urls.regular)
-        })
-		this.setState({ 
-			imgs: temp,
-            current: temp[0],
-            currentUrl: temp[0]
-		 });
-		})
-		.catch((error) => {
-		console.log(error);
-		});
-    }
+	componentDidMount () {
+		this.getUserInformation();
+	}
 
-    alterPhoto () {
-        let hold = this.state.imgs[0];
-        let tempz = this.state.imgs.slice(1)
-        tempz.push(hold);
-        this.setState({
-            imgs: tempz,
-            current: tempz[0],
-            currentUrl: tempz[0]
-        })
-    }
+	render() {
+		const { animation, duration, visible } = this.state
+		return(
+			<Container fluid>
+				<Container fluid textAlign='center'>
+					<h2>{`Hello, ${this.props.userName}. We are looking for your recommendations!`}</h2>
+					<Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
+				</Container>
 
-    componentDidMount () {
-        this.newGetSplashImages();
-        //setInterval(this.alterPhoto, 5000)
-    }
-
-    render() {
-        const { animation, duration, visible } = this.state
-
-        return(
-            <Container fluid>
-                <NavBar changeView={this.props.changeView}/>
-                <Container fluid textAlign='center'>
-                <h1>User HOMEPAGE</h1>
-                <h2>DO WE HAVE ENOUGH DATA ON YOU?</h2>
-            
-                <Button basic color='green' size='large' content='Sign up for free' onClick={this.toggleSignup}/>
-                <Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
-                </Container>
-
-                <Container>
-                    <Transition animation={animation} duration={duration} visible={visible}>
-                        <div className="card" content='Run' onClick={this.toggleVisibility}>
-                            <Image onClick={this.alterPhoto} 
-                                src={this.state.currentUrl}
-                                rounded
-                            />
-                        </div>
-                    </Transition>
-                </Container>
-            </Container>
-
-        )
-    }
-
+				<Container>
+					<Transition animation={animation} duration={duration} visible={visible}>
+						<div> Make a new component here to render a list of recommended lenses
+							<br/>
+							if not enough data, tell user to use photoliker!
+						</div>
+					</Transition>
+				</Container>
+			</Container>
+		)
+	}
 }

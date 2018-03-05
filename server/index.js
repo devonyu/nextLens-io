@@ -64,22 +64,24 @@ app.post('/signup', (req, res) => {
   const { firstName, email, password, mount, about } = req.body;
   const toClient = { firstName, email, password, mount, about };
   // Check database for email address
-  async function checkSignUp() {
-    const result = await db.checkEmail(toClient.email, (response) => {
-      console.log('result of checkEmail: ', response.rows[0]);
-      return response.rows[0];
-    });
-    console.log('result = ', result);
-    if (result) {
-      console.log('user EXISTS ALREADY! ABORT')
-      res.send({status: false});
-    } else if (result === undefined) {
-      db.signUp(toClient, (res) => {
-        console.log('signing up user: ', toClient.email);
+  const checkSignUp = async () => {
+    try {
+      await db.checkEmail(toClient.email, (response) => {
+        console.log('result of checkEmail: ', response.rows[0]);
+        if (response.rows[0]) {
+          console.log('user EXISTS ALREADY! ABORT');
+          res.send({ status: false });
+        } else if (response.rows[0] === undefined) {
+          db.signUp(toClient, () => {
+            console.log('signing up user: ', toClient.email);
+          });
+          res.send('signed UP!');
+        }
       });
-      res.send('signed UP!');
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
   checkSignUp();
 });
 
@@ -104,4 +106,3 @@ app.get('*', (request, response) => {
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
-

@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 // Use TEST_DATABASE || DATABASE_URL for local dev || deployed state
-const connectionString = process.env.TEST_DATABASE;
+const connectionString = process.env.DATABASE_URL;
 const client = new Client({
   connectionString,
 });

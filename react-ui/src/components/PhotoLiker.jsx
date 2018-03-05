@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Container, Image, Popup } from 'semantic-ui-react'
-import NavBar from './NavBar';
-
+import { Button, Container, Image, Popup } from 'semantic-ui-react';
 
 export default class PhotoLiker extends Component {
     constructor(props) {
@@ -11,7 +9,7 @@ export default class PhotoLiker extends Component {
 			imgs: [],
             current: {},
             currentUrl: '',
-			userid: 1,
+			userid: 0,
 			userAccount: ''
 		}
 		this.getPics = this.getPics.bind(this)
@@ -74,7 +72,6 @@ export default class PhotoLiker extends Component {
     render() {
         return(
             <Container fluid>
-                <NavBar changeView={this.props.changeView}/>
                 <Container fluid textAlign='center'>
                     <h2>PhotoLiker Beta 1.0</h2>
                     <Button onClick={this.handleYes} size='big'>Like</Button>

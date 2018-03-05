@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Container, Form, Segment, Transition } from 'semantic-ui-react'
 import axios from 'axios';
-import NavBar from './NavBar';
 
 export default class Login extends Component {
   constructor(props) {
@@ -29,6 +28,10 @@ export default class Login extends Component {
         // change state to user information
         // change view to photoliker or userHomepage
         this.props.changeView('homepage');
+        this.props.changeState('loggedIn', true);
+        this.props.changeState('userName', result.data.firstname);
+        this.props.changeState('id', result.data.id);
+        this.props.changeState('mount', result.data.mount);
       }
     })
     .catch((error) => {
@@ -43,7 +46,6 @@ export default class Login extends Component {
   render() {
     return(
       <Container fluid>
-      <NavBar changeView={this.props.changeView}/>
       <Transition animation='pulse' duration={500} transitionOnMount={true}>
         <Segment>
           <Container>

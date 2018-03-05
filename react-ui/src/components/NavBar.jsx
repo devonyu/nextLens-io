@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { Button, Container, Header, Image, Menu, Modal } from 'semantic-ui-react'
-
+import { Button, Header, Image, Menu, Modal } from 'semantic-ui-react'
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: 'false',
-      term: ''
+      status: 'Logged-out',
     }
     this.logIn = this.logIn.bind(this);
     this.landing = this.landing.bind(this);
@@ -16,7 +14,16 @@ class NavBar extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   logIn() {
-    this.props.changeView('login');
+    if (this.state.status === 'Logged In' && this.props.view !== 'login') {
+      this.props.changeState('loggedIn', false);
+      this.props.changeState('userName', '');
+      this.props.changeState('userId', null);
+      this.setState({status: 'Logged-out'})
+      this.props.changeView('landing');
+    } else if (this.state.status === 'Logged-out') {
+      this.setState({status: 'Logged In'})
+      this.props.changeView('login');
+    }
   }
 
   landing() {
@@ -27,7 +34,6 @@ class NavBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <Container fluid>
       <Menu borderless={true} size='tiny' fluid={true}>
         <Menu.Item onClick={this.landing}
         header
@@ -44,7 +50,6 @@ class NavBar extends Component {
             About
           </Menu.Item>
         }>
-
           <Modal.Header>NextLens was designed and built by Devon Yu</Modal.Header>
           <Modal.Content>
             <Modal.Description>
@@ -56,14 +61,15 @@ class NavBar extends Component {
           </Modal.Content>
         </Modal>
 
-
         <Menu.Menu position='right'>
           <Menu.Item>
-            <Button size='tiny' onClick={this.logIn} primary>Log-in</Button>
+            {this.props.userName? `Welcome ${this.props.userName}` : '' }
+          </Menu.Item>
+          <Menu.Item>
+            <Button size='tiny' onClick={this.logIn} primary>{this.props.loggedIn === false? 'Log in' : 'Log out'}</Button>
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-      </Container>
     )
   }
 }

@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Container, Image, Transition } from 'semantic-ui-react'
-import NavBar from './NavBar';
+import { Button, Container, Image, Transition } from 'semantic-ui-react';
 
 export default class Landing extends Component {
     constructor(props) {
         super(props);
 		this.state = {
-            signedin: false,
 			imgs: [],
             current: [],
             currentUrl: '',
@@ -91,7 +89,6 @@ export default class Landing extends Component {
 
         return(
             <Container fluid>
-                <NavBar changeView={this.props.changeView}/>
                 <Container fluid textAlign='center'>
                 <h1>Tired of your current Lens?</h1>
                 <h2>Find out the lenses you like based off the photos taken by them!</h2>

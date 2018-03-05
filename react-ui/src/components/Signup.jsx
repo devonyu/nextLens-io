@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Form, TextArea, Transition, Segment, Select } from 'semantic-ui-react'
 import axios from 'axios';
-import NavBar from './NavBar';
 const options = require('./utils.js');
-// Addition filters can be which specific mount (EG. FX or DX)
 
 export default class Signup extends Component {
   constructor(props) {
@@ -44,8 +42,8 @@ export default class Signup extends Component {
             alert('Email is already signed up!');
           } else {
             // Email signed up successfully
-            // Change state to homepage for user to sign in!
-            this.props.changeView('homepage');
+            alert(`${info.email} Signed up!`);
+            this.props.changeView('landing');
           }
       })
       .catch((error) => {
@@ -76,7 +74,6 @@ export default class Signup extends Component {
 
     return(
       <Container fluid>
-        <NavBar changeView={this.props.changeView}/>
         <Container>
             <Transition animation='pulse' duration={500} transitionOnMount={true}>
                 <Segment>
