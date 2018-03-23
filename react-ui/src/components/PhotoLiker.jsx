@@ -75,7 +75,7 @@ export default class PhotoLiker extends Component {
                 <Container fluid textAlign='center'>
                     <h2>PhotoLiker Beta 1.0</h2>
                     <Button onClick={this.handleYes} size='big'>Like</Button>
-                    <Button onClick={this.handleNo} size='big'>Dislke</Button>
+                    <Button onClick={this.handleNo} size='big'>Dislike</Button>
                     <br/>
                         <Popup
                             trigger={
