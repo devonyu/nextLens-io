@@ -36,8 +36,7 @@ export default class PhotoLiker extends Component {
     }
     
     handleYes = () => {
-        console.log('Yes Clicked');
-        let temp = this.state.imgs
+        let temp = this.state.imgs;
 		temp.shift();
 		if (temp.length === 0) {
 			this.getPics()
@@ -51,8 +50,7 @@ export default class PhotoLiker extends Component {
     }
 
     handleNo = () => {
-        console.log('No Clicked');
-		let temp = this.state.imgs
+		let temp = this.state.imgs;
 		temp.shift();
 		if (temp.length === 0) {
 			this.getPics()

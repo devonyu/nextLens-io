@@ -18,6 +18,9 @@ _For more examples and usage, please refer to the [Wiki][wiki]._
 ## Roadmap
 See the [open issues](#bugs) for smaller things to work on.
 
+## Flowchart
+![FlowchartImage](https://github.com/devonyu/nextLens-io/blob/master/images/flowchart.jpg)
+
 ### Currently Implemented:
 - React styled with Semantic-UI React components rendering.
 - NodeJS server basic setup with Express.
