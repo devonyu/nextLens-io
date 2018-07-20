@@ -36,6 +36,18 @@ app.get('/pics', (req, res) => {
     });
 });
 
+// Get curated portraits images from my collection 
+app.get('/portrait', (req, res) => {
+  axios.get(`https://api.unsplash.com/collections/1606374/photos?client_id=${process.env.UNSPLASH_URL}`, {
+    params: {
+      per_page: 100,
+    },
+  })
+    .then((result) => {
+      res.send(result.data);
+    });
+});
+
 // Gets collection of images from first photo lens collection - soon to be a larger search query
 app.get('/landing', (req, res) => {
   axios.get(`https://api.unsplash.com/collections/1351856/photos/?client_id=${process.env.UNSPLASH_URL}`)
