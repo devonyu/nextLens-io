@@ -25,3 +25,12 @@
 #About {
   width: max-content;
 }
+
+.visible.transition {
+  margin-top: auto !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: inline-block !important;
+  position: relative;
+  top: 20%;
+}

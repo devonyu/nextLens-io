@@ -49,13 +49,13 @@ class NavBar extends Component {
           >
             About
           </Menu.Item>
-        }>
-          <Modal.Header>NextLens was designed and built by Devon Yu</Modal.Header>
+        }closeIcon>
+          <Modal.Header>Designed and Developed by Devon Yu</Modal.Header>
           <Modal.Content>
             <Modal.Description>
-            <Image id='About' wrapped size='medium' src='https://i.imgur.com/p2JkbNN.png' circular centered/>
+            <Image id='About' wrapped size='medium' src='https://github.com/devonyu/devonyu.github.io/blob/master/images/pf2.jpg?raw=true' circular centered/>
               <Header>I wanted to create an application to help new photographers find their next lens</Header>
-              <p>Built using React/Redux, Node+Express, MongoDB + Redis, Deployed with Heroku </p>
+              <p>Built using React, Node+Express, PostgreSQL, Deployed with Heroku</p>
               <p>Are you Hiring? Checkout my <a href='https://devonyu.github.io'>portfolio</a>, Download my <a href='https://devonyu.github.io/devonyuresume.pdf' download='true'>Resume!</a></p>
             </Modal.Description>
           </Modal.Content>
