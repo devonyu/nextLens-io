@@ -28,25 +28,15 @@ const checkEmail = async (email) => {
   }
 };
 
-const checkLogin = (params, callback) => {
-  console.log('Checking if ', params.email, 'exists');
+const checkLogin = async (params) => {
   const { email, password } = params;
   const query = `Select * from users where email = '${email}' and password = '${password}';`;
-  console.log(query);
-  client.query(query, (err, response) => {
-    if (err) {
-      console.log('Username or Password incorrect');
-      callback({ status: false });
-    } else {
-      const userInformation = response.rows[0];
-      console.log('database sending back: ', userInformation);
-      if (userInformation === undefined) {
-        callback({ status: false });
-      } else {
-        callback(userInformation);
-      }
-    }
-  });
+  const loginResult = await client.query(query);
+  if (!loginResult.rows[0]) {
+    return ({status: false});
+  } else {
+    return loginResult.rows[0];
+  }
 };
 
 module.exports = {

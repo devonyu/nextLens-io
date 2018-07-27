@@ -116,10 +116,10 @@ app.post('/login', (request, response) => {
     // If email found, compare salted password with bcrypt
     const match = await bcrypt.compare(credentials.password, user.password);
     if (match) {
-      console.log('passwords MATCH')
+      console.log('CORRECT PASSWORD')
       response.send(user);
     } else {
-      console.log('WRONG PASSWORD. ')
+      console.log('WRONG PASSWORD')
       response.send({status: false});
     }
   }
