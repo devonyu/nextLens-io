@@ -64,7 +64,7 @@ export default class Landing extends Component {
 
     componentDidMount () {
         this.getSplashImages();
-        setInterval(this.alterPhoto, 3500)
+        //setInterval(this.alterPhoto, 3500)
     }
 
     render() {

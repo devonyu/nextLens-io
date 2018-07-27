@@ -17,7 +17,6 @@ export default class PhotoLiker extends Component {
 		this.handleYes = this.handleYes.bind(this)
     }
 
-
 	getPics = () => {
         //Use Portait API Dummy data for now to test
         this.setState({ 
@@ -57,11 +56,11 @@ export default class PhotoLiker extends Component {
                     <h2>PhotoLiker Beta 1.0</h2>
                     <Button onClick={this.handleYes} size='big'>Like</Button>
                     <Button onClick={this.handleNo} size='big'>Dislike</Button>
-                    <Progress percent={Math.round(((this.state.progress.length / 30) * 10))} progress />
+                    <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />
                     <br/>
                         <Popup
                             trigger={
-                                <Image src={this.state.imgs[this.state.currentIndex].urls.small}
+                                <Image src={this.state.imgs[this.state.currentIndex].urls.regular}
                                     size='huge'
                                     rounded
                                     centered={true}
