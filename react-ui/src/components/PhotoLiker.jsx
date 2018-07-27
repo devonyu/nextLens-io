@@ -8,69 +8,41 @@ export default class PhotoLiker extends Component {
 		super(props);
 		this.state = {
 			imgs: [],
-            current: {},
-            currentUrl: '',
             currentIndex: 0,
             userid: 0,
-            progress: [],
-			userAccount: ''
+            progress: []
 		}
 		this.getPics = this.getPics.bind(this)
 		this.handleNo = this.handleNo.bind(this)
 		this.handleYes = this.handleYes.bind(this)
     }
 
-    //Gets 30 random images with the Unsplash Api and sets it into state
+
 	getPics = () => {
+        //Use Portait API Dummy data for now to test
         this.setState({ 
-			imgs: api.portrait1.concat(api.portrait2).concat(api.portrait3).concat(api.portrait4),
-            currentUrl: api.portrait1[0].urls.regular,
-            current: api.portrait1[0]
+			imgs: api.portrait1.concat(api.portrait2).concat(api.portrait3).concat(api.portrait4)
 		 });
     }
     
     handleYes = () => {
-        // let temp = this.state.imgs;
-		// temp.shift();
-		// if (temp.length === 0) {
-		// 	this.getPics()
-		// } else {
-		// 	this.setState({
-		// 		imgs: temp,
-        //         current: temp[0].exif,
-        //         currentUrl: temp[0].urls.regular
-		// 	})
-        // }
-         let temp = this.state.current;
-
+        //add photo to user likes table
          this.setState(function(prevState, props) {
             return {
-              //currentIndex: prevState.currentIndex ++,
-              progress: prevState.progress.push(temp),
-              current: prevState.imgs[prevState.currentIndex],
-              currentUrl: prevState.imgs[prevState.currentIndex + 1].urls.regular
-            };
-          });
-
-         this.setState(function(prevState, props) {
-            return {
-                currentIndex: prevState.currentIndex += 1,
+                progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
+                currentIndex: prevState.currentIndex += 1
             };
           });
     }
 
     handleNo = () => {
-		let temp = this.state.imgs;
-		temp.shift();
-		if (temp.length === 0) {
-			this.getPics()
-		} else {
-			this.setState({
-				imgs: temp,
-                current: temp[0].exif,
-                currentUrl: temp[0].urls.regular
-			})
-		}
+        //add image to user likes table (dislike)
+        this.setState(function(prevState, props) {
+            return {
+                progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
+                currentIndex: prevState.currentIndex += 1
+            };
+          });
     }
 
     componentWillMount () {
@@ -85,11 +57,11 @@ export default class PhotoLiker extends Component {
                     <h2>PhotoLiker Beta 1.0</h2>
                     <Button onClick={this.handleYes} size='big'>Like</Button>
                     <Button onClick={this.handleNo} size='big'>Dislike</Button>
-                    <Progress percent={this.state.progress.length} progress />
+                    <Progress percent={Math.round(((this.state.progress.length / 30) * 10))} progress />
                     <br/>
                         <Popup
                             trigger={
-                                <Image src={this.state.currentUrl}
+                                <Image src={this.state.imgs[this.state.currentIndex].urls.small}
                                     size='huge'
                                     rounded
                                     centered={true}

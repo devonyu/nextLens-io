@@ -7,14 +7,12 @@ export default class Landing extends Component {
         super(props);
 		this.state = {
 			imgs: [],
-            current: [],
-            currentUrl: '',
+            currentIndex: 0,
             animation: 'pulse', 
             duration: 250, 
             visible: true
         }
-        
-        this.getSplashImage = this.getSplashImage.bind(this);
+        this.getSplashImages = this.getSplashImages.bind(this);
         this.alterPhoto = this.alterPhoto.bind(this);
         this.toggleVisibility = this.toggleVisibility.bind(this);
         this.toggleChangeView = this.toggleChangeView.bind(this);
@@ -24,64 +22,49 @@ export default class Landing extends Component {
     toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
     toggleChangeView = () => {
-        console.log('clicked')
         this.props.changeView('photoliker');
     }
 
     toggleSignup = () => {
-        console.log('clicked')
         this.props.changeView('signup');
     }
-	getSplashImage = () => {
+
+    getSplashImages = () => {
 		axios.get('/landing')
 		.then(({ data }) => {
-        let temp = [];
-        data.forEach((img)=> {
-            temp.push(img.urls.regular)
-        })
-		this.setState({ 
-			imgs: temp,
-            current: temp[0],
-            currentUrl: temp[0]
-		 });
+            const temp = [];
+            data.results.forEach((img)=> {
+                //if we can determine internet speed we can optimize b/w reg/small
+                temp.push(img.urls.regular)
+            })
+            this.setState(function(prevState, props) {
+                return {
+                    imgs: temp,
+                    currentIndex: 0
+                };
+              });
 		})
 		.catch((error) => {
-		console.log(error);
-		});
-    }
-
-    newGetSplashImages = () => {
-		axios.get('/newlanding')
-		.then(({ data }) => {
-        let temp = [];
-        data.results.forEach((img)=> {
-            temp.push(img.urls.regular)
-        })
-		this.setState({ 
-			imgs: temp,
-            current: temp[0],
-            currentUrl: temp[0]
-		 });
-		})
-		.catch((error) => {
-		console.log(error);
+		    console.log(error);
 		});
     }
 
     alterPhoto () {
-        let hold = this.state.imgs[0];
-        let tempz = this.state.imgs.slice(1)
-        tempz.push(hold);
-        this.setState({
-            imgs: tempz,
-            current: tempz[0],
-            currentUrl: tempz[0]
-        })
+        if (this.state.currentIndex !== 29) {
+            this.setState(function(prevState, props) {
+                return {
+                    currentIndex: prevState.currentIndex += 1
+                };
+              });
+              this.toggleVisibility();
+        } else {
+            this.getSplashImages();
+        }
     }
 
     componentDidMount () {
-        this.newGetSplashImages();
-        //setInterval(this.alterPhoto, 5000)
+        this.getSplashImages();
+        setInterval(this.alterPhoto, 3500)
     }
 
     render() {
@@ -90,18 +73,17 @@ export default class Landing extends Component {
         return(
             <Container fluid>
                 <Container fluid textAlign='center'>
-                <h1>Tired of your current Lens?</h1>
-                <h2>Find out the lenses you like based off the photos taken by them!</h2>
-            
+                <h2>Based off of images you like, we will give recommendations for lenses that suit your preferences!</h2>
+
                 <Button basic color='green' size='large' content='Sign up for free' onClick={this.toggleSignup}/>
                 <Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
                 </Container>
 
                 <Container>
                     <Transition animation={animation} duration={duration} visible={visible}>
-                        <div className="card" content='Run' onClick={this.toggleVisibility}>
+                        <div id="splashImage" className="card" content='Run' onClick={this.toggleVisibility}>
                             <Image onClick={this.alterPhoto} 
-                                src={this.state.currentUrl}
+                                src={this.state.imgs[this.state.currentIndex]}
                                 rounded
                             />
                         </div>

@@ -5,10 +5,10 @@ import { Button, Container, Transition } from 'semantic-ui-react'
 export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
-	this.state = {
-		animation: 'pulse', 
-		duration: 250, 
-		visible: true
+		this.state = {
+			animation: 'pulse', 
+			duration: 250, 
+			visible: true
 	}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	}
@@ -20,7 +20,7 @@ export default class HomePage extends Component {
 	}
 
 	getUserInformation = (userId) => {
-		//  git the userID api route to check whether or not we have recommendations or not
+		//  get the userID api route to check whether or not we have recommendations or not
 		axios.get('/test')
 		.then(({ data }) => {
       console.log(data)
