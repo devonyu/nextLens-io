@@ -4,6 +4,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const db = require('./db');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,7 +41,7 @@ app.get('/pics', (req, res) => {
 app.get('/portrait', (req, res) => {
   axios.get(`https://api.unsplash.com/collections/1606374/photos?client_id=${process.env.UNSPLASH_URL}`, {
     params: {
-      per_page: 100,
+      per_page: 30,
     },
   })
     .then((result) => {
@@ -75,34 +76,54 @@ app.get('/newlanding', (req, res) => {
 app.post('/signup', (req, res) => {
   const { firstName, email, password, mount, about } = req.body;
   const toClient = { firstName, email, password, mount, about };
-  // Check database for email address
-  const checkSignUp = async () => {
-    try {
-      await db.checkEmail(toClient.email, (response) => {
-        console.log('result of checkEmail: ', response.rows[0]);
-        if (response.rows[0]) {
-          console.log('user EXISTS ALREADY! ABORT');
-          res.send({ status: false });
-        } else if (response.rows[0] === undefined) {
-          db.signUp(toClient, () => {
-            console.log('signing up user: ', toClient.email);
-          });
-          res.send('signed UP!');
-        }
-      });
-    } catch (err) {
-      console.log(err);
+  console.log('Sign up router HIT, what we got===> ', toClient);
+  
+  async function checkSignUp (userInformation) {
+    //check if email exist first?
+    const userExists = await db.checkEmail(toClient.email);
+    //if exist, exit out now.
+    if (userExists !== undefined) {
+      res.send({status: false});
+    } else if (userExists === undefined) {
+    //if not exist, sign user up
+      const passwordHash = await bcrypt.hash(toClient.password, 10);
+      toClient.password = passwordHash;
+    //signing user up with new hashed password
+      const signingUp = await db.signUp(toClient);
+    //if error occured, let them know
+      if (signingUp.status !== true) {
+        res.send({status: 'error'});
+      } else if (signingUp.status === true) {
+            //if signed up sucsessfully, let them know
+        res.send({status: true});
+      }
     }
-  };
-  checkSignUp();
+  }
+  checkSignUp(toClient);
 });
 
 // Login route
 app.post('/login', (request, response) => {
-  const input = request.body;
-  db.checkLogin(input, (res) => {
-    response.send(res);
-  });
+  const loginInput = request.body;
+  async function checkCredentials (credentials) {
+    const user = await db.checkEmail(credentials.email, (res) => {
+      return res.rows[0];
+    });
+    // If email not found, show error
+    if (user === undefined) {
+      response.send({status: false});
+    }
+    // If email found, compare salted password with bcrypt
+    const match = await bcrypt.compare(credentials.password, user.password);
+    if (match) {
+      console.log('passwords MATCH')
+      response.send(user);
+    } else {
+      console.log('WRONG PASSWORD. ')
+      response.send({status: false});
+    }
+  }
+  checkCredentials(loginInput);
 });
 
 app.post('/logout', (req, res) => {

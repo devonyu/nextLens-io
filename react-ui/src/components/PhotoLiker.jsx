@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Button, Container, Image, Popup } from 'semantic-ui-react';
+//import axios from 'axios';
+import { Button, Container, Image, Popup, Progress } from 'semantic-ui-react';
+const api = require('../../../example_Data/api');
 
 export default class PhotoLiker extends Component {
     constructor(props) {
@@ -9,7 +10,9 @@ export default class PhotoLiker extends Component {
 			imgs: [],
             current: {},
             currentUrl: '',
-			userid: 0,
+            currentIndex: 0,
+            userid: 0,
+            progress: [],
 			userAccount: ''
 		}
 		this.getPics = this.getPics.bind(this)
@@ -19,34 +22,41 @@ export default class PhotoLiker extends Component {
 
     //Gets 30 random images with the Unsplash Api and sets it into state
 	getPics = () => {
-		axios.get('/pics')
-		.then((data) => {
-        let temp = data.data[0].exif;
-        let imageUrl = data.data[0].urls.regular;
-		this.setState({ 
-			imgs: data.data,
-            current: temp,
-            currentUrl: imageUrl
+        this.setState({ 
+			imgs: api.portrait1.concat(api.portrait2).concat(api.portrait3).concat(api.portrait4),
+            currentUrl: api.portrait1[0].urls.regular,
+            current: api.portrait1[0]
 		 });
-		console.log('State inside Liker: ', this.state)
-		})
-		.catch((error) => {
-		console.log(error);
-		});
     }
     
     handleYes = () => {
-        let temp = this.state.imgs;
-		temp.shift();
-		if (temp.length === 0) {
-			this.getPics()
-		} else {
-			this.setState({
-				imgs: temp,
-                current: temp[0].exif,
-                currentUrl: temp[0].urls.regular
-			})
-		}
+        // let temp = this.state.imgs;
+		// temp.shift();
+		// if (temp.length === 0) {
+		// 	this.getPics()
+		// } else {
+		// 	this.setState({
+		// 		imgs: temp,
+        //         current: temp[0].exif,
+        //         currentUrl: temp[0].urls.regular
+		// 	})
+        // }
+         let temp = this.state.current;
+
+         this.setState(function(prevState, props) {
+            return {
+              //currentIndex: prevState.currentIndex ++,
+              progress: prevState.progress.push(temp),
+              current: prevState.imgs[prevState.currentIndex],
+              currentUrl: prevState.imgs[prevState.currentIndex + 1].urls.regular
+            };
+          });
+
+         this.setState(function(prevState, props) {
+            return {
+                currentIndex: prevState.currentIndex += 1,
+            };
+          });
     }
 
     handleNo = () => {
@@ -68,12 +78,14 @@ export default class PhotoLiker extends Component {
     }
 
     render() {
+        console.log(this.state)
         return(
             <Container fluid>
                 <Container fluid textAlign='center'>
                     <h2>PhotoLiker Beta 1.0</h2>
                     <Button onClick={this.handleYes} size='big'>Like</Button>
                     <Button onClick={this.handleNo} size='big'>Dislike</Button>
+                    <Progress percent={this.state.progress.length} progress />
                     <br/>
                         <Popup
                             trigger={
@@ -83,8 +95,8 @@ export default class PhotoLiker extends Component {
                                     centered={true}
                                 />
                             }
-                            header={this.state.imgs.length !== 0 ? <p>Download this picture on Unsplash <a href={this.state.imgs[0].links.download}>here</a></p> : null}
-                            content={this.state.imgs.length !== 0 ? <p>Photo by <a href={'https://unsplash.com/@' + this.state.imgs[0].user.username + '?utm_source=Photoliker&utm_medium=referral'} >{this.state.imgs[0].user.name}</a> on <a href={'https://unsplash.com/?utm_source=Photoliker&utm_medium=referral'}>Unsplash </a> </p>: null }
+                            header={this.state.imgs.length !== 0 ? <p>Download this picture on Unsplash <a href={this.state.imgs[this.state.currentIndex].links.download}>here</a></p> : null}
+                            content={this.state.imgs.length !== 0 ? <p>Photo by <a href={'https://unsplash.com/@' + this.state.imgs[this.state.currentIndex].user.username + '?utm_source=Photoliker&utm_medium=referral'} >{this.state.imgs[0].user.name}</a> on <a href={'https://unsplash.com/?utm_source=Photoliker&utm_medium=referral'}>Unsplash </a> </p>: null }
                             on={['click']}
                         />
                 </Container>

@@ -22,9 +22,15 @@ export default class Signup extends Component {
   handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({
-      [name]: value
-    });
+    if (name !== 'email') {
+        this.setState({
+            [name]: value
+          });
+    } else {
+        this.setState({
+            [name]: value.toLowerCase()
+          });
+    }
   }
 
   updateMount = (e, { value }) => {
@@ -38,10 +44,8 @@ export default class Signup extends Component {
         data: info
       }).then((result) => {
           if (result.data.status === false) {
-            // Email already in database
             alert('Email is already signed up!');
-          } else {
-            // Email signed up successfully
+          } else if (result.data.status === true){
             alert(`${info.email} Signed up!`);
             this.props.changeView('landing');
           }
@@ -96,6 +100,7 @@ export default class Signup extends Component {
                             <label>Password</label>
                             <input placeholder='Password'
                             name='password'
+                            type='password'
                             value={password}
                             onChange={this.handleChange} />
                         </Form.Field>

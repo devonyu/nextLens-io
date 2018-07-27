@@ -1,5 +1,7 @@
 # NextLens.io
-> Camera and Lens recommendations based on user's likes on pre-sorted and pre-screened images.  
+-----------------------------------------------
+
+> Camera and Lens recommendations based on user's likes on pre-sorted and pre-screened images.
 >
 [![Build Status][travis-image]][travis-url]
 
@@ -10,18 +12,46 @@ Enter NextLens.io!  This app's primary objective will be to find camera and lens
 ![MockupImage](https://devonyu.github.io/images/nextLensmockup.jpg)
 
 ## Usage example
+-----------------------------------------------
 
 New photographer is tired of their kit lens that came with the camera.  Although it is decent generalist lens, our user wants to create a more unique look.  Typical kit lens are normal zoom lenses that range from a 18-55mm (crop sensor) with average/slow variable apertures (Typically f/3.5-5.6).  For more 'bokeh' (focus on a specific subject with an intense blur of everything else - portraits are great for this), a lens with a faster aperture is needed (E.g. 1.4, 1.8, 2.8).  A lens with a longer focal length will increase the 'bokeh' and separation from subject and its background.  The app will give a user images to Like || Dislike to determine specific types of photos that a user maybe prefer (EXIF Data).  These images are very high quality as they are coming from the Unsplash API.  After collecting enough data (subject to the creation of the algorithm), the app will return a list of suggested lenses for the user.  This is the MVP portion of the project.
 
 _For more examples and usage, please refer to the [Wiki][wiki]._
 
 ## Roadmap
+-----------------------------------------------
 See the [open issues](#bugs) for smaller things to work on.
 
+
 ## Flowchart
+-----------------------------------------------
 ![FlowchartImage](https://github.com/devonyu/nextLens-io/blob/master/images/flowchart.jpg)
 
+
+
+## Schema Design
+-----------------------------------------------
+
+![Schema](https://github.com/devonyu/nextLens-io/blob/master/images/schema.jpg)
+
+
+
+## Tech Stack: 
+
+-----------------------------------------------
+
+- JavaScript ES6
+- React
+- NodeJS + Express
+- PostgreSQL
+- Semantic UI React
+- Heroku
+- Travis CI
+- Unsplash API
+
+
 ### Currently Implemented:
+-----------------------------------------------
 - React styled with Semantic-UI React components rendering.
 - NodeJS server basic setup with Express.
 - NavBar set up.
@@ -30,7 +60,10 @@ See the [open issues](#bugs) for smaller things to work on.
 - Travis CI integration for automatic deployment on pushes to the master branch.
 - Deployed to Heroku (The web app is a WIP, excuse the bugs for now).
 
+
+
 ### Planned:
+-----------------------------------------------
 - Create a full step by step wire framing / storyboard to optimize UX/UI to break down features.
 - Create Tests for everything - TDD! (Mocha/Chai).  Travis CI will use these tests.
 - Create Trello board to break down features to make it more manageable.
@@ -45,11 +78,16 @@ See the [open issues](#bugs) for smaller things to work on.
 - Filtering system to limit price and specific metrics of lenses a user may want in their perceived recommendations.
 - Sharing the web app to social media (FB/Google+/Instagram/Snapchat?/others).
 
+
+
 ### Possible Improvements on Current Features:
+-----------------------------------------------
 - Currently using 30 random images from Unsplash API for likes (some images dont have EXIF Data), By sorting images that do have EXIF data, we can filter the amount of calls needed to their API and not waste anytime/clicks.
 - Alternatively, we can use an external API (IBM Watson / Microsoft Computer Vision /etc) to scan images for key terms on their likes and dislikes.  A NoSQL DB may be useful for this as the data may vary from image to image.
 
+
 ### Future features and goals:
+-----------------------------------------------
 - Learn React Native and port the general functionality of web app to a mobile experience.
 - Ability to upload user images to add to photos a user can 'Like || Dislike'.
 - With the above feature, have a leaderboard (Daily/Weekly/Monthly/etc) for most user submitted likes.
@@ -61,11 +99,19 @@ See the [open issues](#bugs) for smaller things to work on.
 - SOA Micro service architecture in the back-end to decouple the components.
 - APM implementation to see where bottlenecks/issues are occurring before they bring down the entire system.
 
+
+
 ### Bugs:
+-----------------------------------------------
+
 - Rendering of images at current state depends on the users connection speeds - we can optimize the downloads based off of what device they are using (smaller images for phones vs larger for desktops).
-- Rendering of images only occur when a Like || Dislike is clicked. Cache or Preload images can fix this immensely (How to optimize?)
+- Rendering of images only occurs when a Like || Dislike is clicked. Cache or Preload images can fix this immensely (How to optimize?)
+
+-----------------------------------------------
 
 ## Local Development setup
+
+-----------------------------------------------
 
 Fork and clone the repo down to your local dev machine.  Npm install the dependencies from the package.json file.
 
@@ -89,6 +135,8 @@ npm start
 
 ## Release History
 
+-----------------------------------------------
+
 <!-- * 0.2.1
     * CHANGE: Update docs (module code remains unchanged)
 * 0.2.0
@@ -99,6 +147,7 @@ npm start
 * 0.1.0
     * The first proper release
     * CHANGE: Rename `foo()` to `bar()` -->
+
 * 0.0.4
     * Sign-in/Login Page MVP implemented
     * Option to toggle between landing page and photoliker
@@ -114,6 +163,8 @@ npm start
 
 ## Social Media
 
+-----------------------------------------------
+
 - [nextLens.io](https://www.nextLens.io)
 - [@nextlens](https://twitter.com/nextlens) 
 - [Facbook.com/nextlens.io](https://www.facebook.com/nextlens.io)
@@ -122,6 +173,8 @@ npm start
 - [Tumblr.com/blog/nextlens](https://www.tumblr.com/blog/nextlens)
 
 ## Contact Information
+
+-----------------------------------------------
 
  Devon Yu 
  
@@ -133,6 +186,8 @@ npm start
 - [Instagram](https://instagram.com/devonyu)
 
 ## Contributing
+
+-----------------------------------------------
 
 1. Fork it (<https://github.com/devonyu/nextLens-io#fork-destination-box>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)

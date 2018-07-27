@@ -14,19 +14,15 @@ export default class Login extends Component {
   }
 
   handleSubmit = (e) => {
-    console.log('submit hit: ', this.state);
     axios({
       method: 'post',
       url: '/login',
       data: this.state
     }).then((result) => {
-      console.log('sent to server and back: ', result);
       if (result.data.status === false) {
         alert(`Sorry, wrong account and password`);
       } else {
         console.log(`${this.state.email} has been logged in`);
-        // change state to user information
-        // change view to photoliker or userHomepage
         this.props.changeView('homepage');
         this.props.changeState('loggedIn', true);
         this.props.changeState('userName', result.data.firstname);
@@ -56,7 +52,7 @@ export default class Login extends Component {
               </Form.Field>
               <Form.Field>
                 <label>Password</label>
-                <input placeholder='Password' name='password' onChange={this.handleChange}/>
+                <input placeholder='Password' name='password' type='password' onChange={this.handleChange}/>
               </Form.Field>
               <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
             </Form>

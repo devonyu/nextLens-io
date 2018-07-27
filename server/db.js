@@ -6,27 +6,26 @@ const client = new Client({
 });
 client.connect();
 
-const signUp = (params, callback) => {
+const signUp = async (params) => {
   const { firstName, email, password, mount, about } = params;
-  const query = `INSERT into users (firstName, email, password, mount, about) VALUES ('${firstName}', '${email}', '${password}', '${mount}', '${about}');`;
-  client.query(query, (err, response) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(response);
-    }
-  });
+  const query = `INSERT into users (email, firstName, password, mount, about) VALUES ('${email}', '${firstName}', '${password}', ${mount}, '${about}');`;
+  try {
+    const insertUser = await client.query(query);
+    console.log('RESULT OF SIGNING UP USER=> ,', insertUser);
+    return {status: true};
+  } catch(err) {
+    next(err);
+  }
 };
 
-const checkEmail = (email, callback) => {
+const checkEmail = async (email) => {
   const query = `Select * from users where email = '${email}'`;
-  client.query(query, (err, response) => {
-    if (err) {
-      callback(err);
-    } else {
-      callback(response);
-    }
-  });
+  try {
+    const userInformation = await client.query(query);
+    return userInformation.rows[0];
+  } catch(err) {
+    next(err);
+  }
 };
 
 const checkLogin = (params, callback) => {

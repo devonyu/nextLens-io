@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
     "dotenv": "^5.0.1",
     "eslint-config-airbnb-base": "^12.1.0",
