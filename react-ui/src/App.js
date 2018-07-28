@@ -16,8 +16,8 @@ class App extends Component {
       fetching: true,
       loggedIn: false,
       userState: {
-        userId: null,
-        firstName: '',
+        userid: null,
+        firstname: '',
         mount: null
       }
     };
@@ -65,7 +65,7 @@ class App extends Component {
     } else if (this.state.view ==='photoliker') {
       return <PhotoLiker
       changeView={ this.changeView }
-      userId={ this.state.userState.userId }
+      userInformation={ this.state.userState }
       />
     } else if (this.state.view ==='homepage') {
       return <HomePage

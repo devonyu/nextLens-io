@@ -53,7 +53,7 @@ const userPhotoImpression = async (params) => {
 
 const getUserLikes = async (params) => {
   //Function will do a query on all photos liked by user in userLikes table
-
+  
 }
 
 const getRecommendations = async (params) => {

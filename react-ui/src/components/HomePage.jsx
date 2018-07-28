@@ -8,7 +8,8 @@ export default class HomePage extends Component {
 		this.state = {
 			animation: 'pulse', 
 			duration: 250, 
-			visible: true
+			visible: true,
+			firstName: this.props.userInformation.firstname
 	}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	}
@@ -20,8 +21,9 @@ export default class HomePage extends Component {
 	}
 
 	getUserInformation = (userId) => {
-		axios.get('/test')
+		axios.get(`/user?ID=${userId}/likedphotos`)
 		.then(({ data }) => {
+			console.log(`response from getting user id=${userId} liked photos ==>`, data);
     	})
 		.catch((error) => {
 		  console.log(error);
@@ -29,7 +31,8 @@ export default class HomePage extends Component {
   }
 
 	componentWillMount () {
-		this.getUserInformation();
+		console.log('signing in with userid: ', this.props.userInformation.userid)
+		this.getUserInformation(this.props.userInformation.userid);
 	}
 
 	render() {
@@ -38,6 +41,7 @@ export default class HomePage extends Component {
 			<Container fluid>
 				<Container fluid textAlign='center'>
 					<h2>Hello {this.props.userInformation.firstname}!</h2>
+					<h2>bye {this.state.firstname}!</h2>
 					<h3>We are looking for you recommendations now, if you have 30 likes</h3>
 					<Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
 				</Container>

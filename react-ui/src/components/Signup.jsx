@@ -43,7 +43,9 @@ export default class Signup extends Component {
         method: 'post',
         url: '/signup',
         data: info
-      }).then((result) => {
+      })
+      .then((result) => {
+          console.log('response from server after axios')
           if (result.data.status === false) {
             alert('Email is already signed up!');
           } else if (result.data.status === true){
@@ -52,6 +54,7 @@ export default class Signup extends Component {
           }
       })
       .catch((error) => {
+        console.log('error inside signup Axios failed')
         console.log(error);
       });
   }

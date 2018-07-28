@@ -19,7 +19,8 @@ export default class Login extends Component {
       url: '/login',
       data: this.state
     }).then((result) => {
-      if (result.data.status === false) {
+      console.log('result of login response ===>', result.data)
+      if (result.data.error) {
         alert(`Sorry, wrong account and password`);
       } else {
         console.log(`${this.state.email} has been logged in`);
@@ -30,6 +31,7 @@ export default class Login extends Component {
       }
     })
     .catch((error) => {
+      alert(`Sorry, wrong account and password`)
       console.log(error);
     });
   }

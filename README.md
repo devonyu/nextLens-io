@@ -3,7 +3,9 @@
 
 > Camera and Lens recommendations based on user's likes on pre-sorted and pre-screened images.
 >
-[![Build Status][travis-image]][travis-url]
+
+[![Build Status][travis-image]][travis-url] 
+[![Coverage Status](https://coveralls.io/repos/github/devonyu/nextLens-io/badge.svg?branch=master)](https://coveralls.io/github/devonyu/nextLens-io?branch=master)
 
 So you just started your photography journey by either purchasing your own DSLR or was generously gifted one!  You're beginning to master the basic functions of your favorite new toy but upon viewing images on Instagram/Flickr/Unsplash/etc, a lingering question burns into your mind:  "Why aren't my photos as aesthetic as theirs!? What camera and lens setup are they using for these exposures?!?".
 

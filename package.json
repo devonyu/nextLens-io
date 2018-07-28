@@ -12,9 +12,14 @@
     "node": "8.9.4"
   },
   "scripts": {
-    "start": "node server",
-    "test": "jshint hello.js",
+    "start": "node server/server.js",
+    "test": "jest",
+    "test dev": "jest --watch",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
   },
   "cacheDirectories": [
     "node_modules",
@@ -24,6 +29,7 @@
     "axios": "^0.18.0",
     "bcrypt": "^3.0.0",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "express": "^4.16.3",
@@ -54,11 +60,13 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
+    "jest": "^23.4.2",
     "jshint": "^2.6.0",
     "nodemon": "^1.18.3",
     "redux-devtools": "^3.4.1"

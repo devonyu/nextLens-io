@@ -9,7 +9,7 @@ export default class PhotoLiker extends Component {
 		this.state = {
 			imgs: [],
             currentIndex: 0,
-            userid: 0,
+            userid: this.props.userid,
             progress: []
 		}
 		this.getPics = this.getPics.bind(this)
@@ -54,7 +54,7 @@ export default class PhotoLiker extends Component {
             <Container fluid>
                 <Container fluid textAlign='center'>
                     <h2>PhotoLiker Beta 1.0</h2>
-                    <h1>{this.props.userid} + 'asdfasdf'</h1>
+                    <h1>{this.state.userid}</h1>
                     <Button onClick={this.handleYes} size='big'>Like</Button>
                     <Button onClick={this.handleNo} size='big'>Dislike</Button>
                     <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />
