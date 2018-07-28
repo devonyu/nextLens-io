@@ -15,9 +15,11 @@ class App extends Component {
       message: null,
       fetching: true,
       loggedIn: false,
-      userId: null,
-      userName: '',
-      mount: '',
+      userState: {
+        userId: null,
+        firstName: '',
+        mount: null
+      }
     };
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
@@ -25,58 +27,50 @@ class App extends Component {
   }
 
   changeView(option) {
-    this.setState({ view: option})
+    console.log(this.state);
+    this.setState((prevState, props) => {
+      return {
+          view: option
+      };
+    });
   }
 
   changeState(option, value) {
-    this.setState({ [option]: value})
+    this.setState((prevState, props) => {
+      return {
+          [option]: value
+      };
+    });
   }
 
   componentDidMount() {
-    fetch('/api')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`status ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(json => {
-        this.setState({
-          message: json.message,
-          fetching: false
-        });
-      }).catch(e => {
-        this.setState({
-          message: `API call failed: ${e}`,
-          fetching: false
-        });
-      })
+    //check here for sessions
+    //then load data for user
   }
 
   getView() {
     if (this.state.view === 'landing') {
       return <Landing
-      changeView={ this.changeView.bind(this) }
+      changeView={ this.changeView }
       />
     } else if (this.state.view ==='login') {
       return <Login
-      changeView={ this.changeView.bind(this) }
+      changeView={ this.changeView }
       changeState={ this.changeState }
       />
     } else if (this.state.view ==='signup') {
       return <Signup
-      changeView={ this.changeView.bind(this) }
+      changeView={ this.changeView }
       />
     } else if (this.state.view ==='photoliker') {
       return <PhotoLiker
-      changeView={ this.changeView.bind(this) }
+      changeView={ this.changeView }
+      userId={ this.state.userState.userId }
       />
     } else if (this.state.view ==='homepage') {
       return <HomePage
-      changeView={ this.changeView.bind(this) }
-      userId={ this.state.userId }
-      userName={ this.state.userName }
-      mount={ this.state.mount }
+      changeView={ this.changeView }
+      userInformation={ this.state.userState }
       />
     }
   }
@@ -84,10 +78,9 @@ class App extends Component {
   render() {
     return (
         <div>
-          <div> {<NavBar
-            view={this.state.view} 
+          <div> { <NavBar
+            username={this.state.userState}
             changeView={this.changeView} 
-            userName={this.state.userName}
             loggedIn={this.state.loggedIn}
             changeState={this.changeState}/> } 
           </div>

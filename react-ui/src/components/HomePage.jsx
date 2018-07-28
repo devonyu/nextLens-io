@@ -20,17 +20,15 @@ export default class HomePage extends Component {
 	}
 
 	getUserInformation = (userId) => {
-		//  get the userID api route to check whether or not we have recommendations or not
 		axios.get('/test')
 		.then(({ data }) => {
-      console.log(data)
-    })
+    	})
 		.catch((error) => {
 		  console.log(error);
 		});
   }
 
-	componentDidMount () {
+	componentWillMount () {
 		this.getUserInformation();
 	}
 
@@ -39,7 +37,8 @@ export default class HomePage extends Component {
 		return(
 			<Container fluid>
 				<Container fluid textAlign='center'>
-					<h2>{`Hello, ${this.props.userName}. We are looking for your recommendations!`}</h2>
+					<h2>Hello {this.props.userInformation.firstname}!</h2>
+					<h3>We are looking for you recommendations now, if you have 30 likes</h3>
 					<Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
 				</Container>
 

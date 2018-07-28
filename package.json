@@ -1,7 +1,13 @@
 {
   "name": "NextLens.io",
+  "homepage": "https://www.nextlens.io/",
   "version": "1.0.0",
   "description": "Lens and Camera Recommendations based off Users Likes",
+  "author": {
+    "name": "Devon Yu",
+    "email": "devonyu415@gmail.com",
+    "url": "https://devonyu.com"
+  },
   "engines": {
     "node": "8.9.4"
   },

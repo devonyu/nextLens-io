@@ -4,26 +4,21 @@ import { Button, Header, Image, Menu, Modal } from 'semantic-ui-react'
 class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      status: 'Logged-out',
-    }
+    this.state = {}
     this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
     this.landing = this.landing.bind(this);
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   logIn() {
-    if (this.state.status === 'Logged In' && this.props.view !== 'login') {
-      this.props.changeState('loggedIn', false);
-      this.props.changeState('userName', '');
-      this.props.changeState('userId', null);
-      this.setState({status: 'Logged-out'})
-      this.props.changeView('landing');
-    } else if (this.state.status === 'Logged-out') {
-      this.setState({status: 'Logged In'})
-      this.props.changeView('login');
-    }
+    this.props.changeView('login');
+  }
+
+  logOut() {
+    this.props.changeState('loggedIn', false);
+    this.landing();
   }
 
   landing() {
@@ -63,10 +58,10 @@ class NavBar extends Component {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            {this.props.userName? `Welcome ${this.props.userName}` : '' }
+            {this.props.username === '' ?  `Welcome ${this.props.username}` : '' }
           </Menu.Item>
           <Menu.Item>
-            <Button size='tiny' onClick={this.logIn} primary>{this.props.loggedIn === false? 'Log in' : 'Log out'}</Button>
+            {this.props.loggedIn ? <Button size='tiny' onClick={this.logOut} primary>Log out</Button> : <Button size='tiny' onClick={this.logIn} primary>Log in</Button> }
           </Menu.Item>
         </Menu.Menu>
       </Menu>

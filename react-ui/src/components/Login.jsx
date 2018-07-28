@@ -23,11 +23,15 @@ export default class Login extends Component {
         alert(`Sorry, wrong account and password`);
       } else {
         console.log(`${this.state.email} has been logged in`);
-        this.props.changeView('homepage');
+        console.log('data after logging in:  =>', result.data)
+        
         this.props.changeState('loggedIn', true);
-        this.props.changeState('userName', result.data.firstname);
-        this.props.changeState('id', result.data.id);
-        this.props.changeState('mount', result.data.mount);
+        this.props.changeState('userState', result.data)
+        // this.props.changeState('firstName', result.data.firstname);
+        // this.props.changeState('id', result.data.id);
+        // this.props.changeState('mount', result.data.mount);
+        setTimeout(()=>{this.props.changeView('homepage')}, 90);
+        // this.props.changeView('homepage');
       }
     })
     .catch((error) => {

@@ -17,12 +17,6 @@ app.use(morgan('dev'));
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
 
-// Answer API requests.
-app.get('/api', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  res.send('{"message":"Welcome to NextLens.io You are connected via Node.JS"}');
-});
-
 app.get('/test', (req, res) => {
   res.send('{"message":"testing the /test endpoint"}');
 });
@@ -103,6 +97,7 @@ app.post('/login', (request, response) => {
     const match = await bcrypt.compare(credentials.password, user.password);
     if (match) {
       console.log('CORRECT PASSWORD')
+      delete user.password;
       response.send(user);
     } else {
       console.log('WRONG PASSWORD')
