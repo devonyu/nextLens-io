@@ -3,14 +3,16 @@ const path = require('path');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const db = require('./db');
+const db = require('../database/db');
 const bcrypt = require('bcrypt');
+const morgan = require('morgan');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 dotenv.load();
 app.use(bodyParser.json());
+app.use(morgan('dev'));
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
@@ -71,22 +73,16 @@ app.post('/signup', (req, res) => {
   console.log('Sign up router HIT, what we got===> ', toClient);
   
   async function checkSignUp (userInformation) {
-    //check if email exist first?
     const userExists = await db.checkEmail(toClient.email);
-    //if exist, exit out now.
     if (userExists !== undefined) {
       res.send({status: false});
     } else if (userExists === undefined) {
-    //if not exist, sign user up
       const passwordHash = await bcrypt.hash(toClient.password, 10);
       toClient.password = passwordHash;
-    //signing user up with new hashed password
       const signingUp = await db.signUp(toClient);
-    //if error occured, let them know
       if (signingUp.status !== true) {
         res.send({status: 'error'});
       } else if (signingUp.status === true) {
-            //if signed up sucsessfully, let them know
         res.send({status: true});
       }
     }
@@ -101,11 +97,9 @@ app.post('/login', (request, response) => {
     const user = await db.checkEmail(credentials.email, (res) => {
       return res.rows[0];
     });
-    // If email not found, show error
     if (user === undefined) {
       response.send({status: false});
     }
-    // If email found, compare salted password with bcrypt
     const match = await bcrypt.compare(credentials.password, user.password);
     if (match) {
       console.log('CORRECT PASSWORD')

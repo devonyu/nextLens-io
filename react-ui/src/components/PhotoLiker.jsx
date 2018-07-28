@@ -18,9 +18,9 @@ export default class PhotoLiker extends Component {
     }
 
 	getPics = () => {
-        //Use Portait API Dummy data for now to test
+        //Use Portrait API Dummy data for now to test
         this.setState({ 
-			imgs: api.portrait1.concat(api.portrait2).concat(api.portrait3).concat(api.portrait4)
+			imgs: api.portrait1.concat(api.aerial1).concat(api.landscape1).concat(api.portrait4)
 		 });
     }
     

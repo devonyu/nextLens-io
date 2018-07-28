@@ -39,8 +39,33 @@ const checkLogin = async (params) => {
   }
 };
 
+const userPhotoImpression = async (params) => {
+  //Function will add current photoID with userID to the userLikes table with the impression of true or false
+  const { userId, photoId, liked} = params;
+  const query = `INSERT into user_likes (userId, photoId, liked) Values (${userId}, ${photoId}, ${liked});`;
+  const impressionResult = await client.query(query);
+  if (!impressionResult.rows[0]) {
+    return ({status: false});
+  } else {
+    return impressionResult.rows[0];
+  }
+}
+
+const getUserLikes = async (params) => {
+  //Function will do a query on all photos liked by user in userLikes table
+
+}
+
+const getRecommendations = async (params) => {
+  // Function will sort top liked categories and return lens recommendations based on query
+
+}
+
 module.exports = {
   checkLogin,
   checkEmail,
   signUp,
+  userPhotoImpression,
+  getUserLikes,
+  getRecommendations
 };
