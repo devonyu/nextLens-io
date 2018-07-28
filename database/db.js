@@ -7,8 +7,8 @@ const client = new Client({
 client.connect();
 
 const signUp = async (params) => {
-  const { firstName, email, password, mount, about } = params;
-  const query = `INSERT into users (email, firstName, password, mount, about) VALUES ('${email}', '${firstName}', '${password}', ${mount}, '${about}');`;
+  const { firstName, email, password, mount, about, profileimgurl } = params;
+  const query = `INSERT into users (email, firstName, password, mount, about, profileimgurl) VALUES ('${email}', '${firstName}', '${password}', ${mount}, '${about}', '${profileimgurl}');`;
   try {
     const insertUser = await client.query(query);
     console.log('RESULT OF SIGNING UP USER=> ,', insertUser);

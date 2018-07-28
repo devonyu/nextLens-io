@@ -12,6 +12,7 @@ export default class Signup extends Component {
         password: '',
         mount: '',
         about: '',
+        profileimgurl: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -74,8 +75,7 @@ export default class Signup extends Component {
   }
 
   render() {
-    const { firstName, email, password, mount, about} = this.state
-
+    const { firstName, email, password, mount, about, profileimgurl} = this.state;
     return(
       <Container fluid>
         <Container>
@@ -105,17 +105,23 @@ export default class Signup extends Component {
                             onChange={this.handleChange} />
                         </Form.Field>
                         <Form.Field control={Select} 
-                        label='Camera Mount' 
-                        options={options}
-                        value={mount}
-                        placeholder='Your Camera Mount'
-                        onChange={this.updateMount} />
+                            label='Camera Mount' 
+                            options={options}
+                            value={mount}
+                            placeholder='Your Camera Mount'
+                            onChange={this.updateMount} />
                         <Form.Field control={TextArea} 
-                    label='About' 
-                        placeholder='Tell us more about yourself...' 
-                        name='about' 
-                        value={about} 
-                        onChange={this.handleChange}/>
+                            label='Profile Image URL' 
+                            placeholder='Copy your Profile image url here' 
+                            name='profileimgurl' 
+                            value={profileimgurl} 
+                            onChange={this.handleChange} />
+                        <Form.Field control={TextArea} 
+                            label='About' 
+                            placeholder='Tell us more about yourself...' 
+                            name='about' 
+                            value={about} 
+                            onChange={this.handleChange}/>
                         <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
                     </Form>
                 </Segment>

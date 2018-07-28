@@ -62,8 +62,8 @@ app.get('/landing', (req, res) => {
 
 // Signup Route
 app.post('/signup', (req, res) => {
-  const { firstName, email, password, mount, about } = req.body;
-  const toClient = { firstName, email, password, mount, about };
+  const { firstName, email, password, mount, about, profileimgurl } = req.body;
+  const toClient = { firstName, email, password, mount, about, profileimgurl };
   console.log('Sign up router HIT, what we got===> ', toClient);
   
   async function checkSignUp (userInformation) {
