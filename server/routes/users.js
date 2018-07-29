@@ -17,7 +17,7 @@ router
     console.log('authenticated? ===>', req.params.authenticated === true);
     const userId = req.params.id;
     async function getUserLikedPhotos (userid) {
-        const likedPhotos = await db.getUserLikes({userId: 3});
+        const likedPhotos = await db.getUserLikes({ userId });
         if (likedPhotos === null) {
           //res.status(400).send({status: false});
           console.log('User has no likes')

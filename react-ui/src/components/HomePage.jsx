@@ -25,7 +25,6 @@ export default class HomePage extends Component {
 		axios.get(`/users/${userId}/likedphotos`)
 		.then(({ data }) => {
 			console.log(`response from getting user id=${userId} liked photos ==>`, data);
-			// const likedImages = JSON.parse(data);
 			this.setState((prevState, props)=> {
 				return {
 					likedphotos: data
