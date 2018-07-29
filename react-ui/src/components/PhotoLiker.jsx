@@ -37,6 +37,7 @@ export default class PhotoLiker extends Component {
 
     handleNo = () => {
         //add image to user likes table (dislike)
+        
         this.setState(function(prevState, props) {
             return {
                 progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
@@ -46,6 +47,7 @@ export default class PhotoLiker extends Component {
     }
 
     componentWillMount () {
+        //get past liked images so we dont show again
         this.getPics();
     }
 

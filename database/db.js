@@ -55,6 +55,7 @@ const getUserLikes = async (params) => {
   //Function will do a query on all photos liked by user in userLikes table
   const { userId } = params;
   const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
+  // We want to return the images themselves from the photos table (update query)
   const likedPhotos = await client.query(query);
   if (!likedPhotos.rows) {
     return (null);
@@ -66,7 +67,21 @@ const getUserLikes = async (params) => {
 
 const getRecommendations = async (params) => {
   // Function will sort top liked categories and return lens recommendations based on query
+  // Find top 3 categories for user.  Show them the lenses that are associated with their mount and categories
+}
 
+const addPhotoToDatabase = async (params) => {
+  // Function will load images to database from json api
+  const { unsplashId, photographerName, downloadUrl, profileUrl, profileImageUrl, regularUrl, smallUrl, thumbUrl, category } = params;
+  const query = `INSERT into photos (unsplashId, photographerName, downloadUrl, profileUrl, profileImageUrl, regularUrl, smallUrl, thumbUrl, category)
+  Values ('${unsplashId}', '${photographerName}', '${downloadUrl}', '${profileUrl}', '${profileImageUrl}', '${regularUrl}', '${smallUrl}', '${thumbUrl}', '${category}');`;
+  try {
+    const savePhoto = await client.query(query);
+    console.log('Added Photo Id:', unsplashId, ' to Postgres!');
+    return {status: true}; 
+  } catch(err) {
+    next(err);
+  }
 }
 
 module.exports = {
@@ -75,5 +90,6 @@ module.exports = {
   signUp,
   userPhotoImpression,
   getUserLikes,
-  getRecommendations
+  getRecommendations,
+  addPhotoToDatabase
 };
