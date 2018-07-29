@@ -48,7 +48,8 @@ export default class HomePage extends Component {
 				<Container fluid textAlign='center'>
 					<h2>Hello {this.props.userInformation.firstname}!</h2>
 					<h2>You have liked {this.state.likedphotos.length} photos!</h2>
-					<h3>We are looking for you recommendations now, if you have 30 likes</h3>
+					<h3>Once we have at least 30 likes, we will get you your recommendations!</h3>
+					<h3>{30 - this.state.likedphotos.length} more likes to go!</h3>
 					<Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
 				</Container>
 

@@ -26,15 +26,6 @@
   width: max-content;
 }
 
-/* .visible.transition {
-  margin-top: auto !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  display: inline-block !important;
-  position: relative;
-  top: 10%;
-} */
-
 .ui.rounded.image {
   position: relative;
   width: 90%;
