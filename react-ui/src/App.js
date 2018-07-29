@@ -77,7 +77,7 @@ class App extends Component {
 
   render() {
     return (
-        <div>
+        <div className="container">
           <div> { <NavBar
             username={this.state.userState}
             changeView={this.changeView} 

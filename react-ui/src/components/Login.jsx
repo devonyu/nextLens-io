@@ -36,11 +36,22 @@ export default class Login extends Component {
     });
   }
 
-  handleChange = (e) => {
-    this.setState({[e.target.name]: e.target.value});
+  handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    if (name !== 'email') {
+        this.setState({
+            [name]: value
+          });
+    } else {
+        this.setState({
+            [name]: value.toLowerCase()
+          });
+    }
   }
 
   render() {
+    const { email, password } = this.state;
     return(
       <Container fluid>
       <Transition animation='pulse' duration={500} transitionOnMount={true}>
@@ -49,11 +60,11 @@ export default class Login extends Component {
             <Form>
               <Form.Field>
                 <label>Email</label>
-                <input placeholder='Email' name='email' onChange={this.handleChange}/>
+                <input placeholder='Email' name='email' value={email} onChange={this.handleChange}/>
               </Form.Field>
               <Form.Field>
                 <label>Password</label>
-                <input placeholder='Password' name='password' type='password' onChange={this.handleChange}/>
+                <input placeholder='Password' name='password' value={password} type='password' onChange={this.handleChange}/>
               </Form.Field>
               <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
             </Form>

@@ -9,7 +9,7 @@ export default class HomePage extends Component {
 			animation: 'pulse', 
 			duration: 250, 
 			visible: true,
-			firstName: this.props.userInformation.firstname
+			likedphotos:[],
 	}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	}
@@ -21,18 +21,25 @@ export default class HomePage extends Component {
 	}
 
 	getUserInformation = (userId) => {
-		axios.get(`/user?ID=${userId}/likedphotos`)
+		console.log('send axios req to server w/id:', userId, ' to retrieve liked photos');
+		axios.get(`/users/${userId}/likedphotos`)
 		.then(({ data }) => {
 			console.log(`response from getting user id=${userId} liked photos ==>`, data);
+			// const likedImages = JSON.parse(data);
+			this.setState((prevState, props)=> {
+				return {
+					likedphotos: data
+				}
+			});
     	})
 		.catch((error) => {
 		  console.log(error);
 		});
   }
 
-	componentWillMount () {
-		console.log('signing in with userid: ', this.props.userInformation.userid)
-		this.getUserInformation(this.props.userInformation.userid);
+	componentDidMount () {
+		console.log('signing in with userid: ', this.props.userInformation.id)
+		this.getUserInformation(this.props.userInformation.id);
 	}
 
 	render() {
@@ -41,7 +48,7 @@ export default class HomePage extends Component {
 			<Container fluid>
 				<Container fluid textAlign='center'>
 					<h2>Hello {this.props.userInformation.firstname}!</h2>
-					<h2>bye {this.state.firstname}!</h2>
+					<h2>You have liked {this.state.likedphotos.length} photos!</h2>
 					<h3>We are looking for you recommendations now, if you have 30 likes</h3>
 					<Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
 				</Container>

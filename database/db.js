@@ -53,7 +53,15 @@ const userPhotoImpression = async (params) => {
 
 const getUserLikes = async (params) => {
   //Function will do a query on all photos liked by user in userLikes table
-  
+  const { userId } = params;
+  const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
+  const likedPhotos = await client.query(query);
+  if (!likedPhotos.rows) {
+    return (null);
+  } else {
+    console.log('DB Found and sending to server==> ', likedPhotos.rows)
+    return likedPhotos.rows;
+  }
 }
 
 const getRecommendations = async (params) => {

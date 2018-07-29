@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 //import axios from 'axios';
 import { Button, Container, Image, Popup, Progress } from 'semantic-ui-react';
-const api = require('../../../example_Data/api');
+// const api = require('../../../example_Data/api');
+const api = require('../example_data_react/api');
 
 export default class PhotoLiker extends Component {
     constructor(props) {
