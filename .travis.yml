@@ -8,10 +8,10 @@ node_js:
 - "8.9.4"
 - node
 
-install: yarn install
+install: npm install
 
-after_success:
-  - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
+# after_success:
+#   - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
 
 script: echo "Running tests against $(node -v)... Running Jest test and coverage below and sending it to coveralls!"
 
