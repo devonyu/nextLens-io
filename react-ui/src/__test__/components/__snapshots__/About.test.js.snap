@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can see header 1`] = `
+<div>
+  <h2
+    className="alt-header"
+  >
+    About
+  </h2>
+  <p>
+    Changed
+  </p>
+</div>
+`;

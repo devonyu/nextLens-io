@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loads Profile Card with Props 1`] = `
+<div
+  className="ui card"
+  onClick={[Function]}
+>
+  <img
+    className="ui image"
+    src="http://test.com/image.jpg"
+  />
+  <div
+    className="content"
+  >
+    <div
+      className="header"
+    >
+      Tester
+    </div>
+    <div
+      className="meta"
+    >
+      Current Mount: 
+      3
+    </div>
+    <div
+      className="description"
+    >
+      Im testing Jest and test renderer with props
+    </div>
+  </div>
+  <div
+    className="extra content"
+  >
+    <a>
+      <i
+        aria-hidden="true"
+        className="user icon"
+      />
+      Testing Card Features
+    </a>
+    <a>
+      <i
+        aria-hidden="true"
+        className="camera retro icon"
+      />
+      How many lenses do you own?
+    </a>
+    <button
+      className="ui small button"
+      onClick={[Function]}
+      role="button"
+    >
+      Ability to update profile
+    </button>
+  </div>
+</div>
+`;
