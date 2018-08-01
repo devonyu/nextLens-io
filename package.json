@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test": "node_modules/.bin/jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "node_modules/.bin/jest --coverage -u && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "testing": "jest --watch",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
@@ -68,6 +68,10 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.4.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "coveralls": "^3.0.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -78,6 +82,7 @@
     "jest-enzyme": "^6.0.2",
     "jshint": "^2.6.0",
     "nodemon": "^1.18.3",
-    "react-test-renderer": "^16.4.1"
+    "react-test-renderer": "^16.4.1",
+    "regenerator-runtime": "^0.12.0"
   }
 }

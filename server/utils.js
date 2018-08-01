@@ -11,9 +11,6 @@ const api = require('../example_data_server/api');
 const db = require('../database/db')
 
 const loadImagesToDb = (api) => {
-  //we want to load the data base with images that fit the data structure that we've laid out
-  //only key items will be needed to be saved with the addition of categories
-  //we know the categories from api by making curated lists
   let promises = [];
   for (var key in api) {
     //for each page, we will iterating the array
@@ -30,29 +27,30 @@ const loadImagesToDb = (api) => {
       const thumbUrl = current.urls.thumb;
       let category = null;
       if (key.indexOf('portrait') !== -1) {
-        category = 1
+        category = 1;
       } else if (key.indexOf('landscape') !== -1) {
-        category = 2
+        category = 2;
       } else if (key.indexOf('aerial') !== -1) {
-        category = 3
+        category = 3;
       } else if (key.indexOf('street') !== -1) {
-        category = 4
+        category = 4;
       }
       //console.log(unsplashId, photographerName, downloadUrl, profileUrl, profileImageUrl, regularUrl, smallUrl, thumbUrl, category);
-      const toDatabase = { unsplashId, photographerName, downloadUrl, profileUrl, profileImageUrl, regularUrl, smallUrl, thumb, category };
+      const toDatabase = { unsplashId, photographerName, downloadUrl, profileUrl, profileImageUrl, regularUrl, smallUrl, thumbUrl, category };
       promises.push(db.addPhotoToDatabase(toDatabase));
     }
   }
   Promise.all(promises)
   .then((something)=> {
-    console.log('so after all the promises:', something)
+    console.log('so after all the promises:', something);
   })
   .catch((e) => {
     console.log('there were errors ==>', e);
   })
 }
 
-loadImagesToDb(api)
+// run node utils.js to load postgres with images from example api file
+loadImagesToDb(api);
 
 
 module.exports.asyncMiddleware = asyncMiddleware

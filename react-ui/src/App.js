@@ -16,10 +16,14 @@ class App extends Component {
       fetching: true,
       loggedIn: false,
       userState: {
-        userid: null,
+        about: '',
+        email: '',
         firstname: '',
-        mount: null
-      }
+        id: '',
+        mount: '',
+        profileimgurl: ''
+      },
+      userPhotoImpressions: []
     };
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
@@ -65,12 +69,16 @@ class App extends Component {
     } else if (this.state.view ==='photoliker') {
       return <PhotoLiker
       changeView={ this.changeView }
+      changeState={this.changeState}
       userInformation={ this.state.userState }
+      userPhotoImpressions={ this.state.userPhotoImpressions }
       />
     } else if (this.state.view ==='homepage') {
       return <HomePage
       changeView={ this.changeView }
+      changeState={this.changeState}
       userInformation={ this.state.userState }
+      userPhotoImpressions={ this.state.userPhotoImpressions }
       />
     }
   }

@@ -7,7 +7,7 @@ class NavBar extends Component {
     this.state = {}
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.landing = this.landing.bind(this);
+    this.title = this.title.bind(this);
   }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -18,11 +18,16 @@ class NavBar extends Component {
 
   logOut() {
     this.props.changeState('loggedIn', false);
-    this.landing();
+    this.props.changeState('userState', {});
+    this.props.changeView('landing');
   }
 
-  landing() {
-    this.props.changeView('landing');
+  title() {
+    if (this.props.loggedIn === true) {
+      this.props.changeView('homepage');
+    } else if (this.props.loggedIn === false) {
+      this.props.changeView('landing');
+    }
   }
 
   render() {
@@ -30,7 +35,7 @@ class NavBar extends Component {
 
     return (
       <Menu borderless={true} size='tiny' fluid={true}>
-        <Menu.Item onClick={this.landing}
+        <Menu.Item onClick={this.title}
         header
         >
           NextLens.io

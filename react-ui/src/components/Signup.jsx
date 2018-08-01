@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Container, Form, TextArea, Transition, Segment, Select } from 'semantic-ui-react'
 import axios from 'axios';
-const options = require('./utils.js');
+// const options = require('./utils.js');
+import { mounts as options } from './utils.js';
 
 export default class Signup extends Component {
   constructor(props) {
