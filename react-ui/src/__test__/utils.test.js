@@ -1,5 +1,5 @@
 //TEST Suite For Util functions
-import { evenlyDistributedImages } from '../../src/components/utils';
+import { evenlyDistributedImages, shuffleImages } from '../../src/components/utils';
 
 const api = {
       portait1: [
@@ -22,15 +22,32 @@ const api = {
       ]
 }
 
-// test('Test EvenlyDistributed Images', () => {
-//     expect(evenlyDistributedImages([api.portait1, api.aerial1, api.landscape1])).toHaveLength(12);
-//   });
-
 describe('Evenly Distribute Images', () => {
+  let evenDistributeImagesTest = evenlyDistributedImages([api.portait1, api.aerial1, api.landscape1]);
+  it('should return an array', () => {
+    expect(Array.isArray(evenDistributeImagesTest)).toBe(true);
+  });
     it('should have the correct amount of images', () => {
-        expect(evenlyDistributedImages([api.portait1, api.aerial1, api.landscape1])).toHaveLength(12);
+        expect(evenDistributeImagesTest).toHaveLength(12);
     });
-    it('should return an array', () => {
-        expect(Array.isArray(evenlyDistributedImages([api.portait1, api.aerial1, api.landscape1]))).toBe(true);
-    });
+    it('should evenly distribute images in array', () => {
+      expect(evenDistributeImagesTest[0]).toEqual({pimage1: 'datap1'});
+      expect(evenDistributeImagesTest[3]).toEqual({pimage2: 'datap2'});
+      expect(evenDistributeImagesTest[1]).toEqual({aimage1: 'dataa1'});
+      expect(evenDistributeImagesTest[4]).toEqual({aimage2: 'dataa2'});
+  });
+});
+
+describe('Shuffle Images', () => {
+  let shuffleImagesTest = shuffleImages([api.portait1, api.aerial1, api.landscape1]);
+  let shuffleImagesTest2 = shuffleImages([api.portait1, api.aerial1, api.landscape1]);
+  it('should return an array', () => {
+    expect(Array.isArray(shuffleImagesTest)).toBe(true);
+  });
+  it('should have the correct amount of images', () => {
+      expect(shuffleImagesTest).toHaveLength(12);
+  });
+  it('should shuffle an array', () => {
+    expect(shuffleImagesTest).not.toEqual(shuffleImagesTest2);
+  });
 });

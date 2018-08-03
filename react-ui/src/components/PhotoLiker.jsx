@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Image, Popup, Progress } from 'semantic-ui-react';
-import { evenlyDistributedImages } from './utils.js';
+import { shuffleImages } from './utils.js';
 const api = require('../example_data_react/api');
 
 export default class PhotoLiker extends Component {
@@ -18,12 +18,13 @@ export default class PhotoLiker extends Component {
 
 	getPics = () => {
         //Use Portrait API Dummy data for now to test
-        let distributed = evenlyDistributedImages(
-            [api.aerial1, api.landscape1, api.portrait1, api.street1, api.aerial2, api.landscape2, api.portrait2,api.street2, 
-            api.aerial3, api.landscape3, api.portrait3, api.street3, api.aerial4, api.landscape4, api.portrait4, api.street4]
-        )
+        let allCategories = []
+        for (let category in api) {
+            allCategories.push(api[category])
+        }
+        let shuffled = shuffleImages(allCategories);
         this.setState({ 
-			imgs: distributed
+			imgs: shuffled
 		 });
     }
     
@@ -39,7 +40,6 @@ export default class PhotoLiker extends Component {
 
     handleNo = () => {
         //add image to user likes table (dislike)
-        
         this.setState(function(prevState, props) {
             return {
                 progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
