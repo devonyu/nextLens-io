@@ -17,9 +17,10 @@ router.post('/', (req, res) => {
   const toClient = { firstName, email, password, mount, about, profileimgurl };
   console.log('Sign up router HIT, what we got===> ', toClient);
   async function checkSignUp (userInformation) {
-    const userExists = await db.checkEmail(toClient.email);
+    const userExists = await db.checkEmail(userInformation.email);
+    console.log('userExists server: ', userExists);
     if (userExists !== undefined) {
-      res.status(400).send({status: false});
+      res.status(200).send({status: false});
     } else if (userExists === undefined) {
       const passwordHash = await bcrypt.hash(toClient.password, 10);
       toClient.password = passwordHash;

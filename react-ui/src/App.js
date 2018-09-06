@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import axios from 'axios';
 import PhotoLiker from './components/PhotoLiker';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
@@ -49,7 +50,38 @@ class App extends Component {
 
   componentDidMount() {
     //check here for sessions
-    //then load data for user
+    console.log('app mounted')
+    axios.get('/auth')// or /auth
+    .then(({ data }) => {
+      console.log('loaded top level for auth==>', data);
+      try {
+        if (data) {
+          console.log('user info found:', data)
+          this.setState((prevState, props) => {
+            return {
+                loggedIn: true,
+                userState: {
+                  about: data.about,
+                  email: data.email,
+                  firstname: data.firstname,
+                  id: data.id,
+                  mount: data.mount,
+                  profileimgurl: data.profileimgurl
+                }
+              }
+            });
+          this.changeView('homepage')
+        }
+      } 
+      catch(err) {
+        this.changeView('landing')
+      }
+
+    })
+    .catch((err)=>{
+      console.log(err);
+      alert(err);
+    })
   }
 
   getView() {
@@ -87,7 +119,7 @@ class App extends Component {
     return (
         <div className="container">
           <div> { <NavBar
-            username={this.state.userState}
+            userInformation={this.state.userState}
             changeView={this.changeView} 
             loggedIn={this.state.loggedIn}
             changeState={this.changeState}/> } 

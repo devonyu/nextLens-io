@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 
 router
 .post('/', (request, response) => {
-  const loginInput = request.body;
+  const loginInput = request.body || request.query;
   async function checkCredentials (credentials) {
     const user = await db.checkEmail(credentials.email, (res) => {
       return res.rows[0];
@@ -19,7 +19,12 @@ router
     const match = await bcrypt.compare(credentials.password, user.password);
     if (match) {
       console.log('CORRECT PASSWORD')
+      console.log(request.session)
       delete user.password;
+      // Create session
+      // Redis must be connected are else this wont work
+      request.session.key = credentials.email;
+      //console.log('created session: ', request.session);
       response.status(200).send(user);
     } else {
       console.log('WRONG PASSWORD')
@@ -29,11 +34,11 @@ router
   checkCredentials(loginInput);
 })
 .get('/', (req, res) => {
-    console.log('GET from Login, nothing here');
+    //console.log('GET from Login, nothing here');
     res.send('GET outta HERE');
 })
 .get('/test', (req, res) => {
-    console.log('test logging in @ /login/test, return yeezy string');
+    //console.log('test logging in @ /login/test, return yeezy string');
     res.status(200).send('yeezy');
 })
 

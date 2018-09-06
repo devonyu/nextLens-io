@@ -9,13 +9,13 @@ router
 })
 .get('/:id', (req, res) => {
     console.log('userId===>', req.params.id);
-    console.log('authenticated? ===>', req.params.authenticated === true);
+    console.log('authenticated?===>', req.params.authenticated === true);
     res.send({'Getting data for user': req.params.id});
 })
 .get('/:id/likedphotos', (req, res) => {
-    console.log('userId===>', req.params.id);
-    console.log('authenticated? ===>', req.params.authenticated === true);
-    const userId = req.params.id;
+    console.log('userId===>', req.session.key);
+    console.log('authenticated? ===>', req.session.authenticated === true);
+    const userId = req.session.key;
     async function getUserLikedPhotos (userid) {
         const likedPhotos = await db.getUserLikes({ userId });
         if (likedPhotos === null) {

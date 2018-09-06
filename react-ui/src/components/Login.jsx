@@ -19,12 +19,12 @@ export default class Login extends Component {
       url: '/login',
       data: this.state
     }).then((result) => {
-      console.log('result of login response ===>', result.data)
+      //console.log('result of login response ===>', result.data)
       if (result.data.error) {
         alert(`Sorry, wrong account and password`);
       } else {
-        console.log(`${this.state.email} has been logged in`);
-        console.log('data after logging in:  =>', result.data);
+        //console.log(`${this.state.email} has been logged in`);
+        //console.log('data after logging in:  =>', result.data);
         this.props.changeState('loggedIn', true);
         this.props.changeState('userState', result.data);
         this.props.changeView('homepage');
@@ -32,7 +32,7 @@ export default class Login extends Component {
     })
     .catch((error) => {
       alert(`Sorry, wrong account and password`)
-      console.log(error);
+      //console.log(error);
     });
   }
 

@@ -22,6 +22,7 @@ const checkEmail = async (email) => {
   const query = `Select * from users where email = '${email}'`;
   try {
     const userInformation = await client.query(query);
+    console.log('checking email in DB:', email)
     return userInformation.rows[0];
   } catch(err) {
     next(err);
