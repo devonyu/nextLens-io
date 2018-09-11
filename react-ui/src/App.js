@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cookies from 'universal-cookie';
 import './App.css';
 import axios from 'axios';
 import PhotoLiker from './components/PhotoLiker';
@@ -49,39 +50,41 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //check here for sessions
-    console.log('app mounted')
-    axios.get('/auth')// or /auth
-    .then(({ data }) => {
-      console.log('loaded top level for auth==>', data);
-      try {
-        if (data) {
-          console.log('user info found:', data)
-          this.setState((prevState, props) => {
-            return {
-                loggedIn: true,
-                userState: {
-                  about: data.about,
-                  email: data.email,
-                  firstname: data.firstname,
-                  id: data.id,
-                  mount: data.mount,
-                  profileimgurl: data.profileimgurl
+    //console.log('app mounted')
+    //if there is a cookie set, check it
+    const cookies = new Cookies();
+    if (cookies.get('connection') !== undefined) {
+      axios.get('/auth')
+      .then(({ data }) => {
+        console.log('loaded top level for auth==>', data);
+        try {
+          if (data) {
+            console.log('user info found:', data)
+            this.setState((prevState, props) => {
+              return {
+                  loggedIn: true,
+                  userState: {
+                    about: data.about,
+                    email: data.email,
+                    firstname: data.firstname,
+                    id: data.id,
+                    mount: data.mount,
+                    profileimgurl: data.profileimgurl
+                  }
                 }
-              }
-            });
-          this.changeView('homepage')
+              });
+            this.changeView('homepage')
+          }
+        } 
+        catch(err) {
+          this.changeView('landing')
         }
-      } 
-      catch(err) {
-        this.changeView('landing')
-      }
-
-    })
-    .catch((err)=>{
-      console.log(err);
-      alert(err);
-    })
+  
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    }
   }
 
   getView() {

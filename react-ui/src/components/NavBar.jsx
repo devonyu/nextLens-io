@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Header, Image, Menu, Modal } from 'semantic-ui-react'
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 class NavBar extends Component {
   constructor(props) {
@@ -23,10 +24,12 @@ class NavBar extends Component {
       method: 'get',
       url: '/logout'
     }).then(()=> {
-      console.log('success in logging out!')
+      const cookies = new Cookies();
+      cookies.remove('connection');
       this.props.changeState('loggedIn', false);
       this.props.changeState('userState', {});
       this.props.changeView('landing');
+      console.log('success in logging out!')
     }).catch((err)=> {
       console.log('error in loggin out!')
     })

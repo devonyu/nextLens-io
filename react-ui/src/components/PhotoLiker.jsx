@@ -54,7 +54,8 @@ export default class PhotoLiker extends Component {
     }
 
     componentWillReceiveProps() {
-        this.state((prevState, props)=> {
+        console.log('receiving props in PL!');
+        this.setState((prevState, props)=> {
             return {
                 currentIndex: 4
             }

@@ -76,7 +76,7 @@ export default class Landing extends Component {
                 <h2>Based off of images you like, we will give recommendations for lenses that suit your preferences!</h2>
 
                 <Button basic color='green' size='large' content='Sign up for free' onClick={this.toggleSignup}/>
-                <Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
+                {/* <Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/> */}
                 </Container>
 
                 <Container>

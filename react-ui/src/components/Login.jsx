@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Form, Segment, Transition } from 'semantic-ui-react'
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 export default class Login extends Component {
   constructor(props) {
@@ -25,6 +26,8 @@ export default class Login extends Component {
       } else {
         //console.log(`${this.state.email} has been logged in`);
         //console.log('data after logging in:  =>', result.data);
+        const cookies = new Cookies();
+        cookies.set('connection', result.data.cookie, { path: '/' });
         this.props.changeState('loggedIn', true);
         this.props.changeState('userState', result.data);
         this.props.changeView('homepage');
