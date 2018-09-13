@@ -29,6 +29,17 @@ const checkEmail = async (email) => {
   }
 };
 
+const checkUserId = async (id) => {
+  const query = `Select * from users where id = '${id}'`;
+  try {
+    const userInformation = await client.query(query);
+    console.log('checking id in DB:', id)
+    return userInformation.rows[0];
+  } catch(err) {
+    next(err);
+  }
+};
+
 const checkLogin = async (params) => {
   const { email, password } = params;
   const query = `Select * from users where email = '${email}' and password = '${password}';`;
@@ -81,13 +92,14 @@ const addPhotoToDatabase = async (params) => {
     console.log('Added Photo Id:', unsplashId, ' to Postgres!');
     return {status: true}; 
   } catch(err) {
-    next(err);
+    console.log(err);
   }
 }
 
 module.exports = {
   checkLogin,
   checkEmail,
+  checkUserId,
   signUp,
   userPhotoImpression,
   getUserLikes,

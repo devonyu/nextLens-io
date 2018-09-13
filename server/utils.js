@@ -1,11 +1,3 @@
-//Asynchronously route handler middle ware!
-const asyncMiddleware = fn =>
-  (req, res, next) => {
-    Promise.resolve(fn(req, res, next))
-      .catch(next);
-  };
-
-
 // Load images to DB
 const api = require('../example_data_server/api');
 const db = require('../database/db')
@@ -51,6 +43,3 @@ const loadImagesToDb = (api) => {
 
 // run node utils.js to load postgres with images from example api file
 loadImagesToDb(api);
-
-
-module.exports.asyncMiddleware = asyncMiddleware

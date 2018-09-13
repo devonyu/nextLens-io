@@ -18,12 +18,15 @@ router
     }
     const match = await bcrypt.compare(credentials.password, user.password);
     if (match) {
-      console.log('CORRECT PASSWORD')
-      console.log(request.session)
+      // console.log('CORRECT PASSWORD')
+      // console.log(request.session)
       delete user.password;
       // Create session
       // Redis must be connected are else this wont work
-      request.session.key = credentials.email;
+      request.session.key = user.id;
+      //set cookie on browser
+      user.cookie = request.session.id;
+      request.session.auth = true;
       //console.log('created session: ', request.session);
       response.status(200).send(user);
     } else {

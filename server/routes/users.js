@@ -14,7 +14,7 @@ router
 })
 .get('/:id/likedphotos', (req, res) => {
     console.log('userId===>', req.session.key);
-    console.log('authenticated? ===>', req.session.authenticated === true);
+    console.log('authenticated? ===>', req.session.auth=== true);
     const userId = req.session.key;
     async function getUserLikedPhotos (userid) {
         const likedPhotos = await db.getUserLikes({ userId });

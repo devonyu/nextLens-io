@@ -12,14 +12,14 @@ router.use('/',  async (req, res, next) => {
       // get user information from DB
       let user = req.session.key;
       console.log('user found: ', user);
-      let results = await db.checkEmail(user);
+      let results = await db.checkUserId(user);
       delete results.password;
       console.log('results of auth: ', results);
       res.send(results);
     } else {
     // else go to home page.
       console.log('key not present, No user session located');
-      //return next();
+      return next();
     }
   });
 
