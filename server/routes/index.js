@@ -29,7 +29,7 @@ router.get('/landing', (req, res) => {
   axios.get(`https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_URL}`, {
     params: {
       query: randomQuery,
-      per_page: 30,
+      per_page: 10,
     },
   })
     .then((result) => {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Container, Transition } from 'semantic-ui-react'
 import Profile from './Profile';
+//import SidebarExampleSidebar from './SideBar';
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -63,6 +64,10 @@ export default class HomePage extends Component {
 				<Container>
 					<Profile userInformation={this.props.userInformation} />
 				</Container>
+
+				{/* <SidebarExampleSidebar>
+
+				</SidebarExampleSidebar> */}
 
 			</Container>
 		)
