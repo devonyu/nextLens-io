@@ -27,31 +27,23 @@ exports[`Loads Profile Card with Props 1`] = `
       className="description"
     >
       Im testing Jest and test renderer with props
+      <br />
+      <i
+        aria-hidden="true"
+        className="camera retro icon"
+      />
+      Owns X lenses
     </div>
   </div>
   <div
     className="extra content"
   >
-    <a>
-      <i
-        aria-hidden="true"
-        className="user icon"
-      />
-      Testing Card Features
-    </a>
-    <a>
-      <i
-        aria-hidden="true"
-        className="camera retro icon"
-      />
-      How many lenses do you own?
-    </a>
     <button
       className="ui small button"
       onClick={[Function]}
       role="button"
     >
-      Ability to update profile
+      Edit Profile
     </button>
   </div>
 </div>
