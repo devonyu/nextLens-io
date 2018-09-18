@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Container, Transition } from 'semantic-ui-react'
-import Profile from './Profile';
-//import SidebarExampleSidebar from './SideBar';
+import { Grid } from 'semantic-ui-react'
+import SidebarMain from './SideBar';
+import Photoliker from './PhotoLiker';
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -11,7 +11,7 @@ export default class HomePage extends Component {
 			animation: 'pulse', 
 			duration: 250, 
 			visible: true,
-	}
+		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	}
 
@@ -40,36 +40,27 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { animation, duration, visible } = this.state
 		return(
-			<Container fluid>
-
-				<Container fluid textAlign='center'>
-					<h2>Hello {this.props.userInformation.firstname}!</h2>
-					<h2>You have liked {this.props.userPhotoImpressions.length} photos!</h2>
-					<h3>The recommendation system will need at least 30 likes before we can calculate accurate results..</h3>
-					<h3>{30 - this.props.userPhotoImpressions.length} more likes to go!</h3>
-					<Button basic color='blue' size='large' content='Photoliker Beta' onClick={this.toggleChangeView}/>
-				</Container>
-
-				<Container fluid textAlign='center'>
-					<Transition animation={animation} duration={duration} visible={visible}>
-						<div> Make a new component here to render a list of recommended lenses
-							<br/>
-							if not enough data, tell user to use photoliker!
-						</div>
-					</Transition>
-				</Container>
-
-				<Container>
-					<Profile userInformation={this.props.userInformation} />
-				</Container>
-
-				{/* <SidebarExampleSidebar>
-
-				</SidebarExampleSidebar> */}
-
-			</Container>
+			<div>
+				    <Grid>
+						<Grid.Column mobile={16} tablet={8} computer={3}>
+							<SidebarMain 
+								id='sidebar' 
+								userInformation={this.props.userInformation}
+								likeProgress={this.props.userPhotoImpressions.length}
+							>
+							</SidebarMain>
+						</Grid.Column>
+						<Grid.Column mobile={16} tablet={8} computer={12}>
+							<Photoliker id='photoliker'>
+								changeView={ this.changeView }
+								changeState={this.changeState}
+								userInformation={ this.state.userState }
+								userPhotoImpressions={ this.state.userPhotoImpressions }
+							</Photoliker>
+						</Grid.Column>
+					</Grid>	
+				</div>
 		)
 	}
 }

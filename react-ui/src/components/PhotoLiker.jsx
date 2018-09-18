@@ -65,14 +65,11 @@ export default class PhotoLiker extends Component {
     render() {
         console.log(this.state)
         return(
-            <Container fluid>
                 <Container fluid textAlign='center'>
-                    <h2>PhotoLiker Beta 1.0</h2>
-                    {console.log(` INSIDE PHOTOLIKER <h1>USERID: ${this.props.userInformation.id} USERNAME: ${this.props.userInformation.firstname} ABOUT: ${this.props.userInformation.about}</h1>`)}
+                    {/* {console.log(` INSIDE PHOTOLIKER <h1>USERID: ${this.props.userInformation.id} USERNAME: ${this.props.userInformation.firstname} ABOUT: ${this.props.userInformation.about}</h1>`)} */}
                     <Button onClick={this.handleYes} size='big'>Like</Button>
                     <Button onClick={this.handleNo} size='big'>Dislike</Button>
                     <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />
-                    <br/>
                         <Popup
                             trigger={
                                 <Image src={this.state.imgs[this.state.currentIndex].urls.regular}
@@ -86,7 +83,6 @@ export default class PhotoLiker extends Component {
                             on={['click']}
                         />
                 </Container>
-            </Container>
         )
     }
 

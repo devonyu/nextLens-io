@@ -1,53 +1,50 @@
 import React, { Component } from 'react'
-import { Button, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Button, Input, Label, Menu } from 'semantic-ui-react'
+import Profile from './Profile';
 
-export default class SidebarExampleSidebar extends Component {
-  state = { visible: false }
+export default class SidebarMain extends Component {
+  state = { activeItem: 'pf' }
 
-  handleButtonClick = () => this.setState({ visible: !this.state.visible })
-
-  handleSidebarHide = () => this.setState({ visible: false })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
-    const { visible } = this.state
+    const { activeItem } = this.state
 
     return (
-      <div>
-        <Button onClick={this.handleButtonClick}>Toggle visibility</Button>
+      <Menu vertical>
+        <Menu.Item name='pf' active={activeItem === 'pf'} onClick={this.handleItemClick}>
+          {/* <Label color='teal'>1</Label> */}
+          <Profile userInformation={this.props.userInformation}>
+          </Profile>
+        </Menu.Item>
 
-        <Sidebar.Pushable as={Segment}>
-          <Sidebar
-            as={Menu}
-            animation='overlay'
-            icon='labeled'
-            inverted
-            onHide={this.handleSidebarHide}
-            vertical
-            visible={visible}
-            width='thin'
-          >
-            <Menu.Item as='a'>
-              <Icon name='home' />
-              Home
-            </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='gamepad' />
-              Games
-            </Menu.Item>
-            <Menu.Item as='a'>
-              <Icon name='camera' />
-              Channels
-            </Menu.Item>
-          </Sidebar>
+        <Menu.Item name='pl' active={activeItem === 'pl'} onClick={this.handleItemClick}>
+        <Button primary>PhotoLiker</Button>
+        </Menu.Item>
 
-          <Sidebar.Pusher>
-            <Segment basic>
-              <Header as='h3'>Application Content</Header>
-              <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
-            </Segment>
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
-      </div>
+        <Menu.Item name='pg' active={activeItem === 'pg'} onClick={this.handleItemClick}>
+          <Label>{this.props.likeProgress}/30</Label>
+          Current Progress:
+        </Menu.Item>
+
+        <Menu.Item name='rec' active={activeItem === 'rec'} onClick={this.handleItemClick}>
+          <Label>{this.props.likeProgress >= 30 ? "Ready!" : "N/A"}</Label>
+          Recommendations:
+        </Menu.Item>
+
+        <Menu.Item name='liked' active={activeItem === 'liked'} onClick={this.handleItemClick}>
+          <Label>{this.props.likeProgress}</Label>
+          Liked Images:
+        </Menu.Item>
+
+        <Menu.Item name='rev' active={activeItem === 'rev'} onClick={this.handleItemClick}>
+          <Label>1</Label>
+          Lens Reviews:
+        </Menu.Item>
+        <Menu.Item>
+          <Input icon='search' placeholder='Search NextLens' />
+        </Menu.Item>
+      </Menu>
     )
   }
 }

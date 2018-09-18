@@ -9,18 +9,15 @@ export default class Profile extends Component {
                     <Card.Content>
                     <Card.Header>{this.props.userInformation.firstname}</Card.Header>
                     <Card.Meta>Current Mount: {this.props.userInformation.mount}</Card.Meta>
-                    <Card.Description>{this.props.userInformation.about}</Card.Description>
+                    <Card.Description>
+                    {this.props.userInformation.about}
+                    <br/>
+                    <Icon name='camera retro' />
+                    Owns X lenses
+                    </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                    <a>
-                        <Icon name='user' />
-                        Testing Card Features
-                    </a>  
-                    <a>
-                        <Icon name='camera retro' />
-                        How many lenses do you own?
-                    </a>
-                    <Button onClick={()=>{console.log('update profile handler')}} size='small'>Ability to update profile</Button>
+                    <Button onClick={()=>{console.log('update profile handler')}} size='small'>Edit Profile</Button>
                     </Card.Content>
                 </Card>
         )
