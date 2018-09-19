@@ -19,7 +19,6 @@ class NavBar extends Component {
   }
 
   logOut() {
-    console.log('log out clicked');
     axios({
       method: 'get',
       url: '/logout'

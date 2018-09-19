@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import './App.css';
 import axios from 'axios';
-import PhotoLiker from './components/PhotoLiker';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
 import Login from './components/Login';
@@ -14,8 +13,6 @@ class App extends Component {
     super(props);
     this.state = {
       view: 'landing',
-      message: null,
-      fetching: true,
       loggedIn: false,
       userState: {
         about: '',
@@ -25,7 +22,10 @@ class App extends Component {
         mount: '',
         profileimgurl: ''
       },
-      userPhotoImpressions: []
+      userPhotoImpressions: {
+        likes: [],
+        dislikes: []
+      }
     };
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   changeView(option) {
-    console.log(this.state);
     this.setState((prevState, props) => {
       return {
           view: option
@@ -50,16 +49,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //console.log('app mounted')
-    //if there is a cookie set, check it
     const cookies = new Cookies();
     if (cookies.get('connection') !== undefined) {
       axios.get('/auth')
       .then(({ data }) => {
-        console.log('loaded top level for auth==>', data);
+        console.log('Auth: ', data);
         try {
           if (data) {
-            console.log('user info found:', data)
+            //Implement Redux in future to make this cleaner
             this.setState((prevState, props) => {
               return {
                   loggedIn: true,
@@ -100,13 +97,6 @@ class App extends Component {
     } else if (this.state.view ==='signup') {
       return <Signup
       changeView={ this.changeView }
-      />
-    } else if (this.state.view ==='photoliker') {
-      return <PhotoLiker
-      changeView={ this.changeView }
-      changeState={this.changeState}
-      userInformation={ this.state.userState }
-      userPhotoImpressions={ this.state.userPhotoImpressions }
       />
     } else if (this.state.view ==='homepage') {
       return <HomePage
