@@ -17,7 +17,7 @@ export default class PhotoLiker extends Component {
     }
 
 	getPics = () => {
-        //Use Portrait API Dummy data for now to test
+        //Use API Dummy data for now to test
         let allCategories = []
         for (let category in api) {
             allCategories.push(api[category])
@@ -25,11 +25,15 @@ export default class PhotoLiker extends Component {
         let shuffled = shuffleImages(allCategories);
         this.setState({ 
 			imgs: shuffled
-		 });
+         });
+         setTimeout(()=>{console.log('state inside PL: ', this.state)}, 1000)
     }
     
     handleYes = () => {
         //add photo to user likes table
+
+        //save to DB
+
          this.setState(function(prevState, props) {
             return {
                 progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
@@ -40,12 +44,15 @@ export default class PhotoLiker extends Component {
 
     handleNo = () => {
         //add image to user likes table (dislike)
-        this.setState(function(prevState, props) {
-            return {
-                progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
-                currentIndex: prevState.currentIndex += 1
-            };
-          });
+
+        // save to database with dislike
+
+        // this.setState(function(prevState, props) {
+        //     return {
+        //         progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
+        //         currentIndex: prevState.currentIndex += 1
+        //     };
+        //   });
     }
 
     componentWillMount () {
@@ -65,7 +72,6 @@ export default class PhotoLiker extends Component {
     render() {
         return(
                 <Container fluid textAlign='center'>
-                    {/* {console.log(` INSIDE PHOTOLIKER <h1>USERID: ${this.props.userInformation.id} USERNAME: ${this.props.userInformation.firstname} ABOUT: ${this.props.userInformation.about}</h1>`)} */}
                     <Button onClick={this.handleYes} size='small'>Like</Button>
                     <Button onClick={this.handleNo} size='small'>Dislike</Button>
                     <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />

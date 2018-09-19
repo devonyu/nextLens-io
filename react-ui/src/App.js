@@ -22,10 +22,7 @@ class App extends Component {
         mount: '',
         profileimgurl: ''
       },
-      userPhotoImpressions: {
-        likes: [],
-        dislikes: []
-      }
+      userPhotoImpressions: []
     };
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);

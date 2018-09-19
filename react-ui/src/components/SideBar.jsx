@@ -6,7 +6,8 @@ export default class SidebarMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: ''
+      activeItem: '',
+      progress: 0
     }
   }
 
@@ -17,13 +18,38 @@ export default class SidebarMain extends Component {
     }
   }
 
+  updateProgress() {
+    if (this.state.progress < 30) {
+      this.setState((state, props) => ({
+        progress: state.progress + 1
+      }));
+    }
+    console.log('progress increased in sidebar');
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.likeProgress !== this.props.likeProgress){
+      this.setState({          
+        progress: this.props.likeProgress.length
+      });
+    }
+  }
+
+  componentDidMount() {
+    console.log('after mounting=>',this.props.likeProgress)
+    if (this.props.likeProgress) {
+      this.setState((state) => ({
+        progress: this.props.likeProgress.length
+      }));
+    }
+  }
+
   render() {
     const { activeItem } = this.state
 
     return (
       <Menu vertical>
-        <Menu.Item name='editProfile' active={activeItem === 'editProfile'} onClick={this.handleItemClick} rounded>
-          {/* <Label color='teal'>1</Label> */}
+        <Menu.Item name='editProfile' active={activeItem === 'editProfile'} onClick={this.handleItemClick}>
           <Profile userInformation={this.props.userInformation}>
           </Profile>
         </Menu.Item>
@@ -36,22 +62,22 @@ export default class SidebarMain extends Component {
         </Menu.Item>
 
         <Menu.Item name='progress' active={activeItem === 'progress'} onClick={this.handleItemClick}>
-          <Label>{Math.floor((this.props.likeProgress / 30) * 100)}%</Label>
+          <Label onClick={this.updateProgress.bind(this)}>{Math.floor((this.state.progress / 30) * 100)}%</Label>
           Current Progress:
         </Menu.Item>
 
         <Menu.Item name='recommendations' active={activeItem === 'recommendations'} onClick={this.handleItemClick}>
-          <Label>{this.props.likeProgress >= 30 ? "Ready!" : "N/A"}</Label>
+          <Label>{this.state.progress >= 30 ? "Ready" : "N/A"}</Label>
           Recommendations:
         </Menu.Item>
 
         <Menu.Item name='likedImages' active={activeItem === 'likedImages'} onClick={this.handleItemClick}>
-          <Label>{this.props.likeProgress >= 0 ? this.props.likeProgress : 0 }</Label>
+          <Label>{this.state.progress}</Label>
           Liked Images:
         </Menu.Item>
 
         <Menu.Item name='reviews' active={activeItem === 'reviews'} onClick={this.handleItemClick}>
-          <Label>1</Label>
+          <Label>0</Label>
           Lens Reviews:
         </Menu.Item>
         <Menu.Item>

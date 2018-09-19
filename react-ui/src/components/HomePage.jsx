@@ -41,6 +41,7 @@ export default class HomePage extends Component {
 
 	getUserInformation = (userId) => {
 		//console.log('send axios req to server w/id:', userId, ' to retrieve liked photos');
+		console.log('Getting user info with AXIOS')
 		axios.get(`/users/${userId}/likedphotos`)
 		.then(({ data }) => {
 			console.log(`response from getting user id=${userId} liked photos ==>`, data);
@@ -95,18 +96,20 @@ export default class HomePage extends Component {
 		//console.log('current state: ', this.state);
 		return(
 			<div>
-				<Grid>
-					<Grid.Column mobile={4} tablet={3} computer={2}>
-						<SidebarMain 
-							id='sidebar' 
-							userInformation={this.props.userInformation}
-							likeProgress={this.props.userPhotoImpressions.length}
-							changeViews={ this.changeViews }
-							changeStates={ this.changeStates }
-						>
-						</SidebarMain>
+				<Grid celled columns={2}>
+					<Grid.Column mobile={5} tablet={4} computer={3}>
+						<div>
+							<SidebarMain 
+								id='sidebar' 
+								userInformation={this.props.userInformation}
+								likeProgress={this.props.userPhotoImpressions}
+								changeViews={ this.changeViews }
+								changeStates={ this.changeStates }
+							>
+							</SidebarMain>
+						</div>
 					</Grid.Column>
-					<Grid.Column mobile={16} tablet={12} computer={14}>
+					<Grid.Column mobile={8} tablet={10} computer={12}>
 						<div>{ this.getViews() }</div>
 					</Grid.Column>
 				</Grid>	
