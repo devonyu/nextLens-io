@@ -42,4 +42,5 @@ const loadImagesToDb = (api) => {
 }
 
 // run node utils.js to load postgres with images from example api file
+// Loads 100 images for each category (MVP 4 categories)
 loadImagesToDb(api);

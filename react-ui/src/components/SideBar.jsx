@@ -22,7 +22,7 @@ export default class SidebarMain extends Component {
 
     return (
       <Menu vertical>
-        <Menu.Item name='editProfile' active={activeItem === 'editProfile'} onClick={this.handleItemClick}>
+        <Menu.Item name='editProfile' active={activeItem === 'editProfile'} onClick={this.handleItemClick} rounded>
           {/* <Label color='teal'>1</Label> */}
           <Profile userInformation={this.props.userInformation}>
           </Profile>
@@ -36,7 +36,7 @@ export default class SidebarMain extends Component {
         </Menu.Item>
 
         <Menu.Item name='progress' active={activeItem === 'progress'} onClick={this.handleItemClick}>
-          <Label>{this.props.likeProgress}/30</Label>
+          <Label>{Math.floor((this.props.likeProgress / 30) * 100)}%</Label>
           Current Progress:
         </Menu.Item>
 

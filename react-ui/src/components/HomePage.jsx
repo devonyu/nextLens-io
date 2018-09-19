@@ -92,7 +92,7 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		console.log('current state: ', this.state);
+		//console.log('current state: ', this.state);
 		return(
 			<div>
 				<Grid>
