@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Input, Label, Menu } from 'semantic-ui-react'
+import { Button, Icon, Input, Label, Menu } from 'semantic-ui-react'
 import Profile from './Profile';
 
 export default class SidebarMain extends Component {
@@ -29,7 +29,10 @@ export default class SidebarMain extends Component {
         </Menu.Item>
 
         <Menu.Item name='photoliker' active={activeItem === 'photoliker'} onClick={this.handleItemClick}>
-        <Button primary>PhotoLiker</Button>
+        <Button fluid primary icon labelPosition='right'>
+          <Icon name='thumbs up outline' />
+          PhotoLiker
+        </Button>
         </Menu.Item>
 
         <Menu.Item name='progress' active={activeItem === 'progress'} onClick={this.handleItemClick}>
@@ -43,7 +46,7 @@ export default class SidebarMain extends Component {
         </Menu.Item>
 
         <Menu.Item name='likedImages' active={activeItem === 'likedImages'} onClick={this.handleItemClick}>
-          <Label>{this.props.likeProgress}</Label>
+          <Label>{this.props.likeProgress >= 0 ? this.props.likeProgress : 0 }</Label>
           Liked Images:
         </Menu.Item>
 

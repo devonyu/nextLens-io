@@ -31,6 +31,7 @@ export default class Login extends Component {
         this.props.changeState('loggedIn', true);
         this.props.changeState('userState', result.data);
         this.props.changeView('homepage');
+        console.log('user has signed in, here is the data we have: ', result.data);
       }
     })
     .catch((error) => {

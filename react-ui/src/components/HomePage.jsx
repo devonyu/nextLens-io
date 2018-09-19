@@ -43,9 +43,8 @@ export default class HomePage extends Component {
 		//console.log('send axios req to server w/id:', userId, ' to retrieve liked photos');
 		axios.get(`/users/${userId}/likedphotos`)
 		.then(({ data }) => {
-			//console.log(`response from getting user id=${userId} liked photos ==>`, data);
+			console.log(`response from getting user id=${userId} liked photos ==>`, data);
 			this.props.changeState('userPhotoImpressions', data);
-			// We can divide userImpressions to an object with like and dislike keys
     	})
 		.catch((error) => {
 		  console.log(error);

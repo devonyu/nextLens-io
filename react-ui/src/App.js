@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'landing',
+      view: '',
       loggedIn: false,
       userState: {
         about: '',
@@ -57,6 +57,7 @@ class App extends Component {
         try {
           if (data) {
             //Implement Redux in future to make this cleaner
+            console.log('all data after auth returned to react===> ', data);
             this.setState((prevState, props) => {
               return {
                   loggedIn: true,
@@ -74,13 +75,17 @@ class App extends Component {
           }
         } 
         catch(err) {
+          console.log('caught err in setting state after auth: ', err)
           this.changeView('landing')
         }
   
       })
       .catch((err)=>{
+        console.log('theres an error with auth! check below');
         console.log(err);
       })
+    } else {
+      this.changeState('view', 'landing');
     }
   }
 
