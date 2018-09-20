@@ -31,5 +31,24 @@ router
     }
     getUserLikedPhotos(userId);
 })
+.post('/:id/:photoid', (req, res) => {
+    // will add photoid and userid to likes table with boolean, test in postman
+    console.log('adding something at this endpoint:', req.params.id, req.params.photoid, req.body);
+    const userId = req.params.id;
+    const photoId = req.params.photoid;
+    const liked = req.body.liked;
+    async function savePhotoImpressions (userId, photoId, liked) {
+        const savedImpression = await db.userPhotoImpression({ userId, photoId, liked });
+        if (savedImpression) {
+            console.log('Server has results from DB: ', savedImpression);
+            console.log('Type of results from DB: ', typeof savedImpression);
+            res.status(200).send(JSON.stringify(savedImpression));
+        } else {
+            console.log('error in saving photo impression!');
+            res.status(400).send('Photo NOT SAVED!');
+        }
+    }
+    savePhotoImpressions(userId, photoId, liked);
+})
 
 module.exports = router

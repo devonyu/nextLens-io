@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       view: '',
       loggedIn: false,
+      place: 0,
       userState: {
         about: '',
         email: '',
@@ -58,11 +59,13 @@ class App extends Component {
             this.setState((prevState, props) => {
               return {
                   loggedIn: true,
+                  place: data.place,
                   userState: {
                     about: data.about,
                     email: data.email,
                     firstname: data.firstname,
                     id: data.id,
+                    place: data.place,
                     mount: data.mount,
                     profileimgurl: data.profileimgurl
                   }
@@ -103,7 +106,8 @@ class App extends Component {
     } else if (this.state.view ==='homepage') {
       return <HomePage
       changeView={ this.changeView }
-      changeState={this.changeState}
+      changeState={ this.changeState }
+      place = { this.state.place } 
       userInformation={ this.state.userState }
       userPhotoImpressions={ this.state.userPhotoImpressions }
       />
@@ -111,13 +115,14 @@ class App extends Component {
   }
 
   render() {
+    console.log('state at top   <>', this.state)
     return (
         <div className="container">
           <div> { <NavBar
-            userInformation={this.state.userState}
-            changeView={this.changeView} 
-            loggedIn={this.state.loggedIn}
-            changeState={this.changeState}/> } 
+            userInformation={ this.state.userState }
+            changeView={ this.changeView } 
+            loggedIn={ this.state.loggedIn }
+            changeState={ this.changeState }/> } 
           </div>
           <div>{ this.getView() }</div>
         </div>

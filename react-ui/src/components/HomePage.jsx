@@ -31,7 +31,7 @@ export default class HomePage extends Component {
 		});
 	  }
 	
-	  changeStates(option, value) {
+	changeStates(option, value) {
 		this.setState((prevState, props) => {
 		  return {
 			  [option]: value
@@ -62,6 +62,7 @@ export default class HomePage extends Component {
 			return <Photoliker
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
+			changeTopState= { this.props.changeState }
 			/>
 		} else if (this.state.views ==='recommendations') {
 			return <Recommendations
@@ -89,6 +90,13 @@ export default class HomePage extends Component {
 	}
 
 	componentDidMount () {
+		if (this.props.place === 0) {
+			this.changeViews('onBoard')
+		} else if (this.props.userInformation.userPhotoImpressions >= 30){
+			this.changeViews('recommendations')
+		} else {
+			this.changeViews('photoliker')
+		}
 		this.getUserInformation(this.props.userInformation.id);
 	}
 

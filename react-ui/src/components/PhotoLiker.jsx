@@ -40,6 +40,8 @@ export default class PhotoLiker extends Component {
                 currentIndex: prevState.currentIndex += 1
             };
           });
+          console.log(this.state)
+          this.props.changeTopState('place', 9);
     }
 
     handleNo = () => {
