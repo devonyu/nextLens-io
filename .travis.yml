@@ -5,10 +5,10 @@
 
 language: node_js
 node_js:
-- "10.7"
+- "10.11"
 - node
 
-install: npm install
+install: yarn install
 
 # after_success:
 #   - 'cat ./coverage/lcov.info | ./node_modules/.bin/coveralls'
