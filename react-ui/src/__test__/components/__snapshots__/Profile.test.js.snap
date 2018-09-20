@@ -19,10 +19,7 @@ exports[`Loads Profile Card with Props 1`] = `
     </div>
     <div
       className="meta"
-    >
-      Current Mount: 
-      3
-    </div>
+    />
     <div
       className="description"
     >
