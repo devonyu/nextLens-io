@@ -47,12 +47,11 @@ export default class PhotoLiker extends Component {
 
         // save to database with dislike
 
-        // this.setState(function(prevState, props) {
-        //     return {
-        //         progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
-        //         currentIndex: prevState.currentIndex += 1
-        //     };
-        //   });
+        this.setState(function(prevState, props) {
+            return {
+                currentIndex: prevState.currentIndex += 1
+            };
+          });
     }
 
     componentWillMount () {
