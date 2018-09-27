@@ -56,10 +56,14 @@ const userPhotoImpression = async (params) => {
   const { userId, photoId, liked} = params;
   const query = `INSERT into user_likes (userId, photoId, liked) Values (${userId}, ${photoId}, ${liked});`;
   const impressionResult = await client.query(query);
-  if (!impressionResult.rows[0]) {
-    return ({status: false});
-  } else {
-    return impressionResult.rows[0];
+  try {
+    if (!impressionResult.rowCount) {
+      return ({status: false});
+    } else if (impressionResult.rowCount){
+      return ({status: true});
+    }
+  } catch (err) {
+    console.log('Error adding impression in DB: ', err);
   }
 }
 

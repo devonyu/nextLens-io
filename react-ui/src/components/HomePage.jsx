@@ -63,6 +63,7 @@ export default class HomePage extends Component {
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			changeTopState= { this.props.changeState }
+			userInfo= { this.props.userInformation }
 			/>
 		} else if (this.state.views ==='recommendations') {
 			return <Recommendations
@@ -90,6 +91,7 @@ export default class HomePage extends Component {
 	}
 
 	componentDidMount () {
+		console.log('mounted, props: ', this.props.place)
 		if (this.props.place === 0) {
 			this.changeViews('onBoard')
 		} else if (this.props.userInformation.userPhotoImpressions >= 30){

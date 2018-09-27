@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Image, Popup, Progress } from 'semantic-ui-react';
 import { shuffleImages } from './utils.js';
+import axios from 'axios';
 const api = require('../example_data_react/api');
 
 export default class PhotoLiker extends Component {
@@ -9,6 +10,7 @@ export default class PhotoLiker extends Component {
 		this.state = {
 			imgs: [],
             currentIndex: 0,
+            currentImage: {},
             progress: []
 		}
 		this.getPics = this.getPics.bind(this)
@@ -24,24 +26,36 @@ export default class PhotoLiker extends Component {
         }
         let shuffled = shuffleImages(allCategories);
         this.setState({ 
-			imgs: shuffled
+            imgs: shuffled,
+            currentImage: shuffled[this.state.currentIndex]
          });
          setTimeout(()=>{console.log('state inside PL: ', this.state)}, 1000)
     }
     
     handleYes = () => {
-        //add photo to user likes table
-
-        //save to DB
-
+        console.log('current image=> ', this.state.currentImage);
+        
+        axios({
+            method: 'post',
+            url: `/users/${this.props.userInfo.id}/${this.state.currentIndex}`,
+            data: {"liked":true}
+          })
+		.then(({ data }) => {
+            console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentIndex} data=${data}`);
+    	})
+		.catch((error) => {
+		  console.log(error);
+        });
+        
          this.setState(function(prevState, props) {
             return {
                 progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
-                currentIndex: prevState.currentIndex += 1
+                currentIndex: prevState.currentIndex += 1,
+                currentImage: prevState.imgs[prevState.currentIndex]
             };
           });
           console.log(this.state)
-          this.props.changeTopState('place', 9);
+          //this.props.changeTopState('place', this.state.currentIndex);
     }
 
     handleNo = () => {
