@@ -70,7 +70,8 @@ const userPhotoImpression = async (params) => {
 const getUserLikes = async (params) => {
   //Function will do a query on all photos liked by user in userLikes table
   const { userId } = params;
-  const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
+  //const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
+  const query = `SELECT * FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.liked = true and user_likes.photoid = photos.id;`;
   // We want to return the images themselves from the photos table (update query)
   const likedPhotos = await client.query(query);
   if (!likedPhotos.rows) {
@@ -100,6 +101,22 @@ const addPhotoToDatabase = async (params) => {
   }
 }
 
+const updatePlace = async (params) => {
+  //Updates users place to persist next images to show
+  const { userId, photoId } = params;
+  const query = `UPDATE users SET place = ${photoId} WHERE id = ${userId};`;
+  const updatePlaceQuery = await client.query(query);
+  try {
+    if (!updatePlaceQuery.rowCount) {
+      return ({status: false});
+    } else if (updatePlaceQuery.rowCount){
+      return ({status: true});
+    }
+  } catch (err) {
+    console.log('Error updating place in DB: ', err);
+  }
+}
+
 module.exports = {
   checkLogin,
   checkEmail,
@@ -108,5 +125,6 @@ module.exports = {
   userPhotoImpression,
   getUserLikes,
   getRecommendations,
-  addPhotoToDatabase
+  addPhotoToDatabase,
+  updatePlace
 };

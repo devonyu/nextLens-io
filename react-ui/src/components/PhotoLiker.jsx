@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container, Image, Popup, Progress } from 'semantic-ui-react';
-import { shuffleImages } from './utils.js';
+import { evenlyDistributedImages } from './utils.js';
 import axios from 'axios';
 const api = require('../example_data_react/api');
 
@@ -9,13 +9,13 @@ export default class PhotoLiker extends Component {
 		super(props);
 		this.state = {
 			imgs: [],
-            currentIndex: 0,
+            currentIndex: 1,
             currentImage: {},
             progress: []
 		}
-		this.getPics = this.getPics.bind(this)
-		this.handleNo = this.handleNo.bind(this)
-		this.handleYes = this.handleYes.bind(this)
+        this.getPics = this.getPics.bind(this)
+        this.handleOption = this.handleOption.bind(this)
+        this.handleKeyDown = this.handleKeyDown.bind(this)
     }
 
 	getPics = () => {
@@ -24,21 +24,21 @@ export default class PhotoLiker extends Component {
         for (let category in api) {
             allCategories.push(api[category])
         }
-        let shuffled = shuffleImages(allCategories);
+        let shuffled = evenlyDistributedImages(allCategories);
         this.setState({ 
             imgs: shuffled,
             currentImage: shuffled[this.state.currentIndex]
          });
          setTimeout(()=>{console.log('state inside PL: ', this.state)}, 1000)
     }
-    
-    handleYes = () => {
-        console.log('current image=> ', this.state.currentImage);
-        
-        axios({
+
+    handleOption = async (option) => {
+        //console.log('current image=> ', this.state.currentImage);
+        let affinity = option === 'yes' ? true : false;
+        await axios({
             method: 'post',
             url: `/users/${this.props.userInfo.id}/${this.state.currentIndex}`,
-            data: {"liked":true}
+            data: {"liked":affinity}
           })
 		.then(({ data }) => {
             console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentIndex} data=${data}`);
@@ -47,28 +47,29 @@ export default class PhotoLiker extends Component {
 		  console.log(error);
         });
         
-         this.setState(function(prevState, props) {
+        await this.setState(function(prevState, props) {
             return {
-                progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
+                // progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
                 currentIndex: prevState.currentIndex += 1,
                 currentImage: prevState.imgs[prevState.currentIndex]
             };
           });
-          console.log(this.state)
+          //console.log(this.state)
           //this.props.changeTopState('place', this.state.currentIndex);
+          //await this.props.changeTopState('place', this.state.currentIndex);
     }
 
-    handleNo = () => {
-        //add image to user likes table (dislike)
-
-        // save to database with dislike
-
-        this.setState(function(prevState, props) {
-            return {
-                currentIndex: prevState.currentIndex += 1
-            };
-          });
-    }
+    handleKeyDown(e) {
+        if (e.keyCode === 37) {
+            //liked, left key pressed
+            console.log('left Arrow clicked');
+            this.handleOption('yes');
+        } else if (e.keyCode === 39) {
+            //disliked, right key pressed
+            console.log('right Arrow clicked');
+            this.handleOption('no');
+        }
+      }
 
     componentWillMount () {
         //get past liked images so we dont show again
@@ -77,18 +78,13 @@ export default class PhotoLiker extends Component {
 
     componentWillReceiveProps() {
         console.log('receiving props in PL!');
-        this.setState((prevState, props)=> {
-            return {
-                currentIndex: 4
-            }
-        })
     }
 
     render() {
         return(
-                <Container fluid textAlign='center'>
-                    <Button onClick={this.handleYes} size='small'>Like</Button>
-                    <Button onClick={this.handleNo} size='small'>Dislike</Button>
+                <Container fluid textAlign='center' onKeyDown={ this.handleKeyDown }>
+                    <Button onClick={()=>{this.handleOption('yes')}} size='small'>Like</Button>
+                    <Button onClick={()=>{this.handleOption('no')}} size='small'>Dislike</Button>
                     <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />
                         <Popup
                             trigger={

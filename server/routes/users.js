@@ -19,11 +19,9 @@ router
     async function getUserLikedPhotos (userid) {
         const likedPhotos = await db.getUserLikes({ userId });
         if (likedPhotos === null) {
-          //res.status(400).send({status: false});
           console.log('User has no likes')
+          //res.status(400).send({status: false});
         } else if (likedPhotos) {
-            console.log('Server has: ', likedPhotos);
-            console.log(typeof likedPhotos);
             res.status(200).send(JSON.stringify(likedPhotos));
         } else {
             console.log('error in retrieving liked photos!');
@@ -39,6 +37,7 @@ router
     const liked = req.body.liked;
     async function savePhotoImpressions (userId, photoId, liked) {
         const savedImpression = await db.userPhotoImpression({ userId, photoId, liked });
+        const updatePlace = await db.updatePlace({userId, photoId});
         if (savedImpression) {
             console.log('Server has results from DB: ', savedImpression);
             console.log('Type of results from DB: ', typeof savedImpression);
@@ -47,6 +46,8 @@ router
             console.log('error in saving photo impression!');
             res.status(400).send('Photo NOT SAVED!');
         }
+        
+
     }
     savePhotoImpressions(userId, photoId, liked);
 })

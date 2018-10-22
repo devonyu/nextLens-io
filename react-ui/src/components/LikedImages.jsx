@@ -11,12 +11,11 @@ export default class LikedImages extends Component {
   }
 
   componentDidMount() {
-    // Holder till we get real images from DB
-    axios.get('/landing')
+    axios.get(`/users/${this.props.userInfo.id}/likedphotos`)
     .then(({ data }) => {
             const temp = [];
-            data.results.forEach((img)=> {
-                temp.push(img.urls.small)
+            data.forEach((img)=> {
+                temp.push(img.smallurl);
             })
             this.setState(function(prevState, props) {
                 return {

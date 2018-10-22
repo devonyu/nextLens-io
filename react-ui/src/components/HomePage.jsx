@@ -74,6 +74,7 @@ export default class HomePage extends Component {
 			return <LikedImages
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
+			userInfo= { this.props.userInformation }
 			/>
 		} else if (this.state.views ==='reviews') {
 			return <Reviews
