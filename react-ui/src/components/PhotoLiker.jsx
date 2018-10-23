@@ -82,7 +82,7 @@ export default class PhotoLiker extends Component {
 
     render() {
         return(
-                <Container fluid textAlign='center' onKeyDown={ this.handleKeyDown }>
+                <Container fluid textAlign='center' onKeyUp={ this.handleKeyDown }>
                     <Button onClick={()=>{this.handleOption('yes')}} size='small'>Like</Button>
                     <Button onClick={()=>{this.handleOption('no')}} size='small'>Dislike</Button>
                     <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />

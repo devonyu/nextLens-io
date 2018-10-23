@@ -18,5 +18,5 @@ script: echo "Running tests against $(node -v)... Running Jest test and coverage
 jobs:
   include:
     - stage: Produce Coverage
-      node_js: node
+      node_js: "10.11"
       script: jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
