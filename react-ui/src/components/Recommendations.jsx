@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 export default class Recommendations extends Component {
     render() {
+        console.log('recommendations mounted, axios call to DB for algorithm!')
         return(
             <div>
                 <h1>Recommendations HERE</h1>

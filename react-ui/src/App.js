@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   changeView(option) {
-    this.setState((prevState, props) => {
+    this.setState(() => {
       return {
           view: option
       };
@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   changeState(option, value) {
-    this.setState((prevState, props) => {
+    this.setState(() => {
       return {
           [option]: value
       };
@@ -56,7 +56,7 @@ class App extends Component {
           if (data) {
             //Implement Redux in future to make this cleaner
             console.log('all data after auth returned to react===> ', data);
-            this.setState((prevState, props) => {
+            this.setState(() => {
               return {
                   loggedIn: true,
                   place: data.place,

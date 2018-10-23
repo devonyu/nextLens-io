@@ -14,17 +14,19 @@ export default class HomePage extends Component {
 		super(props);
 		this.state = {
 			views: 'onBoard',
+			likedImageHP: 0
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
     this.changeStates = this.changeStates.bind(this);
-    this.getViews = this.getViews.bind(this);
+	this.getViews = this.getViews.bind(this);
+	this.updateHP = this.updateHP.bind(this);
 	}
 
 	toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
 	changeViews(option) {
-		this.setState((prevState, props) => {
+		this.setState(() => {
 		  return {
 			  views: option
 		  };
@@ -32,7 +34,7 @@ export default class HomePage extends Component {
 	  }
 	
 	changeStates(option, value) {
-		this.setState((prevState, props) => {
+		this.setState(() => {
 		  return {
 			  [option]: value
 		  };
@@ -46,10 +48,22 @@ export default class HomePage extends Component {
 		.then(({ data }) => {
 			console.log(`response from getting user id=${userId} liked photos ==>`, data);
 			this.props.changeState('userPhotoImpressions', data);
+			this.setState(() => {
+				return {likedImageHP: data.length}
+			})
     	})
 		.catch((error) => {
+			console.log('Could not fetch user information!')
 		  console.log(error);
 		});
+	}
+
+	updateHP() {
+		this.setState((prevState) => {
+			return {
+				likedImageHP: prevState.likedImageHP += 1
+			};
+		  });
 	}
 	  
 	getViews() {
@@ -64,6 +78,8 @@ export default class HomePage extends Component {
 			changeStates={ this.changeStates }
 			changeTopState= { this.props.changeState }
 			userInfo= { this.props.userInformation }
+			likeProgress={ this.state.likedImageHP }
+			updateProgress={ this.updateHP }
 			/>
 		} else if (this.state.views ==='recommendations') {
 			return <Recommendations
@@ -90,21 +106,24 @@ export default class HomePage extends Component {
 			/>
 		}
 	}
+	componentDidUpdate(prevProps) {
+		if (this.props.userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
+			if (this.props.userPhotoImpressions.length >= 30){
+				this.changeViews('recommendations')
+			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
+				this.changeViews('photoliker')
+			} else {
+				this.changeViews('onBoard')
+			}
+		}
+	}
 
 	componentDidMount () {
-		console.log('mounted, props: ', this.props.place)
-		if (this.props.place === 0) {
-			this.changeViews('onBoard')
-		} else if (this.props.userInformation.userPhotoImpressions >= 30){
-			this.changeViews('recommendations')
-		} else {
-			this.changeViews('photoliker')
-		}
 		this.getUserInformation(this.props.userInformation.id);
 	}
 
 	render() {
-		//console.log('current state: ', this.state);
+		console.log('HP STATE', this.state.likedImageHP);
 		return(
 			<div>
 				<Grid celled columns={2}>
@@ -113,7 +132,7 @@ export default class HomePage extends Component {
 							<SidebarMain 
 								id='sidebar' 
 								userInformation={this.props.userInformation}
-								likeProgress={this.props.userPhotoImpressions}
+								likeProgress={this.state.likedImageHP}
 								changeViews={ this.changeViews }
 								changeStates={ this.changeStates }
 							>

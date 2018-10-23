@@ -17,7 +17,7 @@ export default class LikedImages extends Component {
             data.forEach((img)=> {
                 temp.push(img.smallurl);
             })
-            this.setState(function(prevState, props) {
+            this.setState(() => {
                 return {
                     photos: temp,
                 };

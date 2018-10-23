@@ -24,10 +24,15 @@ export const mounts = [
   // // Function that will combine image categories with an even distribution
 export function evenlyDistributedImages(photoCategories) {
     const finalResults = new Array(photoCategories[0].length);
+    let countId = 1;
       for (let i = 0; i < photoCategories.length; i++) {
         for (let j = 0; j < photoCategories[0].length; j++) {
           if (!finalResults[j]) {
             finalResults[j] = [];
+          }
+          if (photoCategories[i][j]) {
+            photoCategories[i][j].nlid = countId;
+            countId++;
           }
           finalResults[j][i] = photoCategories[i][j];
         }

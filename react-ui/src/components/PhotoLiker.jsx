@@ -9,7 +9,7 @@ export default class PhotoLiker extends Component {
 		super(props);
 		this.state = {
 			imgs: [],
-            currentIndex: 1,
+            currentIndex: 0,
             currentImage: {},
             progress: []
 		}
@@ -37,17 +37,20 @@ export default class PhotoLiker extends Component {
         let affinity = option === 'yes' ? true : false;
         await axios({
             method: 'post',
-            url: `/users/${this.props.userInfo.id}/${this.state.currentIndex}`,
+            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.nlid}`,
             data: {"liked":affinity}
           })
 		.then(({ data }) => {
             console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentIndex} data=${data}`);
+            if (affinity === true) {
+                this.props.updateProgress();
+            }
     	})
 		.catch((error) => {
 		  console.log(error);
         });
         
-        await this.setState(function(prevState, props) {
+        await this.setState(function(prevState) {
             return {
                 // progress: prevState.progress.concat(prevState.imgs[prevState.currentIndex]),
                 currentIndex: prevState.currentIndex += 1,
@@ -85,7 +88,7 @@ export default class PhotoLiker extends Component {
                 <Container fluid textAlign='center' onKeyUp={ this.handleKeyDown }>
                     <Button onClick={()=>{this.handleOption('yes')}} size='small'>Like</Button>
                     <Button onClick={()=>{this.handleOption('no')}} size='small'>Dislike</Button>
-                    <Progress percent={Math.round(((this.state.progress.length / 30) * 100))} progress />
+                    <Progress percent={Math.round(((this.props.likeProgress / 30) * 100))} progress />
                         <Popup
                             trigger={
                                 <Image src={this.state.imgs[this.state.currentIndex].urls.regular}
