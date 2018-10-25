@@ -8,6 +8,7 @@ import Recommendations from './Recommendations';
 import LikedImages from './LikedImages';
 import EditProfile from './EditProfile';
 import Reviews from './Reviews';
+import Suggestions from './Suggestions';
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -98,6 +99,13 @@ export default class HomePage extends Component {
 		}
 		else if (this.state.views ==='editProfile') {
 			return <EditProfile
+			changeViews={ this.changeViews }
+			changeStates={ this.changeStates }
+			userInformation={ this.props.userInformation }
+			/>
+		}
+		else if (this.state.views ==='suggestions') {
+			return <Suggestions
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			userInformation={ this.props.userInformation }

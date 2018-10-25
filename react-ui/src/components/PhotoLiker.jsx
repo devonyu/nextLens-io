@@ -11,7 +11,8 @@ export default class PhotoLiker extends Component {
 			imgs: [],
             currentIndex: 0,
             currentImage: {},
-            progress: []
+            progress: [],
+            ready: 'red'
 		}
         this.getPics = this.getPics.bind(this)
         this.handleOption = this.handleOption.bind(this)
@@ -73,12 +74,44 @@ export default class PhotoLiker extends Component {
       }
 
     componentWillMount () {
-        //get past liked images so we dont show again
         this.getPics();
+        if (this.props.likeProgress > 5 && this.props.likeProgress < 30){
+            this.setState(() => {
+                return {
+                  ready: 'yellow'
+                }
+            })
+        } else if (this.props.likeProgress >= 30) {
+            this.setState(() => {
+                return {
+                  ready: 'green'
+                }
+            })
+        }
     }
 
-    componentWillReceiveProps(props) {
-        console.log('receiving props in PL!=> ', props);
+    componentDidUpdate(prevProps) {
+        if (prevProps.likeProgress !== this.props.likeProgress) {
+            if (this.props.likeProgress < 5) {
+              this.setState(() => {
+                return {
+                  ready: 'red'
+                }
+              })
+            } else if (this.props.likeProgress > 5 && this.props.likeProgress < 30 ) {
+              this.setState(() => {
+                return {
+                  ready: 'yellow'
+                }
+              })
+            } else if (this.props.likeProgress >= 30) {
+              this.setState(() => {
+                return {
+                  ready: 'green'
+                }
+              })
+            }
+        }
     }
 
     render() {
@@ -86,7 +119,7 @@ export default class PhotoLiker extends Component {
                 <Container fluid textAlign='center' onKeyUp={ this.handleKeyDown }>
                     <Button onClick={()=>{this.handleOption('yes')}} size='small'>Like</Button>
                     <Button onClick={()=>{this.handleOption('no')}} size='small'>Dislike</Button>
-                    <Progress percent={Math.round(((this.props.likeProgress / 30) * 100))} progress />
+                    <Progress color={this.state.ready} percent={Math.round(((this.props.likeProgress / 30) * 100))} progress />
                         <Popup
                             trigger={
                                 <Image src={this.state.imgs[this.state.currentIndex].urls.regular}

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Button, Icon, Input, Label, Menu } from 'semantic-ui-react'
+import { Button, Icon, Label, Menu } from 'semantic-ui-react'
 import Profile from './Profile';
 
 export default class SidebarMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: ''
+      activeItem: '',
+      ready: 'red'
     }
   }
 
@@ -14,6 +15,30 @@ export default class SidebarMain extends Component {
     this.setState({ activeItem: name });
     if (name !== 'progress') {
       this.props.changeViews(name);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.likeProgress !== this.props.likeProgress) {
+      if (this.props.likeProgress < 5) {
+        this.setState(() => {
+          return {
+            ready: 'red'
+          }
+        })
+      } else if (this.props.likeProgress > 5 && this.props.likeProgress < 30 ) {
+        this.setState(() => {
+          return {
+            ready: 'yellow'
+          }
+        })
+      } else if (this.props.likeProgress >= 30) {
+        this.setState(() => {
+          return {
+            ready: 'green'
+          }
+        })
+      }
     }
   }
 
@@ -35,12 +60,12 @@ export default class SidebarMain extends Component {
         </Menu.Item>
 
         <Menu.Item name='progress' active={activeItem === 'progress'} onClick={this.handleItemClick}>
-          <Label>{this.props.likeProgress < 30 ? Math.floor((this.props.likeProgress / 30) * 100) : 100}%</Label>
+          <Label color={this.state.ready}>{this.props.likeProgress < 30 ? Math.floor((this.props.likeProgress / 30) * 100) : 100}%</Label>
           Current Progress:
         </Menu.Item>
 
         <Menu.Item name='recommendations' active={activeItem === 'recommendations'} onClick={this.handleItemClick}>
-          <Label size='small'>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
+          <Label size='small' color={this.state.ready}>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
           Your Next Lens:
         </Menu.Item>
 
@@ -53,9 +78,14 @@ export default class SidebarMain extends Component {
           <Label>0</Label>
           Lens Reviews:
         </Menu.Item>
-        <Menu.Item>
-          <Input icon='search' placeholder='Search NextLens' />
+
+        <Menu.Item name='suggestions' active={activeItem === 'suggestions'} onClick={this.handleItemClick}>
+          Suggestions/Feedback
         </Menu.Item>
+
+        {/* <Menu.Item>
+          <Input icon='search' placeholder='Search NextLens' />
+        </Menu.Item> */}
       </Menu>
     )
   }
