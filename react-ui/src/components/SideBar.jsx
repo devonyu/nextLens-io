@@ -40,8 +40,8 @@ export default class SidebarMain extends Component {
         </Menu.Item>
 
         <Menu.Item name='recommendations' active={activeItem === 'recommendations'} onClick={this.handleItemClick}>
-          <Label>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
-          Recommendations:
+          <Label size='small'>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
+          Your Next Lens:
         </Menu.Item>
 
         <Menu.Item name='likedImages' active={activeItem === 'likedImages'} onClick={this.handleItemClick}>

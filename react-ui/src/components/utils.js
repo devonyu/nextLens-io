@@ -9,9 +9,17 @@ export const mounts = [
       { key: 'sony1', text: 'Sony E Mount Crop', value: 6 },
       { key: 'fujifilm', text: 'Fujifilm X Mount', value: 7 }
 ];
+// Function will get mount
+export function getMount(mountNumber, mountApi) {
+  for (let key of mountApi) {
+      if (key.value === mountNumber) {
+          return key.text;
+      }
+  }
+}
 
-  // // Function that will randomize image order
-  export function shuffleImages(photoCategories) {
+// Function that will randomize image order
+export function shuffleImages(photoCategories) {
     const finalResults = [];
     photoCategories.forEach((category,i) => {
       finalResults[i] = category;
@@ -21,7 +29,7 @@ export const mounts = [
     return shuffledResults;
 };
 
-  // // Function that will combine image categories with an even distribution
+// Function that will combine image categories with an even distribution
 export function evenlyDistributedImages(photoCategories) {
     const finalResults = new Array(photoCategories[0].length);
     let countId = 1;

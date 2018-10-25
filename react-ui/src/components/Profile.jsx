@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Card, Icon, Image } from 'semantic-ui-react';
-import { mounts } from './utils.js';
+import { getMount, mounts } from './utils.js';
 
 export default class Profile extends Component {
-
-    getMount(mountNumber) {
-        for (let key of mounts) {
-            if (key.value === mountNumber) {
-                return key.text;
-            }
-        }
-    }
-
     render() {
         return(
                 <Card>
                     <Image src={this.props.userInformation.profileimgurl || 'https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg'} />
                     <Card.Content>
                     <Card.Header>{this.props.userInformation.firstname}</Card.Header>
-                    <Card.Meta>{this.getMount(this.props.userInformation.mount)}</Card.Meta>
+                    <Card.Meta>{getMount(this.props.userInformation.mount, mounts)}</Card.Meta>
                     <Card.Description>
                     {this.props.userInformation.about}
                     <br/>

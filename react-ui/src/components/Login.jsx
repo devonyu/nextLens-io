@@ -22,6 +22,7 @@ export default class Login extends Component {
     }).then((result) => {
       //console.log('result of login response ===>', result.data)
       if (result.data.error) {
+        //Possible modal is better than an alert
         alert(`Sorry, wrong account and password`);
       } else {
         //console.log(`${this.state.email} has been logged in`);
@@ -35,7 +36,8 @@ export default class Login extends Component {
       }
     })
     .catch((error) => {
-      alert(`Sorry, wrong account and password`)
+      //Possible modal is better than an alert
+      alert(`Sorry, wrong account and password`);
       //console.log(error);
     });
   }

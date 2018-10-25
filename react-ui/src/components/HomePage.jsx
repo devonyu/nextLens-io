@@ -42,8 +42,6 @@ export default class HomePage extends Component {
 	  }
 
 	getUserInformation = (userId) => {
-		//console.log('send axios req to server w/id:', userId, ' to retrieve liked photos');
-		console.log('Getting user info with AXIOS')
 		axios.get(`/users/${userId}/likedphotos`)
 		.then(({ data }) => {
 			console.log(`response from getting user id=${userId} liked photos ==>`, data);
@@ -54,7 +52,7 @@ export default class HomePage extends Component {
     	})
 		.catch((error) => {
 			console.log('Could not fetch user information!')
-		  console.log(error);
+		  	console.log(error);
 		});
 	}
 
@@ -109,21 +107,32 @@ export default class HomePage extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
 			if (this.props.userPhotoImpressions.length >= 30){
-				this.changeViews('recommendations')
+				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
-				this.changeViews('photoliker')
+				this.changeViews('photoliker');
 			} else {
-				this.changeViews('onBoard')
+				console.log('missed photo impression checks, going to onBoard');
+				this.changeViews('onBoard');
 			}
 		}
 	}
 
 	componentDidMount () {
 		this.getUserInformation(this.props.userInformation.id);
+		if (this.props.userPhotoImpressions.length > 0) {
+			if (this.props.userPhotoImpressions.length >= 30){
+				this.changeViews('recommendations');
+			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
+				this.changeViews('photoliker');
+			} else {
+				console.log('missed photo impression checks, going to onBoard');
+				this.changeViews('onBoard');
+			}
+		}
 	}
 
 	render() {
-		console.log('HP STATE', this.state.likedImageHP);
+		//console.log('HP STATE', this.state.likedImageHP);
 		return(
 			<div>
 				<Grid celled columns={2}>

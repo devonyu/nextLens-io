@@ -51,31 +51,36 @@ class App extends Component {
     if (cookies.get('connection') !== undefined) {
       axios.get('/auth')
       .then(({ data }) => {
-        console.log('Auth: ', data);
+        //console.log('Auth: ', data);
         try {
           if (data) {
             //Implement Redux in future to make this cleaner
-            console.log('all data after auth returned to react===> ', data);
-            this.setState(() => {
-              return {
-                  loggedIn: true,
-                  place: data.place,
-                  userState: {
-                    about: data.about,
-                    email: data.email,
-                    firstname: data.firstname,
-                    id: data.id,
+            //console.log('all data after auth returned to react===> ', data);
+            if (data.id !== undefined) {
+              this.setState(() => {
+                return {
+                    loggedIn: true,
                     place: data.place,
-                    mount: data.mount,
-                    profileimgurl: data.profileimgurl
+                    userState: {
+                      about: data.about,
+                      email: data.email,
+                      firstname: data.firstname,
+                      id: data.id,
+                      place: data.place,
+                      mount: data.mount,
+                      profileimgurl: data.profileimgurl
+                    }
                   }
-                }
-              });
-            this.changeView('homepage')
+                });
+                this.changeView('homepage');
+            }
+          } else {
+            //Signing in fails, go back to landing page
+            this.changeView('landing');
           }
         } 
         catch(err) {
-          console.log('caught err in setting state after auth: ', err)
+          //console.log('caught err in setting state after auth: ', err)
           this.changeView('landing')
         }
   
@@ -115,7 +120,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('state at top   <>', this.state)
+    //console.log('state at top   <>', this.state)
     return (
         <div className="container">
           <div> { <NavBar

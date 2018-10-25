@@ -29,7 +29,7 @@ export default class PhotoLiker extends Component {
             imgs: shuffled,
             currentImage: shuffled[this.state.currentIndex]
          });
-         setTimeout(()=>{console.log('state inside PL: ', this.state)}, 1000)
+         //setTimeout(()=>{console.log('state inside PL: ', this.state)}, 1000)
     }
 
     handleOption = async (option) => {
@@ -64,12 +64,10 @@ export default class PhotoLiker extends Component {
 
     handleKeyDown(e) {
         if (e.keyCode === 37) {
-            //liked, left key pressed
-            console.log('left Arrow clicked');
+            //console.log('left Arrow clicked');
             this.handleOption('yes');
         } else if (e.keyCode === 39) {
-            //disliked, right key pressed
-            console.log('right Arrow clicked');
+            //console.log('right Arrow clicked');
             this.handleOption('no');
         }
       }
@@ -79,8 +77,8 @@ export default class PhotoLiker extends Component {
         this.getPics();
     }
 
-    componentWillReceiveProps() {
-        console.log('receiving props in PL!');
+    componentWillReceiveProps(props) {
+        console.log('receiving props in PL!=> ', props);
     }
 
     render() {
