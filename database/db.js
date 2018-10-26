@@ -71,6 +71,7 @@ const getUserLikes = async (params) => {
   //Function will do a query on all photos liked by user in userLikes table
   const { userId } = params;
   //const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
+  console.log(`getting user likes in DB for ${userId}`);
   const query = `SELECT * FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.liked = true and user_likes.photoid = photos.id;`;
   // We want to return the images themselves from the photos table (update query)
   const likedPhotos = await client.query(query);
@@ -82,9 +83,21 @@ const getUserLikes = async (params) => {
   }
 }
 
-const getRecommendations = async (params) => {
+const getUserRecommendations = async (params) => {
   // Function will sort top liked categories and return lens recommendations based on query
   // Find top 3 categories for user.  Show them the lenses that are associated with their mount and categories
+  console.log(`Getting User Affinities for ${params}`);
+  const { userId } = params;
+  //const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
+  const query = `SELECT * FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
+  // We want to return the images themselves from the photos table (update query)
+  const photoAffinities = await client.query(query);
+  if (!photoAffinities.rows) {
+    return (null);
+  } else {
+    console.log('DB Found and sending to server==> ', photoAffinities.rows)
+    return photoAffinities.rows;
+  }
 }
 
 const addPhotoToDatabase = async (params) => {
@@ -124,7 +137,7 @@ module.exports = {
   signUp,
   userPhotoImpression,
   getUserLikes,
-  getRecommendations,
+  getUserRecommendations,
   addPhotoToDatabase,
   updatePlace
 };

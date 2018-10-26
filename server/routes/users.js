@@ -8,15 +8,13 @@ router
     res.send('You have reached the users route, supply ID and authentication to continue');
 })
 .get('/:id', (req, res) => {
-    console.log('userId===>', req.params.id);
-    console.log('authenticated?===>', req.params.authenticated === true);
+    console.log('userId ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
     res.send({'Getting data for user': req.params.id});
 })
-.get('/:id/likedphotos', (req, res) => {
-    console.log('userId===>', req.session.key);
-    console.log('authenticated? ===>', req.session.auth=== true);
-    const userId = req.session.key;
-    async function getUserLikedPhotos (userid) {
+.get('/:id/likedphotos', async (req, res) => {
+    console.log('userId ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
+    const userId = await req.session.key || req.params.id;
+    async function getUserLikedPhotos (userId) {
         const likedPhotos = await db.getUserLikes({ userId });
         if (likedPhotos === null) {
           console.log('User has no likes')
@@ -27,10 +25,26 @@ router
             console.log('error in retrieving liked photos!');
         }
     }
-    getUserLikedPhotos(userId);
+    await getUserLikedPhotos(userId);
+})
+.get('/:id/recommendations', async (req, res) => {
+    console.log('userId ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
+    const userId = await req.session.key || req.params.id;
+    async function getUserAffinities (userId) {
+        const allPhotoAffinities = await db.getUserRecommendations({ userId });
+        if (allPhotoAffinities === null) {
+          console.log('User has no affinity data')
+        } else if (allPhotoAffinities) {
+            // Do Algorithm work for recommendations => helper function recommended!
+            res.status(200).send(JSON.stringify(allPhotoAffinities));
+        } else {
+            console.log('error in retrieving photo affinities!');
+        }
+    }
+    await getUserAffinities(userId);
 })
 .post('/:id/:photoid', (req, res) => {
-    // will add photoid and userid to likes table with boolean, test in postman
+    console.log('userId ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
     console.log('adding something at this endpoint:', req.params.id, req.params.photoid, req.body);
     const userId = req.params.id;
     const photoId = req.params.photoid;
@@ -46,8 +60,6 @@ router
             console.log('error in saving photo impression!');
             res.status(400).send('Photo NOT SAVED!');
         }
-        
-
     }
     savePhotoImpressions(userId, photoId, liked);
 })
