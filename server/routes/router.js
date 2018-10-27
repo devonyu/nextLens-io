@@ -7,7 +7,7 @@ const photosRoute = require('./photos.js');
 const usersRoute = require('./users.js');
 const logoutRoute = require('./logout.js');
 const authentication = require('./auth.js');
-
+const flickrRoute = require('./flickr.js');
 
 router.use('/auth', authentication);
 router.use('/', indexRoute);
@@ -16,5 +16,6 @@ router.use('/login', loginRoute);
 router.use('/users', usersRoute);
 router.use('/photos', photosRoute);
 router.use('/logout', logoutRoute);
+router.use('/flickr', flickrRoute);
 
 module.exports = router
