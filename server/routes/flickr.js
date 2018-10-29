@@ -36,13 +36,13 @@ router
         }
     });
 })
-.get('/search/:query', (req, res) => {
+.get('/search/:id', (req, res) => {
     console.log('UserID ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
-    console.log('search query=> ', req.params.query);
+    console.log('search query=> ', req.params.id);
     Flickr.tokenOnly(FlickrOptions, function(error, flickr) {
         let options = {
             api_key: process.env.FLICKR_API_KEY,
-            tags: req.params.query,
+            tags: req.params.id,
             content_type: 1,
             page: 1,
             per_page: 50,
