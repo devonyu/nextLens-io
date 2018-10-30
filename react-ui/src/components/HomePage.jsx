@@ -82,6 +82,7 @@ export default class HomePage extends Component {
 			/>
 		} else if (this.state.views ==='recommendations') {
 			return <Recommendations
+			userInfo= { this.props.userInformation }
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			/>
