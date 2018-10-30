@@ -15,15 +15,43 @@ router
     console.log(req.params);
     res.send('You have reached the flickr Route!');
 })
-.get('/:id', (req, res) => {
+// .get('/search/:id', (req, res) => {
+//     console.log('UserID ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
+//     Flickr.tokenOnly(FlickrOptions, function(error, flickr) {
+//         let options = {
+//             api_key: process.env.FLICKR_API_KEY,
+//             tags: req.params.id,
+//             content_type: 1,
+//             page: 1,
+//             per_page: 50,
+//             format: 'json',
+//             extras: 'url_c'
+//         }
+//         try {
+//             flickr.photos.search(options, function(err, result) {
+//                 console.log('res', result);
+//                 res.status(200).send(JSON.stringify(result));
+//             });
+//         }
+//         catch (err) {
+//             console.log('Error in getting photos => ', err)
+//             res.status(200).send('Error!');
+//         }
+//     });
+// })
+.get('/:id/:page/:tag?', (req, res) => {
     console.log('UserID ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
+    console.log(`Retrieving FlickR images for ${req.params.id}`)
     Flickr.tokenOnly(FlickrOptions, function(error, flickr) {
         let options = {
             api_key: process.env.FLICKR_API_KEY,
             group_id: req.params.id,
-            page: 1,
+            page: req.params.page,
             per_page: 50,
             extras: 'url_c'
+        }
+        if (req.params.tag) {
+            options.tags = req.params.tag
         }
         try {
             flickr.groups.pools.getPhotos(options, function(err, result) {
@@ -36,29 +64,6 @@ router
         }
     });
 })
-.get('/search/:id', (req, res) => {
-    console.log('UserID ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
-    console.log('search query=> ', req.params.id);
-    Flickr.tokenOnly(FlickrOptions, function(error, flickr) {
-        let options = {
-            api_key: process.env.FLICKR_API_KEY,
-            tags: req.params.id,
-            content_type: 1,
-            page: 1,
-            per_page: 50,
-            format: 'json',
-            extras: 'url_c'
-        }
-        try {
-            flickr.photos.search(options, function(err, result) {
-                res.status(200).send(JSON.stringify(result));
-            });
-        }
-        catch (err) {
-            console.log('Error in getting photos => ', err)
-            res.status(200).send('Error!');
-        }
-    });
-})
+
 
 module.exports = router
