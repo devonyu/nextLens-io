@@ -48,7 +48,7 @@ router
             group_id: req.params.id,
             page: req.params.page,
             per_page: 50,
-            extras: 'description, date_upload, owner_name, geo, tags, machine_tags, views, url_c'
+            extras: 'description, date_upload, owner_name, geo, tags, views, url_c'
         }
         if (req.params.tag) {
             options.tags = req.params.tag

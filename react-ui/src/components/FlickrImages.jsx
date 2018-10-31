@@ -43,7 +43,7 @@ export default class FlickrImages extends Component {
     loadImages(groupId, page, tag) {
         //check to see if no images are there, we can stop a server call early!
         let query = `/flickr/${groupId}/${page}`;
-        console.log('state when axios called => ', this.state)
+        //console.log('state when axios called => ', this.state)
         if (tag) {
             query += `/${tag}`;
         }
@@ -51,7 +51,7 @@ export default class FlickrImages extends Component {
             axios.get(query)
             .then(({ data }) => {
                     const temp = [];
-                    console.log('First Image EX: ', data.photos.photo[0]);
+                    //console.log('Example Image from API: ', data.photos.photo[1]);
                     data.photos.photo.forEach((img)=> {
                         temp.push(img);
                     })
@@ -94,11 +94,11 @@ export default class FlickrImages extends Component {
                                         src={image.url_c}
                                     >
                                     </Image>
-                                        <p className='flickrcontent'>
-                                            {image.title} 
-                                            <br/>
-                                            {image.ownername ?  `Photographer: ${image.ownername}` : ''}
-                                        </p>
+                                    <p className='flickrcontent'>
+                                        {image.title.length === 0 ? image.description._content : image.title} 
+                                        <br/>
+                                        {image.ownername ?  `Photographer: ${image.ownername}` : ''} views: {image.views}
+                                    </p>
                                     </div>
                             }) : 'No Images Found'
                         }

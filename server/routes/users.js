@@ -53,8 +53,8 @@ router
         const savedImpression = await db.userPhotoImpression({ userId, photoId, liked });
         const updatePlace = await db.updatePlace({userId, photoId});
         if (savedImpression) {
-            console.log('Server has results from DB: ', savedImpression);
-            console.log('Type of results from DB: ', typeof savedImpression);
+            //console.log('Server has results from DB: ', savedImpression);
+            //console.log('Type of results from DB: ', typeof savedImpression);
             res.status(200).send(JSON.stringify(savedImpression));
         } else {
             console.log('error in saving photo impression!');

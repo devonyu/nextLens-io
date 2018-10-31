@@ -14,7 +14,7 @@ export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			views: 'onBoard',
+			views: '',
 			likedImageHP: 0
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
@@ -45,7 +45,7 @@ export default class HomePage extends Component {
 	getUserInformation = (userId) => {
 		axios.get(`/users/${userId}/likedphotos`)
 		.then(({ data }) => {
-			console.log(`response from getting user id=${userId} liked photos ==>`, data);
+			//console.log(`response from getting user id=${userId} liked photos ==>`, data);
 			this.props.changeState('userPhotoImpressions', data);
 			this.setState(() => {
 				return {likedImageHP: data.length}
@@ -83,6 +83,8 @@ export default class HomePage extends Component {
 		} else if (this.state.views ==='recommendations') {
 			return <Recommendations
 			userInfo= { this.props.userInformation }
+			topProgress = { this.props.userPhotoImpressions.length }
+			likeProgress={ this.state.likedImageHP }
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			/>
@@ -116,32 +118,40 @@ export default class HomePage extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
 			if (this.props.userPhotoImpressions.length >= 30){
+				console.log('recmnt1');
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
+				console.log('plmnt1');
 				this.changeViews('photoliker');
 			} else {
-				console.log('missed photo impression checks, going to onBoard');
+				//console.log('missed photo impression checks, going to onBoard1');
 				this.changeViews('onBoard');
 			}
 		}
 	}
 
-	componentDidMount () {
-		this.getUserInformation(this.props.userInformation.id);
+	componentDidMount = async () => {
+		//console.log('HP mounted => Getting userID => ', this.props.userInformation.id);	
+		await this.getUserInformation(this.props.userInformation.id);
+		//console.log('HP, Photo impressions after getinformation ', this.props.userPhotoImpressions);
 		if (this.props.userPhotoImpressions.length > 0) {
 			if (this.props.userPhotoImpressions.length >= 30){
+				console.log('recmnt2');
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
+				console.log('plmnt2');	
 				this.changeViews('photoliker');
 			} else {
-				console.log('missed photo impression checks, going to onBoard');
+				//console.log('missed photo impression checks, going to onBoard3');
 				this.changeViews('onBoard');
 			}
+		} else {
+			//console.log('missed photo impression checks, going to onBoard4');
+			this.changeViews('onBoard');
 		}
 	}
 
 	render() {
-		//console.log('HP STATE', this.state.likedImageHP);
 		return(
 			<div>
 				<Grid celled columns={2}>
