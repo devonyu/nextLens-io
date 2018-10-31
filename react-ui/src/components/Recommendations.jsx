@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-// import { Form } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 // import axios from 'axios';
+import photolikergif from '../images/photoliker.gif';
 import FlickrImages from './FlickrImages';
 
 let imageGroups = {
@@ -44,7 +45,7 @@ export default class Recommendations extends Component {
                 {this.state.lensRecommendations.length === 0 ? 
                     <div>
                         <h1>Not enough data, Please continue to use PhotoLiker until your progress reaches 100%!</h1>
-                        <img src={'https://gph.to/2OZL5YR'} alt="liking" />
+                        <Image src={photolikergif} alt="liking" />
                     </div>:
                     <div>
                         <h1>{this.props.userInfo.firstname}'s Lens Recommendations!</h1>

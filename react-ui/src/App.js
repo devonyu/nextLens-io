@@ -46,7 +46,7 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
+  checkSession() {
     const cookies = new Cookies();
     if (cookies.get('connection') !== undefined) {
       axios.get('/auth')
@@ -55,8 +55,8 @@ class App extends Component {
         try {
           if (data) {
             //Implement Redux in future to make this cleaner
-            //console.log('all data after auth returned to react===> ', data);
             if (data.id !== undefined) {
+              console.log('Cookies found and Session matches in Redis!')
               this.setState(() => {
                 return {
                     loggedIn: true,
@@ -76,11 +76,12 @@ class App extends Component {
             }
           } else {
             //Signing in fails, go back to landing page
+            console.log('Cookies found, but Session is not valid');
             this.changeView('landing');
           }
         } 
         catch(err) {
-          //console.log('caught err in setting state after auth: ', err)
+          console.log('caught err in setting state after auth: ', err)
           this.changeView('landing')
         }
   
@@ -90,8 +91,13 @@ class App extends Component {
         console.log(err);
       })
     } else {
+      console.log('No Cookies found, wont check sessions');
       this.changeState('view', 'landing');
     }
+  }
+
+  componentDidMount() {
+    this.checkSession();
   }
 
   getView() {
