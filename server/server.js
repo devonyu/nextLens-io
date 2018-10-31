@@ -30,7 +30,7 @@ app.use(session({
   //store: new RedisStore({host: 'localhost', port: 6379, client: client, ttl: 60}),
   store: new RedisStore({client: client, ttl: 60000}),
   id: uuidv4,
-  secret: 'keyboard cat',
+  secret: process.env.REDIS_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {}

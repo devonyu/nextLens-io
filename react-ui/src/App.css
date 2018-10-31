@@ -29,3 +29,38 @@
   width: 90% !important;
   height: auto;
 }
+
+.flickrwrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.flickrimg {
+  transition: ease-in-out .5s;
+}
+
+.flickrcontent {
+  position: absolute;
+  top: 100;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s, visibility .3s, ease-in-out .5s;
+}
+
+.flickrwrap:hover .flickrcontent {
+  visibility: visible;
+  opacity: 1;
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+}
+
+.flickrwrap:hover .flickrimg {
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
