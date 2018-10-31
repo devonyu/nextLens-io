@@ -30,27 +30,37 @@ export default class Recommendations extends Component {
     }
 
     componentDidMount() {
-        console.log('recommendations mounted, axios call to DB for algorithm!');
-        this.loadRecommendations();
+        console.log('recommendations mounted');
+        if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
+            console.log('NOT ENOUGH DATA');
+        } else {
+            this.loadRecommendations();
+        }
     }
 
     render() {
         return(
             <div>
-                <div>
-                    <h1>{this.props.userInfo.firstname}'s Lens Recommendations!</h1>
-                    <ul>
-                        {this.state.lensRecommendations.map((lens, i) => {
-                            return <li key={i}>
-                                <FlickrImages
-                                    images={ this.state.photos }
-                                    flickr={ lens[1] }
-                                    lensname= { lens[0] }
-                                />
-                            </li>
-                        })}
-                    </ul>
-                </div>
+                {this.state.lensRecommendations.length === 0 ? 
+                    <div>
+                        <h1>Not enough data, Please continue to use PhotoLiker until your progress reaches 100%!</h1>
+                        <img src={'https://gph.to/2OZL5YR'} alt="liking" />
+                    </div>:
+                    <div>
+                        <h1>{this.props.userInfo.firstname}'s Lens Recommendations!</h1>
+                        <ul>
+                            {this.state.lensRecommendations.map((lens, i) => {
+                                return <li key={i}>
+                                    <FlickrImages
+                                        images={ this.state.photos }
+                                        flickr={ lens[1] }
+                                        lensname= { lens[0] }
+                                    />
+                                </li>
+                            })}
+                        </ul>
+                    </div>
+                }
             </div>
         )
     }

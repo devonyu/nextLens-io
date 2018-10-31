@@ -71,14 +71,14 @@ const getUserLikes = async (params) => {
   //Function will do a query on all photos liked by user in userLikes table
   const { userId } = params;
   //const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
-  console.log(`getting user likes in DB for ${userId}`);
+  //console.log(`getting user likes in DB for ${userId}`);
   const query = `SELECT * FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.liked = true and user_likes.photoid = photos.id;`;
   // We want to return the images themselves from the photos table (update query)
   const likedPhotos = await client.query(query);
   if (!likedPhotos.rows) {
     return (null);
   } else {
-    console.log('DB Found and sending to server==> ', likedPhotos.rows)
+    //console.log('DB Found and sending to server==> ', likedPhotos.rows)
     return likedPhotos.rows;
   }
 }
@@ -95,7 +95,7 @@ const getUserRecommendations = async (params) => {
   if (!photoAffinities.rows) {
     return (null);
   } else {
-    console.log('DB Found and sending to server==> ', photoAffinities.rows)
+    //console.log('DB Found and sending to server==> ', photoAffinities.rows)
     return photoAffinities.rows;
   }
 }
@@ -107,7 +107,7 @@ const addPhotoToDatabase = async (params) => {
   Values ('${unsplashId}', '${photographerName}', '${downloadUrl}', '${profileUrl}', '${profileImageUrl}', '${regularUrl}', '${smallUrl}', '${thumbUrl}', '${category}');`;
   try {
     const savePhoto = await client.query(query);
-    console.log('Added Photo Id:', unsplashId, ' to Postgres!');
+    //console.log('Added Photo Id:', unsplashId, ' to Postgres!');
     return {status: true}; 
   } catch(err) {
     console.log(err);

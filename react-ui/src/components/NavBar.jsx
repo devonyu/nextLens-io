@@ -27,6 +27,8 @@ class NavBar extends Component {
       cookies.remove('connection');
       this.props.changeState('loggedIn', false);
       this.props.changeState('userState', {});
+      this.props.changeState('userPhotoImpressions', []);
+      this.props.changeState('place', 0);
       this.props.changeView('landing');
       console.log('success in logging out!')
     }).catch((err)=> {
