@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import axios from 'axios';
 
-console.log('inside flickr')
+//TODO's
+// Progress bar or another animated loading object for a better ui/ux.  Look into Placeholder element in Semantic UI to display PH before image loads, (promises?)
+// Also lazy load images from Flickr for better UI
+// Current making calls to Flickr server endpoint to get latest images.  Cache them to state or (local session) so user will do less calls. 
+// ^^ Looks like its automatic
+// On hover of image, show phorographer name, and title if any
 
 export default class FlickrImages extends Component {
     constructor(props) {
         super(props);
         this.state = {
           photos: [],
-          current: '',
           tag: '',
-          id: 5,
+          pastTags: [],
+          page: 1,
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,43 +24,41 @@ export default class FlickrImages extends Component {
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
     handleSubmit = async () => {
+        await this.setState({ 
+            pastTags: this.state.pastTags.concat(this.state.tag),
+            tag: '',
+         });
         await this.searchQueryTag();
-        await this.setState({ tag: '' });
     }
 
-    searchQueryTag() {
-        axios.get(`/flickr/search/${this.state.tag}`)
-        .then(({ data }) => {
-                const temp = [];
-                data.photos.photo.forEach((img)=> {
-                    temp.push(img);
-                })
-                this.setState(() => {
-                    return {
-                        photos: temp,
-                    };
-                  });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    searchQueryTag = async () => {
+        // clear images loaded
+        await this.setState((state, props) => ({
+            photos: [],
+            page: 1
+        }));
+        await this.loadImages(this.props.flickr, this.state.page, this.state.pastTags[this.state.pastTags.length - 1]);
     }
 
-    loadImages(groupId) {
+    loadImages(groupId, page, tag) {
+        //check to see if no images are there, we can stop a server call early!
+        let query = `/flickr/${groupId}/${page}`;
+        console.log('state when axios called => ', this.state)
+        if (tag) {
+            query += `/${tag}`;
+        }
         if (groupId.length > 0) {
-            //console.log(groupId);
-            axios.get(`/flickr/${groupId}`)
+            axios.get(query)
             .then(({ data }) => {
                     const temp = [];
                     console.log('First Image EX: ', data.photos.photo[0]);
                     data.photos.photo.forEach((img)=> {
                         temp.push(img);
                     })
-                    this.setState(() => {
-                        return {
-                            photos: temp,
-                        };
-                      });
+                    this.setState((state, props) => ({
+                        photos: state.photos.concat(temp),
+                        page: state.page += 1
+                    }));
             })
             .catch((error) => {
                 console.log(error);
@@ -63,31 +66,47 @@ export default class FlickrImages extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log('Flickr Modal mounted');
+        this.loadImages(this.props.flickr, 1)
+    }
+
     render() {
         const { tag } = this.state
         return(
-                <Modal trigger={<Button>See Real life Images by lens {this.props.lens}</Button>}>
-                    <Modal.Header>Photos Taken with {this.props.lens}</Modal.Header>
-                    <Form onSubmit={this.handleSubmit}>
-                                        <Form.Group>
-                                            <Form.Input placeholder='Search by Tags' name='tag' value={tag} onChange={this.handleChange} action='Search'/>
-                                        </Form.Group>
-                    </Form>
-
-                    <Modal.Content image>
-                    <Image wrapped size='medium' src='https://cdn.dxomark.com/dakdata/measures/Optics/Sigma_50mm_F14_DG_HSM_A_Nikon/Marketing_PV/Sigma_50mm_F14_DG_HSM_A_Nikon.png' />
+                <Modal trigger={<Button>See Real life Images by lens {this.props.lensname}</Button>} closeIcon >
+                    <Modal.Header>Photos Taken with {this.props.lensname}</Modal.Header>
+                    <Modal.Content>
+                    {/* <Image  src='https://cdn.dxomark.com/dakdata/measures/Optics/Sigma_50mm_F14_DG_HSM_A_Nikon/Marketing_PV/Sigma_50mm_F14_DG_HSM_A_Nikon.png' /> */}
                     <Modal.Description>
-                        <Header>Header, Real life images by {this.props.lens}</Header>
-                        {this.props.images.length > 0 ? 
-                            this.props.images.map((image, i)=> {
-                                return <Image src={image.url_c} key={i} />
-                            }) : ''
+                    
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Group>
+                                <Form.Input placeholder='Filter results by Tag' name='tag' value={tag} onChange={this.handleChange} action='Search'/>
+                            </Form.Group>
+                        </Form>
+                        <Header>FlickR Results for {this.props.lensname}</Header>
+                        {this.state.photos.length > 0 ? 
+                            this.state.photos.map((image, i)=> {
+                                return <div key={i} className='flickrwrap'>
+                                    <Image fluid
+                                        className='flickrimg'
+                                        src={image.url_c}
+                                    >
+                                    </Image>
+                                        <p className='flickrcontent'>
+                                            {image.title} 
+                                            <br/>
+                                            {image.ownername ?  `Photographer: ${image.ownername}` : ''}
+                                        </p>
+                                    </div>
+                            }) : 'No Images Found'
                         }
                     </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>
-                    <Button primary>
-                        Load More Images (axios => nP) <Icon name='right chevron' />
+                    <Button primary onClick={()=>{this.loadImages(this.props.flickr, this.state.page, this.state.pastTags[this.state.pastTags.length - 1])}}>
+                        Load More Images<Icon name='right chevron' />
                     </Button>
                     </Modal.Actions>
             </Modal>

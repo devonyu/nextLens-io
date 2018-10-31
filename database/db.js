@@ -89,7 +89,7 @@ const getUserRecommendations = async (params) => {
   console.log(`Getting User Affinities for ${params}`);
   const { userId } = params;
   //const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
-  const query = `SELECT * FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
+  const query = `SELECT category, liked FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
   // We want to return the images themselves from the photos table (update query)
   const photoAffinities = await client.query(query);
   if (!photoAffinities.rows) {
