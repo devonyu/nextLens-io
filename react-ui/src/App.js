@@ -12,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: '',
+      view: 'landing',
       loggedIn: false,
       place: 0,
       userState: {

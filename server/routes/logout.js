@@ -5,18 +5,18 @@ router.use(bodyParser.json());
 
 
 router.get('/', (req, res) => {
-  console.log('qqqqq?', req.body)
   let fad = req.session.key;
-  console.log('this is session? ==>', req.session);
-  console.log('from redis ====> ', fad);
+  console.log('Session should be here => ', req.session);
+  console.log('Redis ID => ', fad);
   req.session.destroy((err)=> {
     if (err) {
       console.log(err);
       console.log('ISSUE IN SERVER LOG OUT SESSION!');
       res.status(400).send('may day!')
     } else {
-      console.log('session destroyed!')
-      res.status(200).send('hey signed out and sessions destroyed');
+      console.log('Signed out and sessions destroyed in Backend');
+      console.log('session should not be here => ', req.session);
+      res.status(200).send('Signed out and sessions destroyed in Backend');
     }
   });
 });

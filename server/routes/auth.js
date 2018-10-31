@@ -19,7 +19,8 @@ router.use('/',  async (req, res, next) => {
     } else {
     // else go to home page.
       console.log('key not present, No user session located');
-      return next();
+      //return next();
+      res.send({'error': 'NOT AUTHENTICATED'});
     }
   });
 
