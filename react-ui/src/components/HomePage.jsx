@@ -154,7 +154,7 @@ export default class HomePage extends Component {
 	render() {
 		return(
 			<div>
-				<Grid celled columns={2}>
+				<Grid columns={2}>
 					<Grid.Column mobile={5} tablet={4} computer={3}>
 						<div>
 							<SidebarMain 
