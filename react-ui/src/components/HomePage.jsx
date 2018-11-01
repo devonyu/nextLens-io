@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid } from 'semantic-ui-react'
 import SidebarMain from './SideBar';
 import Photoliker from './PhotoLiker';
 import OnBoard from './OnBoard';
@@ -9,13 +8,58 @@ import LikedImages from './LikedImages';
 import EditProfile from './EditProfile';
 import Reviews from './Reviews';
 import Suggestions from './Suggestions';
+import PropTypes from 'prop-types';
+import {
+	Button,
+	Icon,
+	Menu,
+	Segment,
+	Sidebar,
+  } from 'semantic-ui-react'
+
+const VerticalSidebar = ({ animation, direction, visible }) => (
+<Sidebar
+	as={Menu}
+	animation={animation}
+	direction={direction}
+	icon='labeled'
+	inverted
+	vertical
+	visible={visible}
+	width='thin'
+>
+	<Menu.Item as='a'>
+	<Icon name='home' />
+	Home
+	</Menu.Item>
+	<Menu.Item as='a'>
+	<Icon name='gamepad' />
+	Games
+	</Menu.Item>
+	<Menu.Item as='a'>
+	<Icon name='camera' />
+	Channels
+	</Menu.Item>
+</Sidebar>
+)
+
+VerticalSidebar.propTypes = {
+animation: PropTypes.string,
+direction: PropTypes.string,
+visible: PropTypes.bool,
+}
+
 
 export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			views: '',
-			likedImageHP: 0
+			likedImageHP: 0,
+			animation: 'overlay',
+			direction: 'left',
+			dimmed: false,
+			visible: false,
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
@@ -26,13 +70,20 @@ export default class HomePage extends Component {
 
 	toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
+	handleAnimationChange = animation => () =>
+    this.setState({ animation, visible: !this.state.visible })
+
+  	handleDimmedChange = (e, { checked }) => this.setState({ dimmed: checked })
+
+  	handleDirectionChange = direction => () => this.setState({ direction, visible: false })
+
 	changeViews(option) {
 		this.setState(() => {
 		  return {
 			  views: option
 		  };
 		});
-	  }
+	}
 	
 	changeStates(option, value) {
 		this.setState(() => {
@@ -40,7 +91,7 @@ export default class HomePage extends Component {
 			  [option]: value
 		  };
 		});
-	  }
+	}
 
 	getUserInformation = (userId) => {
 		axios.get(`/users/${userId}/likedphotos`)
@@ -115,6 +166,7 @@ export default class HomePage extends Component {
 			/>
 		}
 	}
+
 	componentDidUpdate(prevProps) {
 		if (this.props.userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
 			if (this.props.userPhotoImpressions.length >= 30){
@@ -152,25 +204,30 @@ export default class HomePage extends Component {
 	}
 
 	render() {
+		const { animation, dimmed, direction, visible } = this.state
+		const vertical = direction === 'bottom' || direction === 'top'
 		return(
 			<div>
-				<Grid columns={2}>
-					<Grid.Column mobile={5} tablet={4} computer={3}>
-						<div>
-							<SidebarMain 
-								id='sidebar' 
-								userInformation={this.props.userInformation}
-								likeProgress={this.state.likedImageHP}
-								changeViews={ this.changeViews }
-								changeStates={ this.changeStates }
-							>
-							</SidebarMain>
-						</div>
-					</Grid.Column>
-					<Grid.Column mobile={8} tablet={10} computer={12}>
-						<div>{ this.getViews() }</div>
-					</Grid.Column>
-				</Grid>	
+				<SidebarMain 
+					id='sidebar' 
+					userInformation={this.props.userInformation}
+					likeProgress={this.state.likedImageHP}
+					changeViews={ this.changeViews }
+					changeStates={ this.changeStates }
+				>
+				</SidebarMain>
+				<Button onClick={this.handleAnimationChange('push')}>Push</Button>       
+				<Sidebar.Pushable as={Segment}>
+					{vertical ? null : (
+						<VerticalSidebar animation={animation} direction={direction} visible={visible} />
+					)}
+
+					<Sidebar.Pusher dimmed={dimmed && visible}>
+						<Segment basic>
+							<div>{ this.getViews() }</div> 
+						</Segment>
+					</Sidebar.Pusher>
+				</Sidebar.Pushable>
 			</div>
 		)
 	}

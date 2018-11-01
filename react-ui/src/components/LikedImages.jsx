@@ -8,7 +8,8 @@ const masonryOptions = {
     columnWidth: 20,
     gutter: 10,
     horizontalOrder: true,
-    fitWidth: true
+    fitWidth: true,
+    stagger: 30
 };
 
 const imagesLoadedOptions = { background: '.my-bg-image-el' }
