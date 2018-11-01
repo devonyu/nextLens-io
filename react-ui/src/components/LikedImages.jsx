@@ -41,8 +41,8 @@ export default class LikedImages extends Component {
     render() {
         const childElements = this.state.photos.map((photo, i) => {
            return (
-                <div className='grid-item'>
-                    <img className='grid-item-photo' src={photo.smallurl} key={i} alt={photo.photographername} />
+                <div className='grid-item' key={i}>
+                    <img className='grid-item-photo' src={photo.smallurl} alt={photo.photographername} />
                     <p className='grid-item-photographer'>Photographer: {photo.photographername}</p>
                 </div>
                 );

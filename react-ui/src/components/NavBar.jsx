@@ -48,7 +48,7 @@ class NavBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu borderless={true} size='tiny' fluid={true}>
+      <Menu borderless={true} size='tiny' fluid={true} >
         <Menu.Item onClick={this.title}
         header
         >
