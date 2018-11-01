@@ -9,13 +9,7 @@ import EditProfile from './EditProfile';
 import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import PropTypes from 'prop-types';
-import {
-	Button,
-	Icon,
-	Menu,
-	Segment,
-	Sidebar,
-  } from 'semantic-ui-react'
+import { Button, Icon, Menu, Segment, Sidebar} from 'semantic-ui-react'
 
 const VerticalSidebar = ({ animation, direction, visible }) => (
 <Sidebar

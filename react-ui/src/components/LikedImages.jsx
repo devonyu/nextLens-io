@@ -9,7 +9,6 @@ const masonryOptions = {
     gutter: 10,
     horizontalOrder: true,
     fitWidth: true,
-    stagger: 30
 };
 
 const imagesLoadedOptions = { background: '.my-bg-image-el' }
@@ -26,7 +25,7 @@ export default class LikedImages extends Component {
         .then(({ data }) => {
                 const temp = [];
                 data.forEach((img)=> {
-                    temp.push(img.smallurl);
+                    temp.push(img);
                 })
                 this.setState(() => {
                     return {
@@ -42,8 +41,11 @@ export default class LikedImages extends Component {
     render() {
         const childElements = this.state.photos.map((photo, i) => {
            return (
-                    <img className='grid-item' src={photo} alt={i} />
-            );
+                <div className='grid-item'>
+                    <img className='grid-item-photo' src={photo.smallurl} key={i} alt={photo.photographername} />
+                    <p className='grid-item-photographer'>Photographer: {photo.photographername}</p>
+                </div>
+                );
         });
 
         return (
