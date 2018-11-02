@@ -7,6 +7,7 @@ import Landing from './components/Landing';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
+import { Sticky } from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
@@ -129,12 +130,14 @@ class App extends Component {
     //console.log('state at top   <>', this.state)
     return (
         <div className="container">
-          <div> { <NavBar
-            userInformation={ this.state.userState }
-            changeView={ this.changeView } 
-            loggedIn={ this.state.loggedIn }
-            changeState={ this.changeState }/> } 
-          </div>
+          <Sticky>
+            <div> { <NavBar
+              userInformation={ this.state.userState }
+              changeView={ this.changeView } 
+              loggedIn={ this.state.loggedIn }
+              changeState={ this.changeState }/> } 
+            </div>
+          </Sticky>
           <div>{ this.getView() }</div>
         </div>
     );

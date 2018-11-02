@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
 import axios from 'axios';
 
-//TODO's
-// Progress bar or another animated loading object for a better ui/ux.  Look into Placeholder element in Semantic UI to display PH before image loads, (promises?)
-// Also lazy load images from Flickr for better UI
-// Current making calls to Flickr server endpoint to get latest images.  Cache them to state or (local session) so user will do less calls. 
-// ^^ Looks like its automatic
-// On hover of image, show phorographer name, and title if any
-
 export default class FlickrImages extends Component {
     constructor(props) {
         super(props);
@@ -113,15 +106,3 @@ export default class FlickrImages extends Component {
         )
     }
 }
-
-
-//other styling to load images
-        // let images = this.state.photos.map((image, i) => {
-        //     return  <Grid.Column key={i} mobile={4} tablet={4} computer={4}>
-        //               <Image src={image.url_c} />
-        //             </Grid.Column>
-        //  });
-        /* <Grid relaxed>
-            { this.state.show === false ? '' : images }
-        </Grid> */
-        //Somehow load masonry grid of images?

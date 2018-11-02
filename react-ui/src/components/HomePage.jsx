@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Grid } from 'semantic-ui-react'
-import SidebarMain from './SideBar';
+//import SidebarMain from './SideBar';
 import Photoliker from './PhotoLiker';
 import OnBoard from './OnBoard';
 import Recommendations from './Recommendations';
@@ -9,13 +8,18 @@ import LikedImages from './LikedImages';
 import EditProfile from './EditProfile';
 import Reviews from './Reviews';
 import Suggestions from './Suggestions';
+import SidebarMain from './SidebarMain';
+
+import { Button, Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
 export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			views: '',
-			likedImageHP: 0
+			likedImageHP: 0,
+			dimmed: false,
+			visible: false,
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
@@ -24,7 +28,15 @@ export default class HomePage extends Component {
 	this.updateHP = this.updateHP.bind(this);
 	}
 
-	toggleVisibility = () => this.setState({ visible: !this.state.visible })
+	toggleVisibility = () => this.setState({ 
+		visible: !this.state.visible,
+		dimmed: !this.state.dimmed
+	})
+
+	handleSidebarHide = () => this.setState({ 
+		visible: false,
+		dimmed: false
+	})
 
 	changeViews(option) {
 		this.setState(() => {
@@ -32,7 +44,7 @@ export default class HomePage extends Component {
 			  views: option
 		  };
 		});
-	  }
+	}
 	
 	changeStates(option, value) {
 		this.setState(() => {
@@ -40,7 +52,7 @@ export default class HomePage extends Component {
 			  [option]: value
 		  };
 		});
-	  }
+	}
 
 	getUserInformation = (userId) => {
 		axios.get(`/users/${userId}/likedphotos`)
@@ -115,6 +127,7 @@ export default class HomePage extends Component {
 			/>
 		}
 	}
+
 	componentDidUpdate(prevProps) {
 		if (this.props.userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
 			if (this.props.userPhotoImpressions.length >= 30){
@@ -152,25 +165,87 @@ export default class HomePage extends Component {
 	}
 
 	render() {
+		const { dimmed, visible } = this.state
 		return(
 			<div>
-				<Grid celled columns={2}>
-					<Grid.Column mobile={5} tablet={4} computer={3}>
-						<div>
-							<SidebarMain 
-								id='sidebar' 
-								userInformation={this.props.userInformation}
-								likeProgress={this.state.likedImageHP}
-								changeViews={ this.changeViews }
-								changeStates={ this.changeStates }
-							>
-							</SidebarMain>
-						</div>
-					</Grid.Column>
-					<Grid.Column mobile={8} tablet={10} computer={12}>
-						<div>{ this.getViews() }</div>
-					</Grid.Column>
-				</Grid>	
+
+				<Button onClick={this.toggleVisibility}>Show Sidebar</Button>       
+				<Sidebar.Pushable as={Segment}>
+				{/* <Sidebar
+					as={Menu}
+					animation='slide along'
+					direction='left'
+					icon='labeled'
+					inverted
+					onHide={this.handleSidebarHide}
+					vertical
+					visible={visible}
+					width='thin'
+				>
+					<Menu.Item as='a'>
+					<Icon name='home' />
+					<p>Steve Jobs</p>
+					<p>Fuji Mount</p>
+					</Menu.Item>
+					<Menu.Item as='a'>
+					<Icon name='gamepad' />
+					PhotoLiker Thmb
+					</Menu.Item>
+					<Menu.Item as='a'>
+					<Icon name='camera' />
+					Current Progress
+					</Menu.Item>
+					<Menu.Item as='a'>
+					<Icon name='camera' />
+					Next Lens
+					</Menu.Item>
+					<Menu.Item as='a'>
+					<Icon name='camera' />
+					Liked Images
+					</Menu.Item>
+					<Menu.Item as='a'>
+					<Icon name='camera' />
+					Reviews
+					</Menu.Item>
+					<Menu.Item as='a'>
+					<Icon name='camera' />
+					Suggestions
+					</Menu.Item>
+				</Sidebar> */}
+					
+				{/* <SidebarMain 
+					id='sidebar' 
+					userInformation={this.props.userInformation}
+					likeProgress={this.state.likedImageHP}
+					changeViews={ this.changeViews }
+					changeStates={ this.changeStates }
+					as={Menu}
+					animation='slide along'
+					direction='left'
+					icon='labeled'
+					inverted
+					onHide={this.handleSidebarHide}
+					vertical
+					visible={visible}
+					width='thin'
+				>
+				</SidebarMain> */}
+				<SidebarMain
+					visible={visible}
+					onHide={this.handleSidebarHide.bind(this)}
+					userInformation={this.props.userInformation}
+					likeProgress={this.state.likedImageHP}
+					changeViews={ this.changeViews }
+					changeStates={ this.changeStates }
+				>
+				</SidebarMain>
+
+					<Sidebar.Pusher dimmed={dimmed}>
+						<Segment basic>
+							<div>{ this.getViews() }</div> 
+						</Segment>
+					</Sidebar.Pusher>
+				</Sidebar.Pushable>
 			</div>
 		)
 	}

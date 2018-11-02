@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Icon, Label, Menu } from 'semantic-ui-react'
+import { Button, Icon, Label, Menu, Sidebar } from 'semantic-ui-react'
 import Profile from './Profile';
 
 export default class SidebarMain extends Component {
@@ -46,7 +46,9 @@ export default class SidebarMain extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu vertical>
+      <Sidebar
+          as={Menu}
+          >
         <Menu.Item name='editProfile' active={activeItem === 'editProfile'} onClick={this.handleItemClick}>
           <Profile userInformation={this.props.userInformation}>
           </Profile>
@@ -82,11 +84,7 @@ export default class SidebarMain extends Component {
         <Menu.Item name='suggestions' active={activeItem === 'suggestions'} onClick={this.handleItemClick}>
           Suggestions/Feedback
         </Menu.Item>
-
-        {/* <Menu.Item>
-          <Input icon='search' placeholder='Search NextLens' />
-        </Menu.Item> */}
-      </Menu>
+        </Sidebar>
     )
   }
 }
