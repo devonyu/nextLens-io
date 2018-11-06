@@ -51,14 +51,14 @@ export default class SidebarMain extends Component {
             as={Menu}
             animation='slide along'
             direction='left'
-            // fluid
+            //fluid
             //attached='bottom'
-            compact
+            //compact
             inverted
             vertical
             onHide={this.props.onHide}
             visible={this.props.visible}
-            width='wide'
+            width='thin'
             >
 
             <Menu.Item name='editProfile' active={activeItem === 'editProfile'} onClick={this.handleItemClick}>
@@ -67,20 +67,20 @@ export default class SidebarMain extends Component {
             </Menu.Item>
     
             <Menu.Item name='photoliker' active={activeItem === 'photoliker'} onClick={this.handleItemClick}>
-                <Button primary icon labelPosition='right'>
-                    <Icon name='thumbs up outline' />
+                <Button primary icon labelPosition='right' fluid>
+                    {/* <Icon small name='thumbs up outline' /> */}
                     PhotoLiker
                 </Button>
             </Menu.Item>
 
             <Menu.Item name='progress' active={activeItem === 'progress'} onClick={this.handleItemClick}>
                 <Label corner='right' color={this.state.ready}>{this.props.likeProgress < 30 ? Math.floor((this.props.likeProgress / 30) * 100) : 100}%</Label>
-                Current Progress:
+                Progress:
             </Menu.Item>
 
             <Menu.Item name='recommendations' active={activeItem === 'recommendations'} onClick={this.handleItemClick}>
                 <Label corner='right' size='small' color={this.state.ready}>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
-                Your Next Lens:
+                Next Lens:
             </Menu.Item>
 
             <Menu.Item name='likedImages' active={activeItem === 'likedImages'} onClick={this.handleItemClick}>
@@ -94,12 +94,8 @@ export default class SidebarMain extends Component {
             </Menu.Item>
 
             <Menu.Item name='suggestions' active={activeItem === 'suggestions'} onClick={this.handleItemClick}>
+            <Icon name='camera' />
                 Suggestions
-            </Menu.Item>
-
-            <Menu.Item as='a'>
-                <Icon name='camera' />
-                Channels
             </Menu.Item>
 
             </Sidebar>

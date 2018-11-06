@@ -7,7 +7,6 @@ test('Loads Profile Card with Props', () => {
         'profileimgurl': 'http://test.com/image.jpg',
         'firstname' : 'Tester',
         'mount': '3',
-        'about': 'Im testing Jest and test renderer with props',
     }
     const component = renderer.create(
         <Profile userInformation={userInformation} />

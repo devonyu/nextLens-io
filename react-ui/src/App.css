@@ -2,6 +2,30 @@
   text-align: center;
 }
 
+#container {
+  height: max-content;
+}
+
+#footer {
+  text-align: center;
+}
+
+#ft1, #ft2, #ft3 {
+  background-color: #1b1c1d;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.ui.segment.pushable{
+  height: 750px;
+}
+
+.content {
+  height: 100%;
+}
+
 .hidden {
   display: none;
 }
@@ -26,8 +50,8 @@
 }
 
 .ui.huge.image {
-  width: 90% !important;
-  height: auto;
+  width: auto;
+  height: 100%;
 }
 
 .flickrwrap {

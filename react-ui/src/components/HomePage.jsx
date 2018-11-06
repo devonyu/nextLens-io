@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import SidebarMain from './SideBar';
 import Photoliker from './PhotoLiker';
 import OnBoard from './OnBoard';
 import Recommendations from './Recommendations';
@@ -10,7 +9,7 @@ import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
 
-import { Button, Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Button, Segment, Sidebar } from 'semantic-ui-react'
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -19,7 +18,7 @@ export default class HomePage extends Component {
 			views: '',
 			likedImageHP: 0,
 			dimmed: false,
-			visible: false,
+			visible: false
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
@@ -28,9 +27,9 @@ export default class HomePage extends Component {
 	this.updateHP = this.updateHP.bind(this);
 	}
 
-	toggleVisibility = () => this.setState({ 
-		visible: !this.state.visible,
-		dimmed: !this.state.dimmed
+	toggleVisibility = (bool) => this.setState({ 
+		visible: bool,
+		dimmed: bool
 	})
 
 	handleSidebarHide = () => this.setState({ 
@@ -141,6 +140,11 @@ export default class HomePage extends Component {
 				this.changeViews('onBoard');
 			}
 		}
+		// if (this.props.sidebar === true) {
+		// 	this.toggleVisibility(false);
+		// } else if (this.props.sidebar === false){
+		// 	this.toggleVisibility(true);
+		// }
 	}
 
 	componentDidMount = async () => {
@@ -165,80 +169,21 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { dimmed, visible } = this.state
+		const { dimmed, visible } = this.state;
 		return(
 			<div>
-
 				<Button onClick={this.toggleVisibility}>Show Sidebar</Button>       
 				<Sidebar.Pushable as={Segment}>
-				{/* <Sidebar
-					as={Menu}
-					animation='slide along'
-					direction='left'
-					icon='labeled'
-					inverted
-					onHide={this.handleSidebarHide}
-					vertical
-					visible={visible}
-					width='thin'
-				>
-					<Menu.Item as='a'>
-					<Icon name='home' />
-					<p>Steve Jobs</p>
-					<p>Fuji Mount</p>
-					</Menu.Item>
-					<Menu.Item as='a'>
-					<Icon name='gamepad' />
-					PhotoLiker Thmb
-					</Menu.Item>
-					<Menu.Item as='a'>
-					<Icon name='camera' />
-					Current Progress
-					</Menu.Item>
-					<Menu.Item as='a'>
-					<Icon name='camera' />
-					Next Lens
-					</Menu.Item>
-					<Menu.Item as='a'>
-					<Icon name='camera' />
-					Liked Images
-					</Menu.Item>
-					<Menu.Item as='a'>
-					<Icon name='camera' />
-					Reviews
-					</Menu.Item>
-					<Menu.Item as='a'>
-					<Icon name='camera' />
-					Suggestions
-					</Menu.Item>
-				</Sidebar> */}
-					
-				{/* <SidebarMain 
-					id='sidebar' 
-					userInformation={this.props.userInformation}
-					likeProgress={this.state.likedImageHP}
-					changeViews={ this.changeViews }
-					changeStates={ this.changeStates }
-					as={Menu}
-					animation='slide along'
-					direction='left'
-					icon='labeled'
-					inverted
-					onHide={this.handleSidebarHide}
-					vertical
-					visible={visible}
-					width='thin'
-				>
-				</SidebarMain> */}
-				<SidebarMain
-					visible={visible}
-					onHide={this.handleSidebarHide.bind(this)}
-					userInformation={this.props.userInformation}
-					likeProgress={this.state.likedImageHP}
-					changeViews={ this.changeViews }
-					changeStates={ this.changeStates }
-				>
-				</SidebarMain>
+
+					<SidebarMain
+						visible={visible}
+						onHide={this.handleSidebarHide.bind(this)}
+						userInformation={this.props.userInformation}
+						likeProgress={this.state.likedImageHP}
+						changeViews={ this.changeViews }
+						changeStates={ this.changeStates }
+					>
+					</SidebarMain>
 
 					<Sidebar.Pusher dimmed={dimmed}>
 						<Segment basic>
