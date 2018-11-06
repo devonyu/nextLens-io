@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Icon, Image } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 import { getMount, mounts } from './utils.js';
 
 export default class Profile extends Component {
@@ -10,16 +10,16 @@ export default class Profile extends Component {
                     <Card.Content>
                     <Card.Header>{this.props.userInformation.firstname}</Card.Header>
                     <Card.Meta>{getMount(this.props.userInformation.mount, mounts)}</Card.Meta>
-                    <Card.Description>
+                    {/* <Card.Description>
                     {this.props.userInformation.about}
                     <br/>
                     <Icon name='camera retro' />
                     Owns X lenses
-                    </Card.Description>
+                    </Card.Description> */}
                     </Card.Content>
-                    <Card.Content extra>
+                    {/* <Card.Content extra>
                     <Button onClick={()=>{console.log('update profile handler')}} size='small'>Edit Profile</Button>
-                    </Card.Content>
+                    </Card.Content> */}
                 </Card>
         )
     }

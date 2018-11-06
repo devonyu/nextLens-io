@@ -7,12 +7,14 @@ import Landing from './components/Landing';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 import { Sticky } from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      sidebar: false,
       view: '',
       loggedIn: false,
       place: 0,
@@ -47,8 +49,16 @@ class App extends Component {
     });
   }
 
+  sidebar() {
+    console.log('sidebar from app clicked');
+    this.setState({sidebar: !this.state.sidebar});
+    console.log('Sidebar State top: ', this.state.sidebar);
+  }
+
   checkSession() {
+    console.log('checking session');
     const cookies = new Cookies();
+    console.log(cookies);
     if (cookies.get('connection') !== undefined) {
       axios.get('/auth')
       .then(({ data }) => {
@@ -83,7 +93,7 @@ class App extends Component {
         } 
         catch(err) {
           console.log('caught err in setting state after auth: ', err)
-          this.changeView('landing')
+          this.changeView('landing');
         }
   
       })
@@ -122,6 +132,7 @@ class App extends Component {
       place = { this.state.place } 
       userInformation={ this.state.userState }
       userPhotoImpressions={ this.state.userPhotoImpressions }
+      sidebar={ this.state.sidebar }
       />
     }
   }
@@ -131,14 +142,15 @@ class App extends Component {
     return (
         <div className="container">
           <Sticky>
-            <div> { <NavBar
+            <NavBar
+              sidebar={ this.sidebar.bind(this) } 
               userInformation={ this.state.userState }
               changeView={ this.changeView } 
               loggedIn={ this.state.loggedIn }
-              changeState={ this.changeState }/> } 
-            </div>
+              changeState={ this.changeState }/>
           </Sticky>
-          <div>{ this.getView() }</div>
+          <div id="content">{ this.getView() }</div>
+          <Footer/>
         </div>
     );
   }

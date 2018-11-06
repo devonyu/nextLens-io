@@ -1,6 +1,6 @@
 const { Client } = require('pg');
-// Use TEST_DATABASE || DATABASE_URL for local dev || deployed state
-const connectionString = process.env.DATABASE_URL;
+// Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
+const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/nextlens';
 const client = new Client({
   connectionString,
 });
@@ -14,7 +14,11 @@ const signUp = async (params) => {
     console.log('RESULT OF SIGNING UP USER=> ,', insertUser);
     return {status: true};
   } catch(err) {
-    next(err);
+    console.log('Error in signing up');
+    return {
+      status: false,
+      error: err
+    };
   }
 };
 
@@ -25,7 +29,11 @@ const checkEmail = async (email) => {
     console.log('checking email in DB:', email)
     return userInformation.rows[0];
   } catch(err) {
-    next(err);
+    console.log('Error in checking email');
+    return {
+      status: false,
+      error: err
+    };
   }
 };
 
@@ -36,7 +44,11 @@ const checkUserId = async (id) => {
     console.log('checking id in DB:', id)
     return userInformation.rows[0];
   } catch(err) {
-    next(err);
+    console.log('Error in checking UserId');
+    return {
+      status: false,
+      error: err
+    };
   }
 };
 
@@ -63,7 +75,11 @@ const userPhotoImpression = async (params) => {
       return ({status: true});
     }
   } catch (err) {
-    console.log('Error adding impression in DB: ', err);
+    console.log('Error in adding photo impression');
+    return {
+      status: false,
+      error: err
+    };
   }
 }
 
@@ -110,7 +126,11 @@ const addPhotoToDatabase = async (params) => {
     //console.log('Added Photo Id:', unsplashId, ' to Postgres!');
     return {status: true}; 
   } catch(err) {
-    console.log(err);
+    console.log('Error in adding photo to DB');
+    return {
+      status: false,
+      error: err
+    };
   }
 }
 
@@ -126,7 +146,11 @@ const updatePlace = async (params) => {
       return ({status: true});
     }
   } catch (err) {
-    console.log('Error updating place in DB: ', err);
+    console.log('Error in updating place');
+    return {
+      status: false,
+      error: err
+    };
   }
 }
 
