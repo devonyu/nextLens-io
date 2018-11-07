@@ -9,7 +9,7 @@ import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
 
-import { Button, Segment, Sidebar } from 'semantic-ui-react'
+import { Segment, Sidebar } from 'semantic-ui-react'
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -17,8 +17,7 @@ export default class HomePage extends Component {
 		this.state = {
 			views: '',
 			likedImageHP: 0,
-			dimmed: false,
-			visible: false
+			visible: this.props.sidebar
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
@@ -26,16 +25,6 @@ export default class HomePage extends Component {
 	this.getViews = this.getViews.bind(this);
 	this.updateHP = this.updateHP.bind(this);
 	}
-
-	toggleVisibility = (bool) => this.setState({ 
-		visible: bool,
-		dimmed: bool
-	})
-
-	handleSidebarHide = () => this.setState({ 
-		visible: false,
-		dimmed: false
-	})
 
 	changeViews(option) {
 		this.setState(() => {
@@ -140,11 +129,6 @@ export default class HomePage extends Component {
 				this.changeViews('onBoard');
 			}
 		}
-		// if (this.props.sidebar === true) {
-		// 	this.toggleVisibility(false);
-		// } else if (this.props.sidebar === false){
-		// 	this.toggleVisibility(true);
-		// }
 	}
 
 	componentDidMount = async () => {
@@ -169,15 +153,12 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { dimmed, visible } = this.state;
 		return(
 			<div>
-				<Button onClick={this.toggleVisibility}>Show Sidebar</Button>       
 				<Sidebar.Pushable as={Segment}>
 
 					<SidebarMain
-						visible={visible}
-						onHide={this.handleSidebarHide.bind(this)}
+						visible={this.props.sidebar}			
 						userInformation={this.props.userInformation}
 						likeProgress={this.state.likedImageHP}
 						changeViews={ this.changeViews }
@@ -185,11 +166,10 @@ export default class HomePage extends Component {
 					>
 					</SidebarMain>
 
-					<Sidebar.Pusher dimmed={dimmed}>
-						<Segment basic>
-							<div>{ this.getViews() }</div> 
-						</Segment>
+					<Sidebar.Pusher>
+						{ this.getViews() }
 					</Sidebar.Pusher>
+
 				</Sidebar.Pushable>
 			</div>
 		)

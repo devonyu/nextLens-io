@@ -31,6 +31,7 @@ class App extends Component {
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
+    this.sidebar = this.sidebar.bind(this);
   }
 
   changeView(option) {
@@ -50,9 +51,7 @@ class App extends Component {
   }
 
   sidebar() {
-    console.log('sidebar from app clicked');
     this.setState({sidebar: !this.state.sidebar});
-    console.log('Sidebar State top: ', this.state.sidebar);
   }
 
   checkSession() {
@@ -140,17 +139,21 @@ class App extends Component {
   render() {
     //console.log('state at top   <>', this.state)
     return (
-        <div className="container">
-          <Sticky>
-            <NavBar
-              sidebar={ this.sidebar.bind(this) } 
-              userInformation={ this.state.userState }
-              changeView={ this.changeView } 
-              loggedIn={ this.state.loggedIn }
-              changeState={ this.changeState }/>
-          </Sticky>
+        <div id="container">
+          <div id='navv'>
+            <Sticky onUnstick={()=>{console.log(
+              'unstuck.. it wont go lower, why?'
+            )}}>
+              <NavBar
+                sidebar={ this.sidebar } 
+                userInformation={ this.state.userState }
+                changeView={ this.changeView } 
+                loggedIn={ this.state.loggedIn }
+                changeState={ this.changeState }/>
+            </Sticky>
+          </div>
           <div id="content">{ this.getView() }</div>
-          <Footer/>
+          <Footer />
         </div>
     );
   }

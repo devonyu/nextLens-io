@@ -62,10 +62,10 @@ export default class ClickLanding extends Component {
     render() {
         const { animation, duration, visible } = this.state
         return(
-                <Container>
+                <Container id="splashWrap">
                     <Transition animation={animation} duration={duration} visible={visible}>
-                        <div id="splashImage" className="card" content='Run' onClick={this.toggleVisibility}>
-                            <Image onClick={this.alterPhoto} 
+                        <div className="card" content='Run' onClick={this.toggleVisibility}>
+                            <Image id="splashImage" onClick={this.alterPhoto} 
                                 src={this.state.imgs[this.state.currentIndex]}
                                 rounded
                             />

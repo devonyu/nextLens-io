@@ -56,7 +56,6 @@ export default class SidebarMain extends Component {
             //compact
             inverted
             vertical
-            onHide={this.props.onHide}
             visible={this.props.visible}
             width='thin'
             >
