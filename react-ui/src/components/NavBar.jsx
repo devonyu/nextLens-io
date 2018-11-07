@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Header, Image, Menu, Modal } from 'semantic-ui-react'
+import { Button, Header, Icon, Image, Menu, Modal } from 'semantic-ui-react'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
@@ -52,7 +52,7 @@ class NavBar extends Component {
         <Menu.Item onClick={()=>{this.props.sidebar()}}
         header
         >
-          SideBar
+          <Icon name='sidebar'/>
         </Menu.Item>
 
         <Menu.Item onClick={this.title}
@@ -83,7 +83,7 @@ class NavBar extends Component {
 
         <Menu.Menu position='right'>
           <Menu.Item>
-            {(this.props.userInformation.firstname === '' || this.props.userInformation.firstname === undefined ) ?  '' : `Welcome ${this.props.userInformation.firstname}` }
+            {(this.props.userInformation.firstname === '' || this.props.userInformation.firstname === undefined ) ?  '' : `${this.props.userInformation.firstname}` }
           </Menu.Item>
           <Menu.Item>
             {this.props.loggedIn ? <Button size='tiny' onClick={this.logOut} primary>Log out</Button> : <Button size='tiny' onClick={this.logIn} primary>Log in</Button> }
