@@ -3,7 +3,6 @@
 exports[`Loads Profile Card with Props 1`] = `
 <div
   className="ui card"
-  href={undefined}
   onClick={[Function]}
 >
   <img
