@@ -49,11 +49,11 @@ class NavBar extends Component {
 
     return (
       <Menu borderless={true} size='tiny' fluid={true} >
-        <Menu.Item onClick={()=>{this.props.sidebar()}}
+      {this.props.loggedIn ? <Menu.Item onClick={()=>{this.props.sidebar()}}
         header
         >
-          <Icon name='sidebar'/>
-        </Menu.Item>
+        <Icon name='sidebar'/>
+        </Menu.Item> : null} 
 
         <Menu.Item onClick={this.title}
         header

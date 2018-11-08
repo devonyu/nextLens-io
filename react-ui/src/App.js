@@ -64,6 +64,7 @@ class App extends Component {
         //console.log('Auth: ', data);
         try {
           if (data) {
+          console.log(data);
             //Implement Redux in future to make this cleaner
             if (data.id !== undefined) {
               console.log('Cookies found and Session matches in Redis!')
@@ -80,10 +81,14 @@ class App extends Component {
                       mount: data.mount,
                       profileimgurl: data.profileimgurl
                     }
-                  }
-                });
-                this.changeView('homepage');
+                }
+              });
+              this.changeView('homepage');
+            } else if (data.error === 'NOT AUTHENTICATED') {
+              console.log('Err, cookies are present but session is not, sign in again or loading page!');
+              this.changeView('landing');
             }
+
           } else {
             //Signing in fails, go back to landing page
             console.log('Cookies found, but Session is not valid');
