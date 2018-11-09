@@ -122,10 +122,7 @@ export default class PhotoLiker extends Component {
                     <Progress color={this.state.ready} percent={Math.round(((this.props.likeProgress / 30) * 100))} progress />
                         <Popup
                             trigger={
-                                <Image src={this.state.imgs[this.state.currentIndex].urls.regular}
-                                    size='huge'
-                                    rounded
-                                    centered={true}
+                                <Image id="splashImage" src={this.state.imgs[this.state.currentIndex].urls.regular}
                                 />
                             }
                             header={this.state.imgs.length !== 0 ? <p>Download this picture on Unsplash <a href={this.state.imgs[this.state.currentIndex].links.download}>here</a></p> : null}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Header, Icon, Message } from 'semantic-ui-react'
+import { Form, Header, Icon, Label, Message } from 'semantic-ui-react'
 
 export default class Suggestions extends Component {
     constructor(props){
@@ -54,7 +54,9 @@ export default class Suggestions extends Component {
                         <input type="hidden" name="_subject" value={`Suggestions on ${this.state.value}`} />
                     </Form.Group>
                     <Form.Group widths='equal'>
-                        <label>Topic</label>
+                        <Label as='a' color='red' tag>
+                            Topic
+                        </Label>
                             <Form.Radio
                             label='Lens Recommendations'
                             value='Lens Recommendations'

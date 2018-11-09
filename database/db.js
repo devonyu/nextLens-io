@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 // Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
-const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/nextlens';
+const connectionString = process.env.DATABASE_URL || process.env.TEST_DATABASE;
 const client = new Client({
   connectionString,
 });
