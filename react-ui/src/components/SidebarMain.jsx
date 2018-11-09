@@ -72,7 +72,7 @@ export default class SidebarMain extends Component {
                 </Button>
             </Menu.Item>
 
-            <Menu.Item name='progress' active={activeItem === 'progress'} onClick={this.handleItemClick}>
+            <Menu.Item name='progress' active={activeItem === 'progress'}>
                 <Label corner='right' color={this.state.ready}>{this.props.likeProgress < 30 ? Math.floor((this.props.likeProgress / 30) * 100) : 100}%</Label>
                 Progress:
             </Menu.Item>

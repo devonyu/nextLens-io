@@ -9,7 +9,7 @@ import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
 
-import { Segment, Sidebar } from 'semantic-ui-react'
+import { Segment, Sidebar, Visibility } from 'semantic-ui-react'
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -17,7 +17,10 @@ export default class HomePage extends Component {
 		this.state = {
 			views: '',
 			likedImageHP: 0,
-			visible: this.props.sidebar
+			visible: this.props.sidebar,
+			calculations: {
+				width: 0
+			}
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
@@ -41,6 +44,8 @@ export default class HomePage extends Component {
 		  };
 		});
 	}
+
+	handleUpdate = (e, { calculations }) => this.setState({ calculations })
 
 	getUserInformation = (userId) => {
 		axios.get(`/users/${userId}/likedphotos`)
@@ -153,8 +158,11 @@ export default class HomePage extends Component {
 	}
 
 	render() {
+		const { calculations } = this.state
 		return(
 			<div>
+				{/* <div>{calculations.width.toFixed()}px Via Visibilty sematic UI</div>
+				<div>height = {window.innerHeight}, width = {window.innerWidth} via window</div> */}
 				<Sidebar.Pushable as={Segment}>
 
 					<SidebarMain
@@ -167,7 +175,9 @@ export default class HomePage extends Component {
 					</SidebarMain>
 
 					<Sidebar.Pusher>
-						{ this.getViews() }
+						<Visibility onUpdate={this.handleUpdate}>
+							{ this.getViews() }
+						</Visibility>
 					</Sidebar.Pusher>
 
 				</Sidebar.Pushable>
