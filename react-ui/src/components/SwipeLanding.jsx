@@ -46,6 +46,7 @@ export default class SwipeLanding extends Component {
                     animateTransitions
                     resistance
                     autoplay
+                    interval={6000}
                     >
                         {this.state.imgs.map((image) => {
                             return <div>

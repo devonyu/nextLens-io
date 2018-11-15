@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Photoliker from './PhotoLiker';
+//import Photoliker from './PhotoLiker';
+//import BetaPL from './BetaPL';
+import BetaPL2 from './BetaPL2';
 import OnBoard from './OnBoard';
 import Recommendations from './Recommendations';
 import LikedImages from './LikedImages';
@@ -77,7 +79,7 @@ export default class HomePage extends Component {
 			changeStates={ this.changeStates }
 			/>
 		} else if (this.state.views ==='photoliker') {
-			return <Photoliker
+			return <BetaPL2
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			changeTopState= { this.props.changeState }
@@ -158,7 +160,7 @@ export default class HomePage extends Component {
 	}
 
 	render() {
-		const { calculations } = this.state
+		//const { calculations } = this.state
 		return(
 			<div>
 				{/* <div>{calculations.width.toFixed()}px Via Visibilty sematic UI</div>
