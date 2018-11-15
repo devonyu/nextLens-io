@@ -44,7 +44,7 @@ export default class SidebarMain extends Component {
 
     render() {
         const { activeItem } = this.state
-        console.log('props => ', this.props);
+        //console.log('props => ', this.props);
         return (
 
             <Sidebar

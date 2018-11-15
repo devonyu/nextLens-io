@@ -55,16 +55,16 @@ class App extends Component {
   }
 
   checkSession() {
-    console.log('checking session');
+    //console.log('checking session');
     const cookies = new Cookies();
-    console.log(cookies);
+    //console.log(cookies);
     if (cookies.get('connection') !== undefined) {
       axios.get('/auth')
       .then(({ data }) => {
         //console.log('Auth: ', data);
         try {
           if (data) {
-          console.log(data);
+          //console.log(data);
             //Implement Redux in future to make this cleaner
             if (data.id !== undefined) {
               console.log('Cookies found and Session matches in Redis!')
