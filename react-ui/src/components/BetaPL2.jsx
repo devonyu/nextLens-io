@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { evenlyDistributedImages } from './utils.js';
 import SwipeableViews from 'react-swipeable-views';
-import { virtualize, bindKeyboard } from 'react-swipeable-views-utils';
+import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
 import axios from 'axios';
 const api = require('../example_data_react/api');
-const EnhancedSwipeableViews = bindKeyboard((virtualize(SwipeableViews)));
+const EnhancedSwipeableViews = virtualize(SwipeableViews);
 
 const styles = {
   root: {
@@ -26,9 +26,11 @@ export default class BetaPL2 extends Component {
           currentIndex: 1,
           currentImage: {},
           progress: [],
-          ready: 'red'
+          ready: 'red',
+          pressed: false,
   }
       this.getPics = this.getPics.bind(this);
+      this.handleOption = this.handleOption.bind(this);
   }
   getPics = () => {
     //Use API Dummy data for now to test
@@ -110,6 +112,7 @@ export default class BetaPL2 extends Component {
     //Add the like or nope overlay based on current swipe and hold position here
   }
 
+
   slideDirection = (index, lastIndex) => {
     //needs to activate only when letting go of mouse or screen.
     if (index > lastIndex) {
@@ -121,27 +124,42 @@ export default class BetaPL2 extends Component {
     }
   }
 
+  handleKeyDown = (e) => {
+    // Prevents continuous presses
+    if (this.state.pressed === false) {
+      if (e.keyCode === 37) {
+        console.log('left Arrow clicked');
+        this.simulateLike(false);
+      } else if (e.keyCode === 39) {
+        console.log('right Arrow clicked');
+        this.simulateLike(true);
+      }
+      this.setState(()=>{
+        return {
+          pressed: true
+        }
+      })
+    }
+  }
+
+  handleKeyUp = () => {
+    this.setState(()=>{
+      return {
+        pressed: false
+      }
+    })
+  }
+
   componentWillMount () {
     this.getPics();
-    if (this.props.likeProgress > 5 && this.props.likeProgress < 30){
-      this.setState(() => {
-          return {
-            ready: 'yellow'
-          }
-      })
-  } else if (this.props.likeProgress >= 30) {
-      this.setState(() => {
-          return {
-            ready: 'green'
-          }
-      })
   }
-}
+
 
   render() {
+
     return (
-      <Container fluid textAlign='center' style={styles.root}>
-        <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress />
+      <Container fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
+        <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress/>
         <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
         <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
   
