@@ -14,10 +14,35 @@ const styles = {
   img: {
     width: 'auto',
     height: 'auto',
-    display: 'block',
+    opacity: '0.55'
   },
-  text: {
-    display: 'none'
+  textdefault: {
+    display: 'none',
+  },
+  wrap: {
+    textalign: 'center',
+    position: 'relative'
+  },
+  textlike: {
+    position: 'absolute',
+    fontSize: '7vw',
+    top: '10%',
+    left: '50%',
+    //display: 'inline-block',
+    background: 'green',
+    width: 'auto',
+    transform: 'translate(-50%, -50%)',
+    animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
+  },
+  textdislike: {
+    position: 'absolute',
+    fontSize: '7vw',
+    top: '10%',
+    left: '50%',
+    background: 'red',
+    width: 'auto',
+    transform: 'translate(-50%, -50%)',
+    animation: 'focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
   }
 };
 
@@ -84,9 +109,9 @@ export default class BetaPL2 extends Component {
         //visible={true} //this will preload the 5 images but transitions are off
         //onHide={()=>{console.log('Hiding done')}}
         >
-          <div id="text">
+          <div id="plwraper" style={styles.wrap}>
+            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 0 ? styles.textlike : styles.textdislike}>{this.state.liking <= 0 ? 'Nope' : 'Like'}</p>
             <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
-            <p style={styles.text}>dislike or like overlay</p>
           </div>
         </Transition>
       </div>
@@ -123,6 +148,25 @@ export default class BetaPL2 extends Component {
         }
       })
     }
+
+    //console.log(`Currently: ${type}, initial=${initial} num1=${num1}, currentIndex=${this.state.currentIndex}`);
+    
+    if (num1 > this.state.start) {
+      console.log('disliking');
+      this.setState((prev)=>{
+        return {
+          liking: -1
+        }
+      })
+    } else if (num1 < this.state.start){
+      console.log('liking');
+      this.setState((prev)=>{
+        return {
+          liking: 1
+        }
+      })
+    }
+
     // when user stops dragging image, resets liking
     if (type === 'end') {
       this.setState((prev)=>{
@@ -131,23 +175,7 @@ export default class BetaPL2 extends Component {
         }
       })
     }
-    //console.log(`Currently: ${type}, initial=${initial} num1=${num1}, currentIndex=${this.state.currentIndex}`);
-    
-    if (num1 > this.state.start) {
-      console.log('disliking');
-      this.setState((prev)=>{
-        return {
-          liking: prev.liking -= 1
-        }
-      })
-    } else if (num1 < this.state.start){
-      console.log('liking');
-      this.setState((prev)=>{
-        return {
-          liking: prev.liking += 1
-        }
-      })
-    }
+
   }
 
 
@@ -162,7 +190,8 @@ export default class BetaPL2 extends Component {
     }
     this.setState(()=>{
       return {
-        start: null
+        start: null,
+        liking: 0
       }
     })
   }
@@ -221,8 +250,8 @@ export default class BetaPL2 extends Component {
         index={this.state.currentIndex}
         style={styles.root}
         animateTransitions={false}
-        resistance={true}
-        hysteresis={0.8}
+        resistance={false}
+        hysteresis={0.9}
         />
 
       </Container>

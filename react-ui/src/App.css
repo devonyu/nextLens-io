@@ -49,6 +49,10 @@
   min-height: 100vh;
 }
 
+.ui.segment {
+  background: lightslategray;
+}
+
 .hidden {
   display: none;
 }
@@ -156,5 +160,30 @@
   max-height:100vh;
   margin-left: auto;
   margin-right: auto;
+}
+
+@keyframes text-focus-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes focus-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-800px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(0);
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
