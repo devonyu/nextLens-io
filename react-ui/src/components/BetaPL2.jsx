@@ -16,12 +16,17 @@ const styles = {
     height: 'auto',
     display: 'block',
   },
+  text: {
+    display: 'none'
+  }
 };
 
 export default class BetaPL2 extends Component {
   constructor(props) {
   super(props);
   this.state = {
+          start: null,
+          liking: 0,
           imgs: [{urls: ''},{urls: ''}],
           currentIndex: 1,
           currentImage: {},
@@ -75,11 +80,14 @@ export default class BetaPL2 extends Component {
         <Transition 
         animation='zoom' 
         duration={500} 
-        visible={this.state.currentIndex === index}
-        //visible={true} this will preload the 5 images but transitions are off
+        visible={this.state.currentIndex === index} //will have transtions working correctly
+        //visible={true} //this will preload the 5 images but transitions are off
         //onHide={()=>{console.log('Hiding done')}}
         >
-          <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
+          <div id="text">
+            <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
+            <p style={styles.text}>dislike or like overlay</p>
+          </div>
         </Transition>
       </div>
     );
@@ -103,13 +111,43 @@ export default class BetaPL2 extends Component {
       console.log('Image Noped');
       this.handleOption(false);
     }
-    this.increaseIndex();
+    setTimeout(()=>{this.increaseIndex()}, 500);
   }
 
   addOverlay = (num1, type) => {
-    const initial = num1.toFixed(0);
-    console.log(`${type}ing, initial=${initial} idx=${num1}, currentIndex=${this.state.currentIndex}`);
-    //Add the like or nope overlay based on current swipe and hold position here
+    const initial = num1;
+    if (this.state.start === null) {
+      this.setState(()=>{
+        return {
+          start: initial
+        }
+      })
+    }
+    // when user stops dragging image, resets liking
+    if (type === 'end') {
+      this.setState((prev)=>{
+        return {
+          liking: 0,
+        }
+      })
+    }
+    //console.log(`Currently: ${type}, initial=${initial} num1=${num1}, currentIndex=${this.state.currentIndex}`);
+    
+    if (num1 > this.state.start) {
+      console.log('disliking');
+      this.setState((prev)=>{
+        return {
+          liking: prev.liking -= 1
+        }
+      })
+    } else if (num1 < this.state.start){
+      console.log('liking');
+      this.setState((prev)=>{
+        return {
+          liking: prev.liking += 1
+        }
+      })
+    }
   }
 
 
@@ -122,6 +160,11 @@ export default class BetaPL2 extends Component {
       console.log(`slide Right completed, ${lastIndex} => ${index}`);
       this.simulateLike(true);
     }
+    this.setState(()=>{
+      return {
+        start: null
+      }
+    })
   }
 
   handleKeyDown = (e) => {
@@ -154,6 +197,10 @@ export default class BetaPL2 extends Component {
     this.getPics();
   }
 
+  componentDidUpdate () {
+    console.log('updated!')
+    console.log('like Affinity',this.state.liking)
+  }
 
   render() {
 
@@ -168,7 +215,7 @@ export default class BetaPL2 extends Component {
         ignoreNativeScroll={true}
         slideCount={400} 
         slideRenderer={this.slideRenderer} 
-        overscanSlideAfter={5}
+        overscanSlideAfter={10}
         onChangeIndex={(idx, idxLast)=>{this.slideDirection(idx, idxLast)}}
         onSwitching={(idx, type)=>{this.addOverlay(idx, type)}}
         index={this.state.currentIndex}
