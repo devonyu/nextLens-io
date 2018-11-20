@@ -17,7 +17,7 @@ export default class Recommendations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          lensRecommendations: []
+          lensRecommendations: [null]
         }
     }
 
@@ -30,7 +30,7 @@ export default class Recommendations extends Component {
         this.setState({lensRecommendations: holder});
     }
 
-    componentDidMount() {
+    componentWillMount() {
         console.log('recommendations mounted');
         if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
             console.log('NOT ENOUGH DATA');

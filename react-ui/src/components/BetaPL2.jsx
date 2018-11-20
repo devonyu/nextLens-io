@@ -234,7 +234,7 @@ export default class BetaPL2 extends Component {
   render() {
 
     return (
-      <Container fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
+      <Container id='plmain' fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
         <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress/>
         <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
         <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
