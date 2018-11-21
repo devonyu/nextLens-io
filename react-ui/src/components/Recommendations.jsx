@@ -17,7 +17,7 @@ export default class Recommendations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          lensRecommendations: [null]
+          lensRecommendations: []
         }
     }
 

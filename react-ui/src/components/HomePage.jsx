@@ -112,6 +112,7 @@ export default class HomePage extends Component {
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			userInformation={ this.props.userInformation }
+			reloadUser= { this.props.reloadUser }
 			/>
 		}
 		else if (this.state.views ==='suggestions') {
