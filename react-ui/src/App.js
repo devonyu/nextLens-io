@@ -32,6 +32,7 @@ class App extends Component {
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
     this.sidebar = this.sidebar.bind(this);
+    this.checkSession = this.checkSession.bind(this);
   }
 
   changeView(option) {
@@ -137,6 +138,7 @@ class App extends Component {
       userInformation={ this.state.userState }
       userPhotoImpressions={ this.state.userPhotoImpressions }
       sidebar={ this.state.sidebar }
+      reloadUser={ this.checkSession }
       />
     }
   }
@@ -146,14 +148,13 @@ class App extends Component {
     return (
         <div id="container">
           <div id='navv'>
-            <Sticky onUnstick={()=>{console.log(
-              'unstuck.. it wont go lower, why?'
-            )}}>
+            <Sticky>
               <NavBar
                 sidebar={ this.sidebar } 
                 userInformation={ this.state.userState }
                 changeView={ this.changeView } 
                 loggedIn={ this.state.loggedIn }
+                reloadUser={ this.checkSession }
                 changeState={ this.changeState }/>
             </Sticky>
           </div>

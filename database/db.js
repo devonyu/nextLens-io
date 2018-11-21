@@ -154,6 +154,29 @@ const updatePlace = async (params) => {
   }
 }
 
+const updateProfile = async (params) => {
+  console.log('DB hit!, params=> ', params);
+  const { userId, firstName, email, mount, profileimgurl, about } = params;
+  const query = `UPDATE users SET firstName = '${firstName}', email = '${email}', mount = ${mount}, profileimgurl = '${profileimgurl}', about = '${about}' WHERE id = ${userId};`;
+  console.log('Query formated! ==> ', query)
+  const updateProfileQuery = await client.query(query);
+  try {
+    if (!updateProfileQuery.rowCount) {
+      console.log('DB Failed update profile');
+      return ({status: false});
+    } else if (updateProfileQuery.rowCount){
+      console.log('DB Sucsess update profile');
+      return ({status: true});
+    }
+  } catch (err) {
+    console.log(`Error in updating profile for userId:${userId}`);
+    return {
+      status: false,
+      error: err
+    };
+  }
+}
+
 module.exports = {
   checkLogin,
   checkEmail,
@@ -163,5 +186,6 @@ module.exports = {
   getUserLikes,
   getUserRecommendations,
   addPhotoToDatabase,
-  updatePlace
+  updatePlace,
+  updateProfile
 };

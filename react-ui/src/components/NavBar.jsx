@@ -6,7 +6,9 @@ import Cookies from 'universal-cookie';
 class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      icon: 'sb'
+    }
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
     this.title = this.title.bind(this);
@@ -16,6 +18,19 @@ class NavBar extends Component {
 
   logIn() {
     this.props.changeView('login');
+  }
+
+  alterIcon = () => {
+    this.props.sidebar();
+    this.state.icon === 'sb' ? this.setState(()=>{
+      return {
+        icon: 'leftarrow'
+      }
+    }) : this.setState(()=>{
+      return {
+        icon: 'sb'
+      }
+    })
   }
 
   logOut() {
@@ -39,6 +54,7 @@ class NavBar extends Component {
   title() {
     if (this.props.loggedIn === true) {
       this.props.changeView('homepage');
+      this.props.xxx();
     } else if (this.props.loggedIn === false) {
       this.props.changeView('landing');
     }
@@ -49,10 +65,10 @@ class NavBar extends Component {
 
     return (
       <Menu borderless={true} size='tiny' fluid={true} >
-      {this.props.loggedIn ? <Menu.Item onClick={()=>{this.props.sidebar()}}
+      {this.props.loggedIn ? <Menu.Item onClick={this.alterIcon}
         header
         >
-        <Icon name='sidebar'/>
+        {this.state.icon === 'sb' ? <Icon name='sidebar'/> : <Icon name='chevron left'/>}
         </Menu.Item> : null} 
 
         <Menu.Item onClick={this.title}

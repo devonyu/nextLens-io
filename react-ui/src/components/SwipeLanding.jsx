@@ -48,8 +48,8 @@ export default class SwipeLanding extends Component {
                     autoplay
                     interval={6000}
                     >
-                        {this.state.imgs.map((image) => {
-                            return <div>
+                        {this.state.imgs.map((image, i) => {
+                            return <div key={i}>
                                 <Image id="splashImage" src={image}/>
                             </div>
                         })}
