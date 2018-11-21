@@ -13,8 +13,7 @@ const styles = {
   },
   img: {
     width: 'auto',
-    height: 'auto',
-    opacity: '0.55'
+    height: 'auto'
   },
   textdefault: {
     display: 'none',
@@ -25,24 +24,25 @@ const styles = {
   },
   textlike: {
     position: 'absolute',
-    fontSize: '7vw',
+    fontSize: '5vw',
+    borderRadius: '25px',
+    opacity: '.5',  
     top: '10%',
     left: '50%',
-    //display: 'inline-block',
-    background: 'green',
+    color: 'green',
     width: 'auto',
     transform: 'translate(-50%, -50%)',
     animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
   },
   textdislike: {
     position: 'absolute',
-    fontSize: '7vw',
+    fontSize: '5vw',
     top: '10%',
     left: '50%',
-    background: 'red',
+    color: 'red',
     width: 'auto',
     transform: 'translate(-50%, -50%)',
-    animation: 'focus-in-expand-fwd 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'
+    animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
   }
 };
 
@@ -110,8 +110,8 @@ export default class BetaPL2 extends Component {
         //onHide={()=>{console.log('Hiding done')}}
         >
           <div id="plwraper" style={styles.wrap}>
-            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 0 ? styles.textlike : styles.textdislike}>{this.state.liking <= 0 ? 'Nope' : 'Like'}</p>
             <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
+            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 0 ? styles.textlike : styles.textdislike}>{this.state.liking <= 0 ? 'Nope' : 'Like'}</p>
           </div>
         </Transition>
       </div>
