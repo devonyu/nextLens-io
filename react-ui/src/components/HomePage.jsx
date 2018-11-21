@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import Photoliker from './PhotoLiker';
+//import OldPhotoliker from './OldPhotoLiker';
 //import BetaPL from './BetaPL';
-import BetaPL2 from './BetaPL2';
+import PhotoSwiper from './PhotoSwiper';
 import OnBoard from './OnBoard';
 import Recommendations from './Recommendations';
 import LikedImages from './LikedImages';
@@ -78,8 +78,8 @@ export default class HomePage extends Component {
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			/>
-		} else if (this.state.views ==='photoliker') {
-			return <BetaPL2
+		} else if (this.state.views ==='photoSwiper') {
+			return <PhotoSwiper
 			changeViews={ this.changeViews }
 			changeStates={ this.changeStates }
 			changeTopState= { this.props.changeState }
@@ -131,7 +131,7 @@ export default class HomePage extends Component {
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
 				console.log('plmnt1');
-				this.changeViews('photoliker');
+				this.changeViews('photoswiper');
 			} else {
 				//console.log('missed photo impression checks, going to onBoard1');
 				this.changeViews('onBoard');
@@ -149,7 +149,7 @@ export default class HomePage extends Component {
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
 				console.log('plmnt2');	
-				this.changeViews('photoliker');
+				this.changeViews('photoswiper');
 			} else {
 				//console.log('missed photo impression checks, going to onBoard3');
 				this.changeViews('onBoard');
@@ -162,12 +162,10 @@ export default class HomePage extends Component {
 
 	render() {
 		//const { calculations } = this.state
+		// <div>{calculations.width.toFixed()}px Via Visibilty sematic UI</div>
+		// <div>height = {window.innerHeight}, width = {window.innerWidth} via window</div>
 		return(
-			<div>
-				{/* <div>{calculations.width.toFixed()}px Via Visibilty sematic UI</div>
-				<div>height = {window.innerHeight}, width = {window.innerWidth} via window</div> */}
 				<Sidebar.Pushable as={Segment}>
-
 					<SidebarMain
 						visible={this.props.sidebar}			
 						userInformation={this.props.userInformation}
@@ -182,9 +180,7 @@ export default class HomePage extends Component {
 							{ this.getViews() }
 						</Visibility>
 					</Sidebar.Pusher>
-
 				</Sidebar.Pushable>
-			</div>
 		)
 	}
 }

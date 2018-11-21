@@ -46,7 +46,7 @@ const styles = {
   }
 };
 
-export default class BetaPL2 extends Component {
+export default class PhotoSwiper extends Component {
   constructor(props) {
   super(props);
   this.state = {
@@ -227,8 +227,13 @@ export default class BetaPL2 extends Component {
   }
 
   componentDidUpdate () {
-    console.log('updated!')
     console.log('like Affinity',this.state.liking)
+    console.log('PROGRESS=> ', this.props.likeProgress);
+    if (this.props.likeProgress === 30) {
+      alert('RECS READY');
+    } else if (this.props.likeProgress > 30) {
+      console.log('let user know recs are ready');
+    }
   }
 
   render() {

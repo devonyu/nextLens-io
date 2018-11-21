@@ -65,10 +65,10 @@ export default class SidebarMain extends Component {
                 </Profile>
             </Menu.Item>
     
-            <Menu.Item name='photoliker' active={activeItem === 'photoliker'} onClick={this.handleItemClick}>
+            <Menu.Item name='photoSwiper' active={activeItem === 'photoSwiper'} onClick={this.handleItemClick}>
                 <Button primary icon labelPosition='right' fluid>
                     {/* <Icon small name='thumbs up outline' /> */}
-                    PhotoLiker
+                    PhotoSwiper
                 </Button>
             </Menu.Item>
 

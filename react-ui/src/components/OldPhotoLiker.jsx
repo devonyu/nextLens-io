@@ -4,7 +4,7 @@ import { evenlyDistributedImages } from './utils.js';
 import axios from 'axios';
 const api = require('../example_data_react/api');
 
-export default class PhotoLiker extends Component {
+export default class OldPhotoLiker extends Component {
     constructor(props) {
 		super(props);
 		this.state = {

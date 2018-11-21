@@ -17,7 +17,7 @@
 } */
 
 #container {
-  min-height:100%;
+  max-height:100%;
   height: 100vh;
   margin:0;
   padding:0;
@@ -25,7 +25,7 @@
 
 #content {
   min-height:100%;
-  height: 100vh - 60px;
+  height: 100vh;
 }
 
 #footer {
@@ -49,8 +49,8 @@
 }
 
 .ui.segment.pushable{
-  height: auto;
-  min-height: 100vh;
+  height: -webkit-stretch;
+  max-height: -webkit-stretch;
 }
 
 .ui.segment {
