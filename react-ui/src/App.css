@@ -1,31 +1,18 @@
-/* 
-// Flexbox clearing for footer
-#container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+/* fixes bug where screen shakes on scrolling past bottom */
+html { 
+  overflow-y: scroll;
 }
-
-.content {
-  flex: 1 0 auto;
-  max-height: 100vh;
-}
-
-#footer {
-  margin: auto auto 0 auto;
-  text-align: center;
-} */
 
 #container {
   max-height:100%;
-  height: 100vh;
+  height: calc(100vh - 110px);
   margin:0;
   padding:0;
 }
 
 #content {
   min-height:100%;
-  height: 100vh;
+  height: 100%;
 }
 
 #footer {
