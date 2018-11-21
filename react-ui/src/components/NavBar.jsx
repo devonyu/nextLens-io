@@ -54,7 +54,7 @@ class NavBar extends Component {
   title() {
     if (this.props.loggedIn === true) {
       this.props.changeView('homepage');
-      this.props.xxx();
+      this.props.reloadUser();
     } else if (this.props.loggedIn === false) {
       this.props.changeView('landing');
     }
