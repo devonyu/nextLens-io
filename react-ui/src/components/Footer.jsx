@@ -26,7 +26,6 @@ export default class Footer extends Component {
                         <Button circular color='grey' icon='github' href='https://github.com/devonyu/nextLens-io'/>
                         <Button circular color='twitter' icon='twitter' href='https://twitter.com/nextlens'/>
                         <Button circular color='instagram' icon='instagram' href='https://www.instagram.com/nextlens.io/'/>
-                        <Button circular color='pink' icon='flickr' href='https://www.flickr.com/photos/nextlens'/>
                     </Segment>
                 </Grid.Column>
                 

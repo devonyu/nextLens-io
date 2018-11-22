@@ -131,7 +131,7 @@ export default class HomePage extends Component {
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
 				console.log('plmnt1');
-				this.changeViews('photoswiper');
+				this.changeViews('photoSwiper');
 			} else {
 				//console.log('missed photo impression checks, going to onBoard1');
 				this.changeViews('onBoard');
@@ -149,7 +149,7 @@ export default class HomePage extends Component {
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
 				console.log('plmnt2');	
-				this.changeViews('photoswiper');
+				this.changeViews('photoSwiper');
 			} else {
 				//console.log('missed photo impression checks, going to onBoard3');
 				this.changeViews('onBoard');

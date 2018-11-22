@@ -241,9 +241,6 @@ export default class PhotoSwiper extends Component {
     return (
       <Container id='plmain' fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
         <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress/>
-        <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
-        <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
-  
         <EnhancedSwipeableViews 
         enableMouseEvents
         ignoreNativeScroll={true}
@@ -258,7 +255,8 @@ export default class PhotoSwiper extends Component {
         resistance={false}
         hysteresis={0.9}
         />
-
+        <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
+        <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
       </Container>
     )
 

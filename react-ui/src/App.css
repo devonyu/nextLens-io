@@ -32,7 +32,7 @@ html {
 }
 
 #plmain {
-  height: -webkit-stretch;
+  /* height: -webkit-stretch; */
 }
 
 .ui.segment.pushable{
@@ -64,6 +64,14 @@ html {
 .ui.progress {
   position: relative;
   width: 100%;
+}
+
+/* Space between progress indicating and images in photoswipper */
+.ui.active.indicating.progress {
+  height: 0px;
+}
+.ui.progress:first-child {
+  margin: 0 0 2em !important;
 }
 
 /* .ui.rounded.image {
@@ -152,8 +160,8 @@ html {
 }
 
 #splashImage {
-  max-width:100%;
-  max-height:100vh;
+  max-width: 100%;
+  max-height: calc(100vh - 186px);
   margin-left: auto;
   margin-right: auto;
 }
