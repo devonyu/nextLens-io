@@ -35,7 +35,7 @@ const styles = {
     color: '#00e088',
     padding: '0px 5px 0px 5px',
     width: 'auto',
-    animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
+    animation: 'text-focus-in .3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
   },
   textdislike: {
     position: 'absolute',
@@ -48,7 +48,7 @@ const styles = {
     color: '#ff4643',
     padding: '0px 5px 0px 5px',
     width: 'auto',
-    animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
+    animation: 'text-focus-in .3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
   }
 };
 
@@ -119,8 +119,7 @@ export default class PhotoSwiper extends Component {
         >
           <div id="plwraper" style={styles.wrap}>
             <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
-            {/* <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 0 ? styles.textlike : styles.textdislike}>{this.state.liking < -5 ? 'NOPE' : 'LIKE'}</p> */}
-            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 15 ? styles.textlike : this.state.liking < -15 ? styles.textdislike : styles.textdefault}>{this.state.liking < 0 ? 'NOPE' : 'LIKE'}</p>
+            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 10 ? styles.textlike : this.state.liking < -10 ? styles.textdislike : styles.textdefault}>{this.state.liking < 0 ? 'NOPE' : 'LIKE'}</p>
           </div>
         </Transition>
       </div>
@@ -171,9 +170,12 @@ export default class PhotoSwiper extends Component {
       this.setState((prev)=>{
         return {
           liking: 0,
+          last: 0
         }
       })
     }
+    //Overlay is a bit buggy still..
+    //console.log(`current(${num1}) last(${this.state.last}) liking(${this.state.liking})`);
   }
 
   slideDirection = (index, lastIndex) => {
@@ -268,8 +270,10 @@ export default class PhotoSwiper extends Component {
         resistance={false}
         hysteresis={0.9}
         />
-        <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
-        <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
+        <div id='photoswiperbuttons'>
+          <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
+          <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
+        </div>
       </Container>
     )
 
