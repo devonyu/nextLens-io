@@ -4,6 +4,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
 import axios from 'axios';
+import ModalTemplate from './Modal';
 const api = require('../example_data_react/api');
 const EnhancedSwipeableViews = virtualize(SwipeableViews);
 
@@ -25,23 +26,28 @@ const styles = {
   textlike: {
     position: 'absolute',
     fontSize: '5vw',
-    borderRadius: '25px',
+    border: '5px solid #00e088',
+    borderRadius: '12px',
     opacity: '.5',  
     top: '10%',
-    left: '50%',
-    color: 'green',
+    left: '25%',
+    transform: 'rotate(-35deg)',
+    color: '#00e088',
+    padding: '0px 5px 0px 5px',
     width: 'auto',
-    transform: 'translate(-50%, -50%)',
     animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
   },
   textdislike: {
     position: 'absolute',
     fontSize: '5vw',
+    border: '5px solid #ff4643',
+    borderRadius: '12px',
     top: '10%',
-    left: '50%',
-    color: 'red',
+    right: '25%',
+    transform: 'rotate(35deg)',
+    color: '#ff4643',
+    padding: '0px 5px 0px 5px',
     width: 'auto',
-    transform: 'translate(-50%, -50%)',
     animation: 'text-focus-in .5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both'
   }
 };
@@ -50,18 +56,20 @@ export default class PhotoSwiper extends Component {
   constructor(props) {
   super(props);
   this.state = {
-          start: null,
+          last: 0,
           liking: 0,
           imgs: [{urls: ''},{urls: ''}],
           currentIndex: 1,
           currentImage: {},
           progress: [],
-          ready: 'red',
+          ready: this.props.likeProgress >= 30,
           pressed: false,
+          modal: false
   }
       this.getPics = this.getPics.bind(this);
       this.handleOption = this.handleOption.bind(this);
   }
+
   getPics = () => {
     //Use API Dummy data for now to test
     let allCategories = []
@@ -111,14 +119,15 @@ export default class PhotoSwiper extends Component {
         >
           <div id="plwraper" style={styles.wrap}>
             <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
-            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 0 ? styles.textlike : styles.textdislike}>{this.state.liking <= 0 ? 'Nope' : 'Like'}</p>
+            {/* <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 0 ? styles.textlike : styles.textdislike}>{this.state.liking < -5 ? 'NOPE' : 'LIKE'}</p> */}
+            <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 15 ? styles.textlike : this.state.liking < -15 ? styles.textdislike : styles.textdefault}>{this.state.liking < 0 ? 'NOPE' : 'LIKE'}</p>
           </div>
         </Transition>
       </div>
     );
   }
 
-  increaseIndex = () => {
+  increaseIndex = () => { 
     this.setState((prev)=>{
       return {
         currentIndex: prev.currentIndex += 1,
@@ -140,33 +149,23 @@ export default class PhotoSwiper extends Component {
   }
 
   addOverlay = (num1, type) => {
-    const initial = num1;
-    if (this.state.start === null) {
-      this.setState(()=>{
+    if (num1 > this.state.last) {
+      //console.log('disliking');
+      this.setState((prev)=>{
         return {
-          start: initial
+          last: num1,
+          liking: prev.liking-=1
+        }
+      })
+    } else if (num1 < this.state.last){
+      //console.log('liking');
+      this.setState((prev)=>{
+        return {
+          last: num1,
+          liking: prev.liking+=1
         }
       })
     }
-
-    //console.log(`Currently: ${type}, initial=${initial} num1=${num1}, currentIndex=${this.state.currentIndex}`);
-    
-    if (num1 > this.state.start) {
-      console.log('disliking');
-      this.setState((prev)=>{
-        return {
-          liking: -1
-        }
-      })
-    } else if (num1 < this.state.start){
-      console.log('liking');
-      this.setState((prev)=>{
-        return {
-          liking: 1
-        }
-      })
-    }
-
     // when user stops dragging image, resets liking
     if (type === 'end') {
       this.setState((prev)=>{
@@ -175,9 +174,7 @@ export default class PhotoSwiper extends Component {
         }
       })
     }
-
   }
-
 
   slideDirection = (index, lastIndex) => {
     //needs to activate only when letting go of mouse or screen.
@@ -190,10 +187,13 @@ export default class PhotoSwiper extends Component {
     }
     this.setState(()=>{
       return {
-        start: null,
         liking: 0
       }
     })
+  }
+
+  closeModal = () => {
+    this.setState({ modal: false });
   }
 
   handleKeyDown = (e) => {
@@ -227,10 +227,16 @@ export default class PhotoSwiper extends Component {
   }
 
   componentDidUpdate () {
-    console.log('like Affinity',this.state.liking)
-    console.log('PROGRESS=> ', this.props.likeProgress);
-    if (this.props.likeProgress === 30) {
-      alert('RECS READY');
+    // console.log('like Affinity ',this.state.liking, 'last ', this.state.last);
+    // console.log('PROGRESS=> ', this.props.likeProgress);
+    if (this.props.likeProgress === 30 && this.state.ready === false) {
+      console.log('RECS READY, send modal!');
+      this.setState(()=>{
+        return {
+          ready: true,
+          modal: true
+        }
+      })
     } else if (this.props.likeProgress > 30) {
       console.log('let user know recs are ready');
     }
@@ -241,6 +247,13 @@ export default class PhotoSwiper extends Component {
     return (
       <Container id='plmain' fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
         <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress/>
+        <ModalTemplate 
+          open={ this.state.modal }
+          header={`Recommendations Ready for ${this.props.userInfo.firstname}`}
+          content={'Enough Data has been collected, click the Next Lens on the SideBar or below to see your recommendations!'}
+          closeUp={ this.closeModal.bind(this) }
+          action={ [{ key: 'recommendations', content: 'Show Recommendations', onClick: ()=>{this.props.changeViews('recommendations')}, positive: true }, { key: 'more', content: 'Continue Swiping' }] }
+        />
         <EnhancedSwipeableViews 
         enableMouseEvents
         ignoreNativeScroll={true}

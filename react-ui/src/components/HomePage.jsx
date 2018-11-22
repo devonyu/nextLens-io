@@ -127,10 +127,10 @@ export default class HomePage extends Component {
 	componentDidUpdate(prevProps) {
 		if (this.props.userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
 			if (this.props.userPhotoImpressions.length >= 30){
-				console.log('recmnt1');
+				//console.log('recmnt1');
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
-				console.log('plmnt1');
+				//console.log('plmnt1');
 				this.changeViews('photoSwiper');
 			} else {
 				//console.log('missed photo impression checks, going to onBoard1');
@@ -145,10 +145,10 @@ export default class HomePage extends Component {
 		//console.log('HP, Photo impressions after getinformation ', this.props.userPhotoImpressions);
 		if (this.props.userPhotoImpressions.length > 0) {
 			if (this.props.userPhotoImpressions.length >= 30){
-				console.log('recmnt2');
+				//console.log('recmnt2');
 				this.changeViews('recommendations');
 			} else if (this.props.userPhotoImpressions.length < 30 && this.props.userPhotoImpressions.length > 0){
-				console.log('plmnt2');	
+				//console.log('plmnt2');	
 				this.changeViews('photoSwiper');
 			} else {
 				//console.log('missed photo impression checks, going to onBoard3');

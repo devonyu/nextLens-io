@@ -78,7 +78,7 @@ export default class SidebarMain extends Component {
             </Menu.Item>
 
             <Menu.Item name='recommendations' active={activeItem === 'recommendations'} onClick={this.handleItemClick}>
-                <Label className='heartbeat' corner='right' size='small' color={this.state.ready}>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
+                <Label className={this.props.likeProgress >= 30 ? 'heartbeat' : 'NULL'} corner='right' size='small' color={this.state.ready}>{this.props.likeProgress >= 30 ? "Ready" : "N/A"}</Label>
                 Next Lens:
             </Menu.Item>
 
