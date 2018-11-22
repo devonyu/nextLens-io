@@ -18,10 +18,14 @@ export default class SwipeLanding extends Component {
     getSplashImages = () => {
 		axios.get('/landing')
 		.then(({ data }) => {
-            const temp = [];
+            let temp = [];
             data.results.forEach((img)=> {
+                console.log(img);
                 temp.push(img.urls.regular);
             })
+            //lower the bandwith by changing amount of images to load
+            //depending on device/internet speeds, we can alter this number
+            temp = temp.slice(0, 5);
             this.setState(() => {
                 return {
                     imgs: temp,

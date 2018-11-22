@@ -20,6 +20,7 @@ router
           console.log('User has no likes')
           //res.status(400).send({status: false});
         } else if (likedPhotos) {
+            console.log('user has likes=>', likedPhotos.length);
             res.status(200).send(JSON.stringify(likedPhotos));
         } else {
             console.log('error in retrieving liked photos!');
