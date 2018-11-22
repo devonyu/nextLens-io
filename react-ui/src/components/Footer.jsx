@@ -5,22 +5,16 @@ export default class Footer extends Component {
     render() {
         return (
             <Container id='footer' fluid >
-              <Grid columns={3} relaxed>
+              <Grid columns={2} relaxed>
                 <Grid.Column id='ft1' inverted="true">
                     <Segment basic inverted={true}>
-                    <Icon name='camera retro'></Icon><a href='https://www.nextlens.io'>NextLens.io</a>
+                    <Icon name='camera retro'></Icon><a href='https://www.nextlens.io'>© 2018 NextLens.io</a>
                     </Segment>
                 </Grid.Column>
 
                 <Divider vertical fitted/>
-
-                <Grid.Column id='ft2' inverted="true">
-                    <Segment basic inverted={true}>Terms && Usage</Segment>
-                </Grid.Column>
-
-                <Divider vertical fitted/>
                 
-                <Grid.Column id='ft3' inverted="true">
+                <Grid.Column id='ft2' inverted="true">
                     <Segment basic inverted={true}>
                         <Button circular color='facebook' icon='facebook' href='https://www.facebook.com/nextlens.io/'/>
                         <Button circular color='grey' icon='github' href='https://github.com/devonyu/nextLens-io'/>

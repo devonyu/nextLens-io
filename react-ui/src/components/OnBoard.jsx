@@ -29,8 +29,8 @@ export default class OnBoard extends Component {
                     achievable.  
                 </p>
                 <h2>Reviewing Lenses</h2>
-                <p>This part needs to be more clearly thought about.  How can a user write a review and give a rating for a specific lens?
-                    Can a user upload their images based on certain lens.  Can we force check exif data?  Is there ways for a program to
+                <p>How can a user write a review and give a rating for a specific lens?
+                    Can a user upload their images based on certain lens. Is there ways for a program to
                     alter Exif data to falsify an image?
                 </p>
                 <h2>Editing Profiles</h2>

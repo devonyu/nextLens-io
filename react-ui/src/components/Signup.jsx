@@ -82,7 +82,6 @@ export default class Signup extends Component {
     const { firstName, email, password, mount, about, profileimgurl} = this.state;
     return(
       <Container fluid>
-        <Container>
             <Transition animation='pulse' duration={500} transitionOnMount={true}>
                 <Segment>
                     <Form>
@@ -130,7 +129,6 @@ export default class Signup extends Component {
                     </Form>
                 </Segment>
             </Transition>
-        </Container>
       </Container>
     )
   }
