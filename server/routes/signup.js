@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 const bcrypt = require('bcrypt');
 const axios = require('axios');
+const helpers = require('../helpers.js');
 
 router.get('/', (req, res) => {
     console.log('get route working?');
@@ -13,8 +14,12 @@ router.get('/', (req, res) => {
 
 // Signup Route
 router.post('/', (req, res) => {
+  console.log('zzzz');
+  console.log(req.body)
   const { firstName, email, password, mount, about, profileimgurl } = req.body;
   const toClient = { firstName, email, password, mount, about, profileimgurl };
+  // toClient.about = helpers.parseStringSQL(toClient.about);
+  // Looks like the single quote bug may need to be handled within database file
   console.log('Sign up router HIT, what we got===> ', toClient);
   async function checkSignUp (userInformation) {
     const userExists = await db.checkEmail(userInformation.email);
@@ -22,6 +27,7 @@ router.post('/', (req, res) => {
     if (userExists !== undefined) {
       res.status(200).send({status: false});
     } else if (userExists === undefined) {
+      console.log('user doesnt exist');
       const passwordHash = await bcrypt.hash(toClient.password, 10);
       toClient.password = passwordHash;
       const signingUp = await db.signUp(toClient);
