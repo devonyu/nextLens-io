@@ -66,6 +66,8 @@ export default class Signup extends Component {
         return re.test(String(email).toLowerCase());
     }
     if (validateEmail(this.state.email) && this.state.password.length >= 5 && this.state.firstName && this.state.mount) {
+        //error in about with ' in string. Fix bug within DB
+        console.log(this.state)
         this.signupNewUser(this.state);
     } else if (!validateEmail(this.state.email)) {
         alert('Invalid Email Format');
