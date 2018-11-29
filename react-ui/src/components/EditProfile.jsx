@@ -50,9 +50,9 @@ export default class EditProfile extends Component {
           url: `/editprofile/${this.state.userId}`,
           data: info
         })
-        .then(async (result) => {
+        .then((result) => {
             console.log('response from server after axios, result=> ', result)
-            let confirmation = await result.data.status;
+            let confirmation = result.data.status;
             if (confirmation === false) {
               alert('Failed update user profile');
             } else if (confirmation === true){

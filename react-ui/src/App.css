@@ -41,7 +41,8 @@ html {
 }
 
 #plmain {
-  height: -webkit-fill-available;
+  height: -webkit-stretch;
+  /* height: -webkit-fill-available; */
 }
 
 .ui.segment.pushable{
