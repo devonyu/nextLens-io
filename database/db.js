@@ -1,4 +1,5 @@
 const { Client } = require('pg');
+const helpers = require('./helpers.js');
 // Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
 const connectionString = process.env.DATABASE_URL || process.env.TEST_DATABASE;
 const client = new Client({
@@ -7,7 +8,8 @@ const client = new Client({
 client.connect();
 
 const signUp = async (params) => {
-  const { firstName, email, password, mount, about, profileimgurl } = params;
+  let { firstName, email, password, mount, about, profileimgurl } = params;
+  about = helpers.parseStringSQL(about);
   const query = `INSERT into users (email, firstName, password, mount, about, profileimgurl) VALUES ('${email}', '${firstName}', '${password}', ${mount}, '${about}', '${profileimgurl}');`;
   try {
     const insertUser = await client.query(query);
@@ -156,7 +158,8 @@ const updatePlace = async (params) => {
 
 const updateProfile = async (params) => {
   console.log('DB hit!, params=> ', params);
-  const { userId, firstName, email, mount, profileimgurl, about } = params;
+  let { userId, firstName, email, mount, profileimgurl, about } = params;
+  about = helpers.parseStringSQL(about);
   const query = `UPDATE users SET firstName = '${firstName}', email = '${email}', mount = ${mount}, profileimgurl = '${profileimgurl}', about = '${about}' WHERE id = ${userId};`;
   console.log('Query formated! ==> ', query)
   const updateProfileQuery = await client.query(query);

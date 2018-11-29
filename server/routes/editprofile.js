@@ -35,18 +35,19 @@ router.put('/:id', async (req, res) => {
   const { userId, firstName, email, mount, about, profileimgurl } = req.body;
   const toDB = { userId, firstName, email, mount, about, profileimgurl };
   console.log('Edit Profile Post route, what we got===> ', toDB);
+  let result = await db.updateProfile(toDB);
   try {
-    let result = await db.updateProfile(toDB);
-    if (result.status) {
+    if (result && result.status) {
+        console.log('Profile updated, result=> ', result);
         res.status(200).send(result);
     } else {
-        console.log('Failed to update');
+        console.log('Failed to update, result=> ', result);
         res.status(200).send(result);
     }
   }
   catch {
     console.log('error in updating from server side');
-    res.status(200).send(result);
+    res.status(200).send({status: false});
   }
 });
 
