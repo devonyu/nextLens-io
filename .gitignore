@@ -13,4 +13,5 @@ Dockerfile
 docker-compose.yml
 
 #test coverage from Jest => Travis CI => Coveralls
+.coveralls.yml
 /coverage
