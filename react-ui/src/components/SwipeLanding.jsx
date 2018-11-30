@@ -20,7 +20,7 @@ export default class SwipeLanding extends Component {
 		.then(({ data }) => {
             let temp = [];
             data.results.forEach((img)=> {
-                console.log(img);
+                //console.log(img);
                 temp.push(img.urls.regular);
             })
             //lower the bandwith by changing amount of images to load

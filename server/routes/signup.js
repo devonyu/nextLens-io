@@ -14,12 +14,8 @@ router.get('/', (req, res) => {
 
 // Signup Route
 router.post('/', (req, res) => {
-  console.log('zzzz');
-  console.log(req.body)
   const { firstName, email, password, mount, about, profileimgurl } = req.body;
-  const toClient = { firstName, email, password, mount, about, profileimgurl };
-  // toClient.about = helpers.parseStringSQL(toClient.about);
-  // Looks like the single quote bug may need to be handled within database file
+  const toClient = { firstName, email, password, mount, about, profileimgurl }; 
   console.log('Sign up router HIT, what we got===> ', toClient);
   async function checkSignUp (userInformation) {
     const userExists = await db.checkEmail(userInformation.email);

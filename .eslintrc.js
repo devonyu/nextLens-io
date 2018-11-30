@@ -1,3 +1,6 @@
 module.exports = {
-    "extends": "react-app"
+    "extends": "airbnb",
+    "rules": {
+        "no-console": 0
+    }
 };

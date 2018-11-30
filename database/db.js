@@ -16,7 +16,7 @@ const signUp = async (params) => {
     console.log('RESULT OF SIGNING UP USER=> ,', insertUser);
     return {status: true};
   } catch(err) {
-    console.log('Error in signing up',);
+    console.log(`DB Error: Signup failed: `, err);
     return {
       status: false,
       error: err
