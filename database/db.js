@@ -1,7 +1,12 @@
 const { Client } = require('pg');
 const { parseStringSQL } = require('../helpers/parseStringSQL');
 // Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
-const connectionString = process.env.DATABASE_URL || process.env.TEST_DATABASE;
+let connectionString;
+if (process.env.ENVIROMENT === 'development') {
+  connectionString = process.env.TEST_DATABASE;
+} else if (process.env.ENVIROMENT === 'production') {
+  connectionString = process.env.DATABASE_URL;
+}
 const client = new Client({
   connectionString,
 });
