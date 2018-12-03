@@ -14,7 +14,6 @@ const styles = {
   },
   img: {
     width: 'auto',
-    height: 'auto'
   },
   textdefault: {
     display: 'none',
@@ -118,7 +117,7 @@ export default class PhotoSwiper extends Component {
         //onHide={()=>{console.log('Hiding done')}}
         >
           <div id="plwraper" style={styles.wrap}>
-            <Image style={styles.img} id="splashImage" src={this.state.imgs[index].urls.regular}/>
+            <Image style={styles.img} id="photoSwiperImage" src={this.state.imgs[index].urls.regular}/>
             <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 10 ? styles.textlike : this.state.liking < -10 ? styles.textdislike : styles.textdefault}>{this.state.liking < 0 ? 'NOPE' : 'LIKE'}</p>
           </div>
         </Transition>
@@ -256,24 +255,24 @@ export default class PhotoSwiper extends Component {
           closeUp={ this.closeModal.bind(this) }
           action={ [{ key: 'recommendations', content: 'Show Recommendations', onClick: ()=>{this.props.changeViews('recommendations')}, positive: true }, { key: 'more', content: 'Continue Swiping' }] }
         />
-        <EnhancedSwipeableViews 
-        enableMouseEvents
-        ignoreNativeScroll={true}
-        slideCount={400} 
-        slideRenderer={this.slideRenderer} 
-        overscanSlideAfter={10}
-        onChangeIndex={(idx, idxLast)=>{this.slideDirection(idx, idxLast)}}
-        onSwitching={(idx, type)=>{this.addOverlay(idx, type)}}
-        index={this.state.currentIndex}
-        style={styles.root}
-        animateTransitions={false}
-        resistance={false}
-        hysteresis={0.9}
-        />
-        <div id='photoswiperbuttons'>
-          <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
-          <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
-        </div>
+          <EnhancedSwipeableViews 
+          enableMouseEvents
+          ignoreNativeScroll={true}
+          slideCount={400} 
+          slideRenderer={this.slideRenderer} 
+          overscanSlideAfter={10}
+          onChangeIndex={(idx, idxLast)=>{this.slideDirection(idx, idxLast)}}
+          onSwitching={(idx, type)=>{this.addOverlay(idx, type)}}
+          index={this.state.currentIndex}
+          style={styles.root}
+          animateTransitions={false}
+          resistance={false}
+          hysteresis={0.9}
+          />
+          <div id='photoswiperbuttons'>
+            <Button circular={true} onClick={()=>{this.simulateLike(false)}} size='small'><Icon name='x' color='red'/>Nope</Button>
+            <Button circular={true} onClick={()=>{this.simulateLike(true)}} size='small'><Icon name='like' color='green'/>Like</Button>
+          </div>
       </Container>
     )
 

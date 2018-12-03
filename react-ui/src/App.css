@@ -41,8 +41,17 @@ html {
 }
 
 #plmain {
-  height: -webkit-stretch;
-  /* height: -webkit-fill-available; */
+  height: calc(100vh - 120px);
+  /* vertical-align: bottom; */
+  
+}
+
+#photoSwiperImage {
+  max-height: calc(100vh - 186px);
+  width:100vw;
+  margin-left: auto;
+  margin-right: auto;
+
 }
 
 .ui.segment.pushable{
