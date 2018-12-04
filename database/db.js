@@ -190,6 +190,32 @@ const updateProfile = async (params) => {
   }
 };
 
+const addPhotoToDatabaseBeta = async (params) => {
+  // Function will load images to database from json api
+  const {
+    textId, photographerName, profileUrl,
+    profileImageUrl, regularUrl, smallUrl, category,
+  } = params;
+  const query = `INSERT into ${category} (textId, photographerName, profileUrl, profileImageUrl, regularUrl, smallUrl)
+  Values ('${textId}', '${photographerName}', '${profileUrl}', '${profileImageUrl}', '${regularUrl}', '${smallUrl}');`;
+  try {
+    const savePhoto = await client.query(query);
+    // console.log('Added Photo Id:', unsplashId, ' to Postgres!');
+    if (!savePhoto) {
+      console.log('Error in adding photo to DB : ', params);
+      return { status: false };
+    }
+    return { status: true };
+  } catch (err) {
+    console.log('Error in adding photo to DB', params);
+    console.log('Error => ', err);
+    return {
+      status: false,
+      error: err,
+    };
+  }
+};
+
 module.exports = {
   checkLogin,
   checkEmail,
@@ -199,6 +225,7 @@ module.exports = {
   getUserLikes,
   getUserRecommendations,
   addPhotoToDatabase,
+  addPhotoToDatabaseBeta,
   updatePlace,
   updateProfile,
 };
