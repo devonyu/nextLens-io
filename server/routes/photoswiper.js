@@ -1,17 +1,16 @@
 const express = require('express');
+const db = require('../../database/db');
 
 const router = express.Router();
-const db = require('../../database/db');
 const categories = ['portrait', 'landscape', 'aerial', 'street'];
 
 async function getPhotosForSwiper(category, index, amount) {
   const info = { category, amount, index };
-  console.log(info);
   const photosFromDB = await db.getPhotosFromIndex(info);
   if (photosFromDB.status === false) {
     console.log('Error in getting photos for PS');
   } else if (photosFromDB) {
-    console.log(`Recieved ${photosFromDB.length} images for PS`);
+    // console.log(`Recieved ${photosFromDB.length} images for PS`);
     return photosFromDB;
   } else {
     console.log('error in retrieving photos for PS!');
@@ -25,7 +24,7 @@ async function getLatestUserAffinities(userId) {
   if (!userAffinitiesFromDB) {
     console.log('Error in getting photos for PS');
   } else if (userAffinitiesFromDB) {
-    console.log(`Recieved ${userAffinitiesFromDB.length} affinities for PS`);
+    // console.log(`Recieved ${userAffinitiesFromDB.length} affinities for PS`);
     return userAffinitiesFromDB;
   } else {
     console.log('error in retrieving photos for PS!');
@@ -44,28 +43,20 @@ router
   })
   .get('/:id/getphotos', async (req, res) => {
     const userId = await req.session.key || req.params.id;
-    const promises = [];
-    // get last seen images from liked table for each category
-    // will have an object with categories and indexes
     const userData = await getLatestUserAffinities(userId);
-    console.log(userData);
-    // res.status(200).send(userData);
-    userData.forEach(async (userAffinty) => {
+    // console.log(`User Latestest Affinities: ${userData}`);
+    const resultPromises = userData.map(async (userAffinty) => {
       const category = categories[userAffinty.category - 1];
-      const promise = await getPhotosForSwiper(category, userAffinty.indexlastseen, 5);
-      promises.push(promise);
+      const promise = await getPhotosForSwiper(category, userAffinty.indexlastseen, 10);
+      return [promise, category];
     });
-    // can we rewritten with a HOF for a dynamic amount of categories
-    // const one = await getPhotosForSwiper('portrait', 1, 5);
-    // const two = await getPhotosForSwiper('landscape', 20, 5);
-    // const three = await getPhotosForSwiper('aerial', 30, 5);
-    // const four = await getPhotosForSwiper('street', 40, 5);
-    // promises.push(one, two, three, four);
-    // res.status(200).send(userData);
-    Promise.all(promises)
-      .then((allImages) => {
-        console.log('Promises fullfilled, resulting with: ', allImages);
-        res.status(200).send(allImages);
+    Promise.all(resultPromises)
+      .then((finalImages) => {
+        const formatedData = finalImages.reduce((result, imageArr) => ({
+          ...result,
+          [imageArr[1]]: imageArr[0],
+        }), {});
+        res.status(200).send(formatedData);
       })
       .catch((e) => {
         console.log('there were errors ==>', e);

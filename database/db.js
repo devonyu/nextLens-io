@@ -226,15 +226,14 @@ const getPhotosFromIndex = async (params) => {
   const {
     category, amount, index,
   } = params;
-  const query = `SELECT * FROM ${category} WHERE id >= ${index} LIMIT ${amount};`;
-  console.log(query);
+  const query = `SELECT * FROM ${category} WHERE id > ${index} LIMIT ${amount};`;
   const getPhotosQuery = await client.query(query);
   try {
     if (!getPhotosQuery) {
       console.log('Error in getting photos from DB : ', params);
       return { status: false };
     }
-    console.log('Success in querying photos for Photoswiper in DB: ', getPhotosQuery.rows);
+    // console.log('Success in querying photos for Photoswiper in DB: ', getPhotosQuery.rows);
     return getPhotosQuery.rows;
   } catch (err) {
     console.log('Error in getting photo to DB', params);
@@ -247,7 +246,7 @@ const getPhotosFromIndex = async (params) => {
 };
 
 const getLastSeenImages = async (params) => {
-  console.log(`Getting Last Seen Images for ${params}`);
+  //console.log(`Getting Last Seen Images for ${params}`);
   const { userId } = params;
   const query = `SELECT category, MAX(photoid) AS IndexLastSeen
   FROM user_likes
@@ -259,7 +258,7 @@ const getLastSeenImages = async (params) => {
       console.log(`No Images Found for userId: ${userId}`);
       return null;
     }
-    console.log('DB Last Seen Images Success ', lastSeenImages.rows);
+    // console.log('DB Last Seen Images Success ', lastSeenImages.rows);
     return lastSeenImages.rows;
   } catch (error) {
     console.log('DB Error: Could not get Last Seen Images');
