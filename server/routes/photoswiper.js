@@ -24,7 +24,7 @@ async function getLatestUserAffinities(userId) {
   if (!userAffinitiesFromDB) {
     console.log('Error in getting photos for PS');
   } else if (userAffinitiesFromDB) {
-    // console.log(`Recieved ${userAffinitiesFromDB.length} affinities for PS`);
+    console.log(`Recieved ${userAffinitiesFromDB.length} affinities for PS`);
     return userAffinitiesFromDB;
   } else {
     console.log('error in retrieving photos for PS!');

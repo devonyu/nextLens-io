@@ -1,5 +1,7 @@
 const { Client } = require('pg');
 const { parseStringSQL } = require('../helpers/parseStringSQL');
+const { categoriesAPI } = require('../helpers/categoriesAPI');
+
 // Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
 let connectionString;
 if (process.env.ENVIROMENT === 'development') {
@@ -73,8 +75,10 @@ const checkLogin = async (params) => {
 
 const userPhotoImpression = async (params) => {
   // add current photoID with userID to the userLikes table with the impression of true or false
-  const { userId, photoId, liked } = params;
-  const query = `INSERT into user_likes (userId, photoId, liked) Values (${userId}, ${photoId}, ${liked});`;
+  const {
+    userId, photoId, liked, category,
+  } = params;
+  const query = `INSERT into user_likes (userId, photoId, liked, category) Values (${userId}, ${photoId}, ${liked}, ${category});`;
   const impressionResult = await client.query(query);
   try {
     if (!impressionResult.rowCount) {
@@ -246,7 +250,7 @@ const getPhotosFromIndex = async (params) => {
 };
 
 const getLastSeenImages = async (params) => {
-  //console.log(`Getting Last Seen Images for ${params}`);
+  // console.log(`Getting Last Seen Images for ${params}`);
   const { userId } = params;
   const query = `SELECT category, MAX(photoid) AS IndexLastSeen
   FROM user_likes
@@ -254,12 +258,20 @@ const getLastSeenImages = async (params) => {
   GROUP BY category;`;
   try {
     const lastSeenImages = await client.query(query);
-    if (!lastSeenImages.rows) {
-      console.log(`No Images Found for userId: ${userId}`);
-      return null;
-    }
-    // console.log('DB Last Seen Images Success ', lastSeenImages.rows);
-    return lastSeenImages.rows;
+    const formated = Object.keys(categoriesAPI).map((category) => {
+      return {
+        category: categoriesAPI[category],
+        indexlastseen: 0,
+      };
+    });
+    console.log('before ', formated);
+    lastSeenImages.rows.forEach((lastSeen) => {
+      if (lastSeen.indexlastseen) {
+        formated[lastSeen.category - 1].indexlastseen = lastSeen.indexlastseen;
+      }
+    });
+    console.log('DB Success LastSeen formated: ', formated);
+    return formated;
   } catch (error) {
     console.log('DB Error: Could not get Last Seen Images');
     return error;

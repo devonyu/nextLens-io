@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { evenlyDistributedImages } from './utils.js';
+// import { evenlyDistributedImages } from './utils.js';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
 import axios from 'axios';
 import ModalTemplate from './Modal';
-const api = require('../example_data_react/api');
+// const api = require('../example_data_react/api');
 const EnhancedSwipeableViews = virtualize(SwipeableViews);
+const categories = [null, 'portrait', 'landscape', 'aerial', 'street'];
 
 const styles = {
   root: {
@@ -89,9 +90,17 @@ export default class PhotoSwiper extends Component {
       url: `/photoswiper/${this.props.userInfo.id}/getphotos`,
     }).then(({ data }) => {
       console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
+      const distributedImages = Object.keys(data).reduce((result, category) => {
+        const formattedImages = data[category].map((imageObject)=> {
+          imageObject.category = categories.indexOf(category);
+          return imageObject;
+        })
+        return result.concat(formattedImages);
+      }, []);
+      console.log('ZZZ', distributedImages);
       this.setState({ 
-        imgs: data,
-        currentImage: data[this.state.currentIndex]
+        imgs: distributedImages,
+        currentImage: distributedImages[this.state.currentIndex]
       });
     })
     .catch((error) => {
@@ -103,11 +112,11 @@ export default class PhotoSwiper extends Component {
     //console.log('current image=> ', this.state.currentImage);
     await axios({
             method: 'post',
-            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.category}/${this.state.currentImage.nlid}`,
+            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.category}/${this.state.currentImage.id}`,
             data: {"liked":affinity}
           })
           .then(({ data }) => {
-            console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentIndex} data=${data}`);
+            console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentImage.id} data=${data}`);
             if (affinity === true) {
               this.props.updateProgress();
             }
@@ -131,7 +140,7 @@ export default class PhotoSwiper extends Component {
         //onHide={()=>{console.log('Hiding done')}}
         >
           <div id="plwraper" style={styles.wrap}>
-            <Image style={styles.img} id="photoSwiperImage" src={this.state.imgs[index].urls.regular}/>
+            <Image style={styles.img} id="photoSwiperImage" src={this.state.imgs[this.state.currentIndex].regularurl}/>
             <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 10 ? styles.textlike : this.state.liking < -10 ? styles.textdislike : styles.textdefault}>{this.state.liking < 0 ? 'NOPE' : 'LIKE'}</p>
           </div>
         </Transition>
