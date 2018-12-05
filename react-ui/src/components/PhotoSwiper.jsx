@@ -71,25 +71,39 @@ export default class PhotoSwiper extends Component {
 
   getPics = () => {
     //Use API Dummy data for now to test
-    let allCategories = []
-    for (let category in api) {
-        allCategories.push(api[category])
-    }
-    let shuffled = evenlyDistributedImages(allCategories);
-    //cut for the first 30 images for now
-    let trimmed = shuffled;//.slice(0, 30);
-    trimmed.unshift(trimmed[0]); //bug fix for first image swiping RTL
-    this.setState({ 
-        imgs: trimmed,
-        currentImage: trimmed[this.state.currentIndex]
-     });
+    // let allCategories = []
+    // for (let category in api) {
+    //     allCategories.push(api[category])
+    // }
+    // let shuffled = evenlyDistributedImages(allCategories);
+    // //cut for the first 30 images for now
+    // let trimmed = shuffled;//.slice(0, 30);
+    // trimmed.unshift(trimmed[0]); //bug fix for first image swiping RTL
+    // this.setState({ 
+    //     imgs: trimmed,
+    //     currentImage: trimmed[this.state.currentIndex]
+    //  });
+    //Get photos for user with this server call and load it to state
+    axios({
+      method: 'get',
+      url: `/photoswiper/${this.props.userInfo.id}/getphotos`,
+    }).then(({ data }) => {
+      console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
+      this.setState({ 
+        imgs: data,
+        currentImage: data[this.state.currentIndex]
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   handleOption = async (affinity) => {
     //console.log('current image=> ', this.state.currentImage);
     await axios({
             method: 'post',
-            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.nlid}`,
+            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.category}/${this.state.currentImage.nlid}`,
             data: {"liked":affinity}
           })
           .then(({ data }) => {

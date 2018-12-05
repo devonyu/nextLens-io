@@ -113,12 +113,18 @@ const getUserRecommendations = async (params) => {
   // const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
   const query = `SELECT category, liked FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
   // We want to return the images themselves from the photos table (update query)
-  const photoAffinities = await client.query(query);
-  if (!photoAffinities.rows) {
-    return (null);
+  try {
+    const photoAffinities = await client.query(query);
+    if (!photoAffinities.rows) {
+      console.log(`No Affinities Found for userId: ${userId}`);
+      return null;
+    }
+    console.log('DB Photo Affinities Success ', photoAffinities.rows);
+    return photoAffinities.rows;
+  } catch (error) {
+    console.log('DB Error: Could not get photo Affinities');
+    return error;
   }
-  // console.log('DB Found and sending to server==> ', photoAffinities.rows)
-  return photoAffinities.rows;
 };
 
 const addPhotoToDatabase = async (params) => {
@@ -216,6 +222,51 @@ const addPhotoToDatabaseBeta = async (params) => {
   }
 };
 
+const getPhotosFromIndex = async (params) => {
+  const {
+    category, amount, index,
+  } = params;
+  const query = `SELECT * FROM ${category} WHERE id >= ${index} LIMIT ${amount};`;
+  console.log(query);
+  const getPhotosQuery = await client.query(query);
+  try {
+    if (!getPhotosQuery) {
+      console.log('Error in getting photos from DB : ', params);
+      return { status: false };
+    }
+    console.log('Success in querying photos for Photoswiper in DB: ', getPhotosQuery.rows);
+    return getPhotosQuery.rows;
+  } catch (err) {
+    console.log('Error in getting photo to DB', params);
+    console.log('Error => ', err);
+    return {
+      status: false,
+      error: err,
+    };
+  }
+};
+
+const getLastSeenImages = async (params) => {
+  console.log(`Getting Last Seen Images for ${params}`);
+  const { userId } = params;
+  const query = `SELECT category, MAX(photoid) AS IndexLastSeen
+  FROM user_likes
+  WHERE user_likes.userid = ${userId}
+  GROUP BY category;`;
+  try {
+    const lastSeenImages = await client.query(query);
+    if (!lastSeenImages.rows) {
+      console.log(`No Images Found for userId: ${userId}`);
+      return null;
+    }
+    console.log('DB Last Seen Images Success ', lastSeenImages.rows);
+    return lastSeenImages.rows;
+  } catch (error) {
+    console.log('DB Error: Could not get Last Seen Images');
+    return error;
+  }
+};
+
 module.exports = {
   checkLogin,
   checkEmail,
@@ -224,8 +275,10 @@ module.exports = {
   userPhotoImpression,
   getUserLikes,
   getUserRecommendations,
+  getLastSeenImages,
   addPhotoToDatabase,
   addPhotoToDatabaseBeta,
+  getPhotosFromIndex,
   updatePlace,
   updateProfile,
 };
