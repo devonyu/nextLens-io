@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { evenlyDistributedImages } from './utils.js';
+import { evenlyDistributedImages } from './utils.js';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
@@ -71,32 +71,18 @@ export default class PhotoSwiper extends Component {
   }
 
   getPics = () => {
-    //Use API Dummy data for now to test
-    // let allCategories = []
-    // for (let category in api) {
-    //     allCategories.push(api[category])
-    // }
-    // let shuffled = evenlyDistributedImages(allCategories);
-    // //cut for the first 30 images for now
-    // let trimmed = shuffled;//.slice(0, 30);
-    // trimmed.unshift(trimmed[0]); //bug fix for first image swiping RTL
-    // this.setState({ 
-    //     imgs: trimmed,
-    //     currentImage: trimmed[this.state.currentIndex]
-    //  });
-    //Get photos for user with this server call and load it to state
     axios({
       method: 'get',
       url: `/photoswiper/${this.props.userInfo.id}/getphotos`,
     }).then(({ data }) => {
       console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
-      const distributedImages = Object.keys(data).reduce((result, category) => {
-        const formattedImages = data[category].map((imageObject)=> {
+      Object.keys(data).forEach((category) => {
+        data[category].map((imageObject)=> {
           imageObject.category = categories.indexOf(category);
           return imageObject;
         })
-        return result.concat(formattedImages);
-      }, []);
+      });
+      const distributedImages = evenlyDistributedImages(data);
       console.log('ZZZ', distributedImages);
       this.setState({ 
         imgs: distributedImages,

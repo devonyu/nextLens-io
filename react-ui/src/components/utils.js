@@ -19,32 +19,27 @@ export function getMount(mountNumber, mountApi) {
 }
 
 // Function that will randomize image order
-export function shuffleImages(photoCategories) {
-    const finalResults = [];
-    photoCategories.forEach((category,i) => {
-      finalResults[i] = category;
-    });
-    const flattedResults = _.flatten(finalResults);
-    const shuffledResults = _.shuffle(flattedResults);
-    return shuffledResults;
+export function shuffleImages(photos) {
+  const finalResults = [];
+  Object.keys(photos).forEach((categoryArray, i)=> {
+    finalResults[i] = photos[categoryArray];
+  })
+  const flattedResults = _.flatten(finalResults);
+  const shuffledResults = _.shuffle(flattedResults);
+  return shuffledResults;
 };
 
 // Function that will combine image categories with an even distribution
-export function evenlyDistributedImages(photoCategories) {
-    const finalResults = new Array(photoCategories[0].length);
-    let countId = 1;
-      for (let i = 0; i < photoCategories.length; i++) {
-        for (let j = 0; j < photoCategories[0].length; j++) {
-          if (!finalResults[j]) {
-            finalResults[j] = [];
-          }
-          if (photoCategories[i][j]) {
-            photoCategories[i][j].nlid = countId;
-            countId++;
-          }
-          finalResults[j][i] = photoCategories[i][j];
-        }
-      }
-    const merged = [].concat.apply([], finalResults)
-    return merged;
+export function evenlyDistributedImages(photos) {
+    const categoryResults = [];
+    Object.keys(photos).forEach((categoryArray, i)=> {
+      categoryResults[i] = photos[categoryArray];
+    })
+    const result = new Array(categoryResults.length * categoryResults[0].length);
+    return categoryResults.reduce((finalArray, current, idx, categoryArr) => {
+      current.forEach((imageObj, insideIndex) => {
+        finalArray[(insideIndex * categoryArr.length) + idx] = imageObj;
+      })
+      return finalArray;
+    }, result);
 };
