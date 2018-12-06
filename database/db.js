@@ -1,5 +1,7 @@
 const { Client } = require('pg');
 const { parseStringSQL } = require('../helpers/parseStringSQL');
+const { categoriesAPI } = require('../helpers/categoriesAPI');
+
 // Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
 let connectionString;
 if (process.env.ENVIROMENT === 'development') {
@@ -73,8 +75,10 @@ const checkLogin = async (params) => {
 
 const userPhotoImpression = async (params) => {
   // add current photoID with userID to the userLikes table with the impression of true or false
-  const { userId, photoId, liked } = params;
-  const query = `INSERT into user_likes (userId, photoId, liked) Values (${userId}, ${photoId}, ${liked});`;
+  const {
+    userId, photoId, liked, category,
+  } = params;
+  const query = `INSERT into user_likes (userId, photoId, liked, category) Values (${userId}, ${photoId}, ${liked}, ${category});`;
   const impressionResult = await client.query(query);
   try {
     if (!impressionResult.rowCount) {
@@ -113,12 +117,18 @@ const getUserRecommendations = async (params) => {
   // const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
   const query = `SELECT category, liked FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
   // We want to return the images themselves from the photos table (update query)
-  const photoAffinities = await client.query(query);
-  if (!photoAffinities.rows) {
-    return (null);
+  try {
+    const photoAffinities = await client.query(query);
+    if (!photoAffinities.rows) {
+      console.log(`No Affinities Found for userId: ${userId}`);
+      return null;
+    }
+    console.log('DB Photo Affinities Success ', photoAffinities.rows);
+    return photoAffinities.rows;
+  } catch (error) {
+    console.log('DB Error: Could not get photo Affinities');
+    return error;
   }
-  // console.log('DB Found and sending to server==> ', photoAffinities.rows)
-  return photoAffinities.rows;
 };
 
 const addPhotoToDatabase = async (params) => {
@@ -190,6 +200,84 @@ const updateProfile = async (params) => {
   }
 };
 
+const addPhotoToDatabaseBeta = async (params) => {
+  // Function will load images to database from json api
+  const {
+    textId, photographerName, profileUrl,
+    profileImageUrl, regularUrl, smallUrl, category,
+  } = params;
+  const query = `INSERT into ${category} (textId, photographerName, profileUrl, profileImageUrl, regularUrl, smallUrl)
+  Values ('${textId}', '${photographerName}', '${profileUrl}', '${profileImageUrl}', '${regularUrl}', '${smallUrl}');`;
+  try {
+    const savePhoto = await client.query(query);
+    // console.log('Added Photo Id:', unsplashId, ' to Postgres!');
+    if (!savePhoto) {
+      console.log('Error in adding photo to DB : ', params);
+      return { status: false };
+    }
+    return { status: true };
+  } catch (err) {
+    console.log('Error in adding photo to DB', params);
+    console.log('Error => ', err);
+    return {
+      status: false,
+      error: err,
+    };
+  }
+};
+
+const getPhotosFromIndex = async (params) => {
+  const {
+    category, amount, index,
+  } = params;
+  const query = `SELECT * FROM ${category} WHERE id > ${index} LIMIT ${amount};`;
+  const getPhotosQuery = await client.query(query);
+  try {
+    if (!getPhotosQuery) {
+      console.log('Error in getting photos from DB : ', params);
+      return { status: false };
+    }
+    // console.log('Success in querying photos for Photoswiper in DB: ', getPhotosQuery.rows);
+    return getPhotosQuery.rows;
+  } catch (err) {
+    console.log('Error in getting photo to DB', params);
+    console.log('Error => ', err);
+    return {
+      status: false,
+      error: err,
+    };
+  }
+};
+
+const getLastSeenImages = async (params) => {
+  // console.log(`Getting Last Seen Images for ${params}`);
+  const { userId } = params;
+  const query = `SELECT category, MAX(photoid) AS IndexLastSeen
+  FROM user_likes
+  WHERE user_likes.userid = ${userId}
+  GROUP BY category;`;
+  try {
+    const lastSeenImages = await client.query(query);
+    const formated = Object.keys(categoriesAPI).map((category) => {
+      return {
+        category: categoriesAPI[category],
+        indexlastseen: 0,
+      };
+    });
+    console.log('before ', formated);
+    lastSeenImages.rows.forEach((lastSeen) => {
+      if (lastSeen.indexlastseen) {
+        formated[lastSeen.category - 1].indexlastseen = lastSeen.indexlastseen;
+      }
+    });
+    console.log('DB Success LastSeen formated: ', formated);
+    return formated;
+  } catch (error) {
+    console.log('DB Error: Could not get Last Seen Images');
+    return error;
+  }
+};
+
 module.exports = {
   checkLogin,
   checkEmail,
@@ -198,7 +286,10 @@ module.exports = {
   userPhotoImpression,
   getUserLikes,
   getUserRecommendations,
+  getLastSeenImages,
   addPhotoToDatabase,
+  addPhotoToDatabaseBeta,
+  getPhotosFromIndex,
   updatePlace,
   updateProfile,
 };

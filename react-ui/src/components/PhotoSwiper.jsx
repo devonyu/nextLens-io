@@ -5,8 +5,9 @@ import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
 import axios from 'axios';
 import ModalTemplate from './Modal';
-const api = require('../example_data_react/api');
+// const api = require('../example_data_react/api');
 const EnhancedSwipeableViews = virtualize(SwipeableViews);
+const categories = [null, 'portrait', 'landscape', 'aerial', 'street'];
 
 const styles = {
   root: {
@@ -58,42 +59,63 @@ export default class PhotoSwiper extends Component {
           last: 0,
           liking: 0,
           imgs: [{urls: ''},{urls: ''}],
-          currentIndex: 1,
+          currentIndex: 0,
           currentImage: {},
           progress: [],
           ready: this.props.likeProgress >= 30,
           pressed: false,
-          modal: false
+          modal: false,
+          loadingImages: false,
   }
       this.getPics = this.getPics.bind(this);
       this.handleOption = this.handleOption.bind(this);
   }
 
   getPics = () => {
-    //Use API Dummy data for now to test
-    let allCategories = []
-    for (let category in api) {
-        allCategories.push(api[category])
-    }
-    let shuffled = evenlyDistributedImages(allCategories);
-    //cut for the first 30 images for now
-    let trimmed = shuffled;//.slice(0, 30);
-    trimmed.unshift(trimmed[0]); //bug fix for first image swiping RTL
-    this.setState({ 
-        imgs: trimmed,
-        currentImage: trimmed[this.state.currentIndex]
-     });
+    this.setState(()=>{
+      return {
+        loadingImages: true,
+      }
+    })
+    axios({
+      method: 'get',
+      url: `/photoswiper/${this.props.userInfo.id}/getphotos`,
+    }).then(({ data }) => {
+      // console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
+      Object.keys(data).forEach((category) => {
+        data[category].map((imageObject)=> {
+          imageObject.category = categories.indexOf(category);
+          return imageObject;
+        })
+      });
+      let distributedImages = [];
+      if (this.state.imgs.length === 2) {
+        distributedImages = evenlyDistributedImages(data);
+        console.log('Initiate and load images: ', distributedImages);
+      } else {
+        distributedImages = this.state.imgs.concat(evenlyDistributedImages(data));
+        console.log('Added to imgs=> ', distributedImages);
+      }
+      this.setState({ 
+        imgs: distributedImages,
+        currentImage: distributedImages[this.state.currentIndex],
+      });
+      setTimeout(()=>{this.setState({loadingImages: false})},500);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
   handleOption = async (affinity) => {
     //console.log('current image=> ', this.state.currentImage);
     await axios({
             method: 'post',
-            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.nlid}`,
+            url: `/users/${this.props.userInfo.id}/${this.state.currentImage.category}/${this.state.currentImage.id}`,
             data: {"liked":affinity}
           })
           .then(({ data }) => {
-            console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentIndex} data=${data}`);
+            console.log(`Adding user id=${this.props.userInfo.id} photoid=${this.state.currentImage.id} data=${data}`);
             if (affinity === true) {
               this.props.updateProgress();
             }
@@ -117,7 +139,7 @@ export default class PhotoSwiper extends Component {
         //onHide={()=>{console.log('Hiding done')}}
         >
           <div id="plwraper" style={styles.wrap}>
-            <Image style={styles.img} id="photoSwiperImage" src={this.state.imgs[index].urls.regular}/>
+            <Image style={styles.img} id="photoSwiperImage" src={this.state.imgs[this.state.currentIndex].regularurl}/>
             <p style={this.state.liking === 0 ? styles.textdefault : this.state.liking > 10 ? styles.textlike : this.state.liking < -10 ? styles.textdislike : styles.textdefault}>{this.state.liking < 0 ? 'NOPE' : 'LIKE'}</p>
           </div>
         </Transition>
@@ -143,7 +165,7 @@ export default class PhotoSwiper extends Component {
       console.log('Image Noped');
       this.handleOption(false);
     }
-    setTimeout(()=>{this.increaseIndex()}, 500);
+    setTimeout(()=>{this.increaseIndex()}, 1000);
   }
 
   addOverlay = (num1, type) => {
@@ -224,7 +246,21 @@ export default class PhotoSwiper extends Component {
   }
 
   componentWillMount () {
+    if (this.props.likeProgress > 30 && this.state.imgs.length < 3) {
+      this.setState(()=>{
+        return {
+          ready: true,
+          modal: true
+        }
+      })
+    }
     this.getPics();
+    this.setState(()=>{
+      return {
+        loadingImages: false,
+      }
+    })
+
   }
 
   componentDidUpdate () {
@@ -238,13 +274,19 @@ export default class PhotoSwiper extends Component {
           modal: true
         }
       })
-    } else if (this.props.likeProgress > 30) {
-      console.log('let user know recs are ready');
+    }
+    console.log('current indx=> ', this.state.currentIndex, ' stateimglength=> ', this.state.imgs.length )
+    // check where currentIndex is relative to imgs array to see when we need to add more photos to state
+    console.log('Condition to add more photos: ', this.state.currentIndex === this.state.imgs.length - 1); 
+    console.log('loadingImages = ', this.state.loadingImages);
+    if ((this.state.currentIndex === this.state.imgs.length - 1) && !this.state.loadingImages) {
+      console.log('Right here')
+      //debugger;
+      this.getPics();
     }
   }
 
   render() {
-
     return (
       <Container id='plmain' fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
         <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress/>
@@ -275,8 +317,6 @@ export default class PhotoSwiper extends Component {
           </div>
       </Container>
     )
-
   }
-
 }
 
