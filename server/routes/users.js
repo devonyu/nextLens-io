@@ -50,8 +50,8 @@ router
     console.log(`Photo Impression Recieved=> UserID:${req.params.id}, Category:${req.params.category}, PhotoId:${req.params.photoid}, Affinity:${req.body.liked}`);
     const userId = req.params.id;
     const photoId = req.params.photoid;
-    const category = req.params.category;
-    const liked = req.body.liked;
+    const { category } = req.params;
+    const { liked } = req.body;
     const savedImpression = await db.userPhotoImpression({
       userId, photoId, liked, category,
     });
