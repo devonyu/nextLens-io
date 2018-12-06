@@ -59,35 +59,48 @@ export default class PhotoSwiper extends Component {
           last: 0,
           liking: 0,
           imgs: [{urls: ''},{urls: ''}],
-          currentIndex: 1,
+          currentIndex: 0,
           currentImage: {},
           progress: [],
           ready: this.props.likeProgress >= 30,
           pressed: false,
-          modal: false
+          modal: false,
+          loadingImages: false,
   }
       this.getPics = this.getPics.bind(this);
       this.handleOption = this.handleOption.bind(this);
   }
 
   getPics = () => {
+    this.setState(()=>{
+      return {
+        loadingImages: true,
+      }
+    })
     axios({
       method: 'get',
       url: `/photoswiper/${this.props.userInfo.id}/getphotos`,
     }).then(({ data }) => {
-      console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
+      // console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
       Object.keys(data).forEach((category) => {
         data[category].map((imageObject)=> {
           imageObject.category = categories.indexOf(category);
           return imageObject;
         })
       });
-      const distributedImages = evenlyDistributedImages(data);
-      console.log('ZZZ', distributedImages);
+      let distributedImages = [];
+      if (this.state.imgs.length === 2) {
+        distributedImages = evenlyDistributedImages(data);
+        console.log('Initiate and load images: ', distributedImages);
+      } else {
+        distributedImages = this.state.imgs.concat(evenlyDistributedImages(data));
+        console.log('Added to imgs=> ', distributedImages);
+      }
       this.setState({ 
         imgs: distributedImages,
-        currentImage: distributedImages[this.state.currentIndex]
+        currentImage: distributedImages[this.state.currentIndex],
       });
+      setTimeout(()=>{this.setState({loadingImages: false})},500);
     })
     .catch((error) => {
       console.log(error);
@@ -152,7 +165,7 @@ export default class PhotoSwiper extends Component {
       console.log('Image Noped');
       this.handleOption(false);
     }
-    setTimeout(()=>{this.increaseIndex()}, 500);
+    setTimeout(()=>{this.increaseIndex()}, 1000);
   }
 
   addOverlay = (num1, type) => {
@@ -233,7 +246,21 @@ export default class PhotoSwiper extends Component {
   }
 
   componentWillMount () {
+    if (this.props.likeProgress > 30 && this.state.imgs.length < 3) {
+      this.setState(()=>{
+        return {
+          ready: true,
+          modal: true
+        }
+      })
+    }
     this.getPics();
+    this.setState(()=>{
+      return {
+        loadingImages: false,
+      }
+    })
+
   }
 
   componentDidUpdate () {
@@ -247,13 +274,19 @@ export default class PhotoSwiper extends Component {
           modal: true
         }
       })
-    } else if (this.props.likeProgress > 30) {
-      console.log('let user know recs are ready');
+    }
+    console.log('current indx=> ', this.state.currentIndex, ' stateimglength=> ', this.state.imgs.length )
+    // check where currentIndex is relative to imgs array to see when we need to add more photos to state
+    console.log('Condition to add more photos: ', this.state.currentIndex === this.state.imgs.length - 1); 
+    console.log('loadingImages = ', this.state.loadingImages);
+    if ((this.state.currentIndex === this.state.imgs.length - 1) && !this.state.loadingImages) {
+      console.log('Right here')
+      //debugger;
+      this.getPics();
     }
   }
 
   render() {
-
     return (
       <Container id='plmain' fluid textAlign='center' style={styles.root} tabIndex="1" onKeyDown={ this.handleKeyDown } onKeyUp={ this.handleKeyUp}>
         <Progress indicating percent={Math.round(((this.props.likeProgress / 30) * 100))} progress/>
@@ -284,8 +317,6 @@ export default class PhotoSwiper extends Component {
           </div>
       </Container>
     )
-
   }
-
 }
 
