@@ -34,13 +34,20 @@ router
     const userId = await req.session.key || req.params.id;
     const getUserAffinities = async () => {
       const allPhotoAffinities = await db.getUserRecommendations({ userId });
-      if (allPhotoAffinities === null) {
-        console.log('User has no affinity data');
-      } else if (allPhotoAffinities) {
-        // Do Algorithm work for recommendations => helper function recommended!
-        res.status(200).send(JSON.stringify(allPhotoAffinities));
-      } else {
+      try {
+        if (allPhotoAffinities === null) {
+          console.log('User has no affinity data');
+        } else if (allPhotoAffinities) {
+          // Do Algorithm work for recommendations => helper function recommended!
+          console.log('data came back');
+
+          res.status(200).send(allPhotoAffinities);
+        } else {
+          console.log('error in retrieving photo affinities!');
+        }
+      } catch (err) {
         console.log('error in retrieving photo affinities!');
+        return (err);
       }
     };
     await getUserAffinities(userId);

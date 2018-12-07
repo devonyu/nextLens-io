@@ -133,10 +133,13 @@ const getUserLikes = async (params) => {
 const getUserRecommendations = async (params) => {
   // Function will sort top liked categories and return lens recommendations based on query
   // Find top 3 categories for user.
-  console.log(`Getting User Affinities for ${params}`);
   const { userId } = params;
-  // const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
-  const query = `SELECT category, liked FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
+  console.log(`Getting User Affinities for ${userId}`);
+  const query = `
+  SELECT category
+  FROM user_likes
+  WHERE user_likes.userid = ${userId} AND user_likes.liked = true
+  ORDER BY category;`;
   // We want to return the images themselves from the photos table (update query)
   try {
     const photoAffinities = await client.query(query);
