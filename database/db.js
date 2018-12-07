@@ -95,18 +95,39 @@ const userPhotoImpression = async (params) => {
 };
 
 const getUserLikes = async (params) => {
-  // Function will do a query on all photos liked by user in userLikes table
   const { userId } = params;
-  // const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
-  // console.log(`getting user likes in DB for ${userId}`);
-  const query = `SELECT * FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.liked = true and user_likes.photoid = photos.id;`;
-  // We want to return the images themselves from the photos table (update query)
-  const likedPhotos = await client.query(query);
-  if (!likedPhotos.rows) {
-    return (null);
+  console.log('HERE');
+  try {
+    const query = `SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
+    FROM portrait
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = portrait.id
+    UNION 
+    SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
+    FROM landscape
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = landscape.id
+    UNION
+    SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
+    FROM aerial
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = aerial.id
+    UNION
+    SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
+    FROM street
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = street.id
+    ORDER BY id;
+    `;
+    const likedPhotos = await client.query(query);
+    if (!likedPhotos.rows) {
+      return (null);
+    }
+    console.log('DB Found and sending to server==> ', likedPhotos.rows);
+    return likedPhotos.rows;
+  } catch (err) {
+    console.log('Error getting user likes');
+    return {
+      status: false,
+      error: err,
+    };
   }
-  // console.log('DB Found and sending to server==> ', likedPhotos.rows)
-  return likedPhotos.rows;
 };
 
 const getUserRecommendations = async (params) => {

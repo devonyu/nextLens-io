@@ -5,7 +5,6 @@ import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
 import axios from 'axios';
 import ModalTemplate from './Modal';
-// const api = require('../example_data_react/api');
 const EnhancedSwipeableViews = virtualize(SwipeableViews);
 const categories = [null, 'portrait', 'landscape', 'aerial', 'street'];
 

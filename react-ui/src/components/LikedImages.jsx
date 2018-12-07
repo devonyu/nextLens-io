@@ -23,6 +23,7 @@ export default class LikedImages extends Component {
     componentDidMount() {
         axios.get(`/users/${this.props.userInfo.id}/likedphotos`)
         .then(({ data }) => {
+          console.log(data);
                 const temp = [];
                 data.forEach((img)=> {
                     temp.push(img);
