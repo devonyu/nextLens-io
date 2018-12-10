@@ -96,7 +96,7 @@ const userPhotoImpression = async (params) => {
 
 const getUserLikes = async (params) => {
   const { userId } = params;
-  console.log('HERE');
+  // this query needs fixing, it is bringing in too many likes
   try {
     const query = `SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM portrait
@@ -119,7 +119,7 @@ const getUserLikes = async (params) => {
     if (!likedPhotos.rows) {
       return (null);
     }
-    console.log('DB Found and sending to server==> ', likedPhotos.rows);
+    // console.log('DB Found and sending to server==> ', likedPhotos.rows);
     return likedPhotos.rows;
   } catch (err) {
     console.log('Error getting user likes');
