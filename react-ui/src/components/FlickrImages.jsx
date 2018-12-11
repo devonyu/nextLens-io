@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Header, Icon, Image, Modal } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Image, Modal, } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class FlickrImages extends Component {
@@ -67,7 +67,7 @@ export default class FlickrImages extends Component {
     render() {
         const { tag } = this.state
         return(
-                <Modal trigger={<Button>See Real life Images by lens {this.props.lensname}</Button>} closeIcon >
+                <Modal trigger={<Button><Icon name='flickr'></Icon>FlickR</Button>} closeIcon >
                     <Modal.Header>Photos Taken with {this.props.lensname}</Modal.Header>
                     <Modal.Content>
                     {/* <Image  src='https://cdn.dxomark.com/dakdata/measures/Optics/Sigma_50mm_F14_DG_HSM_A_Nikon/Marketing_PV/Sigma_50mm_F14_DG_HSM_A_Nikon.png' /> */}
