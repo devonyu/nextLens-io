@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../../database/db');
+const { recommendationGenerator } = require('../../helpers/recommendations');
 
 const router = express.Router();
 
@@ -29,21 +30,25 @@ router
     };
     await getUserLikedPhotos(userId);
   })
-  .get('/:id/recommendations', async (req, res) => {
+  .get('/:id/:mount/recommendations', async (req, res) => {
     console.log('userId ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);
-    const userId = await req.session.key || req.params.id;
-    const getUserAffinities = async () => {
+    try {
+      const userId = await req.session.key || req.params.id;
+      const mountId = await req.params.mount;
       const allPhotoAffinities = await db.getUserRecommendations({ userId });
+      const recommendationResults = await recommendationGenerator(allPhotoAffinities, mountId);
       if (allPhotoAffinities === null) {
         console.log('User has no affinity data');
       } else if (allPhotoAffinities) {
-        // Do Algorithm work for recommendations => helper function recommended!
-        res.status(200).send(JSON.stringify(allPhotoAffinities));
+        // console.log('data came back, calling with mountId: ', mountId);
+        res.status(200).send(recommendationResults);
       } else {
-        console.log('error in retrieving photo affinities!');
+        console.log('error in retrieving photo affinities1!');
       }
-    };
-    await getUserAffinities(userId);
+    } catch (err) {
+      console.log('error in retrieving photo affinities2!');
+      return (err);
+    }
   })
   .post('/:id/:category/:photoid', async (req, res) => {
     console.log('userId ===>', req.session.key, ' Authenticated? ===>', req.session.auth === true);

@@ -96,30 +96,30 @@ const userPhotoImpression = async (params) => {
 
 const getUserLikes = async (params) => {
   const { userId } = params;
-  console.log('HERE');
+  // this query needs fixing, it is bringing in too many likes
   try {
     const query = `SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM portrait
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = portrait.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = portrait.id and user_likes.category = 1
     UNION 
     SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM landscape
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = landscape.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = landscape.id and user_likes.category = 2
     UNION
     SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM aerial
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = aerial.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = aerial.id and user_likes.category = 3
     UNION
     SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM street
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = street.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = street.id and user_likes.category = 4
     ORDER BY id;
     `;
     const likedPhotos = await client.query(query);
     if (!likedPhotos.rows) {
       return (null);
     }
-    console.log('DB Found and sending to server==> ', likedPhotos.rows);
+    // console.log('DB Found and sending to server==> ', likedPhotos.rows);
     return likedPhotos.rows;
   } catch (err) {
     console.log('Error getting user likes');
@@ -133,10 +133,13 @@ const getUserLikes = async (params) => {
 const getUserRecommendations = async (params) => {
   // Function will sort top liked categories and return lens recommendations based on query
   // Find top 3 categories for user.
-  console.log(`Getting User Affinities for ${params}`);
   const { userId } = params;
-  // const query = `SELECT * FROM user_likes WHERE userid = ${userId} and liked = true;`;
-  const query = `SELECT category, liked FROM user_likes INNER JOIN photos ON user_likes.userid = ${userId} and user_likes.photoid = photos.id;`;
+  console.log(`Getting User Affinities for ${userId}`);
+  const query = `
+  SELECT category, photoid, liked
+  FROM user_likes
+  WHERE user_likes.userid = ${userId}
+  ORDER BY category;`;
   // We want to return the images themselves from the photos table (update query)
   try {
     const photoAffinities = await client.query(query);
@@ -144,7 +147,7 @@ const getUserRecommendations = async (params) => {
       console.log(`No Affinities Found for userId: ${userId}`);
       return null;
     }
-    console.log('DB Photo Affinities Success ', photoAffinities.rows);
+    // console.log('DB Photo Affinities Success ', photoAffinities.rows);
     return photoAffinities.rows;
   } catch (error) {
     console.log('DB Error: Could not get photo Affinities');
