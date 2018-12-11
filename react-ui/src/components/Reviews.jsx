@@ -79,8 +79,8 @@ const Reviews = () => (
     </Table.Header>
 
     <Table.Body>
-    {condense(exampleApi).map((lens) => {
-      return  <Table.Row>
+    {condense(exampleApi).map((lens, i) => {
+      return  <Table.Row key={i}> 
                 <Table.Cell>
                   <Header as='h2' textAlign='center'>
                   <Image src={lens.lensImage}></Image>

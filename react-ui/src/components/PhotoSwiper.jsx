@@ -107,7 +107,8 @@ export default class PhotoSwiper extends Component {
   }
 
   handleOption = async (affinity) => {
-    //console.log('current image=> ', this.state.currentImage);
+    //console.log('current image=> ', this.state.currentImage); 
+    try {
     await axios({
             method: 'post',
             url: `/users/${this.props.userInfo.id}/${this.state.currentImage.category}/${this.state.currentImage.id}`,
@@ -120,8 +121,12 @@ export default class PhotoSwiper extends Component {
             }
           })
           .catch((error) => {
-            console.log(error);
+            console.log('error adding affinity: ', error);
           });
+    } catch (err) {
+      console.log('error in handleOption: ', err);
+    }
+    this.increaseIndex()
   }
 
   slideRenderer = (params) => {
@@ -164,7 +169,7 @@ export default class PhotoSwiper extends Component {
       console.log('Image Noped');
       this.handleOption(false);
     }
-    setTimeout(()=>{this.increaseIndex()}, 1000);
+    // setTimeout(()=>{this.increaseIndex()}, 500);
   }
 
   addOverlay = (num1, type) => {
@@ -274,12 +279,12 @@ export default class PhotoSwiper extends Component {
         }
       })
     }
-    console.log('current indx=> ', this.state.currentIndex, ' stateimglength=> ', this.state.imgs.length )
+    // console.log('current indx=> ', this.state.currentIndex, ' stateimglength=> ', this.state.imgs.length )
     // check where currentIndex is relative to imgs array to see when we need to add more photos to state
-    console.log('Condition to add more photos: ', this.state.currentIndex === this.state.imgs.length - 1); 
-    console.log('loadingImages = ', this.state.loadingImages);
+    // console.log('Condition to add more photos: ', this.state.currentIndex === this.state.imgs.length - 1); 
+    // console.log('loadingImages = ', this.state.loadingImages);
     if ((this.state.currentIndex === this.state.imgs.length - 1) && !this.state.loadingImages) {
-      console.log('Right here')
+      console.log('Axios call for more photos now!')
       //debugger;
       this.getPics();
     }
