@@ -100,19 +100,19 @@ const getUserLikes = async (params) => {
   try {
     const query = `SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM portrait
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = portrait.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = portrait.id and user_likes.category = 1
     UNION 
     SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM landscape
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = landscape.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = landscape.id and user_likes.category = 2
     UNION
     SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM aerial
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = aerial.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = aerial.id and user_likes.category = 3
     UNION
     SELECT id, textid, photographername, profileurl, profileimageurl, regularurl, smallurl
     FROM street
-    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = street.id
+    JOIN user_likes on user_likes.userid = ${userId} AND user_likes.liked = true And user_likes.photoid = street.id and user_likes.category = 4
     ORDER BY id;
     `;
     const likedPhotos = await client.query(query);
