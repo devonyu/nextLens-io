@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Image } from 'semantic-ui-react'
-// import axios from 'axios';
+import axios from 'axios';
 import photolikergif from '../images/photoliker.gif';
 import FlickrImages from './FlickrImages';
 
-let imageGroups = {
-    canonfifty: '2800875@N25',
-    mavicpro: '3049151@N20',
-    sigmatentwenty: '94829136@N00',
-    tamronseventeenfifty: '37412600@N00',
-    canoneightyfiveonetwo: '84346957@N00'
-}
+// let imageGroups = {
+//     canonfifty: '2800875@N25',
+//     mavicpro: '3049151@N20',
+//     sigmatentwenty: '94829136@N00',
+//     tamronseventeenfifty: '37412600@N00',
+//     canoneightyfiveonetwo: '84346957@N00'
+// }
 // Having a loading screen before mounting component when algorithm is loading.
 
 export default class Recommendations extends Component {
@@ -23,11 +23,16 @@ export default class Recommendations extends Component {
 
     loadRecommendations(){
         //call algo to get best lens recommendations here and get their information
-        let holder = [];
-        for (let lens in imageGroups) {
-            holder.push([lens, imageGroups[lens]]);
-        }
-        this.setState({lensRecommendations: holder});
+        console.log(`Calling AXIOS WITH: ${this.props.userInfo.id}/${this.props.userInfo.mount} route!`);
+        axios.get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
+        .then(({ data }) => {
+          console.log('FE DATA', data)
+          // dynamically loads recommendations on mount and category likes MVP
+          this.setState({lensRecommendations: data});
+        })
+        .catch((err) => {
+          console.log('error with AXIOS, ', err);
+        })
     }
 
     componentWillMount() {
@@ -54,8 +59,8 @@ export default class Recommendations extends Component {
                                 return <li key={i}>
                                     <FlickrImages
                                         images={ this.state.photos }
-                                        flickr={ lens[1] }
-                                        lensname= { lens[0] }
+                                        flickr={ lens.Flickr }
+                                        lensname= { lens.Name }
                                     />
                                 </li>
                             })}

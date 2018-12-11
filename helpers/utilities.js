@@ -7,18 +7,37 @@ const mounts = [
   { key: 'sony1', text: 'Sony E Mount Crop', value: 6 },
   { key: 'fujifilm', text: 'Fujifilm X Mount', value: 7 },
 ];
-// Function will get mount
-const getMount = (mountApi, mountNumber) => {
-  return mountApi.reduce((acc, cur) => {
-    if (cur.value === mountNumber) {
-      console.log(cur.text);
-      acc = cur.text;
-    }
-    console.log('acc=', acc);
-    return acc;
-  });
+
+const categoriesAPI = {
+  1: 'portrait',
+  2: 'landscape',
+  3: 'aerial',
+  4: 'street',
 };
 
+// Function will get mount
+const getMount = (mountApi, mountNumber) => mountApi.reduce((acc, cur) => {
+  if (cur.value.toString() === mountNumber) {
+    acc = cur.text;
+  }
+  return acc;
+}, '');
+
+const consolidateAffinities = affinityArray => affinityArray.reduce((acc, curr) => {
+  if (!acc[curr.category]) {
+    acc[curr.category] = {
+      liked: 0,
+      disliked: 0,
+    };
+  }
+  if (curr.liked) {
+    acc[curr.category].liked += 1;
+  } else if (!curr.liked) {
+    acc[curr.category].disliked += 1;
+  }
+  return acc;
+}, {});
+
 module.exports = {
-  mounts, getMount,
+  mounts, getMount, consolidateAffinities, categoriesAPI,
 };

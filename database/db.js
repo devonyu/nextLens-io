@@ -136,9 +136,9 @@ const getUserRecommendations = async (params) => {
   const { userId } = params;
   console.log(`Getting User Affinities for ${userId}`);
   const query = `
-  SELECT category
+  SELECT category, photoid, liked
   FROM user_likes
-  WHERE user_likes.userid = ${userId} AND user_likes.liked = true
+  WHERE user_likes.userid = ${userId}
   ORDER BY category;`;
   // We want to return the images themselves from the photos table (update query)
   try {
@@ -147,7 +147,7 @@ const getUserRecommendations = async (params) => {
       console.log(`No Affinities Found for userId: ${userId}`);
       return null;
     }
-    console.log('DB Photo Affinities Success ', photoAffinities.rows);
+    // console.log('DB Photo Affinities Success ', photoAffinities.rows);
     return photoAffinities.rows;
   } catch (error) {
     console.log('DB Error: Could not get photo Affinities');

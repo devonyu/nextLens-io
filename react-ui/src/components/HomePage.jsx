@@ -26,7 +26,7 @@ export default class HomePage extends Component {
 		}
 	this.getUserInformation = this.getUserInformation.bind(this);
 	this.changeViews = this.changeViews.bind(this);
-    this.changeStates = this.changeStates.bind(this);
+  this.changeStates = this.changeStates.bind(this);
 	this.getViews = this.getViews.bind(this);
 	this.updateHP = this.updateHP.bind(this);
 	}
