@@ -3,8 +3,8 @@ import { Button, Grid, Icon, Image, Menu, Segment } from 'semantic-ui-react'
 import FlickrImages from './FlickrImages';
 
 const lensReco = (lens, i) => {
-  console.log('Lens information: ', lens);
-  console.log(lens.image)
+  // console.log('Lens information: ', lens);
+  // console.log(lens.image)
   return <Grid key={i} divided verticalAlign='middle' textAlign='left'>
   <Grid.Column width={3}>
     <Image src={lens.image? lens.image : 'https://res.cloudinary.com/nextlens/image/upload/v1544524799/misc/lens1.jpg'} size='medium'/> {lens.name}
@@ -15,9 +15,10 @@ const lensReco = (lens, i) => {
   </Grid.Column>
   <Grid.Column width={3}>
     <FlickrImages
-      images={ [] }
+      // images={ [] }
       flickr={ lens.flickr }
       lensname= { lens.name }
+      lensInfo = { lens }
     />
   </Grid.Column>
 </Grid>

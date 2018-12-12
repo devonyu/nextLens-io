@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Header, Icon, Image, Modal, } from 'semantic-ui-react'
+import { Button, Form, Header, Icon, Image, Modal, Placeholder} from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class FlickrImages extends Component {
@@ -13,6 +13,7 @@ export default class FlickrImages extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.clearImages = this.clearImages.bind(this);
     }
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
@@ -59,18 +60,27 @@ export default class FlickrImages extends Component {
         }
     }
 
+    clearImages () {
+      this.setState(()=>{
+        return {
+          photos: [],
+        }
+      })
+    }
+
     componentDidMount(){
-        console.log('Flickr Modal mounted');
-        this.loadImages(this.props.flickr, 1)
+        console.log('Flickr Modal mounted for ', this.props.lensname);
+        //this.loadImages(this.props.flickr, 1)
     }
 
     render() {
+      console.log('STATE FOR FLICKR! =>', this.state)
         const { tag } = this.state
         return(
-                <Modal trigger={<Button><Icon name='flickr'></Icon>FlickR</Button>} closeIcon >
+                <Modal trigger={<Button><Icon name='flickr'></Icon>FlickR</Button>} closeIcon onClose={ this.clearImages } onOpen= {()=>{this.loadImages(this.props.flickr, 1)} } >
                     <Modal.Header>Photos Taken with {this.props.lensname}</Modal.Header>
                     <Modal.Content>
-                    {/* <Image  src='https://cdn.dxomark.com/dakdata/measures/Optics/Sigma_50mm_F14_DG_HSM_A_Nikon/Marketing_PV/Sigma_50mm_F14_DG_HSM_A_Nikon.png' /> */}
+                    <Image  src={this.props.lensInfo.image} />
                     <Modal.Description>
                     
                         <Form onSubmit={this.handleSubmit}>
@@ -78,10 +88,14 @@ export default class FlickrImages extends Component {
                                 <Form.Input placeholder='Filter results by Tag' name='tag' value={tag} onChange={this.handleChange} action='Search'/>
                             </Form.Group>
                         </Form>
+                        <Placeholder>
+                  <Placeholder.Image square />
+                </Placeholder>
                         <Header>FlickR Results for {this.props.lensname}</Header>
                         {this.state.photos.length > 0 ? 
                             this.state.photos.map((image, i)=> {
                                 return <div key={i} className='flickrwrap'>
+                                
                                     <Image fluid
                                         className='flickrimg'
                                         src={image.url_c}
