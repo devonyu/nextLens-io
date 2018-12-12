@@ -4,9 +4,10 @@ import FlickrImages from './FlickrImages';
 
 const lensReco = (lens, i) => {
   console.log('Lens information: ', lens);
+  console.log(lens.image)
   return <Grid key={i} divided verticalAlign='middle' textAlign='left'>
   <Grid.Column width={3}>
-    <Image src='https://res.cloudinary.com/nextlens/image/upload/v1544524799/misc/lens1.jpg'/> {lens.name}
+    <Image src={lens.image? lens.image : 'https://res.cloudinary.com/nextlens/image/upload/v1544524799/misc/lens1.jpg'} size='medium'/> {lens.name}
   </Grid.Column>
   <Grid.Column width={4}>
     <Button as ='a' href={lens.ebay} target="_blank" >eBay</Button>
