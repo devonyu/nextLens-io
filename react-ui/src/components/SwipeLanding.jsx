@@ -10,7 +10,7 @@ export default class SwipeLanding extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgs: [],
+      imgs: []
     };
     this.getSplashImages = this.getSplashImages.bind(this);
   }
@@ -20,39 +20,41 @@ export default class SwipeLanding extends Component {
   }
 
   getSplashImages() {
-    axios.get('/landing')
+    axios
+      .get('/landing')
       .then(({ data }) => {
         let temp = [];
-        data.results.forEach((img) => {
+        data.results.forEach(img => {
           temp.push(img.urls.regular);
         });
         // lower the bandwith by changing amount of images to load
         temp = temp.slice(0, 5);
         this.setState(() => ({
-          imgs: temp,
+          imgs: temp
         }));
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
 
   render() {
-    return (<Container id="splashWrap">
-      <AutoPlaySwipeableViews
-        enableMouseEvents
-        animateTransitions
-        resistance
-        autoplay
-        interval={6000}
-      >
-        {this.state.imgs.map(image => (
-          <div key={image.url}>
-            <Image id="splashImage" src={image} />
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-            </Container>
+    return (
+      <Container id="splashWrap">
+        <AutoPlaySwipeableViews
+          enableMouseEvents
+          animateTransitions
+          resistance
+          autoplay
+          interval={6000}
+        >
+          {this.state.imgs.map(image => (
+            <div key={image.url}>
+              <Image id="splashImage" src={image} />
+            </div>
+          ))}
+        </AutoPlaySwipeableViews>
+      </Container>
     );
   }
 }
