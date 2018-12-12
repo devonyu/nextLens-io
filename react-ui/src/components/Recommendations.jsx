@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'semantic-ui-react'
+import { Container, Image } from 'semantic-ui-react'
 import axios from 'axios';
 import photolikergif from '../images/photoliker.gif';
 import Reco from './Reco';
@@ -18,7 +18,7 @@ export default class Recommendations extends Component {
     console.log(`Calling AXIOS WITH: ${this.props.userInfo.id}/${this.props.userInfo.mount} route!`);
     axios.get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
     .then(({ data }) => {
-      console.log('FE DATA', data)
+      console.log('FE Data Loaded: ', data)
       this.setState({lensRecommendations: data});
     })
     .catch((err) => {
@@ -35,9 +35,18 @@ export default class Recommendations extends Component {
     }
   }
 
+  componentWillUnmount() {
+    console.log('unmounted');
+    this.setState(()=> {
+      return {
+        lensRecommendations: [],
+      }
+    });
+  }
+
   render() {
     return(
-      <div>
+      <Container>
         {this.state.lensRecommendations.length === 0 ? 
           <div>
               <h1>Not enough data, Please continue to use PhotoLiker until your progress reaches 100%!</h1>
@@ -51,7 +60,7 @@ export default class Recommendations extends Component {
             />
           </div>
         }
-      </div>
+      </Container>
     )
   }
 }
