@@ -57,7 +57,7 @@ export default class EditProfile extends Component {
               alert('Failed update user profile');
             } else if (confirmation === true){
               this.props.reloadUser();
-              this.props.changeViews('recommendations');
+              setTimeout(()=>{this.props.changeViews('recommendations')}, 1000);
             }
         })
         .catch((error) => {

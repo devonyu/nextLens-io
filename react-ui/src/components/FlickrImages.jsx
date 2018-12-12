@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Header, Icon, Image, Modal, Placeholder} from 'semantic-ui-react'
+import { Button, Form, Icon, Image, Modal, } from 'semantic-ui-react'
 import axios from 'axios';
 
 export default class FlickrImages extends Component {
@@ -11,6 +11,7 @@ export default class FlickrImages extends Component {
           pastTags: [],
           page: 1,
         }
+        this.myRef = React.createRef();
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.clearImages = this.clearImages.bind(this);
@@ -25,6 +26,10 @@ export default class FlickrImages extends Component {
         await this.searchQueryTag();
     }
 
+    scroll(ref) {
+      ref.current.scrollIntoView({behavior: 'smooth'});
+    }
+
     searchQueryTag = async () => {
         // clear images loaded
         await this.setState((state, props) => ({
@@ -37,15 +42,15 @@ export default class FlickrImages extends Component {
     loadImages(groupId, page, tag) {
         //check to see if no images are there, we can stop a server call early!
         let query = `/flickr/${groupId}/${page}`;
-        //console.log('state when axios called => ', this.state)
         if (tag) {
+            console.log(`Searching tag: ${tag}`);
             query += `/${tag}`;
         }
         if (groupId.length > 0) {
             axios.get(query)
             .then(({ data }) => {
                     const temp = [];
-                    //console.log('Example Image from API: ', data.photos.photo[1]);
+                    console.log(`Recieved ${data.photos.photo.length} images`);
                     data.photos.photo.forEach((img)=> {
                         temp.push(img);
                     })
@@ -70,32 +75,27 @@ export default class FlickrImages extends Component {
 
     componentDidMount(){
         console.log('Flickr Modal mounted for ', this.props.lensname);
-        //this.loadImages(this.props.flickr, 1)
     }
 
     render() {
-      console.log('STATE FOR FLICKR! =>', this.state)
         const { tag } = this.state
         return(
                 <Modal trigger={<Button><Icon name='flickr'></Icon>FlickR</Button>} closeIcon onClose={ this.clearImages } onOpen= {()=>{this.loadImages(this.props.flickr, 1)} } >
-                    <Modal.Header>Photos Taken with {this.props.lensname}</Modal.Header>
-                    <Modal.Content>
-                    <Image  src={this.props.lensInfo.image} />
-                    <Modal.Description>
+                    <Modal.Header>Photos Taken with <a ref={this.myRef} href={`https://www.flickr.com/groups/${this.props.flickr}/`} target="_blank">{this.props.lensname}</a></Modal.Header>
                     
+                    <Modal.Content>
+                    
+                    <Modal.Description>
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Group>
+                                <Image miny='true' inline src={this.props.lensInfo.image} /> 
                                 <Form.Input placeholder='Filter results by Tag' name='tag' value={tag} onChange={this.handleChange} action='Search'/>
                             </Form.Group>
                         </Form>
-                        <Placeholder>
-                  <Placeholder.Image square />
-                </Placeholder>
-                        <Header>FlickR Results for {this.props.lensname}</Header>
+
                         {this.state.photos.length > 0 ? 
                             this.state.photos.map((image, i)=> {
                                 return <div key={i} className='flickrwrap'>
-                                
                                     <Image fluid
                                         className='flickrimg'
                                         src={image.url_c}
@@ -115,6 +115,7 @@ export default class FlickrImages extends Component {
                     <Button primary onClick={()=>{this.loadImages(this.props.flickr, this.state.page, this.state.pastTags[this.state.pastTags.length - 1])}}>
                         Load More Images<Icon name='right chevron' />
                     </Button>
+                    <Button onClick={() => {this.scroll(this.myRef)}}>Top</Button>
                     </Modal.Actions>
             </Modal>
         )
