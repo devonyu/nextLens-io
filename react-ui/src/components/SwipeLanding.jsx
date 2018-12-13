@@ -15,7 +15,7 @@ export default class SwipeLanding extends Component {
     this.getSplashImages = this.getSplashImages.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.getSplashImages();
   }
 
@@ -39,6 +39,7 @@ export default class SwipeLanding extends Component {
   }
 
   render() {
+    const { imgs } = this.state;
     return (
       <Container id="splashWrap">
         <AutoPlaySwipeableViews
@@ -48,10 +49,8 @@ export default class SwipeLanding extends Component {
           autoplay
           interval={6000}
         >
-          {this.state.imgs.map(image => (
-            <div key={image.url}>
-              <Image id="splashImage" src={image} />
-            </div>
+          {imgs.map((image, i) => (
+            <Image key={i} id="splashImage" src={image} />
           ))}
         </AutoPlaySwipeableViews>
       </Container>

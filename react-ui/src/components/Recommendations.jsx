@@ -14,26 +14,26 @@ export default class Recommendations extends Component {
   }
 
   componentWillMount() {
-    console.log('recommendations mounted');
+    // console.log('recommendations mounted');
     if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
-      console.log('NOT ENOUGH DATA');
+      // console.log('NOT ENOUGH DATA');
     } else {
       this.loadRecommendations();
     }
   }
 
   componentWillUnmount() {
-    console.log('unmounted');
+    // console.log('unmounted');
     this.setState(() => ({
-        lensRecommendations: [],
-      }));
+      lensRecommendations: []
+    }));
   }
 
   loadRecommendations() {
     // call algo to get best lens recommendations here and get their information
-    console.log(
-      `Calling AXIOS WITH: ${this.props.userInfo.id}/${this.props.userInfo.mount} route!`
-    );
+    //  console.log(
+    //     `Calling AXIOS WITH: ${this.props.userInfo.id}/${this.props.userInfo.mount} route!`
+    //   );
     axios
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
@@ -49,16 +49,15 @@ export default class Recommendations extends Component {
     return (
       <Container>
         {this.state.lensRecommendations.length === 0 ? (
-<div>
-              <h1>Not enough data, Please continue to use PhotoLiker until your progress reaches 100%!</h1>
-              <Image src={photolikergif} alt="liking" />
+          <div>
+            <h1>
+              Not enough data, Please continue to use PhotoLiker until your progress reaches 100%!
+            </h1>
+            <Image src={photolikergif} alt="liking" />
           </div>
         ) : (
           <div>
-            <h1>
-{this.props.userInfo.firstname}
-'s Lens Recommendations!
-</h1>
+            <h1>Lens Recommendations for {this.props.userInfo.firstname}</h1>
             <Reco lenses={this.state.lensRecommendations} price={this.state.price} />
           </div>
         )}
