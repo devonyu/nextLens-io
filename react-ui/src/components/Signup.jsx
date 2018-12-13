@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Container, Form, TextArea, Transition, Segment, Select } from 'semantic-ui-react';
 import axios from 'axios';
-// const options = require('./utils.js');
-import { mounts as options } from './utils';
+import PropTypes from 'prop-types';
+import { mounts as options, validateEmail } from './utils';
+import ModalControlled from './ModalControlled';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -13,17 +14,19 @@ export default class Signup extends Component {
       password: '',
       mount: '',
       about: '',
-      profileimgurl: ''
+      profileimgurl: '',
+      warn: false,
+      warning: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateMount = this.updateMount.bind(this);
     this.signupNewUser = this.signupNewUser.bind(this);
+    this.warnUser = this.warnUser.bind(this);
   }
 
   handleChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     if (name !== 'email') {
       this.setState({
         [name]: value
@@ -39,56 +42,52 @@ export default class Signup extends Component {
     this.setState({ mount: value });
   };
 
+  warnUser = (open, warning) => {
+    this.setState(prevState => ({ warn: open, warning }));
+  };
+
   signupNewUser = info => {
+    const { changeView } = this.props;
     axios({
       method: 'post',
       url: '/signup',
       data: info
     })
       .then(result => {
-        // console.log('response from server after axios')
         if (result.data.status === false) {
-          alert('Email is already signed up!');
+          this.warnUser(true, 'Email already exists, please use a new email');
         } else if (result.data.status === true) {
-          alert(`${info.email} Signed up!`);
-          this.props.changeView('landing');
+          this.warnUser(true, `${info.email} Signed up!`);
+          changeView('landing');
         }
       })
       .catch(error => {
         console.log('error inside signup Axios failed');
         console.log(error);
+        this.warnUser(true, `Server Error`);
       });
   };
 
   handleSubmit = () => {
-    function validateEmail(email) {
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
-    if (
-      validateEmail(this.state.email) &&
-      this.state.password.length >= 5 &&
-      this.state.firstName &&
-      this.state.mount
-    ) {
-      // error in about with ' in string. Fix bug within DB
-      // console.log(this.state)
+    const { email, password, firstName, mount } = this.state;
+    if (validateEmail(email) && password.length >= 5 && firstName && mount) {
       this.signupNewUser(this.state);
-    } else if (!validateEmail(this.state.email)) {
-      alert('Invalid Email Format');
-    } else if (this.state.password.length < 5) {
-      alert('Password must be at least 5 characters');
-    } else if (!this.state.firstName) {
-      alert('First Name required');
-    } else if (!this.state.mount) {
-      alert('Please Select a Camera Mount');
+    } else if (!validateEmail(email)) {
+      this.warnUser(true, 'Invalid Email Format');
+    } else if (password.length < 5) {
+      this.warnUser(true, 'Password must be at least 5 characters');
+    } else if (!firstName) {
+      this.warnUser(true, 'First Name required');
+    } else if (!mount) {
+      this.warnUser(true, 'Please Select a Camera Mount');
     }
   };
 
   render() {
-    const { firstName, email, password, mount, about, profileimgurl } = this.state;
+    const { firstName, email, password, mount, about, profileimgurl, warn, warning } = this.state;
     return (
       <Container fluid>
+        <ModalControlled open={warn} message={warning} close={this.warnUser} />
         <Transition animation="pulse" duration={500} transitionOnMount>
           <Segment>
             <Form>
@@ -154,3 +153,7 @@ export default class Signup extends Component {
     );
   }
 }
+
+Signup.propTypes = {
+  changeView: PropTypes.func.isRequired
+};
