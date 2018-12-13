@@ -19,6 +19,12 @@ export function getMount(mountNumber, mountApi) {
   return null;
 }
 
+export function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  // console.log(`${email} is validated: ${re.test(String(email).toLowerCase())}`);
+  return re.test(String(email).toLowerCase());
+}
+
 // Function that will randomize image order
 export function shuffleImages(photos) {
   const finalResults = [];

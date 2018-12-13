@@ -6,25 +6,20 @@ export default class Suggestions extends Component {
     super(props);
     this.state = {
       message: '',
-      _replyto: '',
-      name: '',
+      replyto: '',
       value: '',
       ready: false
     };
   }
 
   handleChange = (e, { name, value }) => {
+    const { replyto, message } = this.state;
     if (name === value) {
       this.setState({ value });
     } else {
       this.setState({ [name]: value });
     }
-    if (
-      this.state._replyto.length > 6 &&
-      this.state.name.length > 4 &&
-      this.state.message.length > 10 &&
-      this.state.value.length > 1
-    ) {
+    if (replyto.length > 6 && name.length > 4 && message.length > 10 && value.length > 1) {
       // Checks email, name, message content, and if topic clicked
       this.setState({ ready: true });
     } else {
@@ -33,10 +28,9 @@ export default class Suggestions extends Component {
   };
 
   handleSubmit = event => {
-    // console.log('button clicked submit')
-    if (this.state.ready) {
-      // Submit the form when ready!
-      // console.log('Submitting Form!');
+    const { ready } = this.state;
+    if (ready) {
+      console.log('Submitting Form!');
     } else {
       // Submit will not work until state is ready
       event.preventDefault();
@@ -44,7 +38,7 @@ export default class Suggestions extends Component {
   };
 
   render() {
-    const { value } = this.state;
+    const { value, ready } = this.state;
     return (
       <div>
         <Header as="h1">
@@ -52,7 +46,7 @@ export default class Suggestions extends Component {
           <Header.Content>Feedback and Suggestions</Header.Content>
         </Header>
         <Form
-          success={this.state.ready}
+          success={ready}
           warning
           action="https://formspree.io/feedback@nextlens.io"
           method="POST"
@@ -69,12 +63,12 @@ export default class Suggestions extends Component {
             <Form.Input
               fluid
               label="Email"
-              name="_replyto"
+              name="replyto"
               placeholder="ebachman@aviato.com"
               onChange={this.handleChange}
             />
             {/* THIS IS THE REDIRECT AFTER SENDING <input type="hidden" name="_next" value="https://devonyu.com" /> */}
-            <input type="hidden" name="_subject" value={`Suggestions on ${this.state.value}`} />
+            <input type="hidden" name="_subject" value={`Suggestions on ${value}`} />
           </Form.Group>
           <Form.Group widths="equal">
             <Label as="a" color="red" tag>
