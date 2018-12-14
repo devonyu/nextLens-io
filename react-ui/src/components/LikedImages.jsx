@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import Masonry from 'react-masonry-component';
 
 const masonryOptions = {
@@ -22,10 +23,10 @@ export default class LikedImages extends Component {
   }
 
   componentDidMount() {
+    const { userInfo } = this.props;
     axios
-      .get(`/users/${this.props.userInfo.id}/likedphotos`)
+      .get(`/users/${userInfo.id}/likedphotos`)
       .then(({ data }) => {
-        // console.log(data);
         const temp = [];
         data.forEach(img => {
           temp.push(img);
@@ -40,7 +41,8 @@ export default class LikedImages extends Component {
   }
 
   render() {
-    const childElements = this.state.photos.map((photo, i) => (
+    const { photos } = this.state;
+    const childElements = photos.map((photo, i) => (
       <div className="grid-item" key={i}>
         <img className="grid-item-photo" src={photo.smallurl} alt={photo.photographername} />
         <p className="grid-item-photographer">Photographer: {photo.photographername}</p>
@@ -61,3 +63,14 @@ export default class LikedImages extends Component {
     );
   }
 }
+
+LikedImages.propTypes = {
+  userInfo: PropTypes.shape({
+    about: PropTypes.string,
+    email: PropTypes.string,
+    firstname: PropTypes.string,
+    id: PropTypes.number,
+    mount: PropTypes.number,
+    profileimgurl: PropTypes.string
+  }).isRequired
+};

@@ -10,8 +10,10 @@ import {
   Select,
   TextArea
 } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
-import { mounts, getMount } from './utils';
+import { mounts, getMount, validateEmail } from './utils';
+import ModalControlled from './ModalControlled';
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -22,12 +24,15 @@ export default class EditProfile extends Component {
       mount: '',
       about: '',
       profileimgurl: '',
-      userId: ''
+      userId: '',
+      warn: false,
+      warning: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateMount = this.updateMount.bind(this);
     this.editProfileAction = this.editProfileAction.bind(this);
+    this.warnUser = this.warnUser.bind(this);
   }
 
   handleChange = event => {
@@ -47,17 +52,17 @@ export default class EditProfile extends Component {
   editProfileAction = info => {
     const { userId } = this.state;
     const { reloadUser, changeViews } = this.props;
-    console.log(`update userid: ${userId} with: ${info}`);
+    // console.log(`update userid: ${userId} with: ${info}`);
     axios({
       method: 'put',
       url: `/editprofile/${userId}`,
       data: info
     })
       .then(result => {
-        console.log('response from server after axios, result=> ', result);
+        // console.log('response from server after axios, result=> ', result);
         const confirmation = result.data.status;
         if (confirmation === false) {
-          alert('Failed update user profile');
+          this.warnUser(true, 'Failed to update User Information');
         } else if (confirmation === true) {
           reloadUser();
           setTimeout(() => {
@@ -66,30 +71,30 @@ export default class EditProfile extends Component {
         }
       })
       .catch(error => {
-        console.log('error inside signup Axios failed');
-        console.log(error);
+        this.warnUser(true, `Network Error: ${error}`);
+        // console.log(error);
       });
   };
 
   handleSubmit = () => {
     const { email, firstName, mount } = this.state;
-    function validateEmail(emailInput) {
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(emailInput).toLowerCase());
-    }
     if (validateEmail(email) && firstName && mount) {
       this.editProfileAction(this.state);
     } else if (!validateEmail(email)) {
-      alert('Invalid Email Format');
+      this.warnUser(true, 'Invalid Email Format');
     } else if (!firstName) {
-      alert('First Name required');
+      this.warnUser(true, 'Invalid First Name Format');
     } else if (!mount) {
-      alert('Please Select a Camera Mount');
+      this.warnUser(true, 'Please Select a Camera Mount');
     }
   };
 
   updateMount = (e, { value }) => {
     this.setState({ mount: value });
+  };
+
+  warnUser = (open, warning) => {
+    this.setState(prevState => ({ warn: open, warning }));
   };
 
   componentWillMount = () => {
@@ -105,10 +110,11 @@ export default class EditProfile extends Component {
   };
 
   render() {
-    const { firstName, email, mount, about, profileimgurl } = this.state;
+    const { firstName, email, mount, about, profileimgurl, warn, warning } = this.state;
     const { userInformation } = this.props;
     return (
       <Container fluid>
+        <ModalControlled open={warn} message={warning} close={this.warnUser} />
         <Grid columns={2} stackable padded>
           <Grid.Column stretched width={5}>
             <Card raised fluid>
@@ -186,3 +192,16 @@ export default class EditProfile extends Component {
     );
   }
 }
+
+EditProfile.propTypes = {
+  userInformation: PropTypes.shape({
+    about: PropTypes.string,
+    email: PropTypes.string,
+    firstname: PropTypes.string,
+    id: PropTypes.number,
+    mount: PropTypes.number,
+    profileimgurl: PropTypes.string
+  }).isRequired,
+  reloadUser: PropTypes.func.isRequired,
+  changeViews: PropTypes.func.isRequired
+};

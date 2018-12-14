@@ -28,8 +28,8 @@ export default class ModalControlled extends Component {
         onClose={this.handleClose}
         basic
         size="small"
-        closeOnEscape="true"
-        closeOnDimmerClick="true"
+        closeOnEscape
+        closeOnDimmerClick
       >
         <Modal.Content>
           <h3>{message}</h3>

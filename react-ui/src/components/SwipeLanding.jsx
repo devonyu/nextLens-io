@@ -15,7 +15,7 @@ export default class SwipeLanding extends Component {
     this.getSplashImages = this.getSplashImages.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.getSplashImages();
   }
 
@@ -27,11 +27,9 @@ export default class SwipeLanding extends Component {
         data.results.forEach(img => {
           temp.push(img.urls.regular);
         });
-        // lower the bandwith by changing amount of images to load
+        // lower the bandwith by changing amount of images to load, Will be scrapped for main landing page
         temp = temp.slice(0, 5);
-        this.setState(() => ({
-          imgs: temp
-        }));
+        this.setState(prevState => ({ imgs: temp }));
       })
       .catch(error => {
         console.log(error);

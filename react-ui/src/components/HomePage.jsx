@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Segment, Sidebar, Visibility } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import PhotoSwiper from './PhotoSwiper';
 import OnBoard from './OnBoard';
 import Recommendations from './Recommendations';
@@ -60,22 +61,21 @@ export default class HomePage extends Component {
         this.changeViews('photoSwiper');
       } else {
         // console.log('missed photo impression checks, going to onBoard1');
-        this.changeViews('onBoard');
+        this.changeViews('onBoardx');
       }
     }
   }
 
   getUserInformation = userId => {
+    const { changeState } = this.props;
     axios
       .get(`/users/${userId}/likedphotos`)
       .then(({ data }) => {
-        // console.log(`response from getting user id=${userId} liked photos ==>`, data);
-        this.props.changeState('userPhotoImpressions', data);
+        changeState('userPhotoImpressions', data);
         this.setState(() => ({ likedImageHP: data.length }));
       })
       .catch(error => {
-        console.log('Could not fetch user information!');
-        console.log(error);
+        console.log('Could not fetch user information! Error: ', error);
       });
   };
 
@@ -157,9 +157,6 @@ export default class HomePage extends Component {
   }
 
   updateHP() {
-    // this.setState(prevState => ({
-    //   likedImageHP: (prevState.likedImageHP += 1)
-    // }));
     this.setState(prevState => ({ likedImageHP: prevState.likedImageHP + 1 }));
   }
 
@@ -178,7 +175,6 @@ export default class HomePage extends Component {
           changeViews={this.changeViews}
           changeStates={this.changeStates}
         />
-
         <Sidebar.Pusher>
           <Visibility onUpdate={this.handleUpdate}>{this.getViews()}</Visibility>
         </Sidebar.Pusher>
@@ -186,3 +182,18 @@ export default class HomePage extends Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  userInformation: PropTypes.shape({
+    about: PropTypes.string,
+    email: PropTypes.string,
+    firstname: PropTypes.string,
+    id: PropTypes.number,
+    mount: PropTypes.number,
+    profileimgurl: PropTypes.string
+  }).isRequired,
+  reloadUser: PropTypes.func.isRequired,
+  changeState: PropTypes.func.isRequired,
+  userPhotoImpressions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sidebar: PropTypes.bool.isRequired
+};

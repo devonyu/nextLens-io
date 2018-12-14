@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import { Button, Container, Icon, Image, Progress, Transition } from 'semantic-ui-react';
@@ -59,7 +60,7 @@ export default class PhotoSwiper extends Component {
       last: 0,
       liking: 0,
       imgs: [{ urls: '' }, { urls: '' }],
-      currentIndex: 0,
+      currentIndex: 1,
       currentImage: {},
       progress: [],
       ready: this.props.likeProgress >= 30,
@@ -73,7 +74,9 @@ export default class PhotoSwiper extends Component {
   }
 
   componentWillMount() {
-    if (this.props.likeProgress > 30 && this.state.imgs.length < 3) {
+    const { imgs } = this.state;
+    const { likeProgress } = this.props;
+    if (likeProgress > 30 && imgs.length < 3) {
       this.setState(() => ({
         ready: true,
         modal: true
@@ -86,14 +89,16 @@ export default class PhotoSwiper extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.likeProgress === 30 && this.state.ready === false) {
-      console.log('RECS READY, send modal!');
+    const { imgs, loadingImages, ready, currentIndex } = this.state;
+    const { likeProgress } = this.props;
+    if (likeProgress === 30 && ready === false) {
+      console.log('Enough Data recorded, send modal to user');
       this.setState(() => ({
         ready: true,
         modal: true
       }));
     }
-    if (this.state.currentIndex === this.state.imgs.length - 1 && !this.state.loadingImages) {
+    if (currentIndex === imgs.length - 1 && !loadingImages) {
       // console.log('Axios call for more photos now!');
       // debugger;
       this.getPics();
@@ -102,33 +107,30 @@ export default class PhotoSwiper extends Component {
 
   increaseIndex = () => {
     this.setState(prev => ({
-      currentIndex: (prev.currentIndex += 1),
+      currentIndex: prev.currentIndex + 1,
       currentImage: prev.imgs[prev.currentIndex]
     }));
   };
 
   simulateLike = like => {
     if (like) {
-      // console.log('Image Liked');
       this.handleOption(true);
     } else if (!like) {
-      // console.log('Image Noped');
       this.handleOption(false);
     }
   };
 
   addOverlay = (num1, type) => {
-    if (num1 > this.state.last) {
-      // console.log('disliking');
-      this.setState(prev => ({
+    const { last } = this.state;
+    if (num1 > last) {
+      this.setState(prevState => ({
         last: num1,
-        liking: (prev.liking -= 1)
+        liking: prevState.liking - 1
       }));
-    } else if (num1 < this.state.last) {
-      // console.log('liking');
-      this.setState(prev => ({
+    } else if (num1 < last) {
+      this.setState(prevState => ({
         last: num1,
-        liking: (prev.liking += 1)
+        liking: prevState.liking + 1
       }));
     }
     // when user stops dragging image, resets liking
@@ -141,7 +143,6 @@ export default class PhotoSwiper extends Component {
   };
 
   slideDirection = (index, lastIndex) => {
-    // needs to activate only when letting go of mouse or screen.
     if (index > lastIndex) {
       // console.log(`slide Left completed, ${lastIndex} => ${index}`);
       this.simulateLike(false);
@@ -160,7 +161,8 @@ export default class PhotoSwiper extends Component {
 
   handleKeyDown = e => {
     // Prevents continuous presses
-    if (this.state.pressed === false) {
+    const { pressed } = this.state;
+    if (pressed === false) {
       if (e.keyCode === 37) {
         // console.log('left Arrow clicked');
         this.simulateLike(false);
@@ -181,12 +183,14 @@ export default class PhotoSwiper extends Component {
   };
 
   getPics = () => {
+    const { imgs, currentIndex } = this.state;
+    const { userInfo } = this.props;
     this.setState(() => ({
       loadingImages: true
     }));
     axios({
       method: 'get',
-      url: `/photoswiper/${this.props.userInfo.id}/getphotos`
+      url: `/photoswiper/${userInfo.id}/getphotos`
     })
       .then(({ data }) => {
         // console.log(`Getting images for user id=${this.props.userInfo.id}, we got: ${data}`);
@@ -197,16 +201,17 @@ export default class PhotoSwiper extends Component {
           });
         });
         let distributedImages = [];
-        if (this.state.imgs.length === 2) {
+        if (imgs.length === 2) {
           distributedImages = evenlyDistributedImages(data);
-          // console.log('Initiate and load images: ', distributedImages);
+          distributedImages.unshift({ urls: '' }); // fix bug on first image swipe
+          console.log('Initiate and load images: ', distributedImages);
         } else {
-          distributedImages = this.state.imgs.concat(evenlyDistributedImages(data));
-          // console.log('Added to imgs=> ', distributedImages);
+          distributedImages = imgs.concat(evenlyDistributedImages(data));
+          console.log('Added to imgs=> ', distributedImages);
         }
         this.setState({
           imgs: distributedImages,
-          currentImage: distributedImages[this.state.currentIndex]
+          currentImage: distributedImages[currentIndex]
         });
         setTimeout(() => {
           this.setState({ loadingImages: false });
@@ -218,7 +223,7 @@ export default class PhotoSwiper extends Component {
   };
 
   slideRenderer = params => {
-    // Working perfectly, limits the amount of images to load and the buffer with overscanslideafter amount
+    const { currentIndex, imgs, liking } = this.state;
     const { index, key } = params;
     // console.log('swiped ', index)
     return (
@@ -226,28 +231,24 @@ export default class PhotoSwiper extends Component {
         <Transition
           animation="zoom"
           duration={500}
-          visible={this.state.currentIndex === index} // will have transtions working correctly
+          visible={currentIndex === index} // will have transtions working correctly
           // visible={true} //this will preload the 5 images but transitions are off
           // onHide={()=>{console.log('Hiding done')}}
         >
           <div id="plwraper" style={styles.wrap}>
-            <Image
-              style={styles.img}
-              id="photoSwiperImage"
-              src={this.state.imgs[this.state.currentIndex].regularurl}
-            />
+            <Image style={styles.img} id="photoSwiperImage" src={imgs[currentIndex].regularurl} />
             <p
-              style={
-                this.state.liking === 0
-                  ? styles.textdefault
-                  : this.state.liking > 10
-                  ? styles.textlike
-                  : this.state.liking < -10
-                  ? styles.textdislike
-                  : styles.textdefault
-              }
+              style={(() => {
+                if (liking > -5 && liking < 5) {
+                  return styles.textdefault;
+                }
+                if (liking >= 5) {
+                  return styles.textlike;
+                }
+                return styles.textdislike;
+              })()}
             >
-              {this.state.liking < 0 ? 'NOPE' : 'LIKE'}
+              {liking < 0 ? 'NOPE' : 'LIKE'}
             </p>
           </div>
         </Transition>
@@ -256,13 +257,13 @@ export default class PhotoSwiper extends Component {
   };
 
   handleOption = async affinity => {
-    // console.log('current image=> ', this.state.currentImage);
+    console.log('current image=> ', this.state.currentImage);
+    const { currentImage } = this.state;
+    const { userInfo, updateProgress } = this.props;
     try {
       await axios({
         method: 'post',
-        url: `/users/${this.props.userInfo.id}/${this.state.currentImage.category}/${
-          this.state.currentImage.id
-        }`,
+        url: `/users/${userInfo.id}/${currentImage.category}/${currentImage.id}`,
         data: { liked: affinity }
       })
         .then(({ data }) => {
@@ -272,7 +273,7 @@ export default class PhotoSwiper extends Component {
           //   } data=${data}`
           // );
           if (affinity === true) {
-            this.props.updateProgress();
+            updateProgress();
           }
         })
         .catch(error => {
@@ -281,24 +282,29 @@ export default class PhotoSwiper extends Component {
     } catch (err) {
       console.log('error in handleOption: ', err);
     }
-    this.increaseIndex();
+    setTimeout(() => {
+      this.increaseIndex();
+    }, 250);
   };
 
   render() {
+    const { modal, currentIndex } = this.state;
+    const { likeProgress, userInfo, changeViews } = this.props;
+    console.log(this.state);
     return (
       <Container
         id="plmain"
         fluid
         textAlign="center"
         style={styles.root}
-        tabIndex="1"
+        tabIndex={-1}
         onKeyDown={this.handleKeyDown}
         onKeyUp={this.handleKeyUp}
       >
-        <Progress indicating percent={Math.round((this.props.likeProgress / 30) * 100)} progress />
+        <Progress indicating percent={Math.round((likeProgress / 30) * 100)} progress />
         <ModalTemplate
-          open={this.state.modal}
-          header={`Recommendations Ready for ${this.props.userInfo.firstname}`}
+          open={modal}
+          header={`Recommendations Ready for ${userInfo.firstname}`}
           content="Enough Data has been collected, click the Next Lens on the SideBar or below to see your recommendations!"
           closeUp={this.closeModal}
           action={[
@@ -306,7 +312,7 @@ export default class PhotoSwiper extends Component {
               key: 'recommendations',
               content: 'Show Recommendations',
               onClick: () => {
-                this.props.changeViews('recommendations');
+                changeViews('recommendations');
               },
               positive: true
             },
@@ -325,7 +331,7 @@ export default class PhotoSwiper extends Component {
           onSwitching={(idx, type) => {
             this.addOverlay(idx, type);
           }}
-          index={this.state.currentIndex}
+          index={currentIndex}
           style={styles.root}
           animateTransitions={false}
           resistance={false}
@@ -357,3 +363,17 @@ export default class PhotoSwiper extends Component {
     );
   }
 }
+
+PhotoSwiper.propTypes = {
+  userInfo: PropTypes.shape({
+    about: PropTypes.string,
+    email: PropTypes.string,
+    firstname: PropTypes.string,
+    id: PropTypes.number,
+    mount: PropTypes.number,
+    profileimgurl: PropTypes.string
+  }).isRequired,
+  changeViews: PropTypes.func.isRequired,
+  likeProgress: PropTypes.number.isRequired,
+  updateProgress: PropTypes.func.isRequired
+};

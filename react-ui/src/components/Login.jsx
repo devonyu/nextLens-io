@@ -1,48 +1,50 @@
 import React, { Component } from 'react';
 import { Button, Container, Form, Segment, Transition } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import ModalControlled from './ModalControlled';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      warn: false,
+      warning: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.warnUser = this.warnUser.bind(this);
   }
 
   handleSubmit = e => {
+    const { changeState, changeView } = this.props;
     axios({
       method: 'post',
       url: '/login',
       data: this.state
     })
       .then(result => {
-        if (result.data.error) {
-          // Possible modal is better than an alert
-          alert(`Sorry, wrong account and password`);
-        } else {
-          const cookies = new Cookies();
-          cookies.set('connection', result.data.cookie, { path: '/' });
-          this.props.changeState('loggedIn', true);
-          this.props.changeState('userState', result.data);
-          this.props.changeView('homepage');
-          // console.log('user has signed in, here is the data we have: ', result.data);
-        }
+        const cookies = new Cookies();
+        cookies.set('connection', result.data.cookie, { path: '/' });
+        changeState('loggedIn', true);
+        changeState('userState', result.data);
+        changeView('homepage');
       })
       .catch(error => {
-        // Possible modal is better than an alert
-        alert(`Sorry, wrong account and password`);
-        // console.log(error);
+        this.warnUser(true, 'Wrong Account or Password');
+        // console.log('err => ', error);
       });
   };
 
+  warnUser = (open, warning) => {
+    this.setState(prevState => ({ warn: open, warning }));
+  };
+
   handleChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     if (name !== 'email') {
       this.setState({
         [name]: value
@@ -55,9 +57,10 @@ export default class Login extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, warn, warning } = this.state;
     return (
       <Container fluid>
+        <ModalControlled open={warn} message={warning} close={this.warnUser} />
         <Transition animation="pulse" duration={500} transitionOnMount>
           <Segment>
             <Container>
@@ -92,3 +95,8 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  changeView: PropTypes.func.isRequired,
+  changeState: PropTypes.func.isRequired
+};

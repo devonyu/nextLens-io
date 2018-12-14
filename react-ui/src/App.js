@@ -22,11 +22,11 @@ class App extends Component {
         about: '',
         email: '',
         firstname: '',
-        id: '',
-        mount: '',
-        profileimgurl: '',
+        id: 0,
+        mount: 1,
+        profileimgurl: ''
       },
-      userPhotoImpressions: [],
+      userPhotoImpressions: []
     };
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
@@ -40,43 +40,30 @@ class App extends Component {
   }
 
   getView() {
-    if (this.state.view === 'landing') {
-      return (
-        <Landing
-          changeView={this.changeView}
-        />
-      );
-    } if (this.state.view === 'login') {
-      return (
-        <Login
-          changeView={this.changeView}
-          changeState={this.changeState}
-        />
-      );
-    } if (this.state.view === 'signup') {
-      return (
-        <Signup
-          changeView={this.changeView}
-        />
-      );
-    } if (this.state.view === 'homepage') {
+    const { place, userState, userPhotoImpressions, sidebar, view } = this.state;
+    if (view === 'landing') {
+      return <Landing changeView={this.changeView} />;
+    }
+    if (view === 'login') {
+      return <Login changeView={this.changeView} changeState={this.changeState} />;
+    }
+    if (view === 'signup') {
+      return <Signup changeView={this.changeView} />;
+    }
+    if (view === 'homepage') {
       return (
         <HomePage
           changeView={this.changeView}
           changeState={this.changeState}
-          place={this.state.place}
-          userInformation={this.state.userState}
-          userPhotoImpressions={this.state.userPhotoImpressions}
-          sidebar={this.state.sidebar}
+          place={place}
+          userInformation={userState}
+          userPhotoImpressions={userPhotoImpressions}
+          sidebar={sidebar}
           reloadUser={this.checkSession}
         />
       );
     }
-    return (
-      <Landing
-        changeView={this.changeView}
-      />
-    );
+    return <Landing changeView={this.changeView} />;
   }
 
   checkSession() {
@@ -84,13 +71,14 @@ class App extends Component {
     const cookies = new Cookies();
     // console.log(cookies);
     if (cookies.get('connection') !== undefined) {
-      axios.get('/auth')
+      axios
+        .get('/auth')
         .then(({ data }) => {
-        // console.log('Auth: ', data);
+          // console.log('Auth: ', data);
           try {
             if (data) {
-            // console.log(data);
-            // Implement Redux in future to make this cleaner
+              // console.log(data);
+              // Implement Redux in future to make this cleaner
               if (data.id !== undefined) {
                 console.log('Cookies found and Session matches in Redis!');
                 this.setState(() => ({
@@ -103,16 +91,18 @@ class App extends Component {
                     id: data.id,
                     place: data.place,
                     mount: data.mount,
-                    profileimgurl: data.profileimgurl,
-                  },
+                    profileimgurl: data.profileimgurl
+                  }
                 }));
                 this.changeView('homepage');
               } else if (data.error === 'NOT AUTHENTICATED') {
-                console.log('Err, cookies are present but session is not, sign in again or loading page!');
+                console.log(
+                  'Err, cookies are present but session is not, sign in again or loading page!'
+                );
                 this.changeView('landing');
               }
             } else {
-            // Signing in fails, go back to landing page
+              // Signing in fails, go back to landing page
               console.log('Cookies found, but Session is not valid');
               this.changeView('landing');
             }
@@ -121,7 +111,7 @@ class App extends Component {
             this.changeView('landing');
           }
         })
-        .catch((err) => {
+        .catch(err => {
           console.log('theres an error with auth! check below');
           console.log(err);
         });
@@ -132,43 +122,40 @@ class App extends Component {
   }
 
   sidebar() {
-    // this.setState({ sidebar: !this.state.sidebar });
-    this.setState((prev) => {
-      return {
-        sidebar: !prev.sidebar,
-      };
-    });
+    this.setState(prev => ({
+      sidebar: !prev.sidebar
+    }));
   }
 
   changeState(option, value) {
     this.setState(() => ({
-      [option]: value,
+      [option]: value
     }));
   }
 
   changeView(option) {
     this.setState(() => ({
-      view: option,
+      view: option
     }));
   }
 
   render() {
-    // console.log('state at top   <>', this.state)
+    const { userState, loggedIn } = this.state;
     return (
       <div id="container">
         <div id="navv">
           <Sticky>
             <NavBar
               sidebar={this.sidebar}
-              userInformation={this.state.userState}
+              userInformation={userState}
               changeView={this.changeView}
-              loggedIn={this.state.loggedIn}
+              loggedIn={loggedIn}
               reloadUser={this.checkSession}
               changeState={this.changeState}
             />
           </Sticky>
         </div>
-        <div id="content">{ this.getView() }</div>
+        <div id="content">{this.getView()}</div>
         <Footer />
       </div>
     );

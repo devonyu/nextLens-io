@@ -67,7 +67,7 @@ export default class Suggestions extends Component {
               placeholder="ebachman@aviato.com"
               onChange={this.handleChange}
             />
-            {/* THIS IS THE REDIRECT AFTER SENDING <input type="hidden" name="_next" value="https://devonyu.com" /> */}
+            {/* THIS IS THE REDIRECT AFTER SENDING <input type="hidden" name="_next" value="https://nextlens.io" /> */}
             <input type="hidden" name="_subject" value={`Suggestions on ${value}`} />
           </Form.Group>
           <Form.Group widths="equal">
