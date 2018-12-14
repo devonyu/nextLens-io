@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Header, Icon, Image, Menu, Modal } from 'semantic-ui-react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 
-class NavBar extends Component {
+export default class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +18,10 @@ class NavBar extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   alterIcon = () => {
-    this.props.sidebar();
-    this.state.icon === 'sb'
+    const { sidebar } = this.props;
+    const { icon } = this.state;
+    sidebar();
+    icon === 'sb'
       ? this.setState(() => ({
           icon: 'leftarrow'
         }))
@@ -28,10 +31,12 @@ class NavBar extends Component {
   };
 
   logIn() {
-    this.props.changeView('login');
+    const { changeView } = this.props;
+    changeView('login');
   }
 
   logOut() {
+    const { changeState, changeView } = this.props;
     axios({
       method: 'get',
       url: '/logout'
@@ -39,52 +44,53 @@ class NavBar extends Component {
       .then(() => {
         const cookies = new Cookies();
         cookies.remove('connection');
-        this.props.changeState('loggedIn', false);
-        this.props.changeState('userState', {});
-        this.props.changeState('userPhotoImpressions', []);
-        this.props.changeState('place', 0);
-        this.props.changeView('landing');
+        changeState('loggedIn', false);
+        changeState('userState', {});
+        changeState('userPhotoImpressions', []);
+        changeState('place', 0);
+        changeView('landing');
         console.log('success in logging out!');
       })
       .catch(err => {
-        console.log('error in loggin out!');
+        console.log('error in loggin out => ', err);
       });
   }
 
   title() {
-    if (this.props.loggedIn === true) {
-      this.props.changeView('homepage');
-    } else if (this.props.loggedIn === false) {
-      this.props.changeView('landing');
+    const { loggedIn, changeView } = this.props;
+    if (loggedIn === true) {
+      changeView('homepage');
+    } else if (loggedIn === false) {
+      changeView('landing');
     }
   }
 
   render() {
-    const { activeItem } = this.state;
+    const { activeItem, icon } = this.state;
+    const { loggedIn, userInformation } = this.props;
 
     return (
       <Menu borderless size="tiny" fluid>
-        {this.props.loggedIn ? (
+        {loggedIn ? (
           <Menu.Item onClick={this.alterIcon} header>
-            {this.state.icon === 'sb' ? <Icon name="sidebar" /> : <Icon name="chevron left" />}
+            {icon === 'sb' ? <Icon name="sidebar" /> : <Icon name="chevron left" />}
           </Menu.Item>
         ) : (
           ''
         )}
 
-        <Menu.Item onClick={this.title}
-header
-        >
+        <Menu.Item
+onClick={this.title} header>
           NextLens.io
         </Menu.Item>
 
         <Modal
           dimmer="blurring"
-          trigger={(
-<Menu.Item name="about" active={activeItem === 'about'} onClick={this.handleItemClick}>
+          trigger={
+            <Menu.Item name="about" active={activeItem === 'about'} onClick={this.handleItemClick}>
               About
             </Menu.Item>
-)}
+          }
           closeIcon
         >
           <Modal.Header>Designed and Developed by Devon Yu</Modal.Header>
@@ -103,8 +109,12 @@ header
               </Header>
               <p>Built using React, Node+Express, PostgreSQL, Deployed with Heroku</p>
               <p>
-                Are you Hiring? Checkout my <a href="https://devonyu.github.io">portfolio</a>,
-                Download my                {' '}
+                Are you Hiring? Checkout my 
+{' '}
+<a href="https://devonyu.github.io">portfolio</a>
+,
+                Download my
+{' '}
                 <a href="https://devonyu.github.io/devonyuresume.pdf" download="true">
                   Resume!
                 </a>
@@ -115,20 +125,19 @@ header
 
         <Menu.Menu position="right">
           <Menu.Item>
-            {this.props.userInformation.firstname === '' ||
-            this.props.userInformation.firstname === undefined
+            {userInformation.firstname === '' || userInformation.firstname === undefined
               ? ''
-              : `${this.props.userInformation.firstname}`}
+              : `${userInformation.firstname}`}
           </Menu.Item>
           <Menu.Item>
-            {this.props.loggedIn ? (
+            {loggedIn ? (
               <Button size="tiny" onClick={this.logOut} primary>
                 Log out
               </Button>
             ) : (
               <Button size="tiny" onClick={this.logIn} primary>
                 Log in
-                </Button>
+              </Button>
             )}
           </Menu.Item>
         </Menu.Menu>
@@ -137,4 +146,17 @@ header
   }
 }
 
-export default NavBar;
+NavBar.propTypes = {
+  sidebar: PropTypes.func.isRequired,
+  changeState: PropTypes.func.isRequired,
+  changeView: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  userInformation: PropTypes.shape({
+    about: PropTypes.string,
+    email: PropTypes.string,
+    firstname: PropTypes.string,
+    id: PropTypes.number,
+    mount: PropTypes.number,
+    profileimgurl: PropTypes.string
+  }).isRequired
+};

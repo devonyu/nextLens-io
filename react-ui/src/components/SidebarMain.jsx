@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, Icon, Label, Menu, Sidebar } from 'semantic-ui-react';
 import Profile from './Profile';
 
@@ -6,39 +7,21 @@ export default class SidebarMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeItem: '',
-      ready: 'red'
+      activeItem: ''
     };
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.likeProgress !== this.props.likeProgress) {
-      if (this.props.likeProgress < 5) {
-        this.setState(() => ({
-          ready: 'red'
-        }));
-      } else if (this.props.likeProgress > 5 && this.props.likeProgress < 30) {
-        this.setState(() => ({
-          ready: 'yellow'
-        }));
-      } else if (this.props.likeProgress >= 30) {
-        this.setState(() => ({
-          ready: 'green'
-        }));
-      }
-    }
-  }
-
   handleItemClick = (e, { name }) => {
+    const { changeViews } = this.props;
     this.setState({ activeItem: name });
     if (name !== 'progress') {
-      this.props.changeViews(name);
+      changeViews(name);
     }
   };
 
   render() {
     const { activeItem } = this.state;
-    // console.log('props => ', this.props);
+    const { visible, userInformation, likeProgress } = this.props;
     return (
       <Sidebar
         as={Menu}
@@ -46,7 +29,7 @@ export default class SidebarMain extends Component {
         direction="left"
         inverted
         vertical
-        visible={this.props.visible}
+        visible={visible}
         width="thin"
       >
         <Menu.Item
@@ -54,7 +37,7 @@ export default class SidebarMain extends Component {
           active={activeItem === 'editProfile'}
           onClick={this.handleItemClick}
         >
-          <Profile userInformation={this.props.userInformation} />
+          <Profile userInformation={userInformation} />
         </Menu.Item>
 
         <Menu.Item
@@ -70,9 +53,20 @@ export default class SidebarMain extends Component {
 
         <Menu.Item name="progress" active={activeItem === 'progress'}>
           Progress:
-          <Label corner="right" color={this.state.ready}>
-            {this.props.likeProgress < 30 ? Math.floor((this.props.likeProgress / 30) * 100) : 100}%
-          </Label>
+          <Label
+            corner="right"
+            color={(() => {
+              if (likeProgress <= 0) {
+                return 'red';
+              }
+              if (likeProgress >= 30) {
+                return 'green';
+              }
+              return 'yellow';
+            })()}
+          >
+            {likeProgress < 30 ? Math.floor((likeProgress / 30) * 100) : 100}%
+                              </Label>
         </Menu.Item>
 
         <Menu.Item
@@ -81,12 +75,20 @@ export default class SidebarMain extends Component {
           onClick={this.handleItemClick}
         >
           <Label
-            className={this.props.likeProgress >= 30 ? 'heartbeat' : 'NULL'}
+            className={likeProgress >= 30 ? 'heartbeat' : 'NULL'}
             corner="right"
             size="small"
-            color={this.state.ready}
+            color={(() => {
+              if (likeProgress <= 0) {
+                return 'red';
+              }
+              if (likeProgress >= 30) {
+                return 'green';
+              }
+              return 'yellow';
+            })()}
           >
-            {this.props.likeProgress >= 30 ? 'Ready' : 'N/A'}
+            {likeProgress >= 30 ? 'Ready' : 'N/A'}
           </Label>
           Next Lens:
         </Menu.Item>
@@ -97,7 +99,7 @@ export default class SidebarMain extends Component {
           onClick={this.handleItemClick}
         >
           <Label corner="right" color="blue">
-            {this.props.likeProgress}
+            {likeProgress}
           </Label>
           Liked Images:
         </Menu.Item>
@@ -119,3 +121,17 @@ export default class SidebarMain extends Component {
     );
   }
 }
+
+SidebarMain.propTypes = {
+  userInformation: PropTypes.shape({
+    about: PropTypes.string,
+    email: PropTypes.string,
+    firstname: PropTypes.string,
+    id: PropTypes.number,
+    mount: PropTypes.number,
+    profileimgurl: PropTypes.string
+  }).isRequired,
+  visible: PropTypes.bool.isRequired,
+  likeProgress: PropTypes.number.isRequired,
+  changeViews: PropTypes.func.isRequired
+};

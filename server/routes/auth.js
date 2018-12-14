@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 router.use('/', async (req, res) => {
   // create new session object.
   if (req.session && req.session.key) {
-  // if email key is sent redirect.
+    // if email key is sent redirect.
     console.log('Users Session within Server=> ', req.session);
     // get user information from DB
     const user = req.session.key;
@@ -18,9 +18,8 @@ router.use('/', async (req, res) => {
     console.log('results of auth: ', results);
     res.send(results);
   } else {
-  // else go to home page.
+    // else go to home page.
     console.log('key not present, No user session located');
-    // return next();
     res.send({ error: 'NOT AUTHENTICATED' });
   }
 });

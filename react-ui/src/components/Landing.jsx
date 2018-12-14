@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Container } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
 import SwipeLanding from './SwipeLanding';
 
 export default class Landing extends Component {
@@ -35,3 +36,7 @@ export default class Landing extends Component {
     );
   }
 }
+
+Landing.propTypes = {
+  changeView: PropTypes.func.isRequired
+};
