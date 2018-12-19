@@ -1,7 +1,7 @@
 # NextLens.io
 -----------------------------------------------
 
-> Camera and Lens recommendations based on user's likes on pre-sorted and pre-screened images.
+> Lens recommendations based on user's likes on pre-sorted and pre-screened images.
 >
 
 [![Build Status][travis-image]][travis-url] 
@@ -54,29 +54,25 @@ See the [open issues](#bugs) for smaller things to work on.
 
 ### Currently Implemented:
 -----------------------------------------------
-- React styled with Semantic-UI React components rendering.
-- NodeJS server basic setup with Express.
-- NavBar set up.
-- Calls to Unsplash Api for current splash page images.
-- About Me section.
+- React Components styled with Semantic-UI
+- NodeJS with Express running as our serverside logic
+- PostgreSQL Database retaining user data
+- Redis Store for saving user sessions based on cookies and a session store upon log-in/out
 - Travis CI integration for automatic deployment on pushes to the master branch.
-- Deployed to Heroku (The web app is a WIP, excuse the bugs for now).
-
+- Deployed to Heroku.
+- MVP recommendation system running via Database queries and a simple ratio analysis on affinities
+- Links to FlickR pages, eBay/Amazon links for sample lens recommendations added to API
+- Profile page that lets user update their information
+- Liked Images component that renders past likes
 
 
 ### Planned:
 -----------------------------------------------
-- Create a full step by step wire framing / storyboard to optimize UX/UI to break down features.
-- Create Tests for everything - TDD! (Mocha/Chai).  Travis CI will use these tests.
-- Create Trello board to break down features to make it more manageable.
-- Create algorithm to determine best lens for user (first with dummy data) - IMPORTANT.
-- Create dummy data to test on Algorithm.
-- Setup a sign-in process to persist data/likes for a user.
-- Setup a PostgreSQL DB server with Heroku.
-- Change the app's url away from the Herokuapp URL.
+- Let users upload their own images for others to rate
+- Create a dashboard for the platforms top likes, categories, lenses, reviews
+- Let users add lenses to their collection and be able to write reviews
 - Possible OAUTH integration with Facebook/Google for quick sign-ins.
 - Possible Instagram integration to find photos base off of specific #hashtags.
-- Flickr integration for gathering images for specific lenses and camera via their group pool images.
 - Filtering system to limit price and specific metrics of lenses a user may want in their perceived recommendations.
 - Sharing the web app to social media (FB/Google+/Instagram/Snapchat?/others).
 
@@ -107,7 +103,6 @@ See the [open issues](#bugs) for smaller things to work on.
 -----------------------------------------------
 
 - Rendering of images at current state depends on the users connection speeds - we can optimize the downloads based off of what device they are using (smaller images for phones vs larger for desktops).
-- Rendering of images only occurs when a Like || Dislike is clicked. Cache or Preload images can fix this immensely (How to optimize?)
 
 -----------------------------------------------
 
@@ -115,24 +110,113 @@ See the [open issues](#bugs) for smaller things to work on.
 
 -----------------------------------------------
 
-Fork and clone the repo down to your local dev machine.  Npm install the dependencies from the package.json file.
+Tools recommended for developing on this project include:
 
-```sh
-npm install
-```
+- NodeJS
+- Yarn
+- NPM
+- NVM
+- PostgresQL
+- Redis
+- React
+- Code Editor (VS CODE Recommended)
 
-Start the NodeJS server by going to the root folder and run the following.
-We use nodemon to continuously watch the server index file for changes:
+### First install Xcode on your Mac via AppStore:
+Once installed, agree to the terms
+Install the command line tools for your OSX version + Xcode version (10.14, Xcode 10.1 Beta 2)
 
-```sh
-nodemon server
-```
+### Install Node via NVM:
+(curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash)
+Once NVM is installed, (check with nvm list)
+Install LTS of Node 10.11
+$ nvm install 10.11.0
+$ nvm use 10.11.0
+$ nvm alias default 10.11.0
+Check installed with $ node -v
 
-React Client UI - cd into the react-ui folder and run have webpack watch and compile a rendered page of the React App:
+(Create a bash profile to persists information - touch ~/.bash_profile)
 
-```sh
-npm start
-```
+### Install latest NPM
+$ npm install -g npm
+Check installed with npm -v
+
+### Install [Brew](https://brew.sh/) 
+Requires the command line tools above
+Check brew is installed brew -v
+
+### Install [Yarn](https://yarnpkg.com/lang/en/docs/install/#mac-stable) 
+brew install yarn
+
+(Optional to use iTerm2) https://iterm2.com/
+
+### GIT SECTION.  Git should be installed once Xcode has been installed
+Go to https://github.com/devonyu/nextLens-io
+Fork the repo and clone your forked repo
+Open your terminal and type
+Git clone https://github.com/devonyu/nextLens-io.git || your forked version
+
+Cd into the root nextLens-io folder and run ‘yarn install’ to install dependencies for back-end code
+
+Open a new terminal window to set up the react UI client
+Cd to react-ui folder
+Run yarn install to install dependencies for front-end client
+Run yarn start to set up react client, it will open a new window to display next lens 
+If not, you can go to localhost:3000 in a browser (Chrome recommended).  You can also load it on different devices, (check the ‘On Your Network’ address and type that in on your wifi connected devices like mobile and tablet)
+
+###  Install nodemon to continuously work on server code (it watches for any changes to server code)
+(npm install -g nodemon)
+Run nodemon on the root folder to set up the backend (will required additional steps first to work)
+
+### Install Postgres
+1. Install Postgres server
+(https://postgresapp.com/) recommended - Postgres.app with PostgreSQL 11 (MAYBE)
+Install and run it, click initialize. Heroku is running 10.5
+Create a server that is running on Postgres 10.5
+
+
+2. Install Postical and add credentials
+
+### Install [Redis](https://medium.com/@djamaldg/install-use-redis-on-macos-sierra-432ab426640e)
+
+Brew update
+Brew install redis
+
+Redis-server 
+Redis-cli
+Test if it working, type ping to the cli (should return pong)
+
+- Tables
+- Create in order
+- Mounts
+- Lenses
+- Users
+- Categories
+- Userlikes
+- Lens review
+- User lens
+
+Then load CSV files to import mock data (create a helper to do this with fake data)
+
+Ensure all tables are created and sample data from csv are loaded to ensure working code.
+Run the node utils.js in server folder to load sample images of 4 categories to DB photos table
+
+### Install [VS CODE](https://code.visualstudio.com/)
+Open up to the nextLens folder
+
+### Create ENV file for links to API keys and secrets, Postgres heroku address and local DB addresses (Postgres port default is 5432)
+
+### Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+brew install heroku/brew/heroku
+
+### PROBLEM IN LOCAL DEV WAS WRONG POSTGRES ADDRESS AND SEQUENCE ID WAS OUT OF SYNC FOR USER ID
+https://hcmc.uvic.ca/blogs/index.php?blog=22&p=8105&more=1&c=1&tb=1&pb=1
+postgres://localhost:5432/nextlens'
+// Use TEST_DATABASE for local development DB || DATABASE_URL for heroku DB
+
+### Install Jest for testing
+
+### Coveralls and Travis CI
+Make sure Coveralls token is added, create a .coveralls.yml file and add your token to fix 
 
 
 ## Release History

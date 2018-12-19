@@ -23,12 +23,8 @@ export default class SwipeLanding extends Component {
     axios
       .get('/landing')
       .then(({ data }) => {
-        let temp = [];
-        data.results.forEach(img => {
-          temp.push(img.urls.regular);
-        });
         // lower the bandwith by changing amount of images to load, Will be scrapped for main landing page
-        temp = temp.slice(0, 5);
+        const temp = data.slice(0, 5);
         this.setState(prevState => ({ imgs: temp }));
       })
       .catch(error => {
