@@ -218,6 +218,8 @@ postgres://localhost:5432/nextlens'
 ### Coveralls and Travis CI
 Make sure Coveralls token is added, create a .coveralls.yml file and add your token to fix 
 
+### Loadtesting
+![LoadTest](https://github.com/devonyu/nextLens-io/blob/master/images/loadtest.png)
 
 ## Release History
 
