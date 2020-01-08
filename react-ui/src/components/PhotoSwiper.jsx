@@ -12,7 +12,7 @@ const categories = [null, 'portrait', 'landscape', 'aerial', 'street'];
 
 const styles = {
   root: {
-    background: '#1b1c1d'
+    background: 'transparent'
   },
   img: {
     width: 'auto'

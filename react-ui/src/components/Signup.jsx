@@ -9,7 +9,7 @@ export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
+      firstname: '',
       email: '',
       password: '',
       mount: '',
@@ -69,14 +69,14 @@ export default class Signup extends Component {
   };
 
   handleSubmit = () => {
-    const { email, password, firstName, mount } = this.state;
-    if (validateEmail(email) && password.length >= 5 && firstName && mount) {
+    const { email, password, firstname, mount } = this.state;
+    if (validateEmail(email) && password.length >= 5 && firstname && mount) {
       this.signupNewUser(this.state);
     } else if (!validateEmail(email)) {
       this.warnUser(true, 'Invalid Email Format');
     } else if (password.length < 5) {
       this.warnUser(true, 'Password must be at least 5 characters');
-    } else if (!firstName) {
+    } else if (!firstname) {
       this.warnUser(true, 'First Name required');
     } else if (!mount) {
       this.warnUser(true, 'Please Select a Camera Mount');
@@ -84,7 +84,7 @@ export default class Signup extends Component {
   };
 
   render() {
-    const { firstName, email, password, mount, about, profileimgurl, warn, warning } = this.state;
+    const { firstname, email, password, mount, about, profileimgurl, warn, warning } = this.state;
     return (
       <Container fluid>
         <ModalControlled open={warn} message={warning} close={this.warnUser} />
@@ -95,8 +95,8 @@ export default class Signup extends Component {
                 <label>First Name</label>
                 <input
                   placeholder="First Name"
-                  name="firstName"
-                  value={firstName}
+                  name="firstname"
+                  value={firstname}
                   onChange={this.handleChange}
                 />
               </Form.Field>

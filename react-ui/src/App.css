@@ -1,21 +1,21 @@
 /* fixes bug where screen shakes on scrolling past bottom */
-html { 
+html {
   overflow-y: scroll;
 }
 
 #container {
-  max-height:100%;
+  max-height: 100%;
   height: calc(100vh - 110px);
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 #content {
-  min-height:100%;
+  min-height: 100%;
   height: 100%;
 }
 
-.pushable>.pusher {
+.pushable > .pusher {
   min-height: calc(100vh - 100px);
 }
 
@@ -26,35 +26,33 @@ html {
 
 #footer {
   text-align: center;
-  bottom:0;
-  width:100%;
-  height:60px;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
 }
 
-#ft1, #ft2 {
+#ft1,
+#ft2 {
   background-color: #1b1c1d;
   font-size: 26px;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 5px;
   padding-top: 5px;
 }
 
 #plmain {
   height: calc(100vh - 120px);
   /* vertical-align: bottom; */
-  
 }
 
 #photoSwiperImage {
   max-height: calc(100vh - 186px);
-  width:100vw;
+  width: 100vw;
   margin-left: auto;
   margin-right: auto;
-
 }
 
-.ui.segment.pushable{
+.ui.segment.pushable {
   height: -webkit-stretch;
   max-height: -webkit-stretch;
 }
@@ -110,7 +108,7 @@ html {
 }
 
 .flickrimg {
-  transition: ease-in-out .5s;
+  transition: ease-in-out 0.5s;
 }
 
 .flickrcontent {
@@ -124,7 +122,7 @@ html {
   color: #fff;
   visibility: hidden;
   opacity: 0;
-  transition: opacity .3s, visibility .3s, ease-in-out .5s;
+  transition: opacity 0.3s, visibility 0.3s, ease-in-out 0.5s;
 }
 
 .flickrwrap:hover .flickrcontent {
@@ -149,7 +147,7 @@ html {
 }
 
 .grid-item-photo {
-  transition: opacity .3s, visibility .3s, ease-in-out .5s;
+  transition: opacity 0.3s, visibility 0.3s, ease-in-out 0.5s;
 }
 
 .grid-item-photographer {
@@ -163,13 +161,13 @@ html {
   right: 0;
 }
 
-.grid-item:hover .grid-item-photographer{
+.grid-item:hover .grid-item-photographer {
   text-align: center;
   visibility: visible;
   opacity: 1;
 }
 
-.grid-item:hover .grid-item-photo{
+.grid-item:hover .grid-item-photo {
   -ms-transform: scale(1.1);
   -webkit-transform: scale(1.1);
 }
@@ -186,7 +184,7 @@ html {
 }
 
 .heartbeat {
-	animation: heartbeat 1.5s ease-in-out infinite both;
+  animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
 @keyframes text-focus-in {
@@ -236,4 +234,8 @@ html {
     transform: scale(1);
     animation-timing-function: ease-out;
   }
+}
+
+.ui.segment.pushable {
+  background-color: #1b1c1d;
 }

@@ -141,7 +141,7 @@ export default class EditProfile extends Component {
           <Grid.Column stretched>
             <Form>
               <Form.Field>
-                <label>First Name</label>
+                <label style={{ color: 'white' }}>First Name</label>
                 <input
                   placeholder={userInformation.firstname}
                   name="firstName"

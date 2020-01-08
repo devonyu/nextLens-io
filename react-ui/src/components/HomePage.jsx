@@ -32,20 +32,20 @@ export default class HomePage extends Component {
   componentDidMount = async () => {
     const { userInformation, userPhotoImpressions } = this.props;
     await this.getUserInformation(userInformation.id);
-    // console.log('HP, Photo impressions after getinformation ', this.props.userPhotoImpressions);
+    console.log('HP, Photo impressions after getinformation ', this.props.userPhotoImpressions);
     if (userPhotoImpressions.length > 0) {
       if (userPhotoImpressions.length >= 30) {
-        // console.log('recmnt2');
+        console.log('recmnt2');
         this.changeViews('recommendations');
       } else if (userPhotoImpressions.length < 30 && userPhotoImpressions.length > 0) {
-        // console.log('plmnt2');
+        console.log('plmnt2');
         this.changeViews('photoSwiper');
       } else {
-        // console.log('missed photo impression checks, going to onBoard3');
+        console.log('missed photo impression checks, going to onBoard3');
         this.changeViews('onBoard');
       }
     } else {
-      // console.log('missed photo impression checks, going to onBoard4');
+      console.log('missed photo impression checks, going to onBoard4');
       this.changeViews('onBoard');
     }
   };
