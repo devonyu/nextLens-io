@@ -59,7 +59,7 @@ export default class Login extends Component {
   render() {
     const { email, password, warn, warning } = this.state;
     return (
-      <Container fluid>
+      <Container>
         <ModalControlled open={warn} message={warning} close={this.warnUser} />
         <Transition animation="pulse" duration={500} transitionOnMount>
           <Segment>

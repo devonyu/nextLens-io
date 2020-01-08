@@ -14,9 +14,9 @@ import Footer from './components/Footer';
 const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  background-color: white;
-  height: 100%;
+  justify-content: space-between;
+  background-color: #1b1c1d;
+  height: 100vh;
 `;
 
 class App extends Component {

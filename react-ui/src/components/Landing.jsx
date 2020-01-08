@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Button, Container } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import SwipeLanding from './SwipeLanding';
+
+const Title = styled.h1`
+  color: white;
+  font-size: 3em;
+`;
 
 export default class Landing extends Component {
   constructor(props) {
@@ -22,7 +28,7 @@ export default class Landing extends Component {
     return (
       <Container fluid>
         <Container fluid textAlign="center">
-          <h2>Welcome to Nextlens.io</h2>
+          <Title>Welcome to Nextlens.io</Title>
           <Button
             basic
             color="green"

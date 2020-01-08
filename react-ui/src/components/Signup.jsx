@@ -86,7 +86,7 @@ export default class Signup extends Component {
   render() {
     const { firstname, email, password, mount, about, profileimgurl, warn, warning } = this.state;
     return (
-      <Container fluid>
+      <Container>
         <ModalControlled open={warn} message={warning} close={this.warnUser} />
         <Transition animation="pulse" duration={500} transitionOnMount>
           <Segment>
