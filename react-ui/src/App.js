@@ -17,6 +17,13 @@ const FlexContainer = styled.div`
   justify-content: space-between;
   background-color: #1b1c1d;
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
+`;
+
+const NavContainer = styled.div`
+  width: 100%;
+  top: 0;
 `;
 
 class App extends Component {
@@ -152,18 +159,16 @@ class App extends Component {
     const { userState, loggedIn } = this.state;
     return (
       <FlexContainer>
-        <div>
-          <Sticky>
-            <NavBar
-              sidebar={this.sidebar}
-              userInformation={userState}
-              changeView={this.changeView}
-              loggedIn={loggedIn}
-              reloadUser={this.checkSession}
-              changeState={this.changeState}
-            />
-          </Sticky>
-        </div>
+        <NavContainer>
+          <NavBar
+            sidebar={this.sidebar}
+            userInformation={userState}
+            changeView={this.changeView}
+            loggedIn={loggedIn}
+            reloadUser={this.checkSession}
+            changeState={this.changeState}
+          />
+        </NavContainer>
         <div>{this.getView()}</div>
         <Footer />
       </FlexContainer>

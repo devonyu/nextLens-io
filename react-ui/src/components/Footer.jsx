@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import { Icon } from 'semantic-ui-react';
 
 const FooterContainer = styled.div`
-  background-color: #1b1c1d;
+  background-color: black;
+  border: none !important;
   display: flex;
   justify-content: space-between;
   height: 30px;
-  position: static;
 `;
 
 const FooterSide = styled.div`
   width: 100%;
-  background-color: #1b1c1d;
+  background-color: black;
   border: none !important;
   color: white;
   display: flex;

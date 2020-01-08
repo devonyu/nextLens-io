@@ -31,7 +31,7 @@ const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  height: 100vh;
+  height: 100%;
 `;
 
 export default class EditProfile extends Component {

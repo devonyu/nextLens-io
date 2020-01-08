@@ -3,8 +3,10 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import Masonry from 'react-masonry-component';
 
+import styled from 'styled-components';
+
 const masonryOptions = {
-  transitionDuration: '0.8s',
+  transitionDuration: '2s',
   itemSelector: '.grid-item',
   columnWidth: 20,
   gutter: 10,
@@ -13,6 +15,18 @@ const masonryOptions = {
 };
 
 const imagesLoadedOptions = { background: '.my-bg-image-el' };
+
+const LikedImagesContainer = styled.div`
+  height: calc(100vh - 75px);
+  position: relative;
+`;
+
+const MasonaryContainer = styled.div`
+  max-height: 100%;
+  max-width: 100%;
+  padding: 1em;
+  overflow: auto;
+`;
 
 export default class LikedImages extends Component {
   constructor(props) {
@@ -45,21 +59,28 @@ export default class LikedImages extends Component {
     const childElements = photos.map((photo, i) => (
       <div className="grid-item" key={i}>
         <img className="grid-item-photo" src={photo.smallurl} alt={photo.photographername} />
-        <p className="grid-item-photographer">Photographer: {photo.photographername}</p>
+        <p className="grid-item-photographer">
+          Photographer:
+          {photo.photographername}
+        </p>
       </div>
     ));
 
     return (
-      <Masonry
-        className="my-gallery-class" // default ''
-        elementType="div" // default 'div'
-        options={masonryOptions} // default {}
-        disableImagesLoaded={false} // default false
-        updateOnEachImageLoad // default false and works only if disableImagesLoaded is false
-        imagesLoadedOptions={imagesLoadedOptions} // default {}
-      >
-        {childElements}
-      </Masonry>
+      <LikedImagesContainer>
+        <MasonaryContainer>
+          <Masonry
+            className="my-gallery-class" // default ''
+            elementType="div" // default 'div'
+            options={masonryOptions} // default {}
+            disableImagesLoaded={false} // default false
+            updateOnEachImageLoad // default false and works only if disableImagesLoaded is false
+            imagesLoadedOptions={imagesLoadedOptions} // default {}
+          >
+            {childElements}
+          </Masonry>
+        </MasonaryContainer>
+      </LikedImagesContainer>
     );
   }
 }

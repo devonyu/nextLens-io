@@ -13,7 +13,7 @@ import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
 
 const FullHeightContainer = styled.div`
-  height: 100vh;
+  height: calc(100vh - 68px);
 `;
 
 export default class HomePage extends Component {
