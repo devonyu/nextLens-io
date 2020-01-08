@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Segment, Sidebar, Visibility } from 'semantic-ui-react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PhotoSwiper from './PhotoSwiper';
 import OnBoard from './OnBoard';
@@ -10,6 +11,10 @@ import EditProfile from './EditProfile';
 import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
+
+const FullHeightContainer = styled.div`
+  height: 100vh;
+`;
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -167,18 +172,20 @@ export default class HomePage extends Component {
     const { sidebar, userInformation } = this.props;
     const { likedImageHP } = this.state;
     return (
-      <Sidebar.Pushable as={Segment}>
-        <SidebarMain
-          visible={sidebar}
-          userInformation={userInformation}
-          likeProgress={likedImageHP}
-          changeViews={this.changeViews}
-          changeStates={this.changeStates}
-        />
-        <Sidebar.Pusher>
-          <Visibility onUpdate={this.handleUpdate}>{this.getViews()}</Visibility>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
+      <FullHeightContainer>
+        <Sidebar.Pushable as={Segment}>
+          <SidebarMain
+            visible={sidebar}
+            userInformation={userInformation}
+            likeProgress={likedImageHP}
+            changeViews={this.changeViews}
+            changeStates={this.changeStates}
+          />
+          <Sidebar.Pusher>
+            <Visibility onUpdate={this.handleUpdate}>{this.getViews()}</Visibility>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </FullHeightContainer>
     );
   }
 }

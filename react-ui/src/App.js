@@ -3,12 +3,21 @@ import Cookies from 'universal-cookie';
 import './App.css';
 import axios from 'axios';
 import { Sticky } from 'semantic-ui-react';
+import styled from 'styled-components';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: white;
+  height: 100%;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -142,8 +151,8 @@ class App extends Component {
   render() {
     const { userState, loggedIn } = this.state;
     return (
-      <div id="container">
-        <div id="navv">
+      <FlexContainer>
+        <div>
           <Sticky>
             <NavBar
               sidebar={this.sidebar}
@@ -155,9 +164,9 @@ class App extends Component {
             />
           </Sticky>
         </div>
-        <div id="content">{this.getView()}</div>
+        <div>{this.getView()}</div>
         <Footer />
-      </div>
+      </FlexContainer>
     );
   }
 }

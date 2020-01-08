@@ -1,19 +1,38 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Container,
-  Card,
-  Form,
-  Grid,
-  Icon,
-  Image,
-  Select,
-  TextArea
-} from 'semantic-ui-react';
+import { Container, Card, Form, Grid, Icon, Image, Select, TextArea } from 'semantic-ui-react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { mounts, getMount, validateEmail } from './utils';
 import ModalControlled from './ModalControlled';
+
+const InputTitle = styled.span`
+  color: #1b1c1d;
+`;
+
+const SubmitButton = styled.button`
+  color: white;
+  font-size: 1.2em;
+  background-color: #3ddb93;
+  border-style: none;
+  border-radius: 0.3em;
+  padding: 10px;
+  cursor: pointer;
+  :hover,
+  :focus {
+    box-shadow: 0 0.5em 0.5em -0.4em #ffffff;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transform: translateY(-0.25em);
+  }
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 100vh;
+`;
 
 export default class EditProfile extends Component {
   constructor(props) {
@@ -113,82 +132,84 @@ export default class EditProfile extends Component {
     const { firstName, email, mount, about, profileimgurl, warn, warning } = this.state;
     const { userInformation } = this.props;
     return (
-      <Container fluid>
-        <ModalControlled open={warn} message={warning} close={this.warnUser} />
-        <Grid columns={2} stackable padded>
-          <Grid.Column stretched width={5}>
-            <Card raised fluid>
-              <Image
-                fluid
-                src={
-                  profileimgurl ||
-                  'https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg'
-                }
-                rounded
-              />
-              <Card.Content>
-                <Card.Header>{firstName}</Card.Header>
-                <Card.Meta>{getMount(mount, mounts)}</Card.Meta>
-                <Card.Description>{about}</Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <Icon name="camera retro" />
-                Owns X lens
-              </Card.Content>
-            </Card>
-          </Grid.Column>
+      <FlexContainer>
+        <Container fluid>
+          <ModalControlled open={warn} message={warning} close={this.warnUser} />
+          <Grid columns={2} stackable padded>
+            <Grid.Column stretched width={5}>
+              <Card raised fluid style={{ margin: '1em' }}>
+                <Image
+                  fluid
+                  src={
+                    profileimgurl ||
+                    'https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg'
+                  }
+                  rounded
+                />
+                <Card.Content>
+                  <Card.Header>{firstName}</Card.Header>
+                  <Card.Meta>{getMount(mount, mounts)}</Card.Meta>
+                  <Card.Description>{about}</Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  <Icon name="camera retro" />
+                  Owns X lens
+                </Card.Content>
+              </Card>
+            </Grid.Column>
 
-          <Grid.Column stretched>
-            <Form>
-              <Form.Field>
-                <label style={{ color: 'white' }}>First Name</label>
-                <input
-                  placeholder={userInformation.firstname}
-                  name="firstName"
-                  value={firstName}
+            <Grid.Column stretched>
+              <Form>
+                <Form.Field>
+                  <InputTitle>First Name</InputTitle>
+                  <input
+                    placeholder={userInformation.firstname}
+                    name="firstName"
+                    value={firstName}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <InputTitle>Email</InputTitle>
+                  <input
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <InputTitle>Camera Mount</InputTitle>
+                <Form.Field
+                  control={Select}
+                  options={mounts}
+                  value={mount}
+                  placeholder={getMount(userInformation.mount, mounts)}
+                  onChange={this.updateMount}
+                />
+                <InputTitle>Profile Image URL</InputTitle>
+                <Form.Field
+                  control={TextArea}
+                  placeholder={userInformation.profileimgurl || 'N/A'}
+                  name="profileimgurl"
+                  value={profileimgurl}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field>
-                <label>Email</label>
-                <input
-                  placeholder="Email"
-                  name="email"
-                  value={email}
+                <InputTitle>About</InputTitle>
+                <Form.Field
+                  control={TextArea}
+                  placeholder={userInformation.about}
+                  name="about"
+                  value={about}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field
-                control={Select}
-                label="Camera Mount"
-                options={mounts}
-                value={mount}
-                placeholder={getMount(userInformation.mount, mounts)}
-                onChange={this.updateMount}
-              />
-              <Form.Field
-                control={TextArea}
-                label="Profile Image URL"
-                placeholder={userInformation.profileimgurl || 'N/A'}
-                name="profileimgurl"
-                value={profileimgurl}
-                onChange={this.handleChange}
-              />
-              <Form.Field
-                control={TextArea}
-                label="About"
-                placeholder={userInformation.about}
-                name="about"
-                value={about}
-                onChange={this.handleChange}
-              />
-              <Button type="submit" onClick={this.handleSubmit}>
-                Update Profile
-              </Button>
-            </Form>
-          </Grid.Column>
-        </Grid>
-      </Container>
+                <SubmitButton type="submit" onClick={this.handleSubmit}>
+                  Update Profile
+                </SubmitButton>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </Container>
+      </FlexContainer>
     );
   }
 }
