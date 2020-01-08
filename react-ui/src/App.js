@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import './App.css';
 import axios from 'axios';
-import { Sticky } from 'semantic-ui-react';
 import styled from 'styled-components';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
