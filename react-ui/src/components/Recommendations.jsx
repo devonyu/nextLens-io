@@ -28,10 +28,6 @@ const NotReadyContainer = styled.div`
 `;
 
 const IpadPhotoswiper = styled.img`
-  // display: block;
-  // width: 100%;
-  // max-width: 250px;
-  // height: auto;
   object-fit: cover;
   width: 100%;
   height: auto;

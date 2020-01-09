@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import photoswipergif from '../images/photoswiperipad.gif';
 
 const Container = styled.div`
   height: calc(100vh - 75px);
@@ -28,7 +29,7 @@ const WalkthroughContainer = styled.div`
 `;
 
 const WalkthroughCard = styled.div`
-  height: 400px;
+  height: 500px;
   max-width: calc(100vw / 4);
   min-width: 350px;
   background-color: white;
@@ -45,78 +46,124 @@ const WalkthroughCard = styled.div`
 const WalkthroughTitle = styled.div`
   font-size: 2em;
   text-align: center;
+  margin-bottom: 10px;
+`;
+const WalkthroughDescription = styled.div`
+  color: #1b1c1d;
 `;
 
-const WalkthroughGif = styled.div`
-  height: 300px;
-  width: 100%;
-  background-color: grey;
+const PhotoContainer = styled.div`
+  object-fit: contain;
+  align-items: center;
   display: flex;
   justify-content: center;
-  margin: 0.5em 0 0.5em 0;
 `;
 
-const OnBoard = () => (
-  <Container>
-    <Title>ONBOARDING / HELP</Title>
-    <WalkthroughContainer>
-      <WalkthroughCard>
-        <WalkthroughTitle>How it works?</WalkthroughTitle>
-        <WalkthroughGif />
-        <p>
-          By using Photoliker, the application intakes certain key factors from your likes AND
-          dislikes. Once we have enough data, the algorithm will return lenses (at different price
-          ranges) to you via the nextlens tab (highlight).
-        </p>
-      </WalkthroughCard>
-      <WalkthroughCard>
-        <WalkthroughTitle>Navigating the App</WalkthroughTitle>
-        <WalkthroughGif />
-        <p>
-          The Nav bar and the buttons. How to display and hide the SideBar. All the buttons that
-          bring up certain components to the main view. Use a modal to show where to click on the
-          nav/sidebar and activating and hiding te SB.
-        </p>
-      </WalkthroughCard>
-      <WalkthroughCard>
-        <WalkthroughTitle>PhotoLiker</WalkthroughTitle>
-        <WalkthroughGif />
-        <p>
-          PL is the component that lets a user dislike and like an image. A user can click on the
-          like and nope buttons, use the left/right arrow keys, or swipe left/right (mobile/with
-          mouse). We have a progress bar to help the user visualize how many more likes are needed.
-        </p>
-      </WalkthroughCard>
-      <WalkthroughCard>
-        <WalkthroughTitle>Next Lens (Reccomendations)</WalkthroughTitle>
-        <WalkthroughGif />
-        <p>
-          Once you we have enough data (affinities on your likes/dislikes), The recommendations tab
-          will display the lenses that we have found for you. Along with links to purchase and rent
-          the lens, We have set up a flow to display real images that were taken with the specific
-          lenses via Flickr to represent real photos that are achievable.
-        </p>
-      </WalkthroughCard>
-      <WalkthroughCard>
-        <WalkthroughTitle>Reviewing Lenses</WalkthroughTitle>
-        <WalkthroughGif />
-        <p>
-          How can a user write a review and give a rating for a specific lens? Can a user upload
-          their images based on certain lens. Is there ways for a program to alter Exif data to
-          falsify an image?
-        </p>
-      </WalkthroughCard>
-      <WalkthroughCard>
-        <WalkthroughTitle>Editing Profile</WalkthroughTitle>
-        <WalkthroughGif />
-        <p>
-          You can edit your profile by clicking opening the sidebar and clicking on the profile card
-          on top. You will be able to view a live update within the edit profile tab.
-        </p>
-      </WalkthroughCard>
-    </WalkthroughContainer>
-  </Container>
-);
+const IpadPhotoswiper = styled.img`
+  width: auto;
+  height: 75%;
+  border-radius: 1em;
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.62);
+  filter: drop-shadow(10px 10px 14px rgba(0, 0, 0, 0.7));
+  cursor: pointer;
+`;
+
+const OnBoard = inputProps => {
+  const { changeViews } = inputProps;
+  return (
+    <Container>
+      <Title>ONBOARDING / HELP</Title>
+      <WalkthroughContainer>
+        <WalkthroughCard>
+          <WalkthroughTitle>How it works?</WalkthroughTitle>
+          <PhotoContainer>
+            <IpadPhotoswiper
+              src={photoswipergif}
+              alt="photoswiper"
+              onClick={() => changeViews('photoSwiper')}
+            />
+          </PhotoContainer>
+          <WalkthroughDescription>
+            The main application uses your likes and dislikes to give you a list of lenses that
+            match your preferences. Use Photoswiper untill it reaches 100%.
+          </WalkthroughDescription>
+        </WalkthroughCard>
+        <WalkthroughCard>
+          <WalkthroughTitle>Navigating the App</WalkthroughTitle>
+          <PhotoContainer>
+            <IpadPhotoswiper
+              src={photoswipergif}
+              alt="photoswiper"
+              onClick={() => changeViews('photoSwiper')}
+            />
+          </PhotoContainer>
+          <WalkthroughDescription>
+            Navigating the App is primarly accessed by the Sidebar. To toggle in/out the sidebar,
+            click the button the the top left.
+          </WalkthroughDescription>
+        </WalkthroughCard>
+        <WalkthroughCard>
+          <WalkthroughTitle>PhotoSwiper</WalkthroughTitle>
+          <PhotoContainer>
+            <IpadPhotoswiper
+              src={photoswipergif}
+              alt="photoswiper"
+              onClick={() => changeViews('photoSwiper')}
+            />
+          </PhotoContainer>
+          <WalkthroughDescription>
+            Swipe left or right to like and dislike an image. The app will be collecting data on
+            your preferences and a notification will show when your recommendations are available!
+          </WalkthroughDescription>
+        </WalkthroughCard>
+        <WalkthroughCard>
+          <WalkthroughTitle>Reccomendations</WalkthroughTitle>
+          <PhotoContainer>
+            <IpadPhotoswiper
+              src={photoswipergif}
+              alt="photoswiper"
+              onClick={() => changeViews('photoSwiper')}
+            />
+          </PhotoContainer>
+          <WalkthroughDescription>
+            Once we have enough data (likes), The recommendations tab will display the lenses that
+            we have calculated for you. Links to rent/ pruchase are included. A User can also view
+            real life images taken with lenses via FlickR.
+          </WalkthroughDescription>
+        </WalkthroughCard>
+        <WalkthroughCard>
+          <WalkthroughTitle>Reviewing Lenses</WalkthroughTitle>
+          <PhotoContainer>
+            <IpadPhotoswiper
+              src={photoswipergif}
+              alt="photoswiper"
+              onClick={() => changeViews('photoSwiper')}
+            />
+          </PhotoContainer>
+          <WalkthroughDescription>
+            Future feature to let users give reviews to lenses and example images. Also let them
+            upload images for that lens.
+          </WalkthroughDescription>
+        </WalkthroughCard>
+        <WalkthroughCard>
+          <WalkthroughTitle>Editing Profile</WalkthroughTitle>
+          <PhotoContainer>
+            <IpadPhotoswiper
+              src={photoswipergif}
+              alt="photoswiper"
+              onClick={() => changeViews('photoSwiper')}
+            />
+          </PhotoContainer>
+          <WalkthroughDescription>
+            Users can edit their profiles by opening the sidebar and clicking on the profile card on
+            top. Live updates are shown as edites are made.
+          </WalkthroughDescription>
+        </WalkthroughCard>
+      </WalkthroughContainer>
+    </Container>
+  );
+};
 // Can use TransitionablePortal to display certain things to user
 
 export default OnBoard;
