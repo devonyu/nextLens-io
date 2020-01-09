@@ -18,7 +18,7 @@ export default class FlickrImages extends Component {
   }
 
   componentDidMount() {
-    console.log('Flickr Modal mounted for ', this.props.lensname);
+    // console.log('Flickr Modal mounted for ', this.props.lensname);
   }
 
   handleSubmit = async () => {

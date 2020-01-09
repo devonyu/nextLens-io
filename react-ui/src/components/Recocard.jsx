@@ -99,8 +99,8 @@ const Recocard = inputProps => {
   const calulateExamplePrice = () =>
     `~$${Math.floor(Math.random() * 500)} - $${Math.floor(Math.random() * 900)}`;
   const examplePrice = calulateExamplePrice();
-  console.log(inputProps.lens);
-  console.log(getModel());
+  // console.log(inputProps.lens);
+  // console.log(getModel());
   return (
     <div className="container">
       <CardContainer>

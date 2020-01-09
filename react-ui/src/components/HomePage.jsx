@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Segment, Sidebar, Visibility } from 'semantic-ui-react';
+import { Segment, Sidebar } from 'semantic-ui-react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PhotoSwiper from './PhotoSwiper';
@@ -21,11 +21,7 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       views: '',
-      likedImageHP: 0,
-      visible: this.props.sidebar,
-      calculations: {
-        width: 0
-      }
+      likedImageHP: 0
     };
     this.getUserInformation = this.getUserInformation.bind(this);
     this.changeViews = this.changeViews.bind(this);
@@ -55,22 +51,6 @@ export default class HomePage extends Component {
     }
   };
 
-  componentDidUpdate(prevProps) {
-    const { userPhotoImpressions } = this.props;
-    if (userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
-      if (userPhotoImpressions.length >= 30) {
-        // console.log('recmnt1');
-        this.changeViews('recommendations');
-      } else if (userPhotoImpressions.length < 30 && userPhotoImpressions.length > 0) {
-        // console.log('plmnt1');
-        this.changeViews('photoSwiper');
-      } else {
-        // console.log('missed photo impression checks, going to onBoard1');
-        this.changeViews('onBoardx');
-      }
-    }
-  }
-
   getUserInformation = userId => {
     const { changeState } = this.props;
     axios
@@ -87,6 +67,7 @@ export default class HomePage extends Component {
   getViews() {
     const { likedImageHP, views } = this.state;
     const { changeState, reloadUser, userInformation, userPhotoImpressions } = this.props;
+    console.log('%c homepage getview call ', 'color: #bada55');
     if (views === 'onBoard') {
       return <OnBoard changeViews={this.changeViews} changeStates={this.changeStates} />;
     }
@@ -147,8 +128,6 @@ export default class HomePage extends Component {
     return null;
   }
 
-  handleUpdate = (e, { calculations }) => this.setState({ calculations });
-
   changeStates(option, value) {
     this.setState(() => ({
       [option]: value
@@ -166,11 +145,9 @@ export default class HomePage extends Component {
   }
 
   render() {
-    // const { calculations } = this.state
-    // <div>{calculations.width.toFixed()}px Via Visibilty sematic UI</div>
-    // <div>height = {window.innerHeight}, width = {window.innerWidth} via window</div>
     const { sidebar, userInformation } = this.props;
     const { likedImageHP } = this.state;
+    console.log('rendering homepage again!');
     return (
       <FullHeightContainer>
         <Sidebar.Pushable as={Segment}>
@@ -181,9 +158,7 @@ export default class HomePage extends Component {
             changeViews={this.changeViews}
             changeStates={this.changeStates}
           />
-          <Sidebar.Pusher>
-            <Visibility onUpdate={this.handleUpdate}>{this.getViews()}</Visibility>
-          </Sidebar.Pusher>
+          <Sidebar.Pusher>{this.getViews()}</Sidebar.Pusher>
         </Sidebar.Pushable>
       </FullHeightContainer>
     );

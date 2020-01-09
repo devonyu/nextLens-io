@@ -12,37 +12,27 @@ const RecommendationContainer = styled.div`
 `;
 
 const Reco = inputProps => {
-  // const state = { activeItem: inputProps.price };
   const [activeItem, toggleItem] = useState('low');
-  // const { lenses } = inputProps;
-  // const { activeItem } = state;
-  // const handleItemClick = name => (state.activeItem = name);
+  const { lenses } = inputProps;
+  // console.log('rerender reco');
   return (
     <div>
       <Menu attached="top" tabular>
-        <Menu.Item
-          name="low"
-          active={activeItem === 'low'}
-          // onClick={() => handleItemClick('low')}
-        />
-        <Menu.Item
-          name="high"
-          active={activeItem === 'high'}
-          // onClick={() => handleItemClick('high')}
-        />
+        <Menu.Item name="low" active={activeItem === 'low'} onClick={() => toggleItem('low')} />
+        <Menu.Item name="high" active={activeItem === 'high'} onClick={() => toggleItem('high')} />
       </Menu>
       <Segment attached="bottom">
         {activeItem === 'low' ? (
           <RecommendationContainer>
-            {/* {lenses.slice(0, 3).map(lens => (
+            {lenses.slice(0, 3).map(lens => (
               <Recocard lens={lens} />
-            ))} */}
+            ))}
           </RecommendationContainer>
         ) : (
           <RecommendationContainer>
-            {/* {lenses.slice(3).map(lens => (
+            {lenses.slice(3).map(lens => (
               <Recocard lens={lens} />
-            ))} */}
+            ))}
           </RecommendationContainer>
         )}
       </Segment>

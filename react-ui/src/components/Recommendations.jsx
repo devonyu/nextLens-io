@@ -63,41 +63,20 @@ export default class Recommendations extends Component {
       lensRecommendations: [],
       price: 'low'
     };
-    // this.loadRecommendations = this.loadRecommendations.bind(this);
   }
 
   componentDidMount() {
     // console.log('recommendations mounted');
     if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
-      // console.log('NOT ENOUGH DATA');
+      console.log('NOT ENOUGH DATA');
     } else {
-      // this.loadRecommendations();
-      axios
-        .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
-        .then(data => {
-          console.log('FE Data Loaded: ', data);
-          console.log(React.version);
-          const lensData = data.data;
-          return lensData;
-          // this.setState(() => ({
-          //   lensRecommendations: lensData
-          // }));
-          // this.setState({ lensRecommendations: data });
-        })
-        .then(final => {
-          console.log(final);
-          this.setState(() => ({
-            lensRecommendations: final
-          }));
-        })
-        .catch(err => {
-          console.log('error with AXIOS, ', err);
-        });
+      console.log('loading recs!!!');
+      this.loadRecommendations();
     }
   }
 
   componentWillUnmount() {
-    // console.log('unmounted');
+    console.log('unmounted');
     this.setState(() => ({
       lensRecommendations: []
     }));
@@ -125,35 +104,10 @@ export default class Recommendations extends Component {
   render() {
     const { lensRecommendations, price } = this.state;
     const { changeViews, userInfo } = this.props;
-    console.log('see below');
-    console.log(lensRecommendations);
+    // console.log('see below');
+    // console.log(lensRecommendations);
     return (
       <RecommendationsContainer>
-        {lensRecommendations && lensRecommendations.length === 0 ? (
-          <div>
-            <Title>none</Title>
-          </div>
-        ) : (
-          <div>
-            <Title>some</Title>
-            <ReadyContainer>
-              <Title>
-                Lens Recommendations for
-                {` ${userInfo.firstname}`}
-              </Title>
-              {lensRecommendations.length ? (
-                <Reco lenses={lensRecommendations} price={price} />
-              ) : null}
-            </ReadyContainer>
-          </div>
-        )}
-      </RecommendationsContainer>
-    );
-  }
-}
-
-{
-  /* <RecommendationsContainer>
         {lensRecommendations && lensRecommendations.length === 0 ? (
           <NotReadyContainer>
             <h2>Recommendations not ready. Please continue using Photoswiper and like images!</h2>
@@ -172,5 +126,7 @@ export default class Recommendations extends Component {
             <Reco lenses={lensRecommendations} price={price} />
           </ReadyContainer>
         )}
-      </RecommendationsContainer> */
+      </RecommendationsContainer>
+    );
+  }
 }

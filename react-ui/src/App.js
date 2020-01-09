@@ -25,6 +25,16 @@ const NavContainer = styled.div`
   top: 0;
 `;
 
+const ViewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1b1c1d;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+`;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -46,12 +56,17 @@ class App extends Component {
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
+    this.displayView = this.displayView.bind(this);
     this.sidebar = this.sidebar.bind(this);
     this.checkSession = this.checkSession.bind(this);
   }
 
   componentDidMount() {
     this.checkSession();
+    const view = this.getView();
+    this.setState(() => ({
+      view
+    }));
   }
 
   getView() {
@@ -66,6 +81,7 @@ class App extends Component {
       return <Signup changeView={this.changeView} />;
     }
     if (view === 'homepage') {
+      console.log('top level getview homeage');
       return (
         <HomePage
           changeView={this.changeView}
@@ -79,6 +95,10 @@ class App extends Component {
       );
     }
     return <Landing changeView={this.changeView} />;
+  }
+
+  displayView() {
+    return this.getView();
   }
 
   checkSession() {
@@ -155,7 +175,7 @@ class App extends Component {
   }
 
   render() {
-    const { userState, loggedIn } = this.state;
+    const { userState, loggedIn, view } = this.state;
     return (
       <FlexContainer>
         <NavContainer>
@@ -168,7 +188,7 @@ class App extends Component {
             changeState={this.changeState}
           />
         </NavContainer>
-        <div>{this.getView()}</div>
+        <ViewContainer>{this.getView()}</ViewContainer>
         <Footer />
       </FlexContainer>
     );
