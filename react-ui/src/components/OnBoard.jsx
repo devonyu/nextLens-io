@@ -40,7 +40,12 @@ const WalkthroughCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0s;
+  :hover {
+    transform: translateY(-20px) !important;
+    cursor: pointer;
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
+  }
 `;
 
 const WalkthroughTitle = styled.div`
