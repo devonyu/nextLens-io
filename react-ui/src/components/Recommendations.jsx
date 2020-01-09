@@ -76,6 +76,7 @@ export default class Recommendations extends Component {
         .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
         .then(data => {
           console.log('FE Data Loaded: ', data);
+          console.log(React.version);
           const lensData = data.data;
           return lensData;
           // this.setState(() => ({
