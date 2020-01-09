@@ -1,58 +1,53 @@
-import React, { Component } from 'react';
-import { Button, Grid, Icon, Image, Menu, Segment } from 'semantic-ui-react';
-import FlickrImages from './FlickrImages';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Menu, Segment } from 'semantic-ui-react';
+import Recocard from './Recocard';
 
-const lensReco = (lens, i) => (
-  <Grid key={i} divided verticalAlign="middle" textAlign="left">
-    <Grid.Column width={4}>
-      <Image
-        src={
-          lens.image
-            ? lens.image
-            : 'https://res.cloudinary.com/nextlens/image/upload/v1544524799/misc/lens1.jpg'
-        }
-        size="medium"
-      />{' '}
-      {lens.name}
-    </Grid.Column>
-    <Grid.Column width={4}>
-      <Button as="a" href={lens.ebay} target="_blank">
-        eBay
-      </Button>
-      <Button as="a" href={lens.amazon} target="_blank">
-        <Icon name="amazon" />
-      </Button>
-    </Grid.Column>
-    <Grid.Column width={2}>
-      <FlickrImages flickr={lens.flickr} lensname={lens.name} lensInfo={lens} />
-    </Grid.Column>
-  </Grid>
-);
+const RecommendationContainer = styled.div`
+  display: flex;
+  width: 100%;
+  transform: scale(0.85);
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
 
-export default class Reco extends Component {
-  state = { activeItem: this.props.price };
+const Reco = inputProps => {
+  // const state = { activeItem: inputProps.price };
+  const [activeItem, toggleItem] = useState('low');
+  // const { lenses } = inputProps;
+  // const { activeItem } = state;
+  // const handleItemClick = name => (state.activeItem = name);
+  return (
+    <div>
+      <Menu attached="top" tabular>
+        <Menu.Item
+          name="low"
+          active={activeItem === 'low'}
+          // onClick={() => handleItemClick('low')}
+        />
+        <Menu.Item
+          name="high"
+          active={activeItem === 'high'}
+          // onClick={() => handleItemClick('high')}
+        />
+      </Menu>
+      <Segment attached="bottom">
+        {activeItem === 'low' ? (
+          <RecommendationContainer>
+            {/* {lenses.slice(0, 3).map(lens => (
+              <Recocard lens={lens} />
+            ))} */}
+          </RecommendationContainer>
+        ) : (
+          <RecommendationContainer>
+            {/* {lenses.slice(3).map(lens => (
+              <Recocard lens={lens} />
+            ))} */}
+          </RecommendationContainer>
+        )}
+      </Segment>
+    </div>
+  );
+};
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
-  render() {
-    const { activeItem } = this.state;
-
-    return (
-      <div>
-        <Menu attached="top" tabular>
-          <Menu.Item name="low" active={activeItem === 'low'} onClick={this.handleItemClick} />
-          <Menu.Item name="high" active={activeItem === 'high'} onClick={this.handleItemClick} />
-        </Menu>
-        <Segment attached="bottom">
-          {this.state.activeItem === 'low' ? (
-            <div>{this.props.lenses.slice(0, 3).map((lens, i) => lensReco(lens, i))}</div>
-          ) : (
-            <div>
-                {this.props.lenses.slice(3).map((lens, i) => lensReco(lens, i))}
-              </div>
-          )}
-        </Segment>
-      </div>
-    );
-  }
-}
+export default Reco;

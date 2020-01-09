@@ -14,7 +14,7 @@ const RecommendationsContainer = styled.div`
 `;
 
 const NotReadyContainer = styled.div`
-  height: 100%%;
+  height: 100%;
   width: 500px;
   min-width: 350px;
   background-color: white;
@@ -38,6 +38,24 @@ const IpadPhotoswiper = styled.img`
   cursor: pointer;
 `;
 
+const ReadyContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: grey;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+`;
+
+const Title = styled.h1`
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 45px;
+  color: white;
+`;
+
 export default class Recommendations extends Component {
   constructor(props) {
     super(props);
@@ -45,14 +63,35 @@ export default class Recommendations extends Component {
       lensRecommendations: [],
       price: 'low'
     };
+    // this.loadRecommendations = this.loadRecommendations.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // console.log('recommendations mounted');
     if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
       // console.log('NOT ENOUGH DATA');
     } else {
-      this.loadRecommendations();
+      // this.loadRecommendations();
+      axios
+        .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
+        .then(data => {
+          console.log('FE Data Loaded: ', data);
+          const lensData = data.data;
+          return lensData;
+          // this.setState(() => ({
+          //   lensRecommendations: lensData
+          // }));
+          // this.setState({ lensRecommendations: data });
+        })
+        .then(final => {
+          console.log(final);
+          this.setState(() => ({
+            lensRecommendations: final
+          }));
+        })
+        .catch(err => {
+          console.log('error with AXIOS, ', err);
+        });
     }
   }
 
@@ -72,7 +111,10 @@ export default class Recommendations extends Component {
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
         console.log('FE Data Loaded: ', data);
-        this.setState({ lensRecommendations: data });
+        this.setState(() => ({
+          lensRecommendations: data
+        }));
+        // this.setState({ lensRecommendations: data });
       })
       .catch(err => {
         console.log('error with AXIOS, ', err);
@@ -82,9 +124,36 @@ export default class Recommendations extends Component {
   render() {
     const { lensRecommendations, price } = this.state;
     const { changeViews, userInfo } = this.props;
+    console.log('see below');
+    console.log(lensRecommendations);
     return (
       <RecommendationsContainer>
-        {lensRecommendations.length === 0 ? (
+        {lensRecommendations && lensRecommendations.length === 0 ? (
+          <div>
+            <Title>none</Title>
+          </div>
+        ) : (
+          <div>
+            <Title>some</Title>
+            <ReadyContainer>
+              <Title>
+                Lens Recommendations for
+                {` ${userInfo.firstname}`}
+              </Title>
+              {lensRecommendations.length ? (
+                <Reco lenses={lensRecommendations} price={price} />
+              ) : null}
+            </ReadyContainer>
+          </div>
+        )}
+      </RecommendationsContainer>
+    );
+  }
+}
+
+{
+  /* <RecommendationsContainer>
+        {lensRecommendations && lensRecommendations.length === 0 ? (
           <NotReadyContainer>
             <h2>Recommendations not ready. Please continue using Photoswiper and like images!</h2>
             <IpadPhotoswiper
@@ -94,15 +163,13 @@ export default class Recommendations extends Component {
             />
           </NotReadyContainer>
         ) : (
-          <div>
-            <h1>
+          <ReadyContainer>
+            <Title>
               Lens Recommendations for
-              {userInfo.firstname}
-            </h1>
+              {` ${userInfo.firstname}`}
+            </Title>
             <Reco lenses={lensRecommendations} price={price} />
-          </div>
+          </ReadyContainer>
         )}
-      </RecommendationsContainer>
-    );
-  }
+      </RecommendationsContainer> */
 }
