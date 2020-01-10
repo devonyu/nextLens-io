@@ -9,6 +9,7 @@ import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import FullPageSpinner from './components/FullPageSpinner';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const NavContainer = styled.div`
 const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   background-color: #1b1c1d;
   height: 100vh;
   width: 100%;
@@ -39,6 +40,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       sidebar: false,
       view: '',
       loggedIn: false,
@@ -56,17 +58,14 @@ class App extends Component {
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
-    this.displayView = this.displayView.bind(this);
     this.sidebar = this.sidebar.bind(this);
     this.checkSession = this.checkSession.bind(this);
   }
 
   componentDidMount() {
-    this.checkSession();
-    const view = this.getView();
-    this.setState(() => ({
-      view
-    }));
+    setTimeout(() => {
+      this.checkSession();
+    }, 1000);
   }
 
   getView() {
@@ -81,7 +80,7 @@ class App extends Component {
       return <Signup changeView={this.changeView} />;
     }
     if (view === 'homepage') {
-      console.log('top level getview homeage');
+      // console.log('top level getview homepage');
       return (
         <HomePage
           changeView={this.changeView}
@@ -97,28 +96,21 @@ class App extends Component {
     return <Landing changeView={this.changeView} />;
   }
 
-  displayView() {
-    return this.getView();
-  }
-
   checkSession() {
-    // console.log('checking session');
     const cookies = new Cookies();
-    // console.log(cookies);
     if (cookies.get('connection') !== undefined) {
       axios
         .get('/auth')
         .then(({ data }) => {
-          // console.log('Auth: ', data);
           try {
             if (data) {
-              // console.log(data);
-              // Implement Redux in future to make this cleaner
               if (data.id !== undefined) {
                 console.log('Cookies found and Session matches in Redis!');
                 this.setState(() => ({
                   loggedIn: true,
                   place: data.place,
+                  loading: false,
+                  view: 'homepage',
                   userState: {
                     about: data.about,
                     email: data.email,
@@ -129,7 +121,6 @@ class App extends Component {
                     profileimgurl: data.profileimgurl
                   }
                 }));
-                this.changeView('homepage');
               } else if (data.error === 'NOT AUTHENTICATED') {
                 console.log(
                   'Err, cookies are present but session is not, sign in again or loading page!'
@@ -139,20 +130,33 @@ class App extends Component {
             } else {
               // Signing in fails, go back to landing page
               console.log('Cookies found, but Session is not valid');
-              this.changeView('landing');
+              this.setState(() => ({
+                loading: false,
+                view: 'landing'
+              }));
             }
           } catch (err) {
             console.log('caught err in setting state after auth: ', err);
-            this.changeView('landing');
+            this.setState(() => ({
+              loading: false,
+              view: 'landing'
+            }));
           }
         })
         .catch(err => {
           console.log('theres an error with auth! check below');
           console.log(err);
+          this.setState(() => ({
+            loading: false,
+            view: 'landing'
+          }));
         });
     } else {
       console.log('No Cookies found, wont check sessions');
-      this.changeState('view', 'landing');
+      this.setState(() => ({
+        loading: false,
+        view: 'landing'
+      }));
     }
   }
 
@@ -175,7 +179,10 @@ class App extends Component {
   }
 
   render() {
-    const { userState, loggedIn, view } = this.state;
+    const { loading, loggedIn, userState } = this.state;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     return (
       <FlexContainer>
         <NavContainer>
@@ -189,7 +196,7 @@ class App extends Component {
           />
         </NavContainer>
         <ViewContainer>{this.getView()}</ViewContainer>
-        <Footer />
+        <Footer changeView={this.changeView} />
       </FlexContainer>
     );
   }

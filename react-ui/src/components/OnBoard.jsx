@@ -75,10 +75,11 @@ const IpadPhotoswiper = styled.img`
 `;
 
 const OnBoard = inputProps => {
-  const { changeViews } = inputProps;
+  const { changeViews, status } = inputProps;
+  console.log(status);
   return (
     <Container>
-      <Title>ONBOARDING / HELP</Title>
+      <Title>{status === 0 ? `ONBOARDING` : `HELP`}</Title>
       <WalkthroughContainer>
         <WalkthroughCard>
           <WalkthroughTitle>How it works?</WalkthroughTitle>

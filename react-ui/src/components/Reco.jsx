@@ -24,14 +24,14 @@ const Reco = inputProps => {
       <Segment attached="bottom">
         {activeItem === 'low' ? (
           <RecommendationContainer>
-            {lenses.slice(0, 3).map(lens => (
-              <Recocard lens={lens} />
+            {lenses.slice(0, 3).map((lens, idx) => (
+              <Recocard lens={lens} key={String(idx)} />
             ))}
           </RecommendationContainer>
         ) : (
           <RecommendationContainer>
-            {lenses.slice(3).map(lens => (
-              <Recocard lens={lens} />
+            {lenses.slice(3).map((lens, idx) => (
+              <Recocard lens={lens} key={String(idx)} />
             ))}
           </RecommendationContainer>
         )}

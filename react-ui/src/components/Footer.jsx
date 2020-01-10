@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Button, Container, Grid, Segment, Icon, Divider } from 'semantic-ui-react';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Button, Header, Image, Menu, Modal } from 'semantic-ui-react';
 
 const FooterContainer = styled.div`
   background-color: black;
@@ -23,6 +22,10 @@ const FooterSide = styled.div`
 const SocialIcons = styled.a`
   padding-right: 2em;
   color: white;
+  cursor: pointer;
+  :hover {
+    color: red;
+  }
 `;
 
 const Footer = () => (
@@ -43,48 +46,50 @@ const Footer = () => (
       <SocialIcons href="https://www.instagram.com/nextlens.io/">
         <Icon name="instagram" />
       </SocialIcons>
-      <SocialIcons href="https://twitter.com/nextlens">
-        <Icon name="twitter" />
-      </SocialIcons>
+      <Modal
+        dimmer="blurring"
+        trigger={
+          <SocialIcons>
+            <Icon name="code" />
+          </SocialIcons>
+        }
+        closeIcon
+      >
+        <Modal.Header>Developed by Devon Yu</Modal.Header>
+        <Modal.Content>
+          <Modal.Description>
+            <Image
+              id="About"
+              wrapped
+              size="small"
+              src="https://devonyu.com/pf2.png"
+              circular
+              centered
+            />
+            <Header>
+              I wanted to create an application to help new photographers find their next lens
+            </Header>
+            <p>Built using React, Node+Express, PostgreSQL, Deployed with Heroku</p>
+            <p>
+              Are you Hiring? Checkout my{' '}
+              <a href="https://devonyu.com" target="_blank" rel="noopener noreferrer">
+                portfolio
+              </a>
+              , Download my{' '}
+              <a
+                href="https://devonyu.com/devonyuresume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="true"
+              >
+                Resume!
+              </a>
+            </p>
+          </Modal.Description>
+        </Modal.Content>
+      </Modal>
     </FooterSide>
   </FooterContainer>
 );
 
 export default Footer;
-
-/* <Container id="footer" fluid>
-<Grid columns={2} relaxed>
-  <Grid.Column id="ft1" inverted="true">
-    <Segment basic inverted>
-      <Icon name="camera retro" />
-      <a href="https://www.nextlens.io">© 2018 NextLens.io</a>
-    </Segment>
-  </Grid.Column>
-
-  <Divider vertical fitted />
-
-  <Grid.Column id="ft2" inverted="true">
-    <Segment basic inverted>
-      <Button
-        circular
-        color="facebook"
-        icon="facebook"
-        href="https://www.facebook.com/nextlens.io/"
-      />
-      <Button
-        circular
-        color="grey"
-        icon="github"
-        href="https://github.com/devonyu/nextLens-io"
-      />
-      <Button circular color="twitter" icon="twitter" href="https://twitter.com/nextlens" />
-      <Button
-        circular
-        color="instagram"
-        icon="instagram"
-        href="https://www.instagram.com/nextlens.io/"
-      />
-    </Segment>
-  </Grid.Column>
-</Grid>
-</Container> */
