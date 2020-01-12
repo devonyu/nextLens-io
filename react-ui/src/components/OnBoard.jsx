@@ -133,7 +133,7 @@ const OnBoard = inputProps => {
             purchase lenses are included.
           </WalkthroughDescription>
         </WalkthroughCard>
-        <WalkthroughCard onClick={() => changeViews('editProfile')}>
+        <WalkthroughCard onClick={() => changeViews('recommendations')}>
           <WalkthroughTitle>Explore Real Images</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper src={flickripadportraitclick} alt="photoswiper" />

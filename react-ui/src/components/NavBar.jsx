@@ -1,41 +1,19 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Button, Icon, Menu } from 'semantic-ui-react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Cookies from 'universal-cookie';
 
-export default class NavBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      icon: 'sb'
-    };
-    this.logIn = this.logIn.bind(this);
-    this.logOut = this.logOut.bind(this);
-    this.toggleHome = this.toggleHome.bind(this);
-    this.alterIcon = this.alterIcon.bind(this);
-  }
+const NavBar = inputProps => {
+  const [icon, setIcon] = useState('sb');
+  const { changeState, changeView, clearState, loggedIn, sidebar, userInformation } = inputProps;
 
-  alterIcon() {
-    const { sidebar } = this.props;
-    const { icon } = this.state;
+  const alterIcon = () => {
+    icon === 'sb' ? setIcon('leftArrow') : setIcon('sb');
     sidebar();
-    icon === 'sb'
-      ? this.setState(() => ({
-          icon: 'leftarrow'
-        }))
-      : this.setState(() => ({
-          icon: 'sb'
-        }));
-  }
+  };
 
-  logIn() {
-    const { changeView } = this.props;
-    changeView('login');
-  }
-
-  logOut() {
-    const { changeState, changeView } = this.props;
+  const logOut = () => {
     axios({
       method: 'get',
       url: '/logout'
@@ -43,66 +21,61 @@ export default class NavBar extends Component {
       .then(() => {
         const cookies = new Cookies();
         cookies.remove('connection');
-        changeState('loggedIn', false);
-        changeState('userState', {});
-        changeState('userPhotoImpressions', []);
-        changeState('place', 0);
-        changeView('landing');
+        clearState();
         console.log('success in logging out!');
+      })
+      .then(() => {
+        changeView('landing');
       })
       .catch(err => {
         console.log('error in loggin out => ', err);
       });
-  }
+  };
 
-  toggleHome() {
-    const { loggedIn, changeView } = this.props;
-    if (loggedIn === true) {
+  const toggleHome = () => {
+    if (loggedIn) {
       changeView('homepage');
-    } else if (loggedIn === false) {
+    } else if (!loggedIn) {
       changeView('landing');
     }
-  }
+  };
 
-  render() {
-    const { icon } = this.state;
-    const { loggedIn, userInformation } = this.props;
-
-    return (
-      <Menu borderless size="tiny" fluid>
-        {loggedIn ? (
-          <Menu.Item onClick={this.alterIcon} header>
-            {icon === 'sb' ? <Icon name="sidebar" /> : <Icon name="chevron left" />}
-          </Menu.Item>
-        ) : (
-          ''
-        )}
-
-        <Menu.Item onClick={this.toggleHome} header>
-          NextLens.io
+  return (
+    <Menu borderless size="tiny" fluid>
+      {loggedIn ? (
+        <Menu.Item onClick={alterIcon} header>
+          {icon === 'sb' ? <Icon name="sidebar" /> : <Icon name="chevron left" />}
         </Menu.Item>
-        <Menu.Menu position="right">
-          <Menu.Item>
-            {userInformation !== undefined && userInformation.firstname === ''
-              ? ''
-              : `${userInformation.firstname}`}
-          </Menu.Item>
-          <Menu.Item>
-            {loggedIn ? (
-              <Button size="tiny" onClick={this.logOut} primary>
-                Log out
-              </Button>
-            ) : (
-              <Button size="tiny" onClick={this.logIn} primary>
-                Log in
-              </Button>
-            )}
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
-    );
-  }
-}
+      ) : (
+        ''
+      )}
+
+      <Menu.Item onClick={toggleHome} header>
+        NextLens.io
+      </Menu.Item>
+      <Menu.Menu position="right">
+        <Menu.Item>
+          {userInformation !== undefined && userInformation.firstname === ''
+            ? ''
+            : `${userInformation.firstname}`}
+        </Menu.Item>
+        <Menu.Item>
+          {loggedIn ? (
+            <Button size="tiny" onClick={logOut} primary>
+              Log out
+            </Button>
+          ) : (
+            <Button size="tiny" onClick={() => changeView('login')} primary>
+              Log in
+            </Button>
+          )}
+        </Menu.Item>
+      </Menu.Menu>
+    </Menu>
+  );
+};
+
+export default NavBar;
 
 NavBar.propTypes = {
   sidebar: PropTypes.func.isRequired,

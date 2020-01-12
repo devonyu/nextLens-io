@@ -43,36 +43,39 @@ const ViewContainer = styled.div`
   overflow: hidden;
 `;
 
+const DEFAULTSTATE = {
+  loading: true,
+  sidebar: false,
+  view: '',
+  loggedIn: false,
+  place: 0,
+  userState: {
+    about: '',
+    email: '',
+    firstname: '',
+    id: 0,
+    mount: 1,
+    profileimgurl: ''
+  },
+  userPhotoImpressions: []
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-      sidebar: false,
-      view: '',
-      loggedIn: false,
-      place: 0,
-      userState: {
-        about: '',
-        email: '',
-        firstname: '',
-        id: 0,
-        mount: 1,
-        profileimgurl: ''
-      },
-      userPhotoImpressions: []
-    };
+    this.state = DEFAULTSTATE;
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
     this.toggleSidebar = this.toggleSidebar.bind(this);
     this.checkSession = this.checkSession.bind(this);
+    this.clearState = this.clearState.bind(this);
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.checkSession();
-    }, 1000);
+    }, 250);
   }
 
   getView() {
@@ -114,34 +117,40 @@ class App extends Component {
             if (data) {
               if (data.id !== undefined) {
                 console.log('Cookies found and Session matches in Redis!');
-                this.setState(() => ({
-                  loggedIn: true,
-                  place: data.place,
-                  loading: false,
-                  view: 'homepage',
-                  userState: {
-                    about: data.about,
-                    email: data.email,
-                    firstname: data.firstname,
-                    id: data.id,
+                setTimeout(() => {
+                  this.setState(() => ({
+                    loggedIn: true,
                     place: data.place,
-                    mount: data.mount,
-                    profileimgurl: data.profileimgurl
-                  }
-                }));
+                    loading: false,
+                    view: 'homepage',
+                    userState: {
+                      about: data.about,
+                      email: data.email,
+                      firstname: data.firstname,
+                      id: data.id,
+                      place: data.place,
+                      mount: data.mount,
+                      profileimgurl: data.profileimgurl
+                    }
+                  }));
+                }, 250);
               } else if (data.error === 'NOT AUTHENTICATED') {
                 console.log(
                   'Err, cookies are present but session is not, sign in again or loading page!'
                 );
-                this.changeView('landing');
+                setTimeout(() => {
+                  this.changeView('landing');
+                }, 500);
               }
             } else {
               // Signing in fails, go back to landing page
               console.log('Cookies found, but Session is not valid');
-              this.setState(() => ({
-                loading: false,
-                view: 'landing'
-              }));
+              setTimeout(() => {
+                this.setState(() => ({
+                  loading: false,
+                  view: 'landing'
+                }));
+              }, 500);
             }
           } catch (err) {
             console.log('caught err in setting state after auth: ', err);
@@ -166,6 +175,13 @@ class App extends Component {
         view: 'landing'
       }));
     }
+  }
+
+  clearState() {
+    this.setState(prev => ({
+      ...DEFAULTSTATE,
+      loading: false
+    }));
   }
 
   toggleSidebar() {
@@ -201,6 +217,7 @@ class App extends Component {
             loggedIn={loggedIn}
             reloadUser={this.checkSession}
             changeState={this.changeState}
+            clearState={this.clearState}
           />
         </NavContainer>
         <ViewContainer>{this.getView()}</ViewContainer>
