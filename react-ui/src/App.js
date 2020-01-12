@@ -4,35 +4,47 @@ import './App.css';
 import axios from 'axios';
 import styled from 'styled-components';
 import Signup from './components/Signup';
-import Landing from './components/Landing';
+// import Landing from './components/Landing';
+import LandingNew from './components/LandingNew';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import FullPageSpinner from './components/FullPageSpinner';
 
-const FlexContainer = styled.div`
+const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: #1b1c1d;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
+  position: relative;
 `;
 
 const NavContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   top: 0;
+  // left: -5px;
+  position: fixed;
+  box-sizing: border-box;
+  height: 43px;
+  z-index: 9999;
+  // padding: 0 5px;
 `;
 
 const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #1b1c1d;
-  height: 100vh;
-  width: 100%;
+  max-height: calc(100%vh - 73px);
+  // height: calc(100%vh - 73px);
+  width: 100vw;
+  position: relative;
+  // padding-bottom: 20px;
+  margin-bottom: 30px;
+  // padding-top: 20px;
+  margin-top: 43px;
   overflow: hidden;
 `;
 
@@ -71,7 +83,7 @@ class App extends Component {
   getView() {
     const { place, userState, userPhotoImpressions, sidebar, view } = this.state;
     if (view === 'landing') {
-      return <Landing changeView={this.changeView} />;
+      return <LandingNew changeView={this.changeView} />;
     }
     if (view === 'login') {
       return <Login changeView={this.changeView} changeState={this.changeState} />;
@@ -93,7 +105,7 @@ class App extends Component {
         />
       );
     }
-    return <Landing changeView={this.changeView} />;
+    return <LandingNew changeView={this.changeView} />;
   }
 
   checkSession() {
@@ -184,7 +196,7 @@ class App extends Component {
       return <FullPageSpinner />;
     }
     return (
-      <FlexContainer>
+      <AppContainer>
         <NavContainer>
           <NavBar
             sidebar={this.sidebar}
@@ -197,7 +209,7 @@ class App extends Component {
         </NavContainer>
         <ViewContainer>{this.getView()}</ViewContainer>
         <Footer changeView={this.changeView} />
-      </FlexContainer>
+      </AppContainer>
     );
   }
 }

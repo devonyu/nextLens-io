@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import axios from 'axios';
 import photoswipergif from '../images/photoswiperipad.gif';
 import Reco from './Reco';
+import FullPageSpinner from './FullPageSpinner';
 
 const RecommendationsContainer = styled.div`
   height: calc(100vh - 75px);
-  width: 100vw;
+  width: 100%;
   background-color: #1b1c1d;
   display: flex;
   justify-content: center;
@@ -30,7 +31,7 @@ const NotReadyContainer = styled.div`
 const IpadPhotoswiper = styled.img`
   object-fit: cover;
   width: 100%;
-  height: auto;
+  height: 10px;
   border-radius: 2.3em;
   background-color: transparent;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.62);
@@ -39,8 +40,8 @@ const IpadPhotoswiper = styled.img`
 `;
 
 const ReadyContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: calc(100vh - 75px);
+  width: 100%;
   background-color: grey;
   position: relative;
   display: flex;
@@ -60,6 +61,7 @@ export default class Recommendations extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       lensRecommendations: [],
       price: 'low'
     };
@@ -69,6 +71,11 @@ export default class Recommendations extends Component {
     // console.log('recommendations mounted');
     if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
       console.log('NOT ENOUGH DATA');
+      // setTimeout(() => {
+      //   this.setState(() => ({
+      //     loading: false
+      //   }));
+      // }, 1000);
     } else {
       console.log('loading recs!!!');
       this.loadRecommendations();
@@ -83,29 +90,35 @@ export default class Recommendations extends Component {
   }
 
   loadRecommendations() {
-    // call algo to get best lens recommendations here and get their information
-    //  console.log(
-    //     `Calling AXIOS WITH: ${this.props.userInfo.id}/${this.props.userInfo.mount} route!`
-    //   );
     axios
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
         console.log('FE Data Loaded: ', data);
+        // setTimeout(() => {
+        //   this.setState(() => ({
+        //     // loading: false,
+        //     lensRecommendations: data
+        //   }));
+        // }, 1000);
         this.setState(() => ({
+          loading: false,
           lensRecommendations: data
         }));
-        // this.setState({ lensRecommendations: data });
       })
       .catch(err => {
         console.log('error with AXIOS, ', err);
+        // this.setState(() => ({
+        //   loading: false
+        // }));
       });
   }
 
   render() {
-    const { lensRecommendations, price } = this.state;
+    const { lensRecommendations, loading, price } = this.state;
     const { changeViews, userInfo } = this.props;
-    // console.log('see below');
-    // console.log(lensRecommendations);
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     return (
       <RecommendationsContainer>
         {lensRecommendations && lensRecommendations.length === 0 ? (

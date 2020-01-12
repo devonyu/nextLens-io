@@ -11,15 +11,18 @@ import EditProfile from './EditProfile';
 import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
+import FullPageSpinner from './FullPageSpinner';
 
 const FullHeightContainer = styled.div`
-  height: calc(100vh - 68px);
+  min-height: calc(100vh - 73px);
+  overflow: hidden;
 `;
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       views: '',
       likedImageHP: 0
     };
@@ -57,7 +60,7 @@ export default class HomePage extends Component {
       .get(`/users/${userId}/likedphotos`)
       .then(({ data }) => {
         changeState('userPhotoImpressions', data);
-        this.setState(() => ({ likedImageHP: data.length }));
+        setTimeout(() => this.setState(() => ({ loading: false, likedImageHP: data.length })), 750);
       })
       .catch(error => {
         console.log('Could not fetch user information! Error: ', error);
@@ -142,8 +145,19 @@ export default class HomePage extends Component {
 
   changeViews(option) {
     this.setState(() => ({
-      views: option
+      loading: true
     }));
+    setTimeout(
+      () =>
+        this.setState(() => ({
+          views: option,
+          loading: false
+        })),
+      750
+    );
+    // this.setState(() => ({
+    //   views: option
+    // }));
   }
 
   updateHP() {
@@ -152,7 +166,10 @@ export default class HomePage extends Component {
 
   render() {
     const { sidebar, userInformation } = this.props;
-    const { likedImageHP } = this.state;
+    const { loading, likedImageHP } = this.state;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     console.log('rendering homepage again!');
     return (
       <FullHeightContainer>

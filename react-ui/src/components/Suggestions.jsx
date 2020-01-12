@@ -4,6 +4,8 @@ import { Form, Header, Icon, Label, Message } from 'semantic-ui-react';
 
 const SuggestionContainer = styled.div`
   height: calc(100vh - 75px);
+  max-height: 100vh;
+  overflow: auto;
   width: 100vw;
   background-color: #c7c9d3;
   display: flex;

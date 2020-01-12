@@ -48,7 +48,6 @@ export default class SidebarMain extends Component {
           onClick={this.handleItemClick}
         >
           <Button primary icon labelPosition="right" fluid>
-            {/* <Icon small name='thumbs up outline' /> */}
             PhotoSwiper
           </Button>
         </Menu.Item>

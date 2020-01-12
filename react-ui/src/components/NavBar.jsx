@@ -15,8 +15,6 @@ export default class NavBar extends Component {
     this.title = this.title.bind(this);
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-
   alterIcon = () => {
     const { sidebar } = this.props;
     const { icon } = this.state;
@@ -66,7 +64,7 @@ export default class NavBar extends Component {
   }
 
   render() {
-    const { activeItem, icon } = this.state;
+    const { icon } = this.state;
     const { loggedIn, userInformation } = this.props;
 
     return (

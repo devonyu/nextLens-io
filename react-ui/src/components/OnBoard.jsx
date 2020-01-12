@@ -76,7 +76,6 @@ const IpadPhotoswiper = styled.img`
 
 const OnBoard = inputProps => {
   const { changeViews, status } = inputProps;
-  console.log(status);
   return (
     <Container>
       <Title>{status === 0 ? `ONBOARDING` : `HELP`}</Title>
@@ -170,6 +169,5 @@ const OnBoard = inputProps => {
     </Container>
   );
 };
-// Can use TransitionablePortal to display certain things to user
 
 export default OnBoard;

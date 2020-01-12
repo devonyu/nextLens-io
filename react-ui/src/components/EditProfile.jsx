@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { mounts, getMount, validateEmail } from './utils';
 import ModalControlled from './ModalControlled';
+import FullPageSpinner from './FullPageSpinner';
 
 const InputTitle = styled.span`
   color: #1b1c1d;
@@ -28,16 +29,21 @@ const SubmitButton = styled.button`
 `;
 
 const FlexContainer = styled.div`
+  height: calc(100vh - 75px);
+  width: 100vw;
+  background-color: white;
+  position: relative;
   display: flex;
   flex-direction: column;
-  background-color: white;
-  height: 100%;
+  justify-content: flex-start;
+  overflow: auto;
 `;
 
 export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       firstName: '',
       email: '',
       mount: '',
@@ -80,12 +86,22 @@ export default class EditProfile extends Component {
       .then(result => {
         // console.log('response from server after axios, result=> ', result);
         const confirmation = result.data.status;
+        this.setState(() => ({
+          loading: true
+        }));
         if (confirmation === false) {
           this.warnUser(true, 'Failed to update User Information');
+          this.setState(() => ({
+            loading: false
+          }));
         } else if (confirmation === true) {
-          reloadUser();
+          // reloadUser();
           setTimeout(() => {
-            changeViews('recommendations');
+            // changeViews('recommendations');
+            reloadUser();
+            this.setState(() => ({
+              loading: false
+            }));
           }, 1000);
         }
       })
@@ -116,9 +132,10 @@ export default class EditProfile extends Component {
     this.setState(prevState => ({ warn: open, warning }));
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const { userInformation } = this.props;
     this.setState(() => ({
+      loading: false,
       firstName: userInformation.firstname,
       email: userInformation.email,
       mount: userInformation.mount,
@@ -129,8 +146,11 @@ export default class EditProfile extends Component {
   };
 
   render() {
-    const { firstName, email, mount, about, profileimgurl, warn, warning } = this.state;
+    const { firstName, email, loading, mount, about, profileimgurl, warn, warning } = this.state;
     const { userInformation } = this.props;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     return (
       <FlexContainer>
         <Container fluid>

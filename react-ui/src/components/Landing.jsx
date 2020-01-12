@@ -9,6 +9,27 @@ const Title = styled.h1`
   font-size: 3em;
 `;
 
+const LandingContainer = styled.div`
+  max-height: calc(100%vh - 73px);
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  overflow: hidden;
+`;
+
+const SignupButton = styled.button`
+  height: 40px;
+  color: green;
+  font-size: 20px;
+  border: 1px solid white;
+  background-color: transparent;
+  border-radius: 10px;
+  align-self: center;
+  width: 200px;
+`;
+
 export default class Landing extends Component {
   constructor(props) {
     super(props);
@@ -26,19 +47,11 @@ export default class Landing extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Container fluid textAlign="center">
-          <Title>Welcome to Nextlens.io</Title>
-          <Button
-            basic
-            color="green"
-            size="large"
-            content="Sign up for free"
-            onClick={this.toggleSignup}
-          />
-        </Container>
+      <LandingContainer>
+        <Title>Welcome to Nextlens.io</Title>
+        <SignupButton onClick={this.toggleSignup}>Sign up for free</SignupButton>
         <SwipeLanding />
-      </Container>
+      </LandingContainer>
     );
   }
 }

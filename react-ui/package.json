@@ -28,6 +28,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "install": "^0.12.1",
     "lodash": "^4.17.10",
+    "node-sass": "^4.13.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

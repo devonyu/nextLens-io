@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, Button, Header, Image, Menu, Modal } from 'semantic-ui-react';
+import { Icon, Header, Image, Modal } from 'semantic-ui-react';
 
 const FooterContainer = styled.div`
   background-color: black;
@@ -8,6 +8,10 @@ const FooterContainer = styled.div`
   display: flex;
   justify-content: space-between;
   height: 30px;
+  position: fixed;
+  width: 100vw;
+  bottom: 0;
+  z-index: 9999;
 `;
 
 const FooterSide = styled.div`
@@ -48,11 +52,11 @@ const Footer = () => (
       </SocialIcons>
       <Modal
         dimmer="blurring"
-        trigger={
+        trigger={(
           <SocialIcons>
             <Icon name="code" />
           </SocialIcons>
-        }
+        )}
         closeIcon
       >
         <Modal.Header>Developed by Devon Yu</Modal.Header>
@@ -71,11 +75,13 @@ const Footer = () => (
             </Header>
             <p>Built using React, Node+Express, PostgreSQL, Deployed with Heroku</p>
             <p>
-              Are you Hiring? Checkout my{' '}
+              Are you Hiring? Checkout my
+{' '}
               <a href="https://devonyu.com" target="_blank" rel="noopener noreferrer">
                 portfolio
               </a>
-              , Download my{' '}
+              , Download my
+{' '}
               <a
                 href="https://devonyu.com/devonyuresume.pdf"
                 target="_blank"

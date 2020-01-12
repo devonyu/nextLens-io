@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,500');
+
+$colors: (
+  primary: #005dff,
+  header: black,
+  description: lighten(#1b1c1d, 10%),
+  primary-light: lighten(#005dff, 40%),
+  accent: #fff6bb,
+  signup: #3ecf8e
+);
+
+$padding: 5px;
+$desktop: 840px;
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+.AppContainer {
+  font-family: 'Quicksand';
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+  background: #757f9a;
+  background: -webkit-linear-gradient(to right, #d7dde8, #757f9a);
+  background: linear-gradient(to right, #d7dde8, #757f9a);
+  p {
+    color: color(description);
+    text-overflow: ellipsis;
+  }
+
+  main {
+    .ltr {
+      @include desktop {
+        display: grid;
+        grid-template-columns: 50% auto;
+        grid-gap: 20px;
+        grid-auto-rows: auto;
+        margin-bottom: 50px;
+        grid-template-areas: 'primary primaryImage';
+      }
+    }
+    .rtl {
+      @include desktop {
+        display: grid;
+        grid-template-columns: 50% auto;
+        grid-gap: 10px;
+        grid-auto-rows: auto;
+        margin-bottom: 100px;
+        grid-template-areas: 'primaryImage primary';
+      }
+    }
+
+    section.primaryImage {
+      width: 100%;
+      @include desktop {
+        grid-area: primaryImage;
+        height: fit-content;
+        align-self: center;
+        margin: 1em;
+      }
+
+      .imageContainer {
+        background-color: transparent;
+        width: 80%;
+        margin: 1.5em auto;
+        padding: 1em;
+        img {
+          box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+          display: block;
+          margin: auto;
+        }
+        img.iphone {
+          border-radius: 22px;
+        }
+        img.ipad {
+          border-radius: 15px;
+        }
+        img.ipad.scaledown {
+          width: 100%;
+          @include desktop {
+            transform: scale(0.75);
+          }
+        }
+        img#future {
+          max-width: 100%;
+          max-height: 100%;
+          box-shadow: none;
+        }
+      }
+    }
+    section.primary {
+      color: black;
+      padding: $padding;
+      width: 100%;
+      text-align: center;
+
+      h1 {
+        text-transform: uppercase;
+        font-size: 3.5em;
+        font-weight: 900;
+        @include desktop {
+          width: 80%;
+          font-size: 4em;
+          line-height: 0.9em;
+        }
+      }
+
+      h1.featureTitle {
+        font-size: 2em;
+        @include desktop {
+          font-size: 2.5em;
+          line-height: 0.9em;
+        }
+      }
+
+      p {
+        font-size: 1em;
+        width: 80%;
+        display: inline-block;
+        @include desktop {
+          width: 70%;
+          line-height: 1.25em;
+          font-size: 1.5em;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        text-transform: uppercase;
+        background-color: color(signup);
+        color: white;
+        position: relative;
+        font-weight: bold;
+        display: block;
+        height: 35px;
+        line-height: 35px;
+        margin: 50px auto 0 auto;
+        text-align: center;
+        border-radius: 10px;
+        width: 40%;
+        max-width: 200px;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+          transform: translate3d(0px, -5px, 0px);
+          cursor: pointer;
+        }
+
+        @include desktop {
+          margin: 2em 0;
+        }
+      }
+
+      @include desktop {
+        grid-area: primary;
+        text-align: left;
+        display: inline-block;
+        padding: $padding $padding * 4;
+        margin: 4em 0 0 4em;
+      }
+    }
+  }
+}
