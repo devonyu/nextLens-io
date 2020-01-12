@@ -90,16 +90,17 @@ $desktop: 840px;
           margin: auto;
         }
         img.iphone {
-          border-radius: 22px;
+          border-radius: 1.5em;
         }
         img.ipad {
-          border-radius: 15px;
-        }
-        img.ipad.scaledown {
-          width: 100%;
+          border-radius: 1.25em;
+          max-width: 30vw;
           @include desktop {
-            transform: scale(0.75);
+            border-radius: 1.75em;
           }
+        }
+        img.algo {
+          width: 100%;
         }
         img#future {
           max-width: 100%;

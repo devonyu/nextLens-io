@@ -24,8 +24,8 @@ const Main = inputProps => {
       <section className="primaryImage">
         <div className="imageContainer">
           <picture className="ipad">
-            <source type="image/webp" srcset={photoswiperipadwebp} />
-            <source type="image/gif" srcset={photoswiperipad} />
+            <source type="image/webp" srcSet={photoswiperipadwebp} />
+            <source type="image/gif" srcSet={photoswiperipad} />
             <img className="ipad" src={photoswiperipad} alt="photoswiper" />
           </picture>
         </div>
@@ -50,10 +50,10 @@ const FeatureOne = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <picture className="ipad scaledown">
-            <source type="image/webp" srcset={algorithmwebp} />
-            <source type="image/gif" srcset={algorithmgif} />
-            <img className="ipad scaledown" src={algorithmgif} alt="algorithm" />
+          <picture className="algo">
+            <source type="image/webp" srcSet={algorithmwebp} />
+            <source type="image/gif" srcSet={algorithmgif} />
+            <img className="algo" src={algorithmgif} alt="algorithm" />
           </picture>
         </div>
       </section>
@@ -75,8 +75,8 @@ const FeatureTwo = () => {
       <section className="primaryImage">
         <div className="imageContainer">
           <picture className="ipad">
-            <source type="image/webp" srcset={recommendationsipadportraitclickwebp} />
-            <source type="image/gif" srcset={recommendationsipad} />
+            <source type="image/webp" srcSet={recommendationsipadportraitclickwebp} />
+            <source type="image/gif" srcSet={recommendationsipad} />
             <img className="ipad" src={recommendationsipad} alt="lensrecommendation" />
           </picture>
         </div>
@@ -99,8 +99,8 @@ const FeatureThree = () => {
       <section className="primaryImage">
         <div className="imageContainer">
           <picture className="iphone">
-            <source type="image/webp" srcset={flickrviewiphonewebp} />
-            <source type="image/gif" srcset={flickrviewiphone} />
+            <source type="image/webp" srcSet={flickrviewiphonewebp} />
+            <source type="image/gif" srcSet={flickrviewiphone} />
             <img className="iphone" src={flickrviewiphone} alt="flickrview" />
           </picture>
         </div>
@@ -121,8 +121,8 @@ const FeatureFour = () => {
       <section className="primaryImage">
         <div className="imageContainer">
           <picture id="future">
-            <source type="image/webp" srcset={futurefeatureswebp} />
-            <source type="image/gif" srcset={futurefeatures} />
+            <source type="image/webp" srcSet={futurefeatureswebp} />
+            <source type="image/gif" srcSet={futurefeatures} />
             <img id="future" src={futurefeatures} alt="futurefeats" />
           </picture>
         </div>
