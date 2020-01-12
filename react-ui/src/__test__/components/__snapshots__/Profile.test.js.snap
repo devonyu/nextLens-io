@@ -7,7 +7,8 @@ exports[`Loads Profile Card with Props 1`] = `
 >
   <img
     className="ui image"
-    src="http://test.com/image.jpg"
+    onError={[Function]}
+    src="test-file-stub"
   />
   <div
     className="content"
