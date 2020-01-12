@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Form, TextArea, Transition, Segment, Select } from 'semantic-ui-react';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 import PropTypes from 'prop-types';
 import { mounts as options, validateEmail } from './utils';
 import ModalControlled from './ModalControlled';
@@ -47,7 +48,7 @@ export default class Signup extends Component {
   };
 
   signupNewUser = info => {
-    const { changeView } = this.props;
+    const { changeView, changeState } = this.props;
     axios({
       method: 'post',
       url: '/signup',
@@ -56,9 +57,14 @@ export default class Signup extends Component {
       .then(result => {
         if (result.data.status === false) {
           this.warnUser(true, 'Email already exists, please use a new email');
-        } else if (result.data.status === true) {
-          this.warnUser(true, `${info.email} Signed up!`);
-          changeView('landing');
+        } else {
+          // this.warnUser(true, `${info.email} Signed up!`);
+          console.log('signedup now what');
+          const cookies = new Cookies();
+          cookies.set('connection', result.data.cookie, { path: '/' });
+          changeState('loggedIn', true);
+          changeState('userState', result.data);
+          changeView('homepage');
         }
       })
       .catch(error => {

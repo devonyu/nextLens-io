@@ -11,7 +11,6 @@ router
   .post("/", (request, response) => {
     const loginInput = request.body || request.query;
     async function checkCredentials(credentials) {
-      console.log("hehe");
       const user = await db.checkEmail(credentials.email, res => res.rows[0]);
       if (user === undefined) {
         console.log("Login Email does not exist");

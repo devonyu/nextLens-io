@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 
 const NavBar = inputProps => {
   const [icon, setIcon] = useState('sb');
-  const { changeState, changeView, clearState, loggedIn, sidebar, userInformation } = inputProps;
+  const { changeView, clearState, loggedIn, sidebar, userInformation } = inputProps;
 
   const alterIcon = () => {
     icon === 'sb' ? setIcon('leftArrow') : setIcon('sb');

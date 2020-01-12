@@ -87,7 +87,7 @@ class App extends Component {
       return <Login changeView={this.changeView} changeState={this.changeState} />;
     }
     if (view === 'signup') {
-      return <Signup changeView={this.changeView} />;
+      return <Signup changeView={this.changeView} changeState={this.changeState} />;
     }
     if (view === 'homepage') {
       // console.log('top level getview homepage');
@@ -139,7 +139,10 @@ class App extends Component {
                   'Err, cookies are present but session is not, sign in again or loading page!'
                 );
                 setTimeout(() => {
-                  this.changeView('landing');
+                  this.setState(() => ({
+                    loading: false,
+                    view: 'landing'
+                  }));
                 }, 500);
               }
             } else {
