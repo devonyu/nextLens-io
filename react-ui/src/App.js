@@ -2,18 +2,52 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import './App.css';
 import axios from 'axios';
-import { Sticky } from 'semantic-ui-react';
+import styled from 'styled-components';
 import Signup from './components/Signup';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import FullPageSpinner from './components/FullPageSpinner';
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #1b1c1d;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  position: relative;
+`;
+
+const NavContainer = styled.div`
+  width: 100%;
+  top: 0;
+  position: fixed;
+  box-sizing: border-box;
+  height: 43px;
+  z-index: 9999;
+`;
+
+const ViewContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: calc(100%vh - 73px);
+  width: 100vw;
+  position: relative;
+  margin-bottom: 30px;
+  margin-top: 43px;
+  overflow: hidden;
+`;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       sidebar: false,
       view: '',
       loggedIn: false,
@@ -31,12 +65,14 @@ class App extends Component {
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
-    this.sidebar = this.sidebar.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this);
     this.checkSession = this.checkSession.bind(this);
   }
 
   componentDidMount() {
-    this.checkSession();
+    setTimeout(() => {
+      this.checkSession();
+    }, 1000);
   }
 
   getView() {
@@ -51,6 +87,7 @@ class App extends Component {
       return <Signup changeView={this.changeView} />;
     }
     if (view === 'homepage') {
+      // console.log('top level getview homepage');
       return (
         <HomePage
           changeView={this.changeView}
@@ -59,6 +96,7 @@ class App extends Component {
           userInformation={userState}
           userPhotoImpressions={userPhotoImpressions}
           sidebar={sidebar}
+          toggleSidebar={this.toggleSidebar}
           reloadUser={this.checkSession}
         />
       );
@@ -67,23 +105,20 @@ class App extends Component {
   }
 
   checkSession() {
-    // console.log('checking session');
     const cookies = new Cookies();
-    // console.log(cookies);
     if (cookies.get('connection') !== undefined) {
       axios
         .get('/auth')
         .then(({ data }) => {
-          // console.log('Auth: ', data);
           try {
             if (data) {
-              // console.log(data);
-              // Implement Redux in future to make this cleaner
               if (data.id !== undefined) {
                 console.log('Cookies found and Session matches in Redis!');
                 this.setState(() => ({
                   loggedIn: true,
                   place: data.place,
+                  loading: false,
+                  view: 'homepage',
                   userState: {
                     about: data.about,
                     email: data.email,
@@ -94,7 +129,6 @@ class App extends Component {
                     profileimgurl: data.profileimgurl
                   }
                 }));
-                this.changeView('homepage');
               } else if (data.error === 'NOT AUTHENTICATED') {
                 console.log(
                   'Err, cookies are present but session is not, sign in again or loading page!'
@@ -104,24 +138,37 @@ class App extends Component {
             } else {
               // Signing in fails, go back to landing page
               console.log('Cookies found, but Session is not valid');
-              this.changeView('landing');
+              this.setState(() => ({
+                loading: false,
+                view: 'landing'
+              }));
             }
           } catch (err) {
             console.log('caught err in setting state after auth: ', err);
-            this.changeView('landing');
+            this.setState(() => ({
+              loading: false,
+              view: 'landing'
+            }));
           }
         })
         .catch(err => {
           console.log('theres an error with auth! check below');
           console.log(err);
+          this.setState(() => ({
+            loading: false,
+            view: 'landing'
+          }));
         });
     } else {
       console.log('No Cookies found, wont check sessions');
-      this.changeState('view', 'landing');
+      this.setState(() => ({
+        loading: false,
+        view: 'landing'
+      }));
     }
   }
 
-  sidebar() {
+  toggleSidebar() {
     this.setState(prev => ({
       sidebar: !prev.sidebar
     }));
@@ -140,24 +187,25 @@ class App extends Component {
   }
 
   render() {
-    const { userState, loggedIn } = this.state;
+    const { loading, loggedIn, userState } = this.state;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     return (
-      <div id="container">
-        <div id="navv">
-          <Sticky>
-            <NavBar
-              sidebar={this.sidebar}
-              userInformation={userState}
-              changeView={this.changeView}
-              loggedIn={loggedIn}
-              reloadUser={this.checkSession}
-              changeState={this.changeState}
-            />
-          </Sticky>
-        </div>
-        <div id="content">{this.getView()}</div>
-        <Footer />
-      </div>
+      <AppContainer>
+        <NavContainer>
+          <NavBar
+            sidebar={this.toggleSidebar}
+            userInformation={userState}
+            changeView={this.changeView}
+            loggedIn={loggedIn}
+            reloadUser={this.checkSession}
+            changeState={this.changeState}
+          />
+        </NavContainer>
+        <ViewContainer>{this.getView()}</ViewContainer>
+        <Footer changeView={this.changeView} />
+      </AppContainer>
     );
   }
 }

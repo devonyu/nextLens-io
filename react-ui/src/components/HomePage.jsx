@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Segment, Sidebar, Visibility } from 'semantic-ui-react';
+import { Segment, Sidebar } from 'semantic-ui-react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import PhotoSwiper from './PhotoSwiper';
 import OnBoard from './OnBoard';
@@ -10,17 +11,20 @@ import EditProfile from './EditProfile';
 import Reviews from './Reviews';
 import Suggestions from './Suggestions';
 import SidebarMain from './SidebarMain';
+import FullPageSpinner from './FullPageSpinner';
+
+const FullHeightContainer = styled.div`
+  min-height: calc(100vh - 73px);
+  overflow: hidden;
+`;
 
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       views: '',
-      likedImageHP: 0,
-      visible: this.props.sidebar,
-      calculations: {
-        width: 0
-      }
+      likedImageHP: 0
     };
     this.getUserInformation = this.getUserInformation.bind(this);
     this.changeViews = this.changeViews.bind(this);
@@ -50,29 +54,13 @@ export default class HomePage extends Component {
     }
   };
 
-  componentDidUpdate(prevProps) {
-    const { userPhotoImpressions } = this.props;
-    if (userPhotoImpressions.length !== prevProps.userPhotoImpressions.length) {
-      if (userPhotoImpressions.length >= 30) {
-        // console.log('recmnt1');
-        this.changeViews('recommendations');
-      } else if (userPhotoImpressions.length < 30 && userPhotoImpressions.length > 0) {
-        // console.log('plmnt1');
-        this.changeViews('photoSwiper');
-      } else {
-        // console.log('missed photo impression checks, going to onBoard1');
-        this.changeViews('onBoardx');
-      }
-    }
-  }
-
   getUserInformation = userId => {
     const { changeState } = this.props;
     axios
       .get(`/users/${userId}/likedphotos`)
       .then(({ data }) => {
         changeState('userPhotoImpressions', data);
-        this.setState(() => ({ likedImageHP: data.length }));
+        setTimeout(() => this.setState(() => ({ loading: false, likedImageHP: data.length })), 750);
       })
       .catch(error => {
         console.log('Could not fetch user information! Error: ', error);
@@ -81,9 +69,23 @@ export default class HomePage extends Component {
 
   getViews() {
     const { likedImageHP, views } = this.state;
-    const { changeState, reloadUser, userInformation, userPhotoImpressions } = this.props;
+    const {
+      changeState,
+      reloadUser,
+      toggleSidebar,
+      userInformation,
+      userPhotoImpressions
+    } = this.props;
+    console.log('%c homepage getview call ', 'color: #bada55');
     if (views === 'onBoard') {
-      return <OnBoard changeViews={this.changeViews} changeStates={this.changeStates} />;
+      return (
+        <OnBoard
+          changeViews={this.changeViews}
+          changeStates={this.changeStates}
+          status={userPhotoImpressions.length}
+          toggleSidebar={toggleSidebar}
+        />
+      );
     }
     if (views === 'photoSwiper') {
       return (
@@ -142,8 +144,6 @@ export default class HomePage extends Component {
     return null;
   }
 
-  handleUpdate = (e, { calculations }) => this.setState({ calculations });
-
   changeStates(option, value) {
     this.setState(() => ({
       [option]: value
@@ -152,8 +152,19 @@ export default class HomePage extends Component {
 
   changeViews(option) {
     this.setState(() => ({
-      views: option
+      loading: true
     }));
+    setTimeout(
+      () =>
+        this.setState(() => ({
+          views: option,
+          loading: false
+        })),
+      750
+    );
+    // this.setState(() => ({
+    //   views: option
+    // }));
   }
 
   updateHP() {
@@ -161,24 +172,25 @@ export default class HomePage extends Component {
   }
 
   render() {
-    // const { calculations } = this.state
-    // <div>{calculations.width.toFixed()}px Via Visibilty sematic UI</div>
-    // <div>height = {window.innerHeight}, width = {window.innerWidth} via window</div>
     const { sidebar, userInformation } = this.props;
-    const { likedImageHP } = this.state;
+    const { loading, likedImageHP } = this.state;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
+    console.log('rendering homepage again!');
     return (
-      <Sidebar.Pushable as={Segment}>
-        <SidebarMain
-          visible={sidebar}
-          userInformation={userInformation}
-          likeProgress={likedImageHP}
-          changeViews={this.changeViews}
-          changeStates={this.changeStates}
-        />
-        <Sidebar.Pusher>
-          <Visibility onUpdate={this.handleUpdate}>{this.getViews()}</Visibility>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
+      <FullHeightContainer>
+        <Sidebar.Pushable as={Segment}>
+          <SidebarMain
+            visible={sidebar}
+            userInformation={userInformation}
+            likeProgress={likedImageHP}
+            changeViews={this.changeViews}
+            changeStates={this.changeStates}
+          />
+          <Sidebar.Pusher>{this.getViews()}</Sidebar.Pusher>
+        </Sidebar.Pushable>
+      </FullHeightContainer>
     );
   }
 }
@@ -195,5 +207,6 @@ HomePage.propTypes = {
   reloadUser: PropTypes.func.isRequired,
   changeState: PropTypes.func.isRequired,
   userPhotoImpressions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sidebar: PropTypes.bool.isRequired
+  sidebar: PropTypes.bool.isRequired,
+  toggleSidebar: PropTypes.func.isRequired
 };

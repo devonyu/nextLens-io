@@ -18,7 +18,7 @@ export default class FlickrImages extends Component {
   }
 
   componentDidMount() {
-    console.log('Flickr Modal mounted for ', this.props.lensname);
+    // console.log('Flickr Modal mounted for ', this.props.lensname);
   }
 
   handleSubmit = async () => {
@@ -104,6 +104,7 @@ export default class FlickrImages extends Component {
             ref={this.myRef}
             href={`https://www.flickr.com/groups/${this.props.flickr}/`}
             target="_blank"
+            rel="noopener noreferrer"
           >
             {this.props.lensname}
           </a>

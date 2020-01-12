@@ -9,7 +9,7 @@
     "url": "https://devonyu.com"
   },
   "engines": {
-    "node": "10.11"
+    "node": "12.14.1"
   },
   "scripts": {
     "start": "node server/server.js",
@@ -25,7 +25,10 @@
       "json",
       "lcov",
       "text-summary"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "cacheDirectories": [
     "node_modules",
@@ -77,7 +80,6 @@
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-jest": "^23.4.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "coveralls": "^3.0.2",

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
@@ -10,9 +11,14 @@ import ModalTemplate from './Modal';
 const EnhancedSwipeableViews = virtualize(SwipeableViews);
 const categories = [null, 'portrait', 'landscape', 'aerial', 'street'];
 
+const FullHeightContainer = styled.div`
+  min-height: calc(100vh - 73px);
+  overflow: hidden;
+`;
+
 const styles = {
   root: {
-    background: '#1b1c1d'
+    background: 'transparent'
   },
   img: {
     width: 'auto'
@@ -73,7 +79,7 @@ export default class PhotoSwiper extends Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { imgs } = this.state;
     const { likeProgress } = this.props;
     if (likeProgress > 30 && imgs.length < 3) {
@@ -292,6 +298,7 @@ export default class PhotoSwiper extends Component {
     const { likeProgress, userInfo, changeViews } = this.props;
     console.log(this.state);
     return (
+      <FullHeightContainer>
       <Container
         id="plmain"
         fluid
@@ -360,6 +367,7 @@ export default class PhotoSwiper extends Component {
           </Button>
         </div>
       </Container>
+      </FullHeightContainer>
     );
   }
 }

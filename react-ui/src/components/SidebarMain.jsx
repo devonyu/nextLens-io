@@ -14,8 +14,10 @@ export default class SidebarMain extends Component {
   handleItemClick = (e, { name }) => {
     const { changeViews } = this.props;
     this.setState({ activeItem: name });
-    if (name !== 'progress') {
+    if (name !== 'progress' && name !== 'help') {
       changeViews(name);
+    } else {
+      changeViews('onBoard');
     }
   };
 
@@ -46,7 +48,6 @@ export default class SidebarMain extends Component {
           onClick={this.handleItemClick}
         >
           <Button primary icon labelPosition="right" fluid>
-            {/* <Icon small name='thumbs up outline' /> */}
             PhotoSwiper
           </Button>
         </Menu.Item>
@@ -66,7 +67,7 @@ export default class SidebarMain extends Component {
             })()}
           >
             {likeProgress < 30 ? Math.floor((likeProgress / 30) * 100) : 100}%
-                              </Label>
+          </Label>
         </Menu.Item>
 
         <Menu.Item
@@ -116,6 +117,11 @@ export default class SidebarMain extends Component {
         >
           <Icon name="camera" />
           Suggestions
+        </Menu.Item>
+
+        <Menu.Item name="help" active={activeItem === 'help'} onClick={this.handleItemClick}>
+          <Icon name="help" />
+          Help
         </Menu.Item>
       </Sidebar>
     );

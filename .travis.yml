@@ -5,7 +5,7 @@
 
 language: node_js
 node_js:
-- "10.11"
+  - "12.14.1"
 
 install: yarn install
 
@@ -17,5 +17,5 @@ script: echo "Running tests against $(node -v)... Running Jest test and coverage
 jobs:
   include:
     - stage: Produce Coverage
-      node_js: "10.11"
+      node_js: "12.14.1"
       script: jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage

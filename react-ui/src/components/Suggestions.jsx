@@ -1,5 +1,21 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { Form, Header, Icon, Label, Message } from 'semantic-ui-react';
+
+const SuggestionContainer = styled.div`
+  height: calc(100vh - 75px);
+  max-height: 100vh;
+  overflow: auto;
+  width: 100vw;
+  background-color: #c7c9d3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  padding: 1.5em;
+  padding-left: 2.5em;
+  left: -20px;
+`;
 
 export default class Suggestions extends Component {
   constructor(props) {
@@ -40,7 +56,7 @@ export default class Suggestions extends Component {
   render() {
     const { value, ready } = this.state;
     return (
-      <div>
+      <SuggestionContainer>
         <Header as="h1">
           <Icon name="pencil" />
           <Header.Content>Feedback and Suggestions</Header.Content>
@@ -54,14 +70,12 @@ export default class Suggestions extends Component {
         >
           <Form.Group widths="equal">
             <Form.Input
-              fluid
               label="Name"
               name="name"
               placeholder="Erlich Bachman"
               onChange={this.handleChange}
             />
             <Form.Input
-              fluid
               label="Email"
               name="replyto"
               placeholder="ebachman@aviato.com"
@@ -131,7 +145,7 @@ export default class Suggestions extends Component {
           <Message success header="Form Completed" content="Ready to Submit! Click below!" />
           <Form.Button>Submit</Form.Button>
         </Form>
-      </div>
+      </SuggestionContainer>
     );
   }
 }

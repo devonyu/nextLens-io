@@ -1,24 +1,50 @@
 import React, { Component } from 'react';
-import {
-  Button,
-  Container,
-  Card,
-  Form,
-  Grid,
-  Icon,
-  Image,
-  Select,
-  TextArea
-} from 'semantic-ui-react';
+import { Container, Card, Form, Grid, Icon, Image, Select, TextArea } from 'semantic-ui-react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { mounts, getMount, validateEmail } from './utils';
 import ModalControlled from './ModalControlled';
+import FullPageSpinner from './FullPageSpinner';
+import defaultpicture from '../images/defaultpicture.jpg';
+
+const InputTitle = styled.span`
+  color: #1b1c1d;
+`;
+
+const SubmitButton = styled.button`
+  color: white;
+  font-size: 1.2em;
+  background-color: #3ddb93;
+  border-style: none;
+  border-radius: 0.3em;
+  padding: 10px;
+  cursor: pointer;
+  :hover,
+  :focus {
+    box-shadow: 0 0.5em 0.5em -0.4em #ffffff;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transform: translateY(-0.25em);
+  }
+`;
+
+const FlexContainer = styled.div`
+  height: calc(100vh - 75px);
+  width: 100vw;
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+`;
 
 export default class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       firstName: '',
       email: '',
       mount: '',
@@ -33,25 +59,31 @@ export default class EditProfile extends Component {
     this.updateMount = this.updateMount.bind(this);
     this.editProfileAction = this.editProfileAction.bind(this);
     this.warnUser = this.warnUser.bind(this);
+    this.addDefaultImage = this.addDefaultImage.bind(this);
   }
 
   handleChange = event => {
     const { name } = event.target;
     const { value } = event.target;
-    if (name !== 'email') {
+    console.log(this.state.profileimgurl.includes('http') === -1);
+    if (name === 'email') {
       this.setState({
-        [name]: value
+        [name]: value.toLowerCase()
       });
     } else {
       this.setState({
-        [name]: value.toLowerCase()
+        [name]: value
       });
     }
   };
 
+  addDefaultImage = ev => {
+    ev.target.src = defaultpicture;
+  };
+
   editProfileAction = info => {
     const { userId } = this.state;
-    const { reloadUser, changeViews } = this.props;
+    const { reloadUser } = this.props;
     // console.log(`update userid: ${userId} with: ${info}`);
     axios({
       method: 'put',
@@ -61,12 +93,22 @@ export default class EditProfile extends Component {
       .then(result => {
         // console.log('response from server after axios, result=> ', result);
         const confirmation = result.data.status;
+        this.setState(() => ({
+          loading: true
+        }));
         if (confirmation === false) {
           this.warnUser(true, 'Failed to update User Information');
+          this.setState(() => ({
+            loading: false
+          }));
         } else if (confirmation === true) {
-          reloadUser();
+          // reloadUser();
           setTimeout(() => {
-            changeViews('recommendations');
+            // changeViews('recommendations');
+            reloadUser();
+            this.setState(() => ({
+              loading: false
+            }));
           }, 1000);
         }
       })
@@ -77,15 +119,18 @@ export default class EditProfile extends Component {
   };
 
   handleSubmit = () => {
-    const { email, firstName, mount } = this.state;
-    if (validateEmail(email) && firstName && mount) {
-      this.editProfileAction(this.state);
-    } else if (!validateEmail(email)) {
+    const { email, firstName, mount, profileimgurl } = this.state;
+    console.log(profileimgurl);
+    if (!validateEmail(email)) {
       this.warnUser(true, 'Invalid Email Format');
     } else if (!firstName) {
       this.warnUser(true, 'Invalid First Name Format');
     } else if (!mount) {
       this.warnUser(true, 'Please Select a Camera Mount');
+    } else if (profileimgurl.length && !profileimgurl.includes('http')) {
+      this.warnUser(true, 'Prefix http or https to profile image url');
+    } else if (validateEmail(email) && firstName && mount) {
+      this.editProfileAction(this.state);
     }
   };
 
@@ -97,9 +142,10 @@ export default class EditProfile extends Component {
     this.setState(prevState => ({ warn: open, warning }));
   };
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const { userInformation } = this.props;
     this.setState(() => ({
+      loading: false,
       firstName: userInformation.firstname,
       email: userInformation.email,
       mount: userInformation.mount,
@@ -110,85 +156,92 @@ export default class EditProfile extends Component {
   };
 
   render() {
-    const { firstName, email, mount, about, profileimgurl, warn, warning } = this.state;
+    const { firstName, email, loading, mount, about, profileimgurl, warn, warning } = this.state;
     const { userInformation } = this.props;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     return (
-      <Container fluid>
-        <ModalControlled open={warn} message={warning} close={this.warnUser} />
-        <Grid columns={2} stackable padded>
-          <Grid.Column stretched width={5}>
-            <Card raised fluid>
-              <Image
-                fluid
-                src={
-                  profileimgurl ||
-                  'https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg'
-                }
-                rounded
-              />
-              <Card.Content>
-                <Card.Header>{firstName}</Card.Header>
-                <Card.Meta>{getMount(mount, mounts)}</Card.Meta>
-                <Card.Description>{about}</Card.Description>
-              </Card.Content>
-              <Card.Content extra>
-                <Icon name="camera retro" />
-                Owns X lens
-              </Card.Content>
-            </Card>
-          </Grid.Column>
+      <FlexContainer>
+        <Container fluid>
+          <ModalControlled open={warn} message={warning} close={this.warnUser} />
+          <Grid columns={2} stackable padded>
+            <Grid.Column stretched width={5}>
+              <Card raised fluid style={{ margin: '1em' }}>
+                <Image
+                  onError={ev => {
+                    this.addDefaultImage(ev);
+                  }}
+                  fluid
+                  src={profileimgurl || defaultpicture}
+                  rounded
+                />
+                <Card.Content>
+                  <Card.Header>{firstName}</Card.Header>
+                  <Card.Meta>{getMount(mount, mounts)}</Card.Meta>
+                  <Card.Description>{about}</Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  <Icon name="camera retro" />
+                  Owns X lens
+                </Card.Content>
+              </Card>
+            </Grid.Column>
 
-          <Grid.Column stretched>
-            <Form>
-              <Form.Field>
-                <label>First Name</label>
-                <input
-                  placeholder={userInformation.firstname}
-                  name="firstName"
-                  value={firstName}
+            <Grid.Column stretched>
+              <Form>
+                <Form.Field>
+                  <InputTitle>First Name</InputTitle>
+                  <input
+                    placeholder={userInformation.firstname}
+                    name="firstName"
+                    value={firstName}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <InputTitle>Email</InputTitle>
+                  <input
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <InputTitle>Camera Mount</InputTitle>
+                <Form.Field
+                  control={Select}
+                  options={mounts}
+                  value={mount}
+                  placeholder={getMount(userInformation.mount, mounts)}
+                  onChange={this.updateMount}
+                />
+                <InputTitle>Profile Image URL</InputTitle>
+                <Form.Field
+                  control={TextArea}
+                  rows="2"
+                  placeholder={userInformation.profileimgurl || 'N/A'}
+                  name="profileimgurl"
+                  value={profileimgurl}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field>
-                <label>Email</label>
-                <input
-                  placeholder="Email"
-                  name="email"
-                  value={email}
+                <InputTitle>About</InputTitle>
+                <Form.Field
+                  control={TextArea}
+                  rows="4"
+                  placeholder={userInformation.about}
+                  name="about"
+                  value={about}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field
-                control={Select}
-                label="Camera Mount"
-                options={mounts}
-                value={mount}
-                placeholder={getMount(userInformation.mount, mounts)}
-                onChange={this.updateMount}
-              />
-              <Form.Field
-                control={TextArea}
-                label="Profile Image URL"
-                placeholder={userInformation.profileimgurl || 'N/A'}
-                name="profileimgurl"
-                value={profileimgurl}
-                onChange={this.handleChange}
-              />
-              <Form.Field
-                control={TextArea}
-                label="About"
-                placeholder={userInformation.about}
-                name="about"
-                value={about}
-                onChange={this.handleChange}
-              />
-              <Button type="submit" onClick={this.handleSubmit}>
-                Update Profile
-              </Button>
-            </Form>
-          </Grid.Column>
-        </Grid>
-      </Container>
+                <SubmitButton type="submit" onClick={this.handleSubmit}>
+                  Update Profile
+                </SubmitButton>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </Container>
+      </FlexContainer>
     );
   }
 }

@@ -1,67 +1,145 @@
 import React, { Component } from 'react';
-import { Container, Image } from 'semantic-ui-react';
+import styled from 'styled-components';
 import axios from 'axios';
-import photolikergif from '../images/photoliker.gif';
+import photoswipergif from '../images/photoswiperipad.gif';
 import Reco from './Reco';
+import FullPageSpinner from './FullPageSpinner';
+
+const RecommendationsContainer = styled.div`
+  height: calc(100vh - 75px);
+  width: 100%;
+  background-color: #1b1c1d;
+  display: flex;
+  justify-content: center;
+  position: relative;
+`;
+
+const NotReadyContainer = styled.div`
+  height: 100%;
+  min-width: 70vw;
+  max-width: 70vw;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const IpadPhotoswiper = styled.img`
+  position: relative;
+  width: auto;
+  max-height: 80vh;
+  min-height: 50vh;
+  margin: auto;
+  margin-top: 3em;
+  border-radius: 1em;
+  background-color: transparent;
+  cursor: pointer;
+`;
+
+const ReadyContainer = styled.div`
+  height: calc(100vh - 75px);
+  width: 100%;
+  background-color: grey;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto;
+`;
+
+const Title = styled.h1`
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 45px;
+  color: white;
+`;
 
 export default class Recommendations extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       lensRecommendations: [],
-      price: 'low'
+      price: 'low',
+      error: null
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     // console.log('recommendations mounted');
     if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
-      // console.log('NOT ENOUGH DATA');
+      console.log('NOT ENOUGH DATA');
+      setTimeout(() => {
+        this.setState(() => ({
+          loading: false
+        }));
+      }, 1000);
     } else {
+      console.log('loading recs!!!');
       this.loadRecommendations();
     }
   }
 
   componentWillUnmount() {
-    // console.log('unmounted');
+    console.log('unmounted');
     this.setState(() => ({
       lensRecommendations: []
     }));
   }
 
   loadRecommendations() {
-    // call algo to get best lens recommendations here and get their information
-    //  console.log(
-    //     `Calling AXIOS WITH: ${this.props.userInfo.id}/${this.props.userInfo.mount} route!`
-    //   );
     axios
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
         console.log('FE Data Loaded: ', data);
-        this.setState({ lensRecommendations: data });
+        this.setState(() => ({
+          loading: false,
+          lensRecommendations: data
+        }));
       })
       .catch(err => {
         console.log('error with AXIOS, ', err);
+        this.setState(() => ({
+          loading: false,
+          error: err
+        }));
       });
   }
 
   render() {
+    const { error, lensRecommendations, loading, price } = this.state;
+    const { changeViews, userInfo } = this.props;
+    if (loading) {
+      return <FullPageSpinner />;
+    }
     return (
-      <Container>
-        {this.state.lensRecommendations.length === 0 ? (
-          <div>
-            <h1>
-              Not enough data, Please continue to use PhotoLiker until your progress reaches 100%!
-            </h1>
-            <Image src={photolikergif} alt="liking" />
-          </div>
+      <RecommendationsContainer>
+        {lensRecommendations && lensRecommendations.length === 0 ? (
+          <NotReadyContainer>
+            <div>
+              <h1>Recommendations not ready</h1>
+              <p>Please continue using Photoswiper and like images!</p>
+            </div>
+            <div>
+              <IpadPhotoswiper
+                src={photoswipergif}
+                alt="photoswiper"
+                onClick={() => changeViews('photoSwiper')}
+              />
+            </div>
+          </NotReadyContainer>
         ) : (
-          <div>
-            <h1>Lens Recommendations for {this.props.userInfo.firstname}</h1>
-            <Reco lenses={this.state.lensRecommendations} price={this.state.price} />
-          </div>
+          <ReadyContainer>
+            <Title>
+              Lens Recommendations for
+              {` ${userInfo.firstname}`}
+            </Title>
+            {!error ? <Reco lenses={lensRecommendations} price={price} /> : <>{error}</>}
+          </ReadyContainer>
         )}
-      </Container>
+      </RecommendationsContainer>
     );
   }
 }

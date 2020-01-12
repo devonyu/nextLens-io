@@ -21,9 +21,14 @@ router
       if (likedPhotos === null) {
         console.log('User has no likes');
       // res.status(400).send({status: false});
+        res.status(200).send(JSON.stringify([]));
       } else if (likedPhotos) {
         console.log('user has likes=>', likedPhotos.length);
-        res.status(200).send(JSON.stringify(likedPhotos));
+        if (likedPhotos && likedPhotos.length > 0) {
+          res.status(200).send(JSON.stringify(likedPhotos));
+        } else {
+          res.status(200).send(JSON.stringify([]));
+        }
       } else {
         console.log('error in retrieving liked photos!');
       }

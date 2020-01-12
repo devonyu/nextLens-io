@@ -9,7 +9,7 @@ export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
+      firstname: '',
       email: '',
       password: '',
       mount: '',
@@ -69,14 +69,14 @@ export default class Signup extends Component {
   };
 
   handleSubmit = () => {
-    const { email, password, firstName, mount } = this.state;
-    if (validateEmail(email) && password.length >= 5 && firstName && mount) {
+    const { email, password, firstname, mount } = this.state;
+    if (validateEmail(email) && password.length >= 5 && firstname && mount) {
       this.signupNewUser(this.state);
     } else if (!validateEmail(email)) {
       this.warnUser(true, 'Invalid Email Format');
     } else if (password.length < 5) {
       this.warnUser(true, 'Password must be at least 5 characters');
-    } else if (!firstName) {
+    } else if (!firstname) {
       this.warnUser(true, 'First Name required');
     } else if (!mount) {
       this.warnUser(true, 'Please Select a Camera Mount');
@@ -84,72 +84,83 @@ export default class Signup extends Component {
   };
 
   render() {
-    const { firstName, email, password, mount, about, profileimgurl, warn, warning } = this.state;
+    const { firstname, email, password, mount, about, profileimgurl, warn, warning } = this.state;
+    const { changeView } = this.props;
     return (
-      <Container fluid>
-        <ModalControlled open={warn} message={warning} close={this.warnUser} />
-        <Transition animation="pulse" duration={500} transitionOnMount>
-          <Segment>
-            <Form>
-              <Form.Field>
-                <label>First Name</label>
-                <input
-                  placeholder="First Name"
-                  name="firstName"
-                  value={firstName}
+      <div style={{ position: 'relative', marginTop: '10%' }}>
+        <Container>
+          <ModalControlled open={warn} message={warning} close={this.warnUser} />
+          <Transition animation="pulse" duration={300} transitionOnMount>
+            <Segment>
+              <h1>Sign Up</h1>
+              <Form>
+                <Form.Field>
+                  <label>First Name</label>
+                  <input
+                    placeholder="First Name"
+                    name="firstname"
+                    value={firstname}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Email</label>
+                  <input
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <input
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field
+                  control={Select}
+                  label="Camera Mount"
+                  options={options}
+                  value={mount}
+                  placeholder="Your Camera Mount"
+                  onChange={this.updateMount}
+                />
+                <Form.Field
+                  control={TextArea}
+                  label="Profile Image URL"
+                  placeholder="Copy your Profile image url here"
+                  name="profileimgurl"
+                  value={profileimgurl}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field>
-                <label>Email</label>
-                <input
-                  placeholder="Email"
-                  name="email"
-                  value={email}
+                <Form.Field
+                  control={TextArea}
+                  label="About"
+                  placeholder="Tell us more about yourself..."
+                  name="about"
+                  value={about}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field>
-                <label>Password</label>
-                <input
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={password}
-                  onChange={this.handleChange}
-                />
-              </Form.Field>
-              <Form.Field
-                control={Select}
-                label="Camera Mount"
-                options={options}
-                value={mount}
-                placeholder="Your Camera Mount"
-                onChange={this.updateMount}
-              />
-              <Form.Field
-                control={TextArea}
-                label="Profile Image URL"
-                placeholder="Copy your Profile image url here"
-                name="profileimgurl"
-                value={profileimgurl}
-                onChange={this.handleChange}
-              />
-              <Form.Field
-                control={TextArea}
-                label="About"
-                placeholder="Tell us more about yourself..."
-                name="about"
-                value={about}
-                onChange={this.handleChange}
-              />
-              <Button type="submit" onClick={this.handleSubmit}>
-                Submit
-              </Button>
-            </Form>
-          </Segment>
-        </Transition>
-      </Container>
+                <Button type="submit" color="green" onClick={this.handleSubmit}>
+                  Submit
+                </Button>
+                <Button
+                  onClick={() => {
+                    changeView('login');
+                  }}
+                >
+                  Login
+                </Button>
+              </Form>
+            </Segment>
+          </Transition>
+        </Container>
+      </div>
     );
   }
 }
