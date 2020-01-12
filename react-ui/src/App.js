@@ -18,18 +18,17 @@ const AppContainer = styled.div`
   background-color: #1b1c1d;
   min-height: 100vh;
   min-width: 100vw;
+  margin: 0;
   position: relative;
 `;
 
 const NavContainer = styled.div`
   width: 100vw;
   top: 0;
-  // left: -5px;
   position: fixed;
   box-sizing: border-box;
   height: 43px;
   z-index: 9999;
-  // padding: 0 5px;
 `;
 
 const ViewContainer = styled.div`
@@ -37,12 +36,9 @@ const ViewContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   max-height: calc(100%vh - 73px);
-  // height: calc(100%vh - 73px);
   width: 100vw;
   position: relative;
-  // padding-bottom: 20px;
   margin-bottom: 30px;
-  // padding-top: 20px;
   margin-top: 43px;
   overflow: hidden;
 `;

@@ -16,26 +16,25 @@ const RecommendationsContainer = styled.div`
 
 const NotReadyContainer = styled.div`
   height: 100%;
-  width: 500px;
-  min-width: 350px;
-  background-color: white;
-  border-radius: 0.3em;
-  box-shadow: 13px 21px 53px -13px rgba(1, 1, 1, 0.65);
-  padding: 1em;
-  margin: 2em;
+  min-width: 70vw;
+  max-width: 70vw;
+  background-color: transparent;
+  color: white;
   display: flex;
+  position: absolute;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 `;
 
 const IpadPhotoswiper = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 10px;
-  border-radius: 2.3em;
+  position: relative;
+  width: auto;
+  max-height: 80vh;
+  min-height: 50vh;
+  margin: auto;
+  margin-top: 3em;
+  border-radius: 1em;
   background-color: transparent;
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.62);
-  filter: drop-shadow(10px 10px 14px rgba(0, 0, 0, 0.7));
   cursor: pointer;
 `;
 
@@ -63,7 +62,8 @@ export default class Recommendations extends Component {
     this.state = {
       loading: true,
       lensRecommendations: [],
-      price: 'low'
+      price: 'low',
+      error: null
     };
   }
 
@@ -71,11 +71,11 @@ export default class Recommendations extends Component {
     // console.log('recommendations mounted');
     if (this.props.likeProgress < 30 && this.props.topProgress < 30) {
       console.log('NOT ENOUGH DATA');
-      // setTimeout(() => {
-      //   this.setState(() => ({
-      //     loading: false
-      //   }));
-      // }, 1000);
+      setTimeout(() => {
+        this.setState(() => ({
+          loading: false
+        }));
+      }, 1000);
     } else {
       console.log('loading recs!!!');
       this.loadRecommendations();
@@ -94,12 +94,6 @@ export default class Recommendations extends Component {
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
         console.log('FE Data Loaded: ', data);
-        // setTimeout(() => {
-        //   this.setState(() => ({
-        //     // loading: false,
-        //     lensRecommendations: data
-        //   }));
-        // }, 1000);
         this.setState(() => ({
           loading: false,
           lensRecommendations: data
@@ -107,14 +101,15 @@ export default class Recommendations extends Component {
       })
       .catch(err => {
         console.log('error with AXIOS, ', err);
-        // this.setState(() => ({
-        //   loading: false
-        // }));
+        this.setState(() => ({
+          loading: false,
+          error: err
+        }));
       });
   }
 
   render() {
-    const { lensRecommendations, loading, price } = this.state;
+    const { error, lensRecommendations, loading, price } = this.state;
     const { changeViews, userInfo } = this.props;
     if (loading) {
       return <FullPageSpinner />;
@@ -123,12 +118,17 @@ export default class Recommendations extends Component {
       <RecommendationsContainer>
         {lensRecommendations && lensRecommendations.length === 0 ? (
           <NotReadyContainer>
-            <h2>Recommendations not ready. Please continue using Photoswiper and like images!</h2>
-            <IpadPhotoswiper
-              src={photoswipergif}
-              alt="photoswiper"
-              onClick={() => changeViews('photoSwiper')}
-            />
+            <div>
+              <h1>Recommendations not ready</h1>
+              <p>Please continue using Photoswiper and like images!</p>
+            </div>
+            <div>
+              <IpadPhotoswiper
+                src={photoswipergif}
+                alt="photoswiper"
+                onClick={() => changeViews('photoSwiper')}
+              />
+            </div>
           </NotReadyContainer>
         ) : (
           <ReadyContainer>
@@ -136,7 +136,7 @@ export default class Recommendations extends Component {
               Lens Recommendations for
               {` ${userInfo.firstname}`}
             </Title>
-            <Reco lenses={lensRecommendations} price={price} />
+            {!error ? <Reco lenses={lensRecommendations} price={price} /> : <>{error}</>}
           </ReadyContainer>
         )}
       </RecommendationsContainer>

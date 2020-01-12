@@ -58,40 +58,51 @@ export default class Login extends Component {
 
   render() {
     const { email, password, warn, warning } = this.state;
+    const { changeView } = this.props;
     return (
-      <Container>
-        <ModalControlled open={warn} message={warning} close={this.warnUser} />
-        <Transition animation="pulse" duration={500} transitionOnMount>
-          <Segment>
-            <Container>
-              <Form>
-                <Form.Field>
-                  <label>Email</label>
-                  <input
-                    placeholder="Email"
-                    name="email"
-                    value={email}
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Password</label>
-                  <input
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    type="password"
-                    onChange={this.handleChange}
-                  />
-                </Form.Field>
-                <Button type="submit" onClick={this.handleSubmit}>
-                  Submit
-                </Button>
-              </Form>
-            </Container>
-          </Segment>
-        </Transition>
-      </Container>
+      <div style={{ position: 'relative', marginTop: '10%' }}>
+        <Container>
+          <ModalControlled open={warn} message={warning} close={this.warnUser} />
+          <Transition animation="pulse" duration={300} transitionOnMount>
+            <Segment>
+              <Container>
+                <h1>Login</h1>
+                <Form>
+                  <Form.Field>
+                    <label>Email</label>
+                    <input
+                      placeholder="Email"
+                      name="email"
+                      value={email}
+                      onChange={this.handleChange}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Password</label>
+                    <input
+                      placeholder="Password"
+                      name="password"
+                      value={password}
+                      type="password"
+                      onChange={this.handleChange}
+                    />
+                  </Form.Field>
+                  <Button type="submit" color="green" onClick={this.handleSubmit}>
+                    Submit
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      changeView('signup');
+                    }}
+                  >
+                    Signup
+                  </Button>
+                </Form>
+              </Container>
+            </Segment>
+          </Transition>
+        </Container>
+      </div>
     );
   }
 }

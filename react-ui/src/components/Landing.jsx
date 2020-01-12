@@ -1,6 +1,11 @@
 import React from 'react';
 import './Landing.scss';
 import PropTypes from 'prop-types';
+import algorithmgif from '../images/algorithm.gif';
+import flickrviewiphone from '../images/flickrviewiphone.gif';
+import futurefeatures from '../images/futurefeatures.png';
+import photoswiperipad from '../images/photoswiperipad.gif';
+import recommendationsipad from '../images/recommendationsipad.gif';
 
 const Main = inputProps => {
   const { changeView } = inputProps;
@@ -13,7 +18,7 @@ const Main = inputProps => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="ipad" alt="photoswiper" src="http://tinyimg.io/i/B3TTr4q.gif" />
+          <img className="ipad" alt="photoswiper" src={photoswiperipad} />
         </div>
       </section>
     </div>
@@ -36,11 +41,7 @@ const FeatureOne = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img
-            className="ipad scaledown"
-            alt="algorithm"
-            src="https://media3.giphy.com/media/6P9Tr4yVla6Hu/giphy.gif?cid=790b76118b46d119b6e74ef34771f45381f91f7e390af239&rid=giphy.gif"
-          />
+          <img className="ipad scaledown" alt="algorithm" src={algorithmgif} />
         </div>
       </section>
     </div>
@@ -60,7 +61,7 @@ const FeatureTwo = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="ipad" alt="lensrecommendation" src="http://tinyimg.io/i/vbbSSXY.gif" />
+          <img className="ipad" alt="lensrecommendation" src={recommendationsipad} />
         </div>
       </section>
     </div>
@@ -80,7 +81,7 @@ const FeatureThree = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="iphone" alt="flickrview" src="http://tinyimg.io/i/U24dC1R.gif" />
+          <img className="iphone" alt="flickrview" src={flickrviewiphone} />
         </div>
       </section>
     </div>
@@ -98,7 +99,7 @@ const FeatureFour = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img id="future" alt="futurefeats" src="http://tinyimg.io/i/Z9gLzhY.png" />
+          <img id="future" alt="futurefeats" src={futurefeatures} />
         </div>
       </section>
     </div>

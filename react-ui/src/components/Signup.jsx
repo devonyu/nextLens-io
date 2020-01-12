@@ -85,71 +85,82 @@ export default class Signup extends Component {
 
   render() {
     const { firstname, email, password, mount, about, profileimgurl, warn, warning } = this.state;
+    const { changeView } = this.props;
     return (
-      <Container>
-        <ModalControlled open={warn} message={warning} close={this.warnUser} />
-        <Transition animation="pulse" duration={500} transitionOnMount>
-          <Segment>
-            <Form>
-              <Form.Field>
-                <label>First Name</label>
-                <input
-                  placeholder="First Name"
-                  name="firstname"
-                  value={firstname}
+      <div style={{ position: 'relative', marginTop: '10%' }}>
+        <Container>
+          <ModalControlled open={warn} message={warning} close={this.warnUser} />
+          <Transition animation="pulse" duration={300} transitionOnMount>
+            <Segment>
+              <h1>Sign Up</h1>
+              <Form>
+                <Form.Field>
+                  <label>First Name</label>
+                  <input
+                    placeholder="First Name"
+                    name="firstname"
+                    value={firstname}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Email</label>
+                  <input
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Password</label>
+                  <input
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                    value={password}
+                    onChange={this.handleChange}
+                  />
+                </Form.Field>
+                <Form.Field
+                  control={Select}
+                  label="Camera Mount"
+                  options={options}
+                  value={mount}
+                  placeholder="Your Camera Mount"
+                  onChange={this.updateMount}
+                />
+                <Form.Field
+                  control={TextArea}
+                  label="Profile Image URL"
+                  placeholder="Copy your Profile image url here"
+                  name="profileimgurl"
+                  value={profileimgurl}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field>
-                <label>Email</label>
-                <input
-                  placeholder="Email"
-                  name="email"
-                  value={email}
+                <Form.Field
+                  control={TextArea}
+                  label="About"
+                  placeholder="Tell us more about yourself..."
+                  name="about"
+                  value={about}
                   onChange={this.handleChange}
                 />
-              </Form.Field>
-              <Form.Field>
-                <label>Password</label>
-                <input
-                  placeholder="Password"
-                  name="password"
-                  type="password"
-                  value={password}
-                  onChange={this.handleChange}
-                />
-              </Form.Field>
-              <Form.Field
-                control={Select}
-                label="Camera Mount"
-                options={options}
-                value={mount}
-                placeholder="Your Camera Mount"
-                onChange={this.updateMount}
-              />
-              <Form.Field
-                control={TextArea}
-                label="Profile Image URL"
-                placeholder="Copy your Profile image url here"
-                name="profileimgurl"
-                value={profileimgurl}
-                onChange={this.handleChange}
-              />
-              <Form.Field
-                control={TextArea}
-                label="About"
-                placeholder="Tell us more about yourself..."
-                name="about"
-                value={about}
-                onChange={this.handleChange}
-              />
-              <Button type="submit" onClick={this.handleSubmit}>
-                Submit
-              </Button>
-            </Form>
-          </Segment>
-        </Transition>
-      </Container>
+                <Button type="submit" color="green" onClick={this.handleSubmit}>
+                  Submit
+                </Button>
+                <Button
+                  onClick={() => {
+                    changeView('login');
+                  }}
+                >
+                  Login
+                </Button>
+              </Form>
+            </Segment>
+          </Transition>
+        </Container>
+      </div>
     );
   }
 }

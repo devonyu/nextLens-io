@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import photoswipergif from '../images/photoswiperipad.gif';
+import flickrviewiphone from '../images/flickrviewiphone.gif';
+import photoswiperipad from '../images/photoswiperipad.gif';
+import recommendationsipad from '../images/recommendationsipad.gif';
 
 const Container = styled.div`
   height: calc(100vh - 75px);
@@ -84,7 +86,7 @@ const OnBoard = inputProps => {
           <WalkthroughTitle>How it works?</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper
-              src={photoswipergif}
+              src={flickrviewiphone}
               alt="photoswiper"
               onClick={() => changeViews('photoSwiper')}
             />
@@ -98,7 +100,7 @@ const OnBoard = inputProps => {
           <WalkthroughTitle>Navigating the App</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper
-              src={photoswipergif}
+              src={photoswiperipad}
               alt="photoswiper"
               onClick={() => changeViews('photoSwiper')}
             />
@@ -112,7 +114,7 @@ const OnBoard = inputProps => {
           <WalkthroughTitle>PhotoSwiper</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper
-              src={photoswipergif}
+              src={photoswiperipad}
               alt="photoswiper"
               onClick={() => changeViews('photoSwiper')}
             />
@@ -126,7 +128,7 @@ const OnBoard = inputProps => {
           <WalkthroughTitle>Reccomendations</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper
-              src={photoswipergif}
+              src={recommendationsipad}
               alt="photoswiper"
               onClick={() => changeViews('photoSwiper')}
             />
@@ -141,7 +143,7 @@ const OnBoard = inputProps => {
           <WalkthroughTitle>Reviewing Lenses</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper
-              src={photoswipergif}
+              src={recommendationsipad}
               alt="photoswiper"
               onClick={() => changeViews('photoSwiper')}
             />
@@ -155,7 +157,7 @@ const OnBoard = inputProps => {
           <WalkthroughTitle>Editing Profile</WalkthroughTitle>
           <PhotoContainer>
             <IpadPhotoswiper
-              src={photoswipergif}
+              src={recommendationsipad}
               alt="photoswiper"
               onClick={() => changeViews('photoSwiper')}
             />
