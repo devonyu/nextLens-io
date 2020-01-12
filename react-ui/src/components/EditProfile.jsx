@@ -76,7 +76,7 @@ export default class EditProfile extends Component {
 
   editProfileAction = info => {
     const { userId } = this.state;
-    const { reloadUser, changeViews } = this.props;
+    const { reloadUser } = this.props;
     // console.log(`update userid: ${userId} with: ${info}`);
     axios({
       method: 'put',

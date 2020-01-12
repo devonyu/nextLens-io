@@ -4,8 +4,7 @@ import './App.css';
 import axios from 'axios';
 import styled from 'styled-components';
 import Signup from './components/Signup';
-// import Landing from './components/Landing';
-import LandingNew from './components/LandingNew';
+import Landing from './components/Landing';
 import Login from './components/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
@@ -83,7 +82,7 @@ class App extends Component {
   getView() {
     const { place, userState, userPhotoImpressions, sidebar, view } = this.state;
     if (view === 'landing') {
-      return <LandingNew changeView={this.changeView} />;
+      return <Landing changeView={this.changeView} />;
     }
     if (view === 'login') {
       return <Login changeView={this.changeView} changeState={this.changeState} />;
@@ -105,7 +104,7 @@ class App extends Component {
         />
       );
     }
-    return <LandingNew changeView={this.changeView} />;
+    return <Landing changeView={this.changeView} />;
   }
 
   checkSession() {
