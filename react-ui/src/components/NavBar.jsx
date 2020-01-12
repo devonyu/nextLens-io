@@ -12,10 +12,11 @@ export default class NavBar extends Component {
     };
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
-    this.title = this.title.bind(this);
+    this.toggleHome = this.toggleHome.bind(this);
+    this.alterIcon = this.alterIcon.bind(this);
   }
 
-  alterIcon = () => {
+  alterIcon() {
     const { sidebar } = this.props;
     const { icon } = this.state;
     sidebar();
@@ -26,7 +27,7 @@ export default class NavBar extends Component {
       : this.setState(() => ({
           icon: 'sb'
         }));
-  };
+  }
 
   logIn() {
     const { changeView } = this.props;
@@ -54,7 +55,7 @@ export default class NavBar extends Component {
       });
   }
 
-  title() {
+  toggleHome() {
     const { loggedIn, changeView } = this.props;
     if (loggedIn === true) {
       changeView('homepage');
@@ -77,12 +78,12 @@ export default class NavBar extends Component {
           ''
         )}
 
-        <Menu.Item onClick={this.title} header>
+        <Menu.Item onClick={this.toggleHome} header>
           NextLens.io
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>
-            {userInformation.firstname === '' || userInformation.firstname === undefined
+            {userInformation !== undefined && userInformation.firstname === ''
               ? ''
               : `${userInformation.firstname}`}
           </Menu.Item>
