@@ -32,12 +32,19 @@ const SocialIcons = styled.a`
   }
 `;
 
+const NextLens = styled.span`
+  font-size: 0.8em;
+  @media (max-width: 320px) {
+    font-size: 0.6em;
+  }
+`;
+
 const Footer = () => (
   <FooterContainer>
     <FooterSide>
       <SocialIcons href="https://nextlens.io">
         <Icon name="camera retro" />
-        <span>2020 Nextlens.io</span>
+        <NextLens>2020 Nextlens.io</NextLens>
       </SocialIcons>
     </FooterSide>
     <FooterSide>
@@ -52,11 +59,11 @@ const Footer = () => (
       </SocialIcons>
       <Modal
         dimmer="blurring"
-        trigger={(
+        trigger={
           <SocialIcons>
             <Icon name="code" />
           </SocialIcons>
-        )}
+        }
         closeIcon
       >
         <Modal.Header>Developed by Devon Yu</Modal.Header>
@@ -75,13 +82,11 @@ const Footer = () => (
             </Header>
             <p>Built using React, Node+Express, PostgreSQL, Deployed with Heroku</p>
             <p>
-              Are you Hiring? Checkout my
-{' '}
+              Are you Hiring? Checkout my{' '}
               <a href="https://devonyu.com" target="_blank" rel="noopener noreferrer">
                 portfolio
               </a>
-              , Download my
-{' '}
+              , Download my{' '}
               <a
                 href="https://devonyu.com/devonyuresume.pdf"
                 target="_blank"

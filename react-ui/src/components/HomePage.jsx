@@ -69,7 +69,13 @@ export default class HomePage extends Component {
 
   getViews() {
     const { likedImageHP, views } = this.state;
-    const { changeState, reloadUser, userInformation, userPhotoImpressions } = this.props;
+    const {
+      changeState,
+      reloadUser,
+      toggleSidebar,
+      userInformation,
+      userPhotoImpressions
+    } = this.props;
     console.log('%c homepage getview call ', 'color: #bada55');
     if (views === 'onBoard') {
       return (
@@ -77,6 +83,7 @@ export default class HomePage extends Component {
           changeViews={this.changeViews}
           changeStates={this.changeStates}
           status={userPhotoImpressions.length}
+          toggleSidebar={toggleSidebar}
         />
       );
     }
@@ -200,5 +207,6 @@ HomePage.propTypes = {
   reloadUser: PropTypes.func.isRequired,
   changeState: PropTypes.func.isRequired,
   userPhotoImpressions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sidebar: PropTypes.bool.isRequired
+  sidebar: PropTypes.bool.isRequired,
+  toggleSidebar: PropTypes.func.isRequired
 };

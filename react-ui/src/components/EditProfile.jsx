@@ -6,6 +6,7 @@ import axios from 'axios';
 import { mounts, getMount, validateEmail } from './utils';
 import ModalControlled from './ModalControlled';
 import FullPageSpinner from './FullPageSpinner';
+import defaultpicture from '../images/defaultpicture.jpg';
 
 const InputTitle = styled.span`
   color: #1b1c1d;
@@ -58,20 +59,26 @@ export default class EditProfile extends Component {
     this.updateMount = this.updateMount.bind(this);
     this.editProfileAction = this.editProfileAction.bind(this);
     this.warnUser = this.warnUser.bind(this);
+    this.addDefaultImage = this.addDefaultImage.bind(this);
   }
 
   handleChange = event => {
     const { name } = event.target;
     const { value } = event.target;
-    if (name !== 'email') {
-      this.setState({
-        [name]: value
-      });
-    } else {
+    console.log(this.state.profileimgurl.includes('http') === -1);
+    if (name === 'email') {
       this.setState({
         [name]: value.toLowerCase()
       });
+    } else {
+      this.setState({
+        [name]: value
+      });
     }
+  };
+
+  addDefaultImage = ev => {
+    ev.target.src = defaultpicture;
   };
 
   editProfileAction = info => {
@@ -112,15 +119,18 @@ export default class EditProfile extends Component {
   };
 
   handleSubmit = () => {
-    const { email, firstName, mount } = this.state;
-    if (validateEmail(email) && firstName && mount) {
-      this.editProfileAction(this.state);
-    } else if (!validateEmail(email)) {
+    const { email, firstName, mount, profileimgurl } = this.state;
+    console.log(profileimgurl);
+    if (!validateEmail(email)) {
       this.warnUser(true, 'Invalid Email Format');
     } else if (!firstName) {
       this.warnUser(true, 'Invalid First Name Format');
     } else if (!mount) {
       this.warnUser(true, 'Please Select a Camera Mount');
+    } else if (profileimgurl.length && !profileimgurl.includes('http')) {
+      this.warnUser(true, 'Prefix http or https to profile image url');
+    } else if (validateEmail(email) && firstName && mount) {
+      this.editProfileAction(this.state);
     }
   };
 
@@ -159,11 +169,11 @@ export default class EditProfile extends Component {
             <Grid.Column stretched width={5}>
               <Card raised fluid style={{ margin: '1em' }}>
                 <Image
+                  onError={ev => {
+                    this.addDefaultImage(ev);
+                  }}
                   fluid
-                  src={
-                    profileimgurl ||
-                    'https://www.watsonmartin.com/wp-content/uploads/2016/03/default-profile-picture.jpg'
-                  }
+                  src={profileimgurl || defaultpicture}
                   rounded
                 />
                 <Card.Content>
@@ -209,6 +219,7 @@ export default class EditProfile extends Component {
                 <InputTitle>Profile Image URL</InputTitle>
                 <Form.Field
                   control={TextArea}
+                  rows="2"
                   placeholder={userInformation.profileimgurl || 'N/A'}
                   name="profileimgurl"
                   value={profileimgurl}
@@ -217,6 +228,7 @@ export default class EditProfile extends Component {
                 <InputTitle>About</InputTitle>
                 <Form.Field
                   control={TextArea}
+                  rows="4"
                   placeholder={userInformation.about}
                   name="about"
                   value={about}

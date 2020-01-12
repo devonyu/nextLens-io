@@ -23,7 +23,7 @@ const AppContainer = styled.div`
 `;
 
 const NavContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   top: 0;
   position: fixed;
   box-sizing: border-box;
@@ -65,7 +65,7 @@ class App extends Component {
     this.changeView = this.changeView.bind(this);
     this.changeState = this.changeState.bind(this);
     this.getView = this.getView.bind(this);
-    this.sidebar = this.sidebar.bind(this);
+    this.toggleSidebar = this.toggleSidebar.bind(this);
     this.checkSession = this.checkSession.bind(this);
   }
 
@@ -96,6 +96,7 @@ class App extends Component {
           userInformation={userState}
           userPhotoImpressions={userPhotoImpressions}
           sidebar={sidebar}
+          toggleSidebar={this.toggleSidebar}
           reloadUser={this.checkSession}
         />
       );
@@ -167,7 +168,7 @@ class App extends Component {
     }
   }
 
-  sidebar() {
+  toggleSidebar() {
     this.setState(prev => ({
       sidebar: !prev.sidebar
     }));
@@ -194,7 +195,7 @@ class App extends Component {
       <AppContainer>
         <NavContainer>
           <NavBar
-            sidebar={this.sidebar}
+            sidebar={this.toggleSidebar}
             userInformation={userState}
             changeView={this.changeView}
             loggedIn={loggedIn}
