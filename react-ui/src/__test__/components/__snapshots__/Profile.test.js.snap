@@ -8,7 +8,7 @@ exports[`Loads Profile Card with Props 1`] = `
   <img
     className="ui image"
     onError={[Function]}
-    src="test-file-stub"
+    src="https://devonyu.com/pf2.png"
   />
   <div
     className="content"
