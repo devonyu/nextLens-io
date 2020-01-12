@@ -7,7 +7,7 @@ const ModalControlled = inputProps => {
   return (
     <Modal
       open={open}
-      onClose={() => close(false)}
+      onClose={() => close(false, '')}
       basic
       size="small"
       closeOnEscape
@@ -17,7 +17,7 @@ const ModalControlled = inputProps => {
         <h3>{message}</h3>
       </Modal.Content>
       <Modal.Actions>
-        <Button color="green" onClick={() => close(false)} inverted>
+        <Button color="green" onClick={() => close(false, '')} inverted>
           <Icon name="checkmark" /> Got it
         </Button>
       </Modal.Actions>
