@@ -39,6 +39,11 @@ const NextLens = styled.span`
   }
 `;
 
+const Status = styled.span`
+  font-size: 1.5em;
+  text-transform: uppercase;
+`;
+
 const Footer = () => (
   <FooterContainer>
     <FooterSide>
@@ -96,6 +101,24 @@ const Footer = () => (
                 Resume!
               </a>
             </p>
+            <Status>
+              <strong>Coveralls:{'  '}</strong>
+              <a href="https://coveralls.io/github/devonyu/nextLens-io?branch=master">
+                <img
+                  src="https://coveralls.io/repos/github/devonyu/nextLens-io/badge.svg?branch=master"
+                  alt="Coveralls Coverage Status"
+                />
+              </a>
+              <strong>
+                {'  '} Travis CI: {'  '}
+              </strong>
+              <a href="https://travis-ci.org/devonyu/nextLens-io">
+                <img
+                  src="https://travis-ci.org/devonyu/nextLens-io.svg?branch=master"
+                  alt="Travis Build Status"
+                />
+              </a>
+            </Status>
           </Modal.Description>
         </Modal.Content>
       </Modal>

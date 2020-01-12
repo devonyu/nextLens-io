@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can see navbar 1`] = `
+<div
+  className="ui tiny borderless fluid menu"
+>
+  
+  <a
+    className="header item"
+    onClick={[Function]}
+  >
+    NextLens.io
+  </a>
+  <div
+    className="right menu"
+  >
+    <div
+      className="item"
+      onClick={[Function]}
+    >
+      
+    </div>
+    <div
+      className="item"
+      onClick={[Function]}
+    >
+      <button
+        className="ui tiny primary button"
+        onClick={[Function]}
+      >
+        Log in
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -6,6 +6,11 @@ import flickrviewiphone from '../images/flickrviewiphone.gif';
 import futurefeatures from '../images/futurefeatures.png';
 import photoswiperipad from '../images/photoswiperipad.gif';
 import recommendationsipad from '../images/recommendationsipad.gif';
+import algorithmwebp from '../images/algorithm.webp';
+import flickrviewiphonewebp from '../images/flickrviewiphone.webp';
+import futurefeatureswebp from '../images/futurefeatures.webp';
+import photoswiperipadwebp from '../images/photoswiperipad.webp';
+import recommendationsipadportraitclickwebp from '../images/recommendationsipadportraitclick.webp';
 
 const Main = inputProps => {
   const { changeView } = inputProps;
@@ -18,7 +23,11 @@ const Main = inputProps => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="ipad" alt="photoswiper" src={photoswiperipad} />
+          <picture className="ipad">
+            <source type="image/webp" srcSet={photoswiperipadwebp} />
+            <source type="image/gif" srcSet={photoswiperipad} />
+            <img className="ipad" src={photoswiperipad} alt="photoswiper" />
+          </picture>
         </div>
       </section>
     </div>
@@ -41,7 +50,11 @@ const FeatureOne = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="ipad scaledown" alt="algorithm" src={algorithmgif} />
+          <picture className="algo">
+            <source type="image/webp" srcSet={algorithmwebp} />
+            <source type="image/gif" srcSet={algorithmgif} />
+            <img className="algo" src={algorithmgif} alt="algorithm" />
+          </picture>
         </div>
       </section>
     </div>
@@ -61,7 +74,11 @@ const FeatureTwo = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="ipad" alt="lensrecommendation" src={recommendationsipad} />
+          <picture className="ipad">
+            <source type="image/webp" srcSet={recommendationsipadportraitclickwebp} />
+            <source type="image/gif" srcSet={recommendationsipad} />
+            <img className="ipad" src={recommendationsipad} alt="lensrecommendation" />
+          </picture>
         </div>
       </section>
     </div>
@@ -81,7 +98,11 @@ const FeatureThree = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img className="iphone" alt="flickrview" src={flickrviewiphone} />
+          <picture className="iphone">
+            <source type="image/webp" srcSet={flickrviewiphonewebp} />
+            <source type="image/gif" srcSet={flickrviewiphone} />
+            <img className="iphone" src={flickrviewiphone} alt="flickrview" />
+          </picture>
         </div>
       </section>
     </div>
@@ -99,7 +120,11 @@ const FeatureFour = () => {
       </section>
       <section className="primaryImage">
         <div className="imageContainer">
-          <img id="future" alt="futurefeats" src={futurefeatures} />
+          <picture id="future">
+            <source type="image/webp" srcSet={futurefeatureswebp} />
+            <source type="image/gif" srcSet={futurefeatures} />
+            <img id="future" src={futurefeatures} alt="futurefeats" />
+          </picture>
         </div>
       </section>
     </div>

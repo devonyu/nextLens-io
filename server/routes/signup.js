@@ -33,10 +33,17 @@ router.post("/", (req, res) => {
       const passwordHash = await bcrypt.hash(toClient.password, 10);
       toClient.password = passwordHash;
       const signingUp = await db.signUp(toClient);
-      if (signingUp.status !== true) {
+      if (signingUp.status === false) {
         res.status(400).send({ status: "error" });
-      } else if (signingUp.status === true) {
-        res.status(200).send({ status: true });
+      } else {
+        const user = await db.checkEmail(
+          userInformation.email,
+          response => response.rows[0]
+        );
+        req.session.key = await user.id;
+        user.cookie = await req.session.id;
+        req.session.auth = true;
+        res.status(200).send(user);
       }
     }
   }

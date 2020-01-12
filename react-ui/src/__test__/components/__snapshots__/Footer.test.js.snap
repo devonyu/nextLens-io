@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Can see footer 1`] = `
+<div
+  className="sc-bdVaJa gzfAUc"
+>
+  <div
+    className="sc-bwzfXH cCmMUB"
+  >
+    <a
+      className="sc-htpNat gEKCED"
+      href="https://nextlens.io"
+    >
+      <i
+        aria-hidden="true"
+        className="camera retro icon"
+      />
+      <span
+        className="sc-bxivhb iVRQth"
+      >
+        2020 Nextlens.io
+      </span>
+    </a>
+  </div>
+  <div
+    className="sc-bwzfXH cCmMUB"
+  >
+    <a
+      className="sc-htpNat gEKCED"
+      href="https://github.com/devonyu/nextLens-io"
+    >
+      <i
+        aria-hidden="true"
+        className="github icon"
+      />
+    </a>
+    <a
+      className="sc-htpNat gEKCED"
+      href="https://www.facebook.com/nextlens.io/"
+    >
+      <i
+        aria-hidden="true"
+        className="facebook icon"
+      />
+    </a>
+    <a
+      className="sc-htpNat gEKCED"
+      href="https://www.instagram.com/nextlens.io/"
+    >
+      <i
+        aria-hidden="true"
+        className="instagram icon"
+      />
+    </a>
+    <a
+      className="sc-htpNat gEKCED"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="code icon"
+      />
+    </a>
+  </div>
+</div>
+`;
