@@ -35,7 +35,7 @@ const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-height: calc(100%vh - 73px);
+  max-height: 100%;
   width: 100vw;
   position: relative;
   margin-bottom: 30px;
