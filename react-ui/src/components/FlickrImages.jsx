@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
-import { Button, Form, Icon, Image, Modal } from 'semantic-ui-react';
+import styled from 'styled-components';
+import { Form, Icon, Image, Modal } from 'semantic-ui-react';
 import axios from 'axios';
+
+const FlickRContainer = styled.div`
+  position: relative;
+  height: 90%;
+`;
+
+const Button = styled.button`
+  color: black;
+  border-radius: 0.2em;
+  height: 30px;
+  margin: 5px;
+  min-width: 100px;
+  cursor: pointer;
+`;
+
+const CameraLensImage = styled.img`
+  max-width: 250px;
+  height: auto;
+`;
 
 export default class FlickrImages extends Component {
   constructor(props) {
@@ -96,74 +116,87 @@ export default class FlickrImages extends Component {
         onOpen={() => {
           this.loadImages(this.props.flickr, 1);
         }}
+        style={{ position: 'relative', marginTop: '75px' }}
       >
-        <Modal.Header>
-          Photos Taken with
-{' '}
-          <a
-            ref={this.myRef}
-            href={`https://www.flickr.com/groups/${this.props.flickr}/`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {this.props.lensname}
-          </a>
-        </Modal.Header>
+        <FlickRContainer>
+          <Modal.Header>
+            <h1>
+              Photos Taken with{' '}
+              <a
+                ref={this.myRef}
+                href={`https://www.flickr.com/groups/${this.props.flickr}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {this.props.lensname}
+              </a>
+            </h1>
+          </Modal.Header>
 
-        <Modal.Content>
-          <Modal.Description>
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Group>
-                <Image miny="true" inline src={this.props.lensInfo.image} />
-                <Form.Input
-                  placeholder="Filter results by Tag"
-                  name="tag"
-                  value={tag}
-                  onChange={this.handleChange}
-                  action="Search"
-                />
-              </Form.Group>
-            </Form>
-
-            {this.state.photos.length > 0
-              ? this.state.photos.map((image, i) => (
-                  <div key={i} className="flickrwrap">
-                    <Image fluid className="flickrimg" src={image.url_c} />
-                    <p className="flickrcontent">
-                      {image.title.length === 0 ? image.description._content : image.title}
-                      <br />
-                      {image.ownername ? `Photographer: ${image.ownername}` : ''} views:
-{' '}
-{' '}
-                      {image.views}
-                    </p>
+          <Modal.Content>
+            <Modal.Description>
+              <div style={{ height: '100%' }}>
+                <Form onSubmit={this.handleSubmit}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      height: '100%',
+                      justifyContent: 'center',
+                      flexWrap: 'wrap',
+                      width: '100%'
+                    }}
+                  >
+                    <CameraLensImage src={this.props.lensInfo.image} alt="cameralens" />
+                    <Form.Input
+                      placeholder="Filter results by Tag"
+                      name="tag"
+                      value={tag}
+                      onChange={this.handleChange}
+                      action="Search"
+                      style={{ height: '45px', margin: '30px 0', width: '100%' }}
+                    />
                   </div>
-                ))
-              : 'No Images Found'}
-          </Modal.Description>
-        </Modal.Content>
-        <Modal.Actions>
-          <Button
-            primary
-            onClick={() => {
-              this.loadImages(
-                this.props.flickr,
-                this.state.page,
-                this.state.pastTags[this.state.pastTags.length - 1]
-              );
-            }}
-          >
-            Load More Images
-            <Icon name="right chevron" />
-          </Button>
-          <Button
-            onClick={() => {
-              this.scroll(this.myRef);
-            }}
-          >
-            Top
-          </Button>
-        </Modal.Actions>
+                </Form>
+              </div>
+
+              {this.state.photos.length > 0
+                ? this.state.photos.map((image, i) => (
+                    <div key={i} className="flickrwrap">
+                      <Image fluid className="flickrimg" src={image.url_c} />
+                      <p className="flickrcontent">
+                        {image.title.length === 0 ? image.description._content : image.title}
+                        <br />
+                        {image.ownername ? `Photographer: ${image.ownername}` : ''} views:{' '}
+                        {image.views}
+                      </p>
+                    </div>
+                  ))
+                : 'No Images Found'}
+            </Modal.Description>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button
+              primary
+              onClick={() => {
+                this.loadImages(
+                  this.props.flickr,
+                  this.state.page,
+                  this.state.pastTags[this.state.pastTags.length - 1]
+                );
+              }}
+            >
+              Load More Images
+              <Icon name="right chevron" />
+            </Button>
+            <Button
+              onClick={() => {
+                this.scroll(this.myRef);
+              }}
+            >
+              Top
+            </Button>
+          </Modal.Actions>
+        </FlickRContainer>
       </Modal>
     );
   }

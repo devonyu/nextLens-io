@@ -4,6 +4,15 @@ import FlickrImages from './FlickrImages';
 
 const Recocard = inputProps => {
   const CardContainer = styled.div`
+    margin: 10px;
+    @media (max-width: 450px) {
+      margin-left: -90px;
+      transform: scale(0.7);
+      left: 0;
+    }
+  `;
+
+  const CardDetails = styled.div`
     width: 300px;
     height: 550px;
     padding: 20px;
@@ -18,16 +27,24 @@ const Recocard = inputProps => {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 2;
+    // @media (max-width: 450px) {
+    //   margin-left: 0px;
+    //   margin-bottom: 30px;
+    //   transform: scale(0.7);
+    //   left: 0;
+    // }
   `;
+
   const CardContainerBack = styled.div`
     background-color: #2185d0;
-    height: 500px;
+    height: 400px;
     width: 200px;
     border-radius: 2em;
-    margin-left: 200px;
-    margin-bottom: -250px;
+    margin-left: 250px;
+    margin-top: 100px;
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
   `;
 
@@ -36,26 +53,28 @@ const Recocard = inputProps => {
     font-size: 16px;
     padding-bottom: 5px;
   `;
+
   const Image = styled.img`
-  transform: scale(1.2) rotate(100deg);
-  // transform: scale(1.2);
-  object-fit: contain;
-  filter: drop-shadow(14px -5px 0.85rem black);
-  margin-left: 170px;
-  margin-top: -150px;
-  background-color: transparent;
-}
-`;
+      transform: scale(1.2) rotate(100deg);
+      // transform: scale(1.2);
+      object-fit: contain;
+      filter: drop-shadow(14px -5px 0.85rem black);
+      margin-left: 170px;
+      margin-top: -150px;
+      background-color: transparent;
+      z-index: 5;
+    }
+  `;
   const ImageNoRotate = styled.img`
-transform: scale(1.2);
-// transform: scale(1.2);
-object-fit: contain;
-filter: drop-shadow(14px -5px 0.85rem black);
-margin-left: 170px;
-margin-top: -150px;
-background-color: transparent;
-}
-`;
+    transform: scale(1.2);
+    // transform: scale(1.2);
+    object-fit: contain;
+    filter: drop-shadow(14px -5px 0.85rem black);
+    margin-left: 170px;
+    margin-top: -150px;
+    background-color: transparent;
+    }
+  `;
 
   const Brand = styled.div`
     font-size: 2em;
@@ -91,7 +110,6 @@ background-color: transparent;
   // const { lens, brand, model, description, recc, price, imageurl } = inputProps;
   const { lens } = inputProps;
   const { amazon, ebay, flickr, image, name } = lens;
-  console.log(image);
   const getBrand = () => name.split(' ')[0];
   const getModel = () =>
     name
@@ -104,9 +122,9 @@ background-color: transparent;
     `~$${Math.floor(Math.random() * 500)} - $${Math.floor(Math.random() * 900)}`;
   const examplePrice = calulateExamplePrice();
   return (
-    <div className="container">
-      <CardContainer>
-        <CardContainerBack />
+    <CardContainer>
+      <CardContainerBack />
+      <CardDetails>
         <Brand>
           <DescriptionTitle>Brand</DescriptionTitle>
           {getBrand()}
@@ -157,8 +175,8 @@ background-color: transparent;
         <div>
           <FlickrImages flickr={flickr} lensname={name} lensInfo={lens} />
         </div>
-      </CardContainer>
-    </div>
+      </CardDetails>
+    </CardContainer>
   );
 };
 
