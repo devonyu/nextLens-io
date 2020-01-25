@@ -94,7 +94,7 @@ export default class Recommendations extends Component {
     axios
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
-        console.log('FE Data Loaded: ', data);
+        // console.log('FE Data Loaded: ', data);
         this.setState(() => ({
           loading: false,
           lensRecommendations: data

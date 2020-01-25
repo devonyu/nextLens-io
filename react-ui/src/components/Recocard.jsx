@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Icon } from 'semantic-ui-react';
 import FlickrImages from './FlickrImages';
+import { categoriesAPI } from '../components/utils';
 
 const Recocard = inputProps => {
   const CardContainer = styled.div`
@@ -8,7 +10,6 @@ const Recocard = inputProps => {
     @media (max-width: 450px) {
       margin-left: -90px;
       transform: scale(0.7);
-      left: 0;
     }
   `;
 
@@ -28,12 +29,6 @@ const Recocard = inputProps => {
     flex-direction: column;
     justify-content: space-between;
     z-index: 2;
-    // @media (max-width: 450px) {
-    //   margin-left: 0px;
-    //   margin-bottom: 30px;
-    //   transform: scale(0.7);
-    //   left: 0;
-    // }
   `;
 
   const CardContainerBack = styled.div`
@@ -49,28 +44,29 @@ const Recocard = inputProps => {
   `;
 
   const DescriptionTitle = styled.div`
-    color: grey;
+    color: black;
     font-size: 16px;
+    font-weight: bolder;
     padding-bottom: 5px;
   `;
 
   const Image = styled.img`
-      transform: scale(1.2) rotate(100deg);
-      // transform: scale(1.2);
+      width: 160px;
+      transform: rotate(100deg);
       object-fit: contain;
       filter: drop-shadow(14px -5px 0.85rem black);
-      margin-left: 170px;
+      margin-left: 195px;
       margin-top: -150px;
       background-color: transparent;
       z-index: 5;
     }
   `;
   const ImageNoRotate = styled.img`
-    transform: scale(1.2);
     // transform: scale(1.2);
+    width: 160px;
     object-fit: contain;
     filter: drop-shadow(14px -5px 0.85rem black);
-    margin-left: 170px;
+    margin-left: 195px;
     margin-top: -150px;
     background-color: transparent;
     }
@@ -96,6 +92,7 @@ const Recocard = inputProps => {
 
   const Price = styled.div`
     color: green;
+    display: flex;
   `;
 
   const Button = styled.button`
@@ -107,9 +104,9 @@ const Recocard = inputProps => {
     cursor: pointer;
   `;
 
-  // const { lens, brand, model, description, recc, price, imageurl } = inputProps;
   const { lens } = inputProps;
-  const { amazon, ebay, flickr, image, name } = lens;
+  console.log(lens);
+  const { amazon, category, ebay, flickr, image, name, rotate } = lens;
   const getBrand = () => name.split(' ')[0];
   const getModel = () =>
     name
@@ -117,9 +114,14 @@ const Recocard = inputProps => {
       .slice(1)
       .join(' ');
   const exampleDescrtipion = `The optical construction utilizes eleven lenses, including aspherical and AA elements, an ED (extra-low dispersion) element, as well as Carl Zeiss T* anti-reflective lens coatings.`;
-  const exampleReccomendation = `This lens matches your likes in Street photography likes`;
+  const recommendationReason = (
+    <span>
+      This lens matches your likes in <b>{categoriesAPI[category]} photography</b>
+    </span>
+  );
+  const exampleStartingPrice = Math.floor(Math.random() * 500) + 500;
   const calulateExamplePrice = () =>
-    `~$${Math.floor(Math.random() * 500)} - $${Math.floor(Math.random() * 900)}`;
+    `$${exampleStartingPrice} - $${exampleStartingPrice + Math.floor(Math.random() * 100) + 20}`;
   const examplePrice = calulateExamplePrice();
   return (
     <CardContainer>
@@ -138,9 +140,8 @@ const Recocard = inputProps => {
           <DescriptionTitle>Description</DescriptionTitle>
           {exampleDescrtipion}
         </Description>
-        {getBrand() === 'DJI' ? (
+        {getBrand() === 'DJI' || rotate === 0 ? (
           <ImageNoRotate
-            width="200px"
             src={
               image || 'https://res.cloudinary.com/nextlens/image/upload/v1544524799/misc/lens1.jpg'
             }
@@ -148,7 +149,6 @@ const Recocard = inputProps => {
           />
         ) : (
           <Image
-            width="200px"
             src={
               image || 'https://res.cloudinary.com/nextlens/image/upload/v1544524799/misc/lens1.jpg'
             }
@@ -158,18 +158,24 @@ const Recocard = inputProps => {
 
         <Description>
           <DescriptionTitle>Reccomendation</DescriptionTitle>
-          {exampleReccomendation}
+          {recommendationReason}
         </Description>
         <Price>
           <DescriptionTitle>Price</DescriptionTitle>
-          {examplePrice}
+          <span style={{ marginLeft: '10px' }}>{examplePrice}</span>
         </Price>
         <div>
           <Button>
-            <a href={amazon}>Amazon</a>
+            <a href={amazon}>
+              <Icon name="amazon" />
+              Amazon
+            </a>
           </Button>
           <Button>
-            <a href={ebay}>Ebay</a>
+            <a href={ebay}>
+              <Icon name="ebay" />
+              Ebay
+            </a>
           </Button>
         </div>
         <div>

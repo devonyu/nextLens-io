@@ -49,7 +49,8 @@ module.exports = {
             DXO: "https://www.dxomark.com/Lenses/Canon/EF85mm-f-1.2L-II-USM",
             amazon: "https://amzn.to/2AAZ2nv",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F3323%2Fi.html%3F_from%3DR40%26_nkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_BIN%3D1"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F3323%2Fi.html%3F_from%3DR40%26_nkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_BIN%3D1",
+            rotate: 0
           }
         ]
       },
@@ -85,7 +86,8 @@ module.exports = {
             flickr: "44697548@N00",
             amazon: "https://amzn.to/2PutVyd",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2BSP%2BAF%2B28-75mm%26_sacat%3D0%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Canon%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2BSP%2BAF%2B28-75mm%26_sacat%3D0%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Canon%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            rotate: 0
           }
         ],
         high: [
@@ -340,7 +342,8 @@ module.exports = {
             flickr: "43198455@N00",
             amazon: "https://amzn.to/2Pv0ig8",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Dsigma%2B50-150mm%2Bf%252F2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Dsigma%2B50-150mm%2Bf%252F2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            rotate: 0
           }
         ]
       },
@@ -548,7 +551,8 @@ module.exports = {
             flickr: "2153387@N24",
             amazon: "https://amzn.to/2QMOjPE",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DRokinon%2B8mm%2BF2.8%2Bsony%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DRokinon%2B8mm%2BF2.8%2Bsony%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            rotate: 0
           }
         ],
         high: [
@@ -653,12 +657,12 @@ module.exports = {
         high: [
           {
             name: "Fuji 16mm F1.4",
-            image:
-              "https://images-na.ssl-images-amazon.com/images/I/51T5xM9zsFL._SL160_.jpg",
+            image: "http://tinyimg.io/i/w2CSQkZ.png",
             flickr: "2798122@N24",
             amazon: "https://amzn.to/2rzu5L7",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR8.TRC1.A0.H0.XFuji%2B16mm%2BF1.4.TRS1%26_nkw%3DFuji%2B16mm%2BF1.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSamyang%2B12mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR8.TRC1.A0.H0.XFuji%2B16mm%2BF1.4.TRS1%26_nkw%3DFuji%2B16mm%2BF1.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSamyang%2B12mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            rotate: 0
           }
         ]
       },
@@ -666,12 +670,12 @@ module.exports = {
         low: [
           {
             name: "Fuji 35mm F2",
-            image:
-              "https://images-na.ssl-images-amazon.com/images/I/51fwTnb3fJL._SL160_.jpg",
+            image: "http://tinyimg.io/i/1efk1f4.png",
             flickr: "2769777@N21",
             amazon: "https://amzn.to/2QsX41Q",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B35mm%2BF2.TRS0%26_nkw%3DFuji%2B35mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B16mm%2BF1.4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B35mm%2BF2.TRS0%26_nkw%3DFuji%2B35mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B16mm%2BF1.4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            rotate: 0
           }
         ],
         high: [
