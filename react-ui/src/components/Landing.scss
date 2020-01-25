@@ -90,13 +90,13 @@ $desktop: 840px;
           margin: auto;
         }
         img.iphone {
-          border-radius: 1.5em;
+          border-radius: 23px;
         }
         img.ipad {
-          border-radius: 1.25em;
+          border-radius: 18px;
           max-width: 30vw;
           @include desktop {
-            border-radius: 1.75em;
+            border-radius: 25px;
           }
         }
         img.algo {

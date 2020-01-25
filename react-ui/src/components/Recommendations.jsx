@@ -41,7 +41,8 @@ const IpadPhotoswiper = styled.img`
 const ReadyContainer = styled.div`
   height: calc(100vh - 75px);
   width: 100%;
-  background-color: grey;
+  max-width: 1400px;
+  background-color: #1b1c1d;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -93,7 +94,7 @@ export default class Recommendations extends Component {
     axios
       .get(`/users/${this.props.userInfo.id}/${this.props.userInfo.mount}/recommendations`)
       .then(({ data }) => {
-        console.log('FE Data Loaded: ', data);
+        // console.log('FE Data Loaded: ', data);
         this.setState(() => ({
           loading: false,
           lensRecommendations: data

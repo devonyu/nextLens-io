@@ -6,7 +6,6 @@ import Recocard from './Recocard';
 const RecommendationContainer = styled.div`
   display: flex;
   width: 100%;
-  transform: scale(0.85);
   justify-content: space-between;
   flex-wrap: wrap;
 `;
@@ -14,12 +13,22 @@ const RecommendationContainer = styled.div`
 const Reco = inputProps => {
   const [activeItem, toggleItem] = useState('low');
   const { lenses } = inputProps;
-  // console.log('rerender reco');
   return (
-    <div>
+    <div style={{ marginTop: '35px', width: '100%' }}>
       <Menu attached="top" tabular>
-        <Menu.Item name="low" active={activeItem === 'low'} onClick={() => toggleItem('low')} />
-        <Menu.Item name="high" active={activeItem === 'high'} onClick={() => toggleItem('high')} />
+        <Menu.Item active name="price" style={{ color: 'black', fontSize: '20px' }} />
+        <Menu.Item
+          name="low"
+          active={activeItem === 'low'}
+          onClick={() => toggleItem('low')}
+          style={{ color: '#2185d0', fontSize: '18px' }}
+        />
+        <Menu.Item
+          name="high"
+          active={activeItem === 'high'}
+          onClick={() => toggleItem('high')}
+          style={{ color: '#2185d0', fontSize: '18px' }}
+        />
       </Menu>
       <Segment attached="bottom">
         {activeItem === 'low' ? (

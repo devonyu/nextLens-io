@@ -9,6 +9,14 @@ export const mounts = [
   { key: 'sony1', text: 'Sony E Mount Crop', value: 6 },
   { key: 'fujifilm', text: 'Fujifilm X Mount', value: 7 }
 ];
+
+export const categoriesAPI = {
+  1: 'Portrait',
+  2: 'Landscape',
+  3: 'Aerial',
+  4: 'Street'
+};
+
 // Function will get mount
 export function getMount(mountNumber, mountApi) {
   for (const key of mountApi) {
