@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'semantic-ui-react';
 import FlickrImages from './FlickrImages';
 import { categoriesAPI } from '../components/utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAmazon } from '@fortawesome/free-brands-svg-icons';
 
 const Recocard = inputProps => {
   const CardContainer = styled.div`
@@ -96,12 +97,23 @@ const Recocard = inputProps => {
   `;
 
   const Button = styled.button`
-    color: black;
-    border-radius: 0.2em;
-    height: 30px;
     margin: 5px;
     min-width: 100px;
     cursor: pointer;
+    color: black;
+    border-radius: 5px;
+    border: none;
+    height: 45px;
+    &:hover {
+      transform: translate(0, -5px);
+      transition: all 0.2s ease-in-out;
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+  `;
+  const Amazon = styled.span`
+    color: black;
+    background: #ff9900;
+    font-size: 18px;
   `;
 
   const { lens } = inputProps;
@@ -123,6 +135,12 @@ const Recocard = inputProps => {
   const calulateExamplePrice = () =>
     `$${exampleStartingPrice} - $${exampleStartingPrice + Math.floor(Math.random() * 100) + 20}`;
   const examplePrice = calulateExamplePrice();
+  const Ebay = [
+    { color: '#e72f30', letter: 'e' },
+    { color: '#0060d5', letter: 'b' },
+    { color: '#f6b001', letter: 'a' },
+    { color: '#85b900', letter: 'y' }
+  ];
   return (
     <CardContainer>
       <CardContainerBack />
@@ -165,18 +183,18 @@ const Recocard = inputProps => {
           <span style={{ marginLeft: '10px' }}>{examplePrice}</span>
         </Price>
         <div>
-          <Button>
-            <a href={amazon}>
-              <Icon name="amazon" />
-              Amazon
-            </a>
-          </Button>
-          <Button>
-            <a href={ebay}>
-              <Icon name="ebay" />
-              Ebay
-            </a>
-          </Button>
+          <a href={amazon}>
+            <Button style={{ background: '#ff9900' }}>
+              <FontAwesomeIcon icon={faAmazon} /> <Amazon>Amazon</Amazon>
+            </Button>
+          </a>
+          <a href={ebay}>
+            <Button style={{ background: 'rgba(0,0,0,.05' }}>
+              {Ebay.map(letter => (
+                <span style={{ color: letter.color, fontSize: '20px' }}>{letter.letter}</span>
+              ))}
+            </Button>
+          </a>
         </div>
         <div>
           <FlickrImages flickr={flickr} lensname={name} lensInfo={lens} />

@@ -9,12 +9,19 @@ const FlickRContainer = styled.div`
 `;
 
 const Button = styled.button`
-  color: black;
-  border-radius: 0.2em;
-  height: 30px;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  background: #0063dc;
+  height: 45px;
   margin: 5px;
   min-width: 100px;
   cursor: pointer;
+  &:hover {
+    transform: translate(0, -5px);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const CameraLensImage = styled.img`
@@ -108,7 +115,7 @@ export default class FlickrImages extends Component {
         trigger={
           <Button>
             <Icon name="flickr" />
-            FlickR
+            View Real Photos via FlickR
           </Button>
         }
         closeIcon
