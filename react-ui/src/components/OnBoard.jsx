@@ -7,7 +7,6 @@ import flickrviewiphone from '../images/flickrviewiphone.gif';
 import likedphotosipadlandscapeclick from '../images/likedphotosipadlandscapeclick.gif';
 import navigationipadlandscapeclick from '../images/navigationipadlandscapeclick.gif';
 import photoswiperipad from '../images/photoswiperipad.gif';
-// import recommendationsipad from '../images/recommendationsipad.gif';
 import recommendationsipadportraitclick from '../images/recommendationsipadportraitclick.gif';
 import reviewlensipadlandscapeclick from '../images/reviewlensipadlandscapeclick.gif';
 
@@ -79,7 +78,7 @@ const IpadPhotoswiper = styled.img`
   max-width: 90%;
   height: auto;
   max-height: 90%;
-  border-radius: 1.1em;
+  border-radius: 20px;
   background-color: transparent;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.62);
   filter: drop-shadow(10px 10px 14px rgba(0, 0, 0, 0.7));
@@ -95,7 +94,11 @@ const OnBoard = inputProps => {
         <WalkthroughCard onClick={() => changeViews('photoSwiper')}>
           <WalkthroughTitle>How it works?</WalkthroughTitle>
           <PhotoContainer>
-            <IpadPhotoswiper src={flickrviewiphone} alt="photoswiper" />
+            <IpadPhotoswiper
+              src={flickrviewiphone}
+              style={{ borderRadius: '22px' }}
+              alt="photoswiper"
+            />
           </PhotoContainer>
           <WalkthroughDescription>
             The main application uses your likes and dislikes to give you a list of lenses that
