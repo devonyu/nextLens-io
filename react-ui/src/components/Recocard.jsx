@@ -117,7 +117,6 @@ const Recocard = inputProps => {
   `;
 
   const { lens } = inputProps;
-  console.log(lens);
   const { amazon, category, ebay, flickr, image, name, rotate } = lens;
   const getBrand = () => name.split(' ')[0];
   const getModel = () =>
@@ -183,15 +182,17 @@ const Recocard = inputProps => {
           <span style={{ marginLeft: '10px' }}>{examplePrice}</span>
         </Price>
         <div>
-          <a href={amazon}>
+          <a href={amazon} target="_blank" rel="noopener noreferrer">
             <Button style={{ background: '#ff9900' }}>
               <FontAwesomeIcon icon={faAmazon} /> <Amazon>Amazon</Amazon>
             </Button>
           </a>
-          <a href={ebay}>
+          <a href={ebay} target="_blank" rel="noopener noreferrer">
             <Button style={{ background: 'rgba(0,0,0,.05' }}>
               {Ebay.map(letter => (
-                <span style={{ color: letter.color, fontSize: '20px' }}>{letter.letter}</span>
+                <span style={{ color: letter.color, fontSize: '20px' }} key={letter.letter}>
+                  {letter.letter}
+                </span>
               ))}
             </Button>
           </a>
