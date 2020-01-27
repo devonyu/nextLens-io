@@ -127,7 +127,7 @@ export default class FlickrImages extends Component {
       >
         <FlickRContainer>
           <Modal.Header>
-            <h1>
+            <h1 style={{ marginTop: '25px' }}>
               Photos Taken with{' '}
               <a
                 ref={this.myRef}
