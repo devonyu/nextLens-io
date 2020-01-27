@@ -52,9 +52,21 @@ def get_average_price(url):
             highest_price = max(highest_price, price_float)
             sum_price += price_float
     if int(total_item_count) < len(product_listings):
-        average_price = str(round((sum_price / int(total_item_count)), 2))
+        if int(total_item_count) == 0:
+            average_price = "N/A"
+            lowest_price = "N/A"
+            highest_price = "N/A"
+            total_item_count = 0
+        else:
+            average_price = str(round((sum_price / int(total_item_count)), 2))
     else:
-        average_price = str(round((sum_price / len(product_listings)), 2))
+        if len(product_listings) == 0:
+            average_price = "N/A"
+            lowest_price = "N/A"
+            highest_price = "N/A"
+            total_item_count = 0
+        else:
+            average_price = str(round((sum_price / len(product_listings)), 2))
 
     result = {"lowest": lowest_price, "highest": highest_price, "average": average_price,
               "item_count": total_item_count, "item_name": item_name_search_query}
