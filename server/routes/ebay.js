@@ -7,10 +7,10 @@ const { spawn } = require("child_process");
 
 router.post("/", (req, res) => {
   console.log("ebaydata route called");
-  const { ebayURL } = req.body;
+  const { ebayLink } = req.body;
   const ls = spawn("python3", [
     path.join(__dirname, "../../scripts/ebay_scraper.py"),
-    ebayURL
+    ebayLink
   ]);
 
   ls.stdout.on("data", data => {

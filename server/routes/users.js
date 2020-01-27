@@ -67,7 +67,8 @@ router
       } else if (allPhotoAffinities) {
         console.log(recommendationResults);
         recommendationResults.forEach(rec => {
-          console.log(rec.ebay);
+          console.log(rec.ebayLink);
+          console.log("LOOOOOOOOK!!!! HERE");
         });
         res.status(200).send(recommendationResults);
       } else {

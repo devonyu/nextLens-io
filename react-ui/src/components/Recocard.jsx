@@ -118,7 +118,7 @@ const Recocard = inputProps => {
   `;
 
   const { lens } = inputProps;
-  const { amazon, category, ebay, flickr, image, name, rotate } = lens;
+  const { amazon, category, ebay, ebayLink, flickr, image, name, rotate } = lens;
   const getBrand = () => name.split(' ')[0];
   const getModel = () =>
     name
@@ -135,12 +135,12 @@ const Recocard = inputProps => {
   const calculateExamplePrice = () =>
     `$${exampleStartingPrice} - $${exampleStartingPrice + Math.floor(Math.random() * 100) + 20}`;
   const examplePrice = calculateExamplePrice();
-
+  console.log('HEHEHE');
+  console.log(ebayLink);
   const calulateRealPrice = () =>
     axios
-      .post(`/ebaydata`, { ebayURL: ebay })
+      .post(`/ebaydata`, { ebayLink: ebayLink })
       .then(({ data }) => {
-        // console.log('FE Data Loaded: ', data);
         console.log('hi!!!');
         console.log(data);
         return data;

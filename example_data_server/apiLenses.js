@@ -12,7 +12,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -22,7 +24,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -37,7 +41,9 @@ module.exports = {
               "https://www.dxomark.com/Lenses/Sigma/50mm-F1.4-EX-DG-HSM-Canon-mounted-on-Canon-EOS-5DS-R_1009",
             amazon: "https://amzn.to/2SFYYsD",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3Dsigma%2B50mm%2Bf%252F1.4%2BEX%2BDG%2BHSM%2Bcanon%26_sacat%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3Dsigma%2B50mm%2Bf%252F1.4%2BEX%2BDG%2BHSM%2Bcanon%26_sacat%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=sigma%2B50mm%2Bf%2F1.4%2BEX%2BDG%2BHSM%2Bcanon&_sacat=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -50,7 +56,9 @@ module.exports = {
             amazon: "https://amzn.to/2AAZ2nv",
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F3323%2Fi.html%3F_from%3DR40%26_nkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_BIN%3D1",
-            rotate: 0
+            rotate: 0,
+            ebayLink:
+              "https://www.ebay.com/sch/3323/i.html?_from=R40&_nkw=Canon%2B85mm%2BF1.2%2BII%2BUSM&LH_TitleDesc=0&LH_PrefLoc=1&_udlo=400&_sop=15&LH_TitleDesc=0&_fsrp=1&LH_BIN=1"
           }
         ]
       },
@@ -63,7 +71,9 @@ module.exports = {
             flickr: "609560@N20",
             amazon: "https://amzn.to/2rySO1Y",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSigma%2B24mm%2BF1.8%2BEX%2B%2BCanon%26_sacat%3D0%26LH_TitleDesc%3D0%26_osacat%3D0%26_odkw%3Dsigma%2B50mm%2Bf%252F1.4%2BEX%2BDG%2BHSM%2Bcanon&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSigma%2B24mm%2BF1.8%2BEX%2B%2BCanon%26_sacat%3D0%26LH_TitleDesc%3D0%26_osacat%3D0%26_odkw%3Dsigma%2B50mm%2Bf%252F1.4%2BEX%2BDG%2BHSM%2Bcanon&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Sigma%2B24mm%2BF1.8%2BEX%2B%2BCanon&_sacat=0&LH_TitleDesc=0&_osacat=0&_odkw=sigma%2B50mm%2Bf%2F1.4%2BEX%2BDG%2BHSM%2Bcanon&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -74,7 +84,9 @@ module.exports = {
             flickr: "1154188@N22",
             amazon: "https://amzn.to/2RkTT8u",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DCanon%2B16-35mm%2BF2.8%2BII%26_sacat%3D3323%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26_osacat%3D3323%26_odkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_BIN%3D1%26LH_TitleDesc%3D0"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DCanon%2B16-35mm%2BF2.8%2BII%26_sacat%3D3323%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26_osacat%3D3323%26_odkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_BIN%3D1%26LH_TitleDesc%3D0",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Canon%2B16-35mm%2BF2.8%2BII&_sacat=3323&LH_TitleDesc=0&_fsrp=1&LH_PrefLoc=1&_udlo=400&_sop=15&_osacat=3323&_odkw=Canon%2B85mm%2BF1.2%2BII%2BUSM&LH_BIN=1&LH_TitleDesc=0"
           }
         ]
       },
@@ -87,7 +99,9 @@ module.exports = {
             amazon: "https://amzn.to/2PutVyd",
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2BSP%2BAF%2B28-75mm%26_sacat%3D0%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Canon%26_dcat%3D3323&campid=5338421432&toolid=20008",
-            rotate: 0
+            rotate: 0,
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Tamron%2BSP%2BAF%2B28-75mm&_sacat=0&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Compatible%20Brand=For%20Canon&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -98,7 +112,9 @@ module.exports = {
             flickr: "91952819@N00",
             amazon: "https://amzn.to/2JrBS5U",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DCanon%2B24-70mm%2BF2.8%2BII%26_sacat%3D3323%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26_osacat%3D3323%26_odkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_BIN%3D1%26LH_TitleDesc%3D0"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DCanon%2B24-70mm%2BF2.8%2BII%26_sacat%3D3323%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_PrefLoc%3D1%26_udlo%3D400%26_sop%3D15%26_osacat%3D3323%26_odkw%3DCanon%2B85mm%2BF1.2%2BII%2BUSM%26LH_BIN%3D1%26LH_TitleDesc%3D0",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Canon%2B24-70mm%2BF2.8%2BII&_sacat=3323&LH_TitleDesc=0&_fsrp=1&LH_PrefLoc=1&_udlo=400&_sop=15&_osacat=3323&_odkw=Canon%2B85mm%2BF1.2%2BII%2BUSM&LH_BIN=1&LH_TitleDesc=0"
           }
         ]
       }
@@ -113,7 +129,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -123,7 +141,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -136,7 +156,9 @@ module.exports = {
             flickr: "2796512@N24",
             amazon: "https://amzn.to/2CT6zzI",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DCanon%252050mm%2520F1.8%2520STM%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_fsrp%3D1%26_udlo%3D90%26_sop%3D15%26LH_BIN%3D1%26rt%3Dnc"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DCanon%252050mm%2520F1.8%2520STM%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_fsrp%3D1%26_udlo%3D90%26_sop%3D15%26LH_BIN%3D1%26rt%3Dnc",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Canon%2050mm%20F1.8%20STM&_sacat=3323&LH_TitleDesc=0&LH_PrefLoc=1&_fsrp=1&_udlo=90&_sop=15&LH_BIN=1&rt=nc"
           }
         ],
         high: [
@@ -147,7 +169,9 @@ module.exports = {
             flickr: "2992917@N22",
             amazon: "https://amzn.to/2ryzhyQ",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XSigma%2B50-100mm%2BF1.8%2BCanon.TRS0%26_nkw%3DSigma%2B50-100mm%2BF1.8%2BCanon%26_sacat%3D0%26LH_TitleDesc%3D0%26_osacat%3D0%26_odkw%3DSigma%2B50-100mm%2BF1.8%2BDC%2BHSM%2BA%2BCanon&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XSigma%2B50-100mm%2BF1.8%2BCanon.TRS0%26_nkw%3DSigma%2B50-100mm%2BF1.8%2BCanon%26_sacat%3D0%26LH_TitleDesc%3D0%26_osacat%3D0%26_odkw%3DSigma%2B50-100mm%2BF1.8%2BDC%2BHSM%2BA%2BCanon&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR1.TRC0.A0.H0.XSigma%2B50-100mm%2BF1.8%2BCanon.TRS0&_nkw=Sigma%2B50-100mm%2BF1.8%2BCanon&_sacat=0&LH_TitleDesc=0&_osacat=0&_odkw=Sigma%2B50-100mm%2BF1.8%2BDC%2BHSM%2BA%2BCanon&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -160,7 +184,9 @@ module.exports = {
             flickr: "1093235@N23",
             amazon: "https://amzn.to/2PxzaRD",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSigma%2B10-20mm%2BF3.5%26_sacat%3D3323%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_PrefLoc%3D1%26_udlo%3D90%26_sop%3D15%26LH_BIN%3D1%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DCanon%252520EF%25252DS%26_dcat%3D3323"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSigma%2B10-20mm%2BF3.5%26_sacat%3D3323%26LH_TitleDesc%3D0%26_fsrp%3D1%26LH_PrefLoc%3D1%26_udlo%3D90%26_sop%3D15%26LH_BIN%3D1%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DCanon%252520EF%25252DS%26_dcat%3D3323",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Sigma%2B10-20mm%2BF3.5&_sacat=3323&LH_TitleDesc=0&_fsrp=1&LH_PrefLoc=1&_udlo=90&_sop=15&LH_BIN=1&LH_TitleDesc=0&rt=nc&Mount=Canon%20EF%2DS&_dcat=3323"
           }
         ],
         high: [
@@ -171,7 +197,9 @@ module.exports = {
             flickr: "2877381@N25",
             amazon: "https://amzn.to/2LczTDp",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTokina%2BAT-X%2B11-20%2BF2.8%2B%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Canon%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTokina%2BAT-X%2B11-20%2BF2.8%2B%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Canon%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Tokina%2BAT-X%2B11-20%2BF2.8%2B&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Compatible%20Brand=For%20Canon&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -184,7 +212,9 @@ module.exports = {
             flickr: "15455151@N00",
             amazon: "https://amzn.to/2OgyrQ6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DTamron%2B17-50mm%2BF2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_fsrp%3D1%26_udlo%3D90%26_sop%3D15%26_osacat%3D3323%26_odkw%3DSigma%2B10-20mm%2BF3.5%26Mount%3DCanon%252520EF%25252DS%26LH_BIN%3D1%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DTamron%2B17-50mm%2BF2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_fsrp%3D1%26_udlo%3D90%26_sop%3D15%26_osacat%3D3323%26_odkw%3DSigma%2B10-20mm%2BF3.5%26Mount%3DCanon%252520EF%25252DS%26LH_BIN%3D1%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Tamron%2B17-50mm%2BF2.8&_sacat=3323&LH_TitleDesc=0&LH_PrefLoc=1&_fsrp=1&_udlo=90&_sop=15&_osacat=3323&_odkw=Sigma%2B10-20mm%2BF3.5&Mount=Canon%20EF%2DS&LH_BIN=1&_dcat=3323&rt=nc&LH_TitleDesc=0"
           }
         ],
         high: [
@@ -195,7 +225,9 @@ module.exports = {
             flickr: "2282781@N23",
             amazon: "https://amzn.to/2EgOegE",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSigma%2B18-35mm%2BF1.8%2B%26_sacat%3D0%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DCanon%252520EF%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSigma%2B18-35mm%2BF1.8%2B%26_sacat%3D0%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DCanon%252520EF%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Sigma%2B18-35mm%2BF1.8%2B&_sacat=0&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Mount=Canon%20EF&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ]
       }
@@ -212,7 +244,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -222,7 +256,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -235,7 +271,9 @@ module.exports = {
             flickr: "1852068@N20",
             amazon: "https://amzn.to/2QOXJKt",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XNikon%2BAF-S%2BNIKKOR%2B85mm%2Bf%252F1.8G.TRS0%26_nkw%3DNikon%2BAF-S%2BNIKKOR%2B85mm%2Bf%252F1.8G%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSigma%2B85mm%2BF1.4%2BDG%2BHSM%2BNikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XNikon%2BAF-S%2BNIKKOR%2B85mm%2Bf%252F1.8G.TRS0%26_nkw%3DNikon%2BAF-S%2BNIKKOR%2B85mm%2Bf%252F1.8G%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSigma%2B85mm%2BF1.4%2BDG%2BHSM%2BNikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC1.A0.H0.XNikon%2BAF-S%2BNIKKOR%2B85mm%2Bf%2F1.8G.TRS0&_nkw=Nikon%2BAF-S%2BNIKKOR%2B85mm%2Bf%2F1.8G&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sigma%2B85mm%2BF1.4%2BDG%2BHSM%2BNikon&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -246,7 +284,9 @@ module.exports = {
             flickr: "3063748@N24",
             amazon: "https://amzn.to/2rvbe3A",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSigma%2B85mm%2BF1.4%2BDG%2BHSM%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSigma%2B85mm%2BF1.4%2BDG%2BHSM%2BA%2BNikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSigma%2B85mm%2BF1.4%2BDG%2BHSM%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSigma%2B85mm%2BF1.4%2BDG%2BHSM%2BA%2BNikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Sigma%2B85mm%2BF1.4%2BDG%2BHSM%2BNikon&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sigma%2B85mm%2BF1.4%2BDG%2BHSM%2BA%2BNikon&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -259,7 +299,9 @@ module.exports = {
             flickr: "32841062@N00",
             amazon: "https://amzn.to/2SFXDCb",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSigma%2B20mm%2BF1.8%2BEX%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DNikon%2B16-35mm%2BF4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSigma%2B20mm%2BF1.8%2BEX%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DNikon%2B16-35mm%2BF4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Sigma%2B20mm%2BF1.8%2BEX%2BNikon&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Nikon%2B16-35mm%2BF4&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -270,7 +312,9 @@ module.exports = {
             flickr: "2822699@N23",
             amazon: "https://amzn.to/2EpElxW",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2BSP%2B15-30mm%2BF%252F2.8%2BDi%2BVC%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2BSP%2B15-30mm%2BF%252F2.8%2BDi%2BVC%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Tamron%2BSP%2B15-30mm%2BF%2F2.8%2BDi%2BVC&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Compatible%20Brand=For%20Nikon&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -283,7 +327,9 @@ module.exports = {
             flickr: "2820875@N24",
             amazon: "https://amzn.to/2rv8PWN",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XTokina%2BAT-X%2B24-70%2BF2.8%2BPRO%2BFX%2BNikon.TRS0%26_nkw%3DTokina%2BAT-X%2B24-70%2BF2.8%2BPRO%2BFX%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26Compatible%252520Brand%3DFor%252520Nikon%26_osacat%3D3323%26_odkw%3DTamron%2BSP%2B15-30mm%2BF%252F2.8%2BDi%2BVC%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XTokina%2BAT-X%2B24-70%2BF2.8%2BPRO%2BFX%2BNikon.TRS0%26_nkw%3DTokina%2BAT-X%2B24-70%2BF2.8%2BPRO%2BFX%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26Compatible%252520Brand%3DFor%252520Nikon%26_osacat%3D3323%26_odkw%3DTamron%2BSP%2B15-30mm%2BF%252F2.8%2BDi%2BVC%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR1.TRC0.A0.H0.XTokina%2BAT-X%2B24-70%2BF2.8%2BPRO%2BFX%2BNikon.TRS0&_nkw=Tokina%2BAT-X%2B24-70%2BF2.8%2BPRO%2BFX%2BNikon&_sacat=3323&LH_TitleDesc=0&Compatible%20Brand=For%20Nikon&_osacat=3323&_odkw=Tamron%2BSP%2B15-30mm%2BF%2F2.8%2BDi%2BVC&_dcat=3323&rt=nc&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -294,7 +340,9 @@ module.exports = {
             flickr: "2146633@N21",
             amazon: "https://amzn.to/2Rmssez",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       }
@@ -309,7 +357,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -319,7 +369,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -332,7 +384,9 @@ module.exports = {
             flickr: "1707775@N23",
             amazon: "https://amzn.to/2QqgX9L",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR4.TRC1.A0.H0.X50mm%2BAF-S%2Bnikon.TRS0%26_nkw%3D50mm%2BAF-S%2Bnikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26Compatible%252520Brand%3DFor%252520Nikon%26_osacat%3D3323%26_odkw%3Dsigma%2B50-150mm%2Bf%252F2.8%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR4.TRC1.A0.H0.X50mm%2BAF-S%2Bnikon.TRS0%26_nkw%3D50mm%2BAF-S%2Bnikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26Compatible%252520Brand%3DFor%252520Nikon%26_osacat%3D3323%26_odkw%3Dsigma%2B50-150mm%2Bf%252F2.8%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR4.TRC1.A0.H0.X50mm%2BAF-S%2Bnikon.TRS0&_nkw=50mm%2BAF-S%2Bnikon&_sacat=3323&LH_TitleDesc=0&Compatible%20Brand=For%20Nikon&_osacat=3323&_odkw=sigma%2B50-150mm%2Bf%2F2.8&_dcat=3323&rt=nc&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -343,7 +397,9 @@ module.exports = {
             amazon: "https://amzn.to/2Pv0ig8",
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Dsigma%2B50-150mm%2Bf%252F2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008",
-            rotate: 0
+            rotate: 0,
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=sigma%2B50-150mm%2Bf%2F2.8&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Compatible%20Brand=For%20Nikon&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -356,7 +412,9 @@ module.exports = {
             flickr: "1240236@N23",
             amazon: "https://amzn.to/2EdMjJI",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSamyang%2B14mm%2Bf%252F2.8%2B%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3Dtokina%2B11-16mm%2Bf%252F2.8%2Bnikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSamyang%2B14mm%2Bf%252F2.8%2B%2BNikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3Dtokina%2B11-16mm%2Bf%252F2.8%2Bnikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Samyang%2B14mm%2Bf%2F2.8%2B%2BNikon&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=tokina%2B11-16mm%2Bf%2F2.8%2Bnikon&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -367,7 +425,9 @@ module.exports = {
             flickr: "660282@N22",
             amazon: "https://amzn.to/2QKxswW",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1311.R4.TR10.TRC0.A0.H0.XTokina%2B11-16mm%2BF2.8.TRS0%26_nkw%3Dtokina%2B11-16mm%2Bf%252F2.8%2Bnikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3D50mm%2BAF-S%2Bnikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1311.R4.TR10.TRC0.A0.H0.XTokina%2B11-16mm%2BF2.8.TRS0%26_nkw%3Dtokina%2B11-16mm%2Bf%252F2.8%2Bnikon%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3D50mm%2BAF-S%2Bnikon%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1311.R4.TR10.TRC0.A0.H0.XTokina%2B11-16mm%2BF2.8.TRS0&_nkw=tokina%2B11-16mm%2Bf%2F2.8%2Bnikon&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=50mm%2BAF-S%2Bnikon&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -380,7 +440,9 @@ module.exports = {
             flickr: "1190984@N25",
             amazon: "https://amzn.to/2UDpcOc",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2B17-50mm%2BF2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DTamron%2B17-50mm%2BF2.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Tamron%2B17-50mm%2BF2.8&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Compatible%20Brand=For%20Nikon&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -391,7 +453,9 @@ module.exports = {
             flickr: "2282781@N23",
             amazon: "https://amzn.to/2La2V6B",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSigma%2B18-35mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSigma%2B18-35mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Compatible%252520Brand%3DFor%252520Nikon%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Sigma%2B18-35mm%2BF1.8&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Compatible%20Brand=For%20Nikon&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ]
       }
@@ -408,7 +472,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -418,7 +484,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -431,7 +499,9 @@ module.exports = {
             flickr: "3252324@N25",
             amazon: "https://amzn.to/2LaibjR",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.8.TRS0%26_nkw%3DSony%2BFE%2B85mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.4%2BGM%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.8.TRS0%26_nkw%3DSony%2BFE%2B85mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.4%2BGM%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.8.TRS0&_nkw=Sony%2BFE%2B85mm%2BF1.8&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BFE%2B85mm%2BF1.4%2BGM&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -442,7 +512,9 @@ module.exports = {
             flickr: "2937198@N22",
             amazon: "https://amzn.to/2UxSYnE",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR11.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.4%2BGM.TRS0%26_nkw%3DSony%2BFE%2B85mm%2BF1.4%2BGM%26_sacat%3D3323%26LH_TitleDesc%3D0%26Compatible%252520Brand%3DFor%252520Nikon%26_osacat%3D3323%26_odkw%3DSigma%2B18-35mm%2BF1.8%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR11.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.4%2BGM.TRS0%26_nkw%3DSony%2BFE%2B85mm%2BF1.4%2BGM%26_sacat%3D3323%26LH_TitleDesc%3D0%26Compatible%252520Brand%3DFor%252520Nikon%26_osacat%3D3323%26_odkw%3DSigma%2B18-35mm%2BF1.8%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR11.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.4%2BGM.TRS0&_nkw=Sony%2BFE%2B85mm%2BF1.4%2BGM&_sacat=3323&LH_TitleDesc=0&Compatible%20Brand=For%20Nikon&_osacat=3323&_odkw=Sigma%2B18-35mm%2BF1.8&_dcat=3323&rt=nc&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -455,7 +527,9 @@ module.exports = {
             flickr: "2700372@N20",
             amazon: "https://amzn.to/2QLGOID",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSamyang%2B12mm%2BF2.8%2Bsony%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DSony%252520E%25252Dmount%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DSamyang%2B12mm%2BF2.8%2Bsony%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DSony%252520E%25252Dmount%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Samyang%2B12mm%2BF2.8%2Bsony&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Mount=Sony%20E%2Dmount&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -466,7 +540,9 @@ module.exports = {
             flickr: "3662854@N25",
             amazon: "https://amzn.to/2QPaBQP",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B16-35mm%2BF2.8%2BGM.TRS0%26_nkw%3DSony%2BFE%2B16-35mm%2BF2.8%2BGM%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B16-35mm%2BF2.8%2BGM.TRS0%26_nkw%3DSony%2BFE%2B16-35mm%2BF2.8%2BGM%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B16-35mm%2BF2.8%2BGM.TRS0&_nkw=Sony%2BFE%2B16-35mm%2BF2.8%2BGM&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BFE%2B85mm%2BF1.8&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -479,7 +555,9 @@ module.exports = {
             flickr: "2788564@N24",
             amazon: "https://amzn.to/2EgZsBB",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B28mm%2BF2.TRS0%26_nkw%3DSony%2BFE%2B28mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DZeiss%2B25mm%2BF2%26Mount%3DSony%252520E%25252Dmount%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B28mm%2BF2.TRS0%26_nkw%3DSony%2BFE%2B28mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DZeiss%2B25mm%2BF2%26Mount%3DSony%252520E%25252Dmount%26_dcat%3D3323%26rt%3Dnc%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B28mm%2BF2.TRS0&_nkw=Sony%2BFE%2B28mm%2BF2&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Zeiss%2B25mm%2BF2&Mount=Sony%20E%2Dmount&_dcat=3323&rt=nc&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -490,7 +568,9 @@ module.exports = {
             flickr: "2939514@N23",
             amazon: "https://amzn.to/2Egj3lm",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DZeiss%2B25mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DSony%252520E%25252Dmount%26_dcat%3D3323&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3DZeiss%2B25mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26LH_TitleDesc%3D0%26rt%3Dnc%26Mount%3DSony%252520E%25252Dmount%26_dcat%3D3323&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=Zeiss%2B25mm%2BF2&_sacat=3323&LH_TitleDesc=0&LH_TitleDesc=0&rt=nc&Mount=Sony%20E%2Dmount&_dcat=3323&campid=5338421432&toolid=20008"
           }
         ]
       }
@@ -505,7 +585,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -515,7 +597,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -528,7 +612,9 @@ module.exports = {
             flickr: "2980804@N23",
             amazon: "https://amzn.to/2UBk1yv",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC2.A0.H0.XSony%2BFE%2B50mm%2BF1.8.TRS1%26_nkw%3DSony%2BFE%2B50mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B28mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC2.A0.H0.XSony%2BFE%2B50mm%2BF1.8.TRS1%26_nkw%3DSony%2BFE%2B50mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B28mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC2.A0.H0.XSony%2BFE%2B50mm%2BF1.8.TRS1&_nkw=Sony%2BFE%2B50mm%2BF1.8&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BFE%2B28mm%2BF2&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -539,7 +625,9 @@ module.exports = {
             flickr: "3252324@N25",
             amazon: "https://amzn.to/2EfbgnZ",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.8.TRS0%26_nkw%3DSony%2BFE%2B85mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B50mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.8.TRS0%26_nkw%3DSony%2BFE%2B85mm%2BF1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B50mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC1.A0.H0.XSony%2BFE%2B85mm%2BF1.8.TRS0&_nkw=Sony%2BFE%2B85mm%2BF1.8&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BFE%2B50mm%2BF1.8&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -552,7 +640,9 @@ module.exports = {
             amazon: "https://amzn.to/2QMOjPE",
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DRokinon%2B8mm%2BF2.8%2Bsony%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BFE%2B85mm%2BF1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
-            rotate: 0
+            rotate: 0,
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Rokinon%2B8mm%2BF2.8%2Bsony&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BFE%2B85mm%2BF1.8&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -563,7 +653,9 @@ module.exports = {
             flickr: "2158077@N22",
             amazon: "https://amzn.to/2Uzglx6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC0.A0.H0.XSony%2BE%2B10-18mm%2Bf%252F4.TRS0%26_nkw%3DSony%2BE%2B10-18mm%2Bf%252F4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DRokinon%2B8mm%2BF2.8%2Bsony%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC0.A0.H0.XSony%2BE%2B10-18mm%2Bf%252F4.TRS0%26_nkw%3DSony%2BE%2B10-18mm%2Bf%252F4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DRokinon%2B8mm%2BF2.8%2Bsony%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC0.A0.H0.XSony%2BE%2B10-18mm%2Bf%2F4.TRS0&_nkw=Sony%2BE%2B10-18mm%2Bf%2F4&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Rokinon%2B8mm%2BF2.8%2Bsony&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -576,7 +668,9 @@ module.exports = {
             flickr: "2394134@N25",
             amazon: "https://amzn.to/2UCr9e3",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC0.A0.H0.XSony%2BE%2B35mm%2Bf%252F1.8.TRS0%26_nkw%3DSony%2BE%2B35mm%2Bf%252F1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BE%2B10-18mm%2Bf%252F4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR3.TRC0.A0.H0.XSony%2BE%2B35mm%2Bf%252F1.8.TRS0%26_nkw%3DSony%2BE%2B35mm%2Bf%252F1.8%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BE%2B10-18mm%2Bf%252F4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR3.TRC0.A0.H0.XSony%2BE%2B35mm%2Bf%2F1.8.TRS0&_nkw=Sony%2BE%2B35mm%2Bf%2F1.8&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BE%2B10-18mm%2Bf%2F4&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -587,7 +681,9 @@ module.exports = {
             flickr: "1753425@N23",
             amazon: "https://amzn.to/2QLI7r1",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSony%2BCarl%2BZeiss%2B24mm%2BF1.8%2B%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BE%2B35mm%2Bf%252F1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dm570.l1313%26_nkw%3DSony%2BCarl%2BZeiss%2B24mm%2BF1.8%2B%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BE%2B35mm%2Bf%252F1.8%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=Sony%2BCarl%2BZeiss%2B24mm%2BF1.8%2B&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BE%2B35mm%2Bf%2F1.8&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       }
@@ -604,7 +700,9 @@ module.exports = {
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
+            ebayLink:
+              "https://www.ebay.com/sch/179697/i.html?_from=R40&_nkw=dji%20spark&_sop=15&LH_BIN=1&Brand=DJI&_dcat=179697&LH_PrefLoc=1&rt=nc&_udlo=250&_udhi=500"
           }
         ],
         high: [
@@ -614,7 +712,9 @@ module.exports = {
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_nkw=dji%20mavic%20pro&_sacat=179697&LH_TitleDesc=0&LH_PrefLoc=1&_sop=15&LH_BIN=1&_fsrp=1&Brand=DJI&Model=DJI%20Mavic%20Pro&_dcat=179697&rt=nc&_udlo=400"
           }
         ]
       },
@@ -627,7 +727,9 @@ module.exports = {
             flickr: "1907148@N22",
             amazon: "https://amzn.to/2QqjOiZ",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XFuji%2B60mm%2BF2.4.TRS0%26_nkw%3DFuji%2B60mm%2BF2.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BCarl%2BZeiss%2B24mm%2BF1.8%2B%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XFuji%2B60mm%2BF2.4.TRS0%26_nkw%3DFuji%2B60mm%2BF2.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSony%2BCarl%2BZeiss%2B24mm%2BF1.8%2B%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR1.TRC0.A0.H0.XFuji%2B60mm%2BF2.4.TRS0&_nkw=Fuji%2B60mm%2BF2.4&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Sony%2BCarl%2BZeiss%2B24mm%2BF1.8%2B&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -638,7 +740,9 @@ module.exports = {
             flickr: "2102367@N21",
             amazon: "https://amzn.to/2UBSxbN",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XFuji%2B56mm%2BF1.2.TRS0%26_nkw%3DFuji%2B56mm%2BF1.2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B60mm%2BF2.4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR1.TRC0.A0.H0.XFuji%2B56mm%2BF1.2.TRS0%26_nkw%3DFuji%2B56mm%2BF1.2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B60mm%2BF2.4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR1.TRC0.A0.H0.XFuji%2B56mm%2BF1.2.TRS0&_nkw=Fuji%2B56mm%2BF1.2&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Fuji%2B60mm%2BF2.4&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -651,7 +755,9 @@ module.exports = {
             flickr: "2700372@N20",
             amazon: "https://amzn.to/2rvhsjY",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR8.TRC1.A0.H0.XSamyang%2B12mm%2BF2.TRS1%26_nkw%3DSamyang%2B12mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B56mm%2BF1.2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR8.TRC1.A0.H0.XSamyang%2B12mm%2BF2.TRS1%26_nkw%3DSamyang%2B12mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B56mm%2BF1.2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR8.TRC1.A0.H0.XSamyang%2B12mm%2BF2.TRS1&_nkw=Samyang%2B12mm%2BF2&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Fuji%2B56mm%2BF1.2&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -662,7 +768,9 @@ module.exports = {
             amazon: "https://amzn.to/2rzu5L7",
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR8.TRC1.A0.H0.XFuji%2B16mm%2BF1.4.TRS1%26_nkw%3DFuji%2B16mm%2BF1.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DSamyang%2B12mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
-            rotate: 0
+            rotate: 0,
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR8.TRC1.A0.H0.XFuji%2B16mm%2BF1.4.TRS1&_nkw=Fuji%2B16mm%2BF1.4&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Samyang%2B12mm%2BF2&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       },
@@ -675,7 +783,9 @@ module.exports = {
             amazon: "https://amzn.to/2QsX41Q",
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B35mm%2BF2.TRS0%26_nkw%3DFuji%2B35mm%2BF2%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B16mm%2BF1.4%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
-            rotate: 0
+            rotate: 0,
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B35mm%2BF2.TRS0&_nkw=Fuji%2B35mm%2BF2&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Fuji%2B16mm%2BF1.4&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ],
         high: [
@@ -686,7 +796,9 @@ module.exports = {
             flickr: "2077423@N20",
             amazon: "https://amzn.to/2QScCvO",
             ebay:
-              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B23mm%2BF1.4.TRS0%26_nkw%3DFuji%2B23mm%2BF1.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B35mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008"
+              "https://rover.ebay.com/rover/1/711-53200-19255-0/1?mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_trksid%3Dp2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B23mm%2BF1.4.TRS0%26_nkw%3DFuji%2B23mm%2BF1.4%26_sacat%3D3323%26LH_TitleDesc%3D0%26_osacat%3D3323%26_odkw%3DFuji%2B35mm%2BF2%26LH_TitleDesc%3D0&campid=5338421432&toolid=20008",
+            ebayLink:
+              "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR2.TRC1.A0.H0.XFuji%2B23mm%2BF1.4.TRS0&_nkw=Fuji%2B23mm%2BF1.4&_sacat=3323&LH_TitleDesc=0&_osacat=3323&_odkw=Fuji%2B35mm%2BF2&LH_TitleDesc=0&campid=5338421432&toolid=20008"
           }
         ]
       }

@@ -7,7 +7,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def get_average_price(url):
     url_without_sort = url.replace('&_sop=15', '')
-    url_completed_listings = url_without_sort + \
+    url_completed_listings = url + \
         '&LH_Sold=1&LH_Complete=1&_sop=13&_ipg=50'
     # print(url_completed_listings)
     # print('above SHOUD BE THE RIGHT URL')
