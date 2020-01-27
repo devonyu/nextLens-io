@@ -12,6 +12,7 @@ const RecommendationsContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
+  box-sizing: border-box;
 `;
 
 const NotReadyContainer = styled.div`
@@ -39,21 +40,23 @@ const IpadPhotoswiper = styled.img`
 `;
 
 const ReadyContainer = styled.div`
-  height: calc(100vh - 75px);
+  height: 100%;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1800px;
   background-color: #1b1c1d;
   position: relative;
   display: flex;
+  margin: 10px;
   flex-direction: column;
   justify-content: flex-start;
   overflow: auto;
+  box-sizing: border-box;
 `;
 
 const Title = styled.h1`
   font-size: 2em;
   text-align: center;
-  margin-bottom: 45px;
+  margin-bottom: 75px;
   color: white;
 `;
 

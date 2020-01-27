@@ -8,13 +8,14 @@ const RecommendationContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   flex-wrap: wrap;
+  box-sizing: content-box;
 `;
 
 const Reco = inputProps => {
   const [activeItem, toggleItem] = useState('low');
   const { lenses } = inputProps;
   return (
-    <div style={{ marginTop: '35px', width: '100%' }}>
+    <>
       <Menu attached="top" tabular>
         <Menu.Item active name="price" style={{ color: 'black', fontSize: '20px' }} />
         <Menu.Item
@@ -45,7 +46,7 @@ const Reco = inputProps => {
           </RecommendationContainer>
         )}
       </Segment>
-    </div>
+    </>
   );
 };
 
