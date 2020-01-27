@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import FlickrImages from './FlickrImages';
 import { categoriesAPI } from '../components/utils';
@@ -131,9 +132,27 @@ const Recocard = inputProps => {
     </span>
   );
   const exampleStartingPrice = Math.floor(Math.random() * 500) + 500;
-  const calulateExamplePrice = () =>
+  const calculateExamplePrice = () =>
     `$${exampleStartingPrice} - $${exampleStartingPrice + Math.floor(Math.random() * 100) + 20}`;
-  const examplePrice = calulateExamplePrice();
+  const examplePrice = calculateExamplePrice();
+
+  const calulateRealPrice = () =>
+    axios
+      .post(`/ebaydata`, { ebayURL: ebay })
+      .then(({ data }) => {
+        // console.log('FE Data Loaded: ', data);
+        console.log('hi!!!');
+        console.log(data);
+        return data;
+      })
+      .catch(err => {
+        console.log('error with AXIOS, ', err);
+      });
+  Promise.resolve(calulateRealPrice()).then(result => {
+    console.log('heyyy');
+    console.log(result);
+  });
+
   const Ebay = [
     { color: '#e72f30', letter: 'e' },
     { color: '#0060d5', letter: 'b' },
