@@ -65,11 +65,6 @@ router
       if (allPhotoAffinities === null) {
         console.log("User has no affinity data");
       } else if (allPhotoAffinities) {
-        console.log(recommendationResults);
-        recommendationResults.forEach(rec => {
-          console.log(rec.ebayLink);
-          console.log("LOOOOOOOOK!!!! HERE");
-        });
         res.status(200).send(recommendationResults);
       } else {
         console.log("error in retrieving photo affinities1!");

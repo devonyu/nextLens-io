@@ -6,7 +6,6 @@ const router = express.Router();
 const { spawn } = require("child_process");
 
 router.post("/", (req, res) => {
-  console.log("ebaydata route called");
   const { ebayLink } = req.body;
   const ls = spawn("python3", [
     path.join(__dirname, "../../scripts/ebay_scraper.py"),
@@ -14,8 +13,8 @@ router.post("/", (req, res) => {
   ]);
 
   ls.stdout.on("data", data => {
-    console.log(`stdout: ${data}`);
-    console.log("FINISHED");
+    // console.log(`stdout: ${data}`);
+    // console.log("FINISHED");
     res.send(data);
   });
 

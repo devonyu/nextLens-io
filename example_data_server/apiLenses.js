@@ -11,6 +11,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -23,6 +24,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
@@ -128,6 +130,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -140,6 +143,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
@@ -243,6 +247,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -255,6 +260,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
@@ -356,6 +362,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -368,6 +375,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
@@ -471,6 +479,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -483,6 +492,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
@@ -584,6 +594,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -596,6 +607,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
@@ -699,6 +711,7 @@ module.exports = {
             image: "http://tinyimg.io/i/LFE0kjM.png",
             flickr: "3704968@N20",
             amazon: "https://amzn.to/2SxejN6",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2F179697%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520spark%26_sop%3D15%26LH_BIN%3D1%26Brand%3DDJI%26_dcat%3D179697%26LH_PrefLoc%3D1%26rt%3Dnc%26_udlo%3D250%26_udhi%3D500",
             ebayLink:
@@ -711,6 +724,7 @@ module.exports = {
             image: "http://tinyimg.io/i/YPw4k8x.png",
             flickr: "3159509@N21",
             amazon: "https://amzn.to/2PxyLKM",
+            rotate: 0,
             ebay:
               "https://rover.ebay.com/rover/1/711-53200-19255-0/1?icep_id=114&ipn=icep&toolid=20004&campid=5338421432&mpre=https%3A%2F%2Fwww.ebay.com%2Fsch%2Fi.html%3F_from%3DR40%26_nkw%3Ddji%2520mavic%2520pro%26_sacat%3D179697%26LH_TitleDesc%3D0%26LH_PrefLoc%3D1%26_sop%3D15%26LH_BIN%3D1%26_fsrp%3D1%26Brand%3DDJI%26Model%3DDJI%252520Mavic%252520Pro%26_dcat%3D179697%26rt%3Dnc%26_udlo%3D400",
             ebayLink:
