@@ -31,7 +31,7 @@
     "enzyme-to-json": "^3.3.4",
     "eslint-config-airbnb-base": "^13.1.0",
     "install": "^0.12.1",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.21",
     "node-sass": "^4.13.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
